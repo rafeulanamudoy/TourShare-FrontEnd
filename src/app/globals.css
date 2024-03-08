@@ -46,6 +46,9 @@
     color: white;
     text-transform: uppercase;
   }
+  .error-message {
+    color: red;
+  }
 }
 @media (min-width: 1280px) and (max-width: 1536px) {
   .authButton {

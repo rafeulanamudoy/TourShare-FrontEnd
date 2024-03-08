@@ -64,7 +64,12 @@ const Input: FC<InputProps> = ({
           />
         )}
         {error && (
-          <div className="  text-sm    text-orange-500   ">{error}</div>
+          <div className="  text-sm        ">
+            <span style={{ fontSize: "0.6em" }} className="">
+              {" "}
+              {error}
+            </span>
+          </div>
         )}
       </div>
     </div>
