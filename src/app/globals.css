@@ -1,6 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+
 @layer components {
   .authButton {
     border-radius: 30px;
@@ -13,8 +30,23 @@
     justify-content: center;
     align-items: center;
   }
-}
+  .mobileMenu {
+    display: none;
+    background-color: red;
+  }
 
+  #menuToggleBtn:focus + .mobileMenu {
+    display: block;
+  }
+
+  .submit-button {
+    border: 1px solid #707070;
+
+    background: #2e4262;
+    color: white;
+    text-transform: uppercase;
+  }
+}
 @media (min-width: 1280px) and (max-width: 1536px) {
   .authButton {
     width: 140px;

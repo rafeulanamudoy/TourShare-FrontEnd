@@ -33,20 +33,20 @@ export default function Header() {
       <nav
         className={`${
           isMobileMenuOpen ? `lg:flex` : `hidden`
-        }  lg:flex grid  mx-5 lg:mx-0   gap-x-5  gap-y-5 xl:gap-y-0  xl:gap-x-18  items-center font-semibold  `}
+        }  lg:flex grid  mx-5 lg:mx-0   gap-x-5  gap-y-5 xl:gap-y-0  xl:gap-x-18  items-center font-semibold `}
       >
         {[
-          ["home", "/home"],
+          ["home", "/"],
           ["create team", "/createTeam"],
           ["join team", "/joinTeam"],
           ["about us", "/about us"],
         ].map(([title, url]) => (
-          <Link key={url} href={url}>
+          <Link className="" key={url} href={url}>
             {title}
           </Link>
         ))}
       </nav>
-      <div className=" order-first  lg:order-none my-5 lg:my-0   mx-5  lg:mx-0 flex items-center   justify-between  ">
+      <div className=" order-first  lg:order-none my-5 lg:my-0    mx-5  lg:mx-0 flex items-center   justify-between  ">
         <div>
           <Image
             className="logo    "
@@ -63,12 +63,12 @@ export default function Header() {
           />
         </div>
 
-        <div className="lg:hidden   ml-5 my-5 ">
+        <div className="lg:hidden    ">
           <button
             className="text-xl font-bold  text-black"
             onClick={toggleMobileMenu}
           >
-            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon className="  " icon={faBars} />
           </button>
         </div>
       </div>
@@ -76,7 +76,7 @@ export default function Header() {
       <nav
         className={`${
           isMobileMenuOpen ? `lg:flex` : `hidden`
-        }   lg:flex gap-x-5  mx-5 lg:mx-0 my-5 lg:my-0   xl:gap-x-18  items-center  font-semibold 
+        }   lg:flex gap-x-5  mx-5 lg:mx-0 mt-5 lg:mt-0   xl:gap-x-18  items-center  font-semibold  
         `}
       >
         <div>
@@ -88,7 +88,7 @@ export default function Header() {
         <div
           className={`${
             isMobileMenuOpen ? `lg:flex` : `hidden`
-          } lg:flex gap-x-5 my-5 lg:my-0   xl:gap-x-18 h-16 items-center `}
+          } lg:flex gap-x-5    xl:gap-x-18 h-16 items-center `}
         >
           {[
             ["sign In", "/signIn", faRightFromBracket],
