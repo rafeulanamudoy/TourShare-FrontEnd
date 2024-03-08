@@ -4,6 +4,7 @@ import { FC, createElement } from "react";
 import { ReactNode } from "react";
 
 export type classNameType = string;
+export type idType = string;
 export type childrenType = ReactNode;
 
 export interface IFormProps {
@@ -15,6 +16,7 @@ export interface IFormProps {
 
   register?: any;
   className?: classNameType;
+  id?: idType;
 }
 
 const Form: FC<IFormProps> = ({

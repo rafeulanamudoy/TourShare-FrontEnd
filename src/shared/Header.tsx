@@ -91,8 +91,8 @@ export default function Header() {
           } lg:flex gap-x-5    xl:gap-x-18 h-16 items-center `}
         >
           {[
-            ["sign In", "/signIn", faRightFromBracket],
-            ["sign up", "/signUp", faUserPlus],
+            ["sign In", "/signIn#signIn", faRightFromBracket],
+            ["sign up", "/signUp#signUp", faUserPlus],
           ].map(([title, url, icon], index) => (
             <div key={index} className="authButton  mt-5 lg:mt-0   ">
               <div>

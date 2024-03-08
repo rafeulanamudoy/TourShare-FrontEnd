@@ -36,6 +36,7 @@ export default function SignIn() {
   };
   return (
     <div
+      id="signIn"
       className={`  h-screen flex  flex-col  justify-center items-center gap-y-16  bg-[#FFBD4A]`}
     >
       <span

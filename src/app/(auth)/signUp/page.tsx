@@ -52,6 +52,7 @@ export default function SignUp() {
   };
   return (
     <div
+      id="signUp"
       className={` flex  flex-col  justify-center items-center  py-16   gap-y-16  h-auto  bg-[#FF914F]`}
     >
       <span
