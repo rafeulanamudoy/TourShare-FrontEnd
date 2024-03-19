@@ -25,7 +25,7 @@ const Input: FC<InputProps> = ({
   ...rest
 }) => {
   return (
-    <div className=" w-full ">
+    <div className=" w-full  ">
       {label && (
         <label className="  " htmlFor={name}>
           {label}
@@ -56,7 +56,7 @@ const Input: FC<InputProps> = ({
           </select>
         ) : (
           <input
-            className="   "
+            className="    "
             aria-invalid={error ? "true" : "false"}
             {...register(name)}
             {...rest}
@@ -64,7 +64,7 @@ const Input: FC<InputProps> = ({
           />
         )}
         {error && (
-          <div className="  text-sm        ">
+          <div className="  text-sm       ">
             <span style={{ fontSize: "0.6em" }} className="">
               {" "}
               {error}

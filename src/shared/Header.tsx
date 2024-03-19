@@ -24,11 +24,11 @@ export default function Header() {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
-    //  console.log(isMobileMenuOpen);
+    console.log(isMobileMenuOpen);
   };
   return (
     <div
-      className={`  z-10  bg-white   absolute top-0 w-full   lg:h-[13em]  grid   lg:flex lg:justify-evenly items-center opacity-80 font-roboto 2xl:text-[25px]  xl:text-[15px]   lg:text-[12px]  text-[8px]     uppercase ${roboto.className}`}
+      className={`z-10  bg-white   lg:absolute top-0 w-full   lg:h-[13em]  grid   lg:flex lg:justify-evenly items-center opacity-80 font-roboto 2xl:text-[25px]  xl:text-[15px]   lg:text-[12px]  text-[8px]     uppercase ${roboto.className}`}
     >
       <nav
         className={`${

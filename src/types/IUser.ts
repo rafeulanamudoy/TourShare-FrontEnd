@@ -1,24 +1,36 @@
+import { File } from "buffer";
+
+export type IUser = {
+  user: {
+    email: string;
+    role: string;
+  };
+  isLoading: boolean;
+  isError: boolean;
+  error: string;
+};
+
 export type ISignUpData = {
-  firstName: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
   id?: string;
-  lastName: string;
 
   email: string;
-  role?: string;
+  role: string;
+  profileImage: FileList;
   password: string;
-  confirmPassword?: string;
-  contactNumber: string;
-  superRoleKey?: string;
 
-  gender: Gender;
-  address: string;
-  designation?: string;
+  confirmPassword?: string;
+  phoneNumber: string;
+  superRoleKey?: string;
 };
 
 export type ISignInData = {
   email: string;
   password: string;
-  role?: string;
+  role?: Role;
 };
 
 export type IUserResponseData = {
@@ -26,7 +38,9 @@ export type IUserResponseData = {
   role?: string;
   password: string;
 };
-enum Gender {
-  male,
-  female,
+
+enum Role {
+  customer,
+  admin,
+  superAdmin,
 }
