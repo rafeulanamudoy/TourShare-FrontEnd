@@ -1,8 +1,10 @@
 "use client";
 
-import React, { CSSProperties, useState } from "react";
+import React, { useState } from "react";
+import Cookies from "js-cookie";
+
 import ClipLoader from "react-spinners/ClipLoader";
-import { Rosario } from "next/font/google";
+import { Rosario as Rosario } from "next/font/google";
 import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
 import { useForm } from "react-hook-form";
@@ -10,23 +12,19 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { ISignUpData } from "@/types/IUser";
-import { signUp } from "@/lib/actions/Server/formActions/signUp";
+import { signUp } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
 import { SignUpSchema } from "@/lib/validation/yupValidation";
+import { override } from "@/utilities/css";
 
 const rosario = Rosario({
   subsets: ["latin"],
   display: "swap",
 });
-const override: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-  backgroundColor: "yellow",
-};
 
 export default function CreateAccount() {
   const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -34,7 +32,6 @@ export default function CreateAccount() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(SignUpSchema) });
   const onSubmit = async (userData: ISignUpData) => {
-    setLoading(true);
     const formData = new FormData();
     formData.append("name[firstName]", userData.name.firstName);
     formData.append("name[lastName]", userData.name.lastName);
@@ -45,12 +42,13 @@ export default function CreateAccount() {
     formData.append("role", "customer");
 
     try {
+      setLoading(true);
       const res = await signUp(formData, "customer");
       console.log(res);
       if (res?.success) {
         toast.success(res?.message);
+        Cookies.set("userEmail", userData.email);
         console.log("Successfully in the success response");
-        reset();
       } else {
         toast.error(res?.message);
       }
@@ -59,6 +57,8 @@ export default function CreateAccount() {
       toast.error("An error occurred while creating the account");
     } finally {
       setLoading(false);
+
+      reset();
     }
   };
   return (

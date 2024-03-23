@@ -1,18 +1,18 @@
 "use client";
-
 import Link from "next/link";
 
 import Image from "next/image";
-import logo from "../../public/Images/logo.png";
-import { Roboto } from "next/font/google";
+import logo from "../../public/images/logo.png";
+import { Roboto as Roboto } from "next/font/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Cookies from "js-cookie";
 import {
   faBars,
   faRightFromBracket,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const roboto = Roboto({
   weight: "400",
@@ -22,13 +22,26 @@ const roboto = Roboto({
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [user, setUser] = useState("");
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
-    console.log(isMobileMenuOpen);
   };
+
+  useEffect(() => {
+    const cookie = Cookies.get("userEmail");
+    setUser(cookie || "");
+  }, [user]);
+
+  const handleLogOut = () => {
+    Cookies.remove("userEmail");
+    setUser("");
+    console.log("clicked");
+  };
+
   return (
     <div
-      className={`z-10  bg-white   lg:absolute top-0 w-full   lg:h-[13em]  grid   lg:flex lg:justify-evenly items-center opacity-80 font-roboto 2xl:text-[25px]  xl:text-[15px]   lg:text-[12px]  text-[8px]     uppercase ${roboto.className}`}
+      className={`z-10  bg-white   lg:absolute top-0 w-full   lg:h-[25vh]  grid   lg:flex lg:justify-evenly items-center opacity-80 font-roboto 2xl:text-[25px]  xl:text-[15px]   lg:text-[12px]  text-[8px]     uppercase ${roboto.className}`}
     >
       <nav
         className={`${
@@ -47,16 +60,16 @@ export default function Header() {
         ))}
       </nav>
       <div className=" order-first  lg:order-none my-5 lg:my-0    mx-5  lg:mx-0 flex items-center   justify-between  ">
-        <div>
+        <div className=" overflow-hidden">
           <Image
-            className="logo    "
-            sizes="100vw"
+            className="logo"
             style={{
               width: "100%",
               height: "auto",
             }}
             width={500}
             height={300}
+            sizes="100vw"
             src={logo}
             placeholder="blur"
             alt="logo"
@@ -84,33 +97,44 @@ export default function Header() {
             contact
           </Link>
         </div>
-
-        <div
-          className={`${
-            isMobileMenuOpen ? `lg:flex` : `hidden`
-          } lg:flex gap-x-5    xl:gap-x-18 h-16 items-center `}
-        >
-          {[
-            ["sign In", "/signIn#signIn", faRightFromBracket],
-            ["sign up", "/signUp#signUp", faUserPlus],
-          ].map(([title, url, icon], index) => (
-            <div key={index} className="authButton  mt-5 lg:mt-0   ">
-              <div>
-                <Link
-                  href={url as string}
-                  className=" flex items-center gap-3 font-semibold "
-                >
-                  <FontAwesomeIcon
-                    style={{ width: "1.1em", height: "1.1em" }}
-                    icon={icon as IconProp}
-                    className="lg:block hidden"
-                  />
-                  <div>{title as string}</div>
-                </Link>
+        {user ? (
+          <div className="lg:flex gap-x-5   xl:gap-x-18 h-16 items-center gap-y-5   ">
+            <button
+              onClick={handleLogOut}
+              className="  uppercase block my-5 lg:my-0"
+            >
+              sign out
+            </button>
+            <button className="  uppercase ">{user}</button>
+          </div>
+        ) : (
+          <div
+            className={`${
+              isMobileMenuOpen ? `lg:flex` : `hidden`
+            } lg:flex gap-x-5    xl:gap-x-18 h-16 items-center `}
+          >
+            {[
+              ["sign In", "/signIn#signIn", faRightFromBracket],
+              ["sign up", "/signUp#signUp", faUserPlus],
+            ].map(([title, url, icon], index) => (
+              <div key={index} className="authButton  mt-5 lg:mt-0   ">
+                <div>
+                  <Link
+                    href={url as string}
+                    className=" flex items-center gap-3 font-semibold "
+                  >
+                    <FontAwesomeIcon
+                      style={{ width: "1.1em", height: "1.1em" }}
+                      icon={icon as IconProp}
+                      className="lg:block hidden"
+                    />
+                    <div>{title as string}</div>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </nav>
     </div>
   );

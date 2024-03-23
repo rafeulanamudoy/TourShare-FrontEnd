@@ -27,5 +27,18 @@ export const SignUpSchema = yup.object().shape({
     )
     .required("Profile Image is required"),
   password: yup.string().required("Password is required"),
-  confirmPassword: yup.string().required("Confirm Password is required"),
+  confirmPassword: yup
+    .string()
+    .required("Confirm Password is required")
+    .oneOf([yup.ref("password")], "Passwords must match"),
+});
+export const LoginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  password: yup
+    .string()
+
+    .required("Password is required"),
 });

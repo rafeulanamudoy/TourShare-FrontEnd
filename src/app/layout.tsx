@@ -23,10 +23,8 @@ export default function RootLayout({
       <body>
         <Header />
         <Banner />
-        <StoreProvider>
-          <Toaster />
-          <div>{children}</div>
-        </StoreProvider>
+        <Toaster />
+        <StoreProvider>{children}</StoreProvider>
 
         <Footer />
       </body>

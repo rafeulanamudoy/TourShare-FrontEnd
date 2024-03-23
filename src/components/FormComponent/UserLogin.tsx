@@ -1,41 +1,53 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Rosario } from "next/font/google";
 import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { ISignInData } from "@/types/IUser";
-
-import { Login } from "@/lib/actions/Server/formActions/signIn";
+import { LoginSchema } from "@/lib/validation/yupValidation";
+import { signIn, signUp } from "@/lib/actions/Server/user";
+import toast from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
+import { override } from "@/utilities/css";
 
 const rosario = Rosario({
   subsets: ["latin"],
   display: "swap",
 });
-const EmailSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-  password: yup
-    .string()
-
-    .required("Password is required"),
-});
 
 export default function UserLogin() {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isValid },
-  } = useForm({ resolver: yupResolver(EmailSchema) });
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(LoginSchema) });
   const onSubmit = async (userData: ISignInData) => {
-    const userLogin = await Login(userData);
-    console.log(userLogin, "from server action");
+    console.log(userData, "usedata");
+
+    try {
+      setLoading(true);
+      const res = await signIn(userData);
+      console.log(res);
+      if (res?.success) {
+        toast.success(res?.message);
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred while creating the account");
+    } finally {
+      setLoading(false);
+
+      reset();
+    }
+
     reset();
   };
   return (
@@ -79,10 +91,19 @@ export default function UserLogin() {
             className="      w-full  submit-button  h-[3em]     "
             type="submit"
             value="Login"
-            disabled={isSubmitting || !isValid}
+            disabled={loading}
           >
-            {" "}
-            login
+            {loading ? (
+              <ClipLoader
+                loading={loading}
+                cssOverride={override}
+                size={100}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Sign in"
+            )}
           </button>
         </div>
       </Form>

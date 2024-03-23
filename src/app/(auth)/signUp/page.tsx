@@ -2,8 +2,8 @@ import CreateAccount from "@/components/FormComponent/CreateAccount";
 
 export default function page() {
   return (
-    <div>
+    <main>
       <CreateAccount />
-    </div>
+    </main>
   );
 }

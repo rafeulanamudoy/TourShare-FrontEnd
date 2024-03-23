@@ -1,5 +1,3 @@
-import { File } from "buffer";
-
 export type IUser = {
   user: {
     email: string;
@@ -18,7 +16,7 @@ export type ISignUpData = {
   id?: string;
 
   email: string;
-  role: string;
+  role: Role;
   profileImage: FileList;
   password: string;
 
@@ -30,13 +28,11 @@ export type ISignUpData = {
 export type ISignInData = {
   email: string;
   password: string;
-  role?: Role;
 };
 
-export type IUserResponseData = {
+export type ISigninResponseData = {
   email: string;
-  role?: string;
-  password: string;
+  accessToken: string;
 };
 
 enum Role {
@@ -44,3 +40,14 @@ enum Role {
   admin,
   superAdmin,
 }
+export type ISendResponse<T> = {
+  success: boolean;
+  statusCode: number;
+  message: string | null;
+  data?: T | null;
+  meta?: {
+    page: number;
+    limit: number;
+    count?: number;
+  };
+};
