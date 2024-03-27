@@ -9,10 +9,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { ISignInData } from "@/types/IUser";
 import { LoginSchema } from "@/lib/validation/yupValidation";
-import { signIn, signUp } from "@/lib/actions/Server/user";
+import { signIn, verifyToken } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { override } from "@/utilities/css";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { date } from "yup";
+import { Secret } from "jsonwebtoken";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -21,6 +25,9 @@ const rosario = Rosario({
 
 export default function UserLogin() {
   const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  //console.log("render userLogin component");
+
   const {
     register,
     handleSubmit,
@@ -28,7 +35,7 @@ export default function UserLogin() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(LoginSchema) });
   const onSubmit = async (userData: ISignInData) => {
-    console.log(userData, "usedata");
+    //   console.log(userData, "usedata");
 
     try {
       setLoading(true);
@@ -36,8 +43,17 @@ export default function UserLogin() {
       console.log(res);
       if (res?.success) {
         toast.success(res?.message);
+
+        dispatch(
+          setUser({
+            user: {
+              email: res.email,
+              role: res.role,
+            },
+          })
+        );
       } else {
-        toast.error(res?.message);
+        toast.error((res?.message as string) || "Error message not available");
       }
     } catch (error) {
       console.error("Error:", error);

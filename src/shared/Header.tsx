@@ -13,6 +13,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { ENUM_USER_ROLE } from "@/types/IUser";
+import {
+  getUserFromCookie,
+  removeCookie,
+  verifyToken,
+} from "@/lib/actions/Server/user";
 
 const roboto = Roboto({
   weight: "400",
@@ -20,23 +28,43 @@ const roboto = Roboto({
 });
 
 export default function Header() {
+  // console.log("render header component");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const [user, setUser] = useState("");
+  const { email, role } = useAppSelector((state) => state.auth.user);
+  const [userEmail, setUserEmail] = useState("");
+  const dispatch = useAppDispatch();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
-
   useEffect(() => {
-    const cookie = Cookies.get("userEmail");
-    setUser(cookie || "");
-  }, [user]);
+    getUserFromCookie()
+      .then((user) => {
+        dispatch(
+          setUser({
+            user: {
+              email: user.userEmail,
+              role: user.role,
+            },
+          })
+        );
+        // Decode user here and set state accordingly
+      })
+      .catch((error) => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const handleLogOut = () => {
-    Cookies.remove("userEmail");
-    setUser("");
-    console.log("clicked");
+  const handleLogOut = async () => {
+    // Cookies.remove("accessToken");
+    await removeCookie("accessToken");
+    dispatch(
+      setUser({
+        user: {
+          role: ENUM_USER_ROLE.CUSTOMER,
+          email: "",
+        },
+      })
+    );
   };
 
   return (
@@ -97,7 +125,7 @@ export default function Header() {
             contact
           </Link>
         </div>
-        {user ? (
+        {email ? (
           <div className="lg:flex gap-x-5   xl:gap-x-18 h-16 items-center gap-y-5   ">
             <button
               onClick={handleLogOut}
@@ -105,7 +133,7 @@ export default function Header() {
             >
               sign out
             </button>
-            <button className="  uppercase ">{user}</button>
+            <button className="  uppercase ">{email}</button>
           </div>
         ) : (
           <div

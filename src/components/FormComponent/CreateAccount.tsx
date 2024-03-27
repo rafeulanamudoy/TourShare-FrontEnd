@@ -16,6 +16,8 @@ import { signUp } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
 import { SignUpSchema } from "@/lib/validation/yupValidation";
 import { override } from "@/utilities/css";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -24,7 +26,7 @@ const rosario = Rosario({
 
 export default function CreateAccount() {
   const [loading, setLoading] = useState(false);
-
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -47,8 +49,16 @@ export default function CreateAccount() {
       console.log(res);
       if (res?.success) {
         toast.success(res?.message);
-        Cookies.set("userEmail", userData.email);
-        console.log("Successfully in the success response");
+        if (res.data) {
+          dispatch(
+            setUser({
+              user: {
+                email: res.data.email,
+                role: res.data.role,
+              },
+            })
+          );
+        }
       } else {
         toast.error(res?.message);
       }

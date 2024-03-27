@@ -21,12 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <Banner />
-        <Toaster />
-        <StoreProvider>{children}</StoreProvider>
-
-        <Footer />
+        <StoreProvider>
+          <Header />
+          <Banner />
+          <Toaster />
+          {children}
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );

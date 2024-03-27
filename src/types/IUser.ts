@@ -1,11 +1,8 @@
 export type IUser = {
   user: {
     email: string;
-    role: string;
+    role: ENUM_USER_ROLE;
   };
-  isLoading: boolean;
-  isError: boolean;
-  error: string;
 };
 
 export type ISignUpData = {
@@ -16,7 +13,7 @@ export type ISignUpData = {
   id?: string;
 
   email: string;
-  role: Role;
+  role: ENUM_USER_ROLE;
   profileImage: FileList;
   password: string;
 
@@ -30,16 +27,17 @@ export type ISignInData = {
   password: string;
 };
 
-export type ISigninResponseData = {
-  email: string;
-  accessToken: string;
-};
+export type IUserPayload = ISignUpData &
+  ISignInData & {
+    accessToken: string;
+  };
 
-enum Role {
-  customer,
-  admin,
-  superAdmin,
+export enum ENUM_USER_ROLE {
+  SUPER_ADMIN = "superAdmin",
+  ADMIN = "admin",
+  CUSTOMER = "customer",
 }
+
 export type ISendResponse<T> = {
   success: boolean;
   statusCode: number;
