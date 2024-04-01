@@ -5,7 +5,7 @@ import Image from "next/image";
 import logo from "../../public/images/logo.png";
 import { Roboto as Roboto } from "next/font/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Cookies from "js-cookie";
+
 import {
   faBars,
   faRightFromBracket,
@@ -16,11 +16,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { ENUM_USER_ROLE } from "@/types/IUser";
-import {
-  getUserFromCookie,
-  removeCookie,
-  verifyToken,
-} from "@/lib/actions/Server/user";
+import { getUserFromCookie, removeCookie } from "@/lib/actions/Server/cookies";
 
 const roboto = Roboto({
   weight: "400",
@@ -30,30 +26,48 @@ const roboto = Roboto({
 export default function Header() {
   // console.log("render header component");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { email, role } = useAppSelector((state) => state.auth.user);
-  const [userEmail, setUserEmail] = useState("");
-  const dispatch = useAppDispatch();
+  const { email } = useAppSelector((state) => state.auth.user);
+  const [isLoading, setLoading] = useState(true);
 
+  const dispatch = useAppDispatch();
+  // console.log("rendering header component");
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
   useEffect(() => {
     getUserFromCookie()
       .then((user) => {
-        dispatch(
-          setUser({
-            user: {
-              email: user.userEmail,
-              role: user.role,
-            },
-          })
-        );
-        // Decode user here and set state accordingly
+        if (user) {
+          dispatch(
+            setUser({
+              user: {
+                email: user.userEmail,
+                role: user.role,
+              },
+            })
+          );
+        } else {
+          dispatch(
+            setUser({
+              user: {
+                email: "",
+                role: ENUM_USER_ROLE.DEFAULT,
+              },
+            })
+          );
+        }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        // Handle error
+      })
+      .finally(() => {
+        setLoading(false); // Set loading state to false when data fetching is done
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  if (isLoading) {
+    return null; // Render nothing while loading
+  }
   const handleLogOut = async () => {
     // Cookies.remove("accessToken");
     await removeCookie("accessToken");

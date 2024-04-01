@@ -4,7 +4,7 @@ import { ENUM_USER_ROLE, IUser, IUserPayload } from "../../../types/IUser";
 const initialState: IUser = {
   user: {
     email: "",
-    role: ENUM_USER_ROLE.CUSTOMER,
+    role: ENUM_USER_ROLE.DEFAULT,
   },
 };
 

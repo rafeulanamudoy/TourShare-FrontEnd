@@ -7,6 +7,7 @@ import Footer from "@/shared/Footer";
 
 import StoreProvider from "@/redux/StoreProvider";
 import { Toaster } from "react-hot-toast";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Tour Share",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body>
         <StoreProvider>
           <Header />
+
           <Banner />
           <Toaster />
           {children}

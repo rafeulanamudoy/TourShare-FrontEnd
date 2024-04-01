@@ -8,6 +8,7 @@ import {
 } from "@/types/IUser";
 import { cookies } from "next/headers";
 import jwt, { JwtPayload, Secret } from "jsonwebtoken";
+import { verifyToken } from "./cookies";
 export async function signUp(data: FormData, role: string) {
   try {
     const response = await fetch(
@@ -64,30 +65,5 @@ export async function signIn(data: ISignInData) {
     }
   } catch (error) {
     throw error;
-  }
-}
-
-export async function verifyToken(token: string, secret: Secret) {
-  return jwt.verify(token, secret) as JwtPayload;
-}
-
-export async function removeCookie(name: string) {
-  cookies().delete(name);
-}
-export async function getUserFromCookie() {
-  const cookieStore = cookies();
-  const user = cookieStore.get("accessToken");
-
-  if (user && user.value) {
-    const { userEmail, role } = await verifyToken(
-      user.value,
-      process.env.JWT_SECRET as Secret
-    );
-    return {
-      userEmail,
-      role,
-    };
-  } else {
-    throw new Error("Access token cookie not found or invalid.");
   }
 }

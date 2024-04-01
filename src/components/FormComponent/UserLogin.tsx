@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { ISignInData } from "@/types/IUser";
 import { LoginSchema } from "@/lib/validation/yupValidation";
-import { signIn, verifyToken } from "@/lib/actions/Server/user";
+import { signIn } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { override } from "@/utilities/css";
@@ -17,6 +17,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { date } from "yup";
 import { Secret } from "jsonwebtoken";
+import { useRouter } from "next/navigation";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ const rosario = Rosario({
 
 export default function UserLogin() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const dispatch = useAppDispatch();
   //console.log("render userLogin component");
 
@@ -52,6 +54,7 @@ export default function UserLogin() {
             },
           })
         );
+        router.push("/");
       } else {
         toast.error((res?.message as string) || "Error message not available");
       }

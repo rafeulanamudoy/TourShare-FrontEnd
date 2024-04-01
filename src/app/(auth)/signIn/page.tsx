@@ -1,7 +1,14 @@
 import UserLogin from "@/components/FormComponent/UserLogin";
+import { getUserFromCookie } from "@/lib/actions/Server/cookies";
 
-export default function SignIn() {
-  //console.log("hello");
+import { redirect } from "next/navigation";
+
+export default async function SignIn() {
+  const user = await getUserFromCookie();
+
+  if (user?.userEmail) {
+    redirect("/");
+  }
   return (
     <main>
       <UserLogin />

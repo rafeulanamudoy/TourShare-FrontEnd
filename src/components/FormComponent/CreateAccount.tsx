@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Cookies from "js-cookie";
 
 import ClipLoader from "react-spinners/ClipLoader";
 import { Rosario as Rosario } from "next/font/google";
@@ -18,6 +17,7 @@ import { SignUpSchema } from "@/lib/validation/yupValidation";
 import { override } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import { useRouter } from "next/navigation";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -26,6 +26,7 @@ const rosario = Rosario({
 
 export default function CreateAccount() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const {
     register,
@@ -59,6 +60,7 @@ export default function CreateAccount() {
             })
           );
         }
+        router.push("/");
       } else {
         toast.error(res?.message);
       }

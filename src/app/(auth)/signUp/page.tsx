@@ -1,6 +1,14 @@
 import CreateAccount from "@/components/FormComponent/CreateAccount";
+import { getUserFromCookie } from "@/lib/actions/Server/cookies";
 
-export default function page() {
+import { redirect } from "next/navigation";
+
+export default async function page() {
+  const user = await getUserFromCookie();
+
+  if (user?.userEmail) {
+    redirect("/");
+  }
   return (
     <main>
       <CreateAccount />
