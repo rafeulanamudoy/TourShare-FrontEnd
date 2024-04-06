@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { ENUM_USER_ROLE } from "@/types/IUser";
 import { getUserFromCookie, removeCookie } from "@/lib/actions/Server/cookies";
+import { getSingleUser } from "@/lib/actions/Server/user";
 
 const roboto = Roboto({
   weight: "400",
@@ -26,8 +27,9 @@ const roboto = Roboto({
 export default function Header() {
   // console.log("render header component");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { email } = useAppSelector((state) => state.auth.user);
+  const { email, profileImage } = useAppSelector((state) => state.auth.user);
   const [isLoading, setLoading] = useState(true);
+  console.log(profileImage, "check profile imge");
 
   const dispatch = useAppDispatch();
   // console.log("rendering header component");
@@ -35,38 +37,52 @@ export default function Header() {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
   useEffect(() => {
-    getUserFromCookie()
-      .then((user) => {
+    setLoading(true);
+    const fetchData = async () => {
+      try {
+        const user = await getUserFromCookie();
+
         if (user) {
+          const userData = await getSingleUser(user._id);
+          console.log(userData, "to check header user data");
           dispatch(
             setUser({
               user: {
-                email: user.userEmail,
-                role: user.role,
+                email: userData?.data?.email,
+                role: userData?.data?.role,
+                profileImage: userData?.data?.profileImage,
               },
             })
           );
+          // Call getSingleUser function here with appropriate role and id
+
+          // Process user data
         } else {
           dispatch(
             setUser({
               user: {
                 email: "",
                 role: ENUM_USER_ROLE.DEFAULT,
+                profileImage: {
+                  url: "",
+                  public_id: "",
+                },
               },
             })
           );
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         // Handle error
-      })
-      .finally(() => {
+      } finally {
         setLoading(false); // Set loading state to false when data fetching is done
-      });
+      }
+    };
+
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (isLoading) {
-    return null; // Render nothing while loading
+    return null;
   }
   const handleLogOut = async () => {
     // Cookies.remove("accessToken");
@@ -76,6 +92,10 @@ export default function Header() {
         user: {
           role: ENUM_USER_ROLE.CUSTOMER,
           email: "",
+          profileImage: {
+            public_id: "",
+            url: "",
+          },
         },
       })
     );
@@ -147,7 +167,17 @@ export default function Header() {
             >
               sign out
             </button>
-            <button className="  uppercase ">{email}</button>
+            <Link className="  " href="/dashboard">
+              <div className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-full overflow-hidden">
+                <Image
+                  src={profileImage.url}
+                  width={500}
+                  height={500}
+                  alt="Picture of the author"
+                  className="rounded-full"
+                />
+              </div>
+            </Link>
           </div>
         ) : (
           <div

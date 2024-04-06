@@ -13,13 +13,14 @@ export async function getUserFromCookie() {
   const user = cookieStore.get("accessToken");
 
   if (user && user.value) {
-    const { userEmail, role } = await verifyToken(
+    const { userEmail, role, _id } = await verifyToken(
       user.value,
       process.env.JWT_SECRET as Secret
     );
     return {
       userEmail,
       role,
+      _id,
     };
   } else {
     return;

@@ -15,9 +15,6 @@ import { ClipLoader } from "react-spinners";
 import { override } from "@/utilities/css";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
-import { date } from "yup";
-import { Secret } from "jsonwebtoken";
-import { useRouter } from "next/navigation";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -26,7 +23,7 @@ const rosario = Rosario({
 
 export default function UserLogin() {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+
   const dispatch = useAppDispatch();
   //console.log("render userLogin component");
 
@@ -41,8 +38,10 @@ export default function UserLogin() {
 
     try {
       setLoading(true);
+
       const res = await signIn(userData);
-      console.log(res);
+      console.log(res, "check the response");
+      console.log(res.data.profileImage, "profile image");
       if (res?.success) {
         toast.success(res?.message);
 
@@ -51,16 +50,17 @@ export default function UserLogin() {
             user: {
               email: res.email,
               role: res.role,
+              profileImage: res?.data?.profileImage,
             },
           })
         );
-        router.push("/");
       } else {
-        toast.error((res?.message as string) || "Error message not available");
+        const errorMessage = res?.message || "Error message not available";
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("An error occurred while creating the account");
+      toast.error("an error occured");
     } finally {
       setLoading(false);
 

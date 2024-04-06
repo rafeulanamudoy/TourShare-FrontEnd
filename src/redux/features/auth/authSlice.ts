@@ -1,10 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ENUM_USER_ROLE, IUser, IUserPayload } from "../../../types/IUser";
+import { ENUM_USER_ROLE, IUser } from "../../../types/IUser";
 
 const initialState: IUser = {
   user: {
     email: "",
     role: ENUM_USER_ROLE.DEFAULT,
+    profileImage: {
+      url: "",
+      public_id: "",
+    },
   },
 };
 
@@ -17,6 +21,7 @@ export const authSlice = createSlice({
 
       state.user.email = payload.user.email;
       state.user.role = payload.user.role;
+      state.user.profileImage = payload.user.profileImage;
     },
   },
 });

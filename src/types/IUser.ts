@@ -2,6 +2,10 @@ export type IUser = {
   user: {
     email: string;
     role: ENUM_USER_ROLE;
+    profileImage: {
+      url: string;
+      public_id: string;
+    };
   };
 };
 
@@ -26,11 +30,6 @@ export type ISignInData = {
   email: string;
   password: string;
 };
-
-export type IUserPayload = ISignUpData &
-  ISignInData & {
-    accessToken: string;
-  };
 
 export enum ENUM_USER_ROLE {
   SUPER_ADMIN = "superAdmin",

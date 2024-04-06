@@ -26,7 +26,7 @@ const rosario = Rosario({
 
 export default function CreateAccount() {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+
   const dispatch = useAppDispatch();
   const {
     register,
@@ -56,11 +56,11 @@ export default function CreateAccount() {
               user: {
                 email: res.data.email,
                 role: res.data.role,
+                profileImage: res.data.profileImage,
               },
             })
           );
         }
-        router.push("/");
       } else {
         toast.error(res?.message);
       }
