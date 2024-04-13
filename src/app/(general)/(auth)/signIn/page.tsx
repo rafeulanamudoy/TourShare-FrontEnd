@@ -1,4 +1,4 @@
-import UserLogin from "@/components/FormComponent/UserLogin";
+import UserLogin from "@/components/formComponent/UserLogin";
 import { getUserFromCookie } from "@/lib/actions/Server/cookies";
 
 import { redirect } from "next/navigation";

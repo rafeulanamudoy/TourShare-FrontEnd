@@ -1,4 +1,5 @@
-import Header from "@/shared/Header";
+import Navbar from "@/components/dashboard/Navbar";
+import Sidebar from "@/components/dashboard/Sidebar";
 
 export default function DashboardLayout({
   children, // will be a page or nested layout
@@ -6,10 +7,17 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      <h1>dashboard layout</h1>
+    <section className="  flex">
+      <div className={"   "}>
+        <Sidebar />
+      </div>
 
-      {children}
+      <div className=" w-full">
+        <div>
+          <Navbar />
+        </div>
+        <div>{children}</div>
+      </div>
     </section>
   );
 }

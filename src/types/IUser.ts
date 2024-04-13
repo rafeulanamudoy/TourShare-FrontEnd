@@ -1,5 +1,9 @@
 export type IUser = {
   user: {
+    name: {
+      firstName: string;
+      lastName: string;
+    };
     email: string;
     role: ENUM_USER_ROLE;
     profileImage: {

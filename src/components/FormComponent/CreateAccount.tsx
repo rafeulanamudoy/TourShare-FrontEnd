@@ -57,6 +57,7 @@ export default function CreateAccount() {
                 email: res.data.email,
                 role: res.data.role,
                 profileImage: res.data.profileImage,
+                name: res.data.name,
               },
             })
           );

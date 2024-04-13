@@ -30,6 +30,7 @@ export default function UserLogin() {
   const {
     register,
     handleSubmit,
+
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(LoginSchema) });
@@ -40,8 +41,8 @@ export default function UserLogin() {
       setLoading(true);
 
       const res = await signIn(userData);
-      console.log(res, "check the response");
-      console.log(res.data.profileImage, "profile image");
+      //console.log(res, "check the response");
+      // console.log(res.data.profileImage, "profile image");
       if (res?.success) {
         toast.success(res?.message);
 
@@ -51,6 +52,7 @@ export default function UserLogin() {
               email: res.email,
               role: res.role,
               profileImage: res?.data?.profileImage,
+              name: res?.data?.name,
             },
           })
         );

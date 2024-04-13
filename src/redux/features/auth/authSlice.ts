@@ -3,6 +3,10 @@ import { ENUM_USER_ROLE, IUser } from "../../../types/IUser";
 
 const initialState: IUser = {
   user: {
+    name: {
+      firstName: "",
+      lastName: "",
+    },
     email: "",
     role: ENUM_USER_ROLE.DEFAULT,
     profileImage: {
@@ -17,11 +21,12 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, { payload }: PayloadAction<IUser>) => {
-      console.log(payload, "i am from authSlice");
+      // console.log(payload, "i am from authSlice");
 
       state.user.email = payload.user.email;
       state.user.role = payload.user.role;
       state.user.profileImage = payload.user.profileImage;
+      state.user.name = payload.user.name;
     },
   },
 });

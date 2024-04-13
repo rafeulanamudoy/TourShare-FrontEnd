@@ -12,12 +12,10 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { setUser } from "@/redux/features/auth/authSlice";
-import { ENUM_USER_ROLE } from "@/types/IUser";
-import { getUserFromCookie, removeCookie } from "@/lib/actions/Server/cookies";
-import { getSingleUser } from "@/lib/actions/Server/user";
+import { useState } from "react";
+import { useAppSelector } from "@/redux/hooks";
+
+import { useRemoveAccount, useUserData } from "@/hooks/user/user";
 
 const roboto = Roboto({
   weight: "400",
@@ -25,81 +23,18 @@ const roboto = Roboto({
 });
 
 export default function Header() {
-  // console.log("render header component");
+  const isLoading = useUserData();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { email, profileImage } = useAppSelector((state) => state.auth.user);
-  const [isLoading, setLoading] = useState(true);
-  console.log(profileImage, "check profile imge");
+  const handleLogOut = useRemoveAccount();
 
-  const dispatch = useAppDispatch();
-  // console.log("rendering header component");
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
-  useEffect(() => {
-    setLoading(true);
-    const fetchData = async () => {
-      try {
-        const user = await getUserFromCookie();
 
-        if (user) {
-          const userData = await getSingleUser(user._id);
-          console.log(userData, "to check header user data");
-          dispatch(
-            setUser({
-              user: {
-                email: userData?.data?.email,
-                role: userData?.data?.role,
-                profileImage: userData?.data?.profileImage,
-              },
-            })
-          );
-          // Call getSingleUser function here with appropriate role and id
-
-          // Process user data
-        } else {
-          dispatch(
-            setUser({
-              user: {
-                email: "",
-                role: ENUM_USER_ROLE.DEFAULT,
-                profileImage: {
-                  url: "",
-                  public_id: "",
-                },
-              },
-            })
-          );
-        }
-      } catch (error) {
-        // Handle error
-      } finally {
-        setLoading(false); // Set loading state to false when data fetching is done
-      }
-    };
-
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   if (isLoading) {
     return null;
   }
-  const handleLogOut = async () => {
-    // Cookies.remove("accessToken");
-    await removeCookie("accessToken");
-    dispatch(
-      setUser({
-        user: {
-          role: ENUM_USER_ROLE.CUSTOMER,
-          email: "",
-          profileImage: {
-            public_id: "",
-            url: "",
-          },
-        },
-      })
-    );
-  };
 
   return (
     <div
@@ -160,21 +95,21 @@ export default function Header() {
           </Link>
         </div>
         {email ? (
-          <div className="lg:flex gap-x-5   xl:gap-x-18 h-16 items-center gap-y-5   ">
+          <div className="lg:flex gap-x-5   xl:gap-x-18 h-16 items-center gap-y-5  mb-5 lg:mb-0  ">
             <button
               onClick={handleLogOut}
               className="  uppercase block my-5 lg:my-0"
             >
               sign out
             </button>
-            <Link className="  " href="/dashboard">
-              <div className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-full overflow-hidden">
+            <Link className="   " href="/dashboard">
+              <div className="relative  w-8 h-8  lg:w-10 lg:h-10   xl:w-12 xl:h-12 2xl:w-14 2xl:h-14  rounded-full overflow-hidden ">
                 <Image
                   src={profileImage.url}
-                  width={500}
-                  height={500}
                   alt="Picture of the author"
                   className="rounded-full"
+                  width={100}
+                  height={100}
                 />
               </div>
             </Link>
