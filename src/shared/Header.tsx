@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import Image from "next/image";
 import logo from "../../public/images/logo.png";
-import { Roboto as Roboto } from "next/font/google";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
@@ -16,14 +16,11 @@ import { useState } from "react";
 import { useAppSelector } from "@/redux/hooks";
 
 import { useRemoveAccount, useUserData } from "@/hooks/user/user";
-
-const roboto = Roboto({
-  weight: "400",
-  subsets: ["latin"],
-});
+import { roboto } from "@/app/styles/fonts";
 
 export default function Header() {
   const isLoading = useUserData();
+  console.log(isLoading, "loading check");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { email, profileImage } = useAppSelector((state) => state.auth.user);
   const handleLogOut = useRemoveAccount();
@@ -38,7 +35,7 @@ export default function Header() {
 
   return (
     <div
-      className={`z-10  bg-white   lg:absolute top-0 w-full   lg:h-[25vh]  grid   lg:flex lg:justify-evenly items-center opacity-80 font-roboto 2xl:text-[25px]  xl:text-[15px]   lg:text-[12px]  text-[8px]     uppercase ${roboto.className}`}
+      className={`z-10  bg-white   lg:absolute top-0 w-full   lg:h-[25vh]  grid   lg:flex lg:justify-evenly items-center opacity-80 font-roboto 2xl:text-[25px]  xl:text-[15px]   lg:text-[12px]  text-[8px]     uppercase`}
     >
       <nav
         className={`${

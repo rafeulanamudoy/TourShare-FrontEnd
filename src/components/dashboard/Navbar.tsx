@@ -24,16 +24,17 @@ export default function Navbar() {
     return null;
   }
   return (
-    <div className=" px-5 flex items-center justify-between     h-36  border-b-2 ">
-      <button onClick={() => dispatch(setToggle())}>
-        <FontAwesomeIcon
-          style={{ width: "1.5em", height: "2em" }}
-          icon={faBars}
-        ></FontAwesomeIcon>
-      </button>
+    <div className="  2xl:text-[25px]  xl:text-[15px]   lg:text-[12px]  text-[8px]  px-5 flex items-center justify-between     h-36  border-b-2 ">
+      <div>
+        <button onClick={() => dispatch(setToggle())}>
+          <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
+        </button>
+      </div>
 
-      <div className="flex  font-bold text-[#31363F] items-center gap-x-5  text-xl capitalize">
-        <Link href="/">Home</Link>
+      <div className=" flex  font-bold text-[#31363F] items-center gap-x-5   capitalize">
+        <div>
+          <Link href="/">Home</Link>
+        </div>
         <div className="  w-8 h-8  lg:w-10 lg:h-10   xl:w-12 xl:h-12 2xl:w-14 2xl:h-14  rounded-full overflow-hidden ">
           <Image
             src={profileImage.url}
@@ -46,7 +47,9 @@ export default function Navbar() {
         <div>
           <p>{name.firstName.concat(" ", name.lastName)}</p>
         </div>
-        <button onClick={handleLogOut}> logout</button>
+        <div>
+          <button onClick={handleLogOut}> logout</button>
+        </div>
       </div>
     </div>
   );

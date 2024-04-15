@@ -1,3 +1,4 @@
+import { montserrat } from "@/app/styles/fonts";
 import Navbar from "@/components/dashboard/Navbar";
 import Sidebar from "@/components/dashboard/Sidebar";
 
@@ -7,16 +8,18 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="  flex">
-      <div className={"   "}>
-        <Sidebar />
-      </div>
-
-      <div className=" w-full">
-        <div>
+    <section className={` flex flex-row-reverse   ${montserrat.className}`}>
+      <div
+        className="  w-full    h-screen 
+      "
+      >
+        <div className=" ">
           <Navbar />
         </div>
-        <div>{children}</div>
+        <div className="">{children}</div>
+      </div>
+      <div className={"   "}>
+        <Sidebar />
       </div>
     </section>
   );

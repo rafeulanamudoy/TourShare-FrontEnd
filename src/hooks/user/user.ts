@@ -41,7 +41,6 @@ export const useUserData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
       try {
         const user = await getUserFromCookie();
 
@@ -80,41 +79,43 @@ export const useUserData = () => {
       } catch (error) {
         console.log(error, "check error from useuserdata");
       } finally {
-        setIsLoading(false); // Update loading state when data fetching is done
+        setIsLoading(false);
+        // Update loading state when data fetching is done
       }
     };
 
     fetchData();
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Return loading state along with other data if needed
   return isLoading;
 };
-export const useResizeHandler = () => {
-  const { innerWidth } = useWindowSize();
-  const [resizeLoading, setResizeLoading] = useState(true);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    const debouncedHandleResize = _debounce(() => {
-      if (innerWidth && innerWidth < 1024) {
-        dispatch(setToggle());
-      }
-    }, 200);
+// export const useResizeHandler = () => {
+//   const { innerWidth } = useWindowSize();
+//   const [resizeLoading, setResizeLoading] = useState(true);
+//   const dispatch = useAppDispatch();
+//   useEffect(() => {
+//     const debouncedHandleResize = _debounce(() => {
+//       if (innerWidth && innerWidth < 1024) {
+//         dispatch(setToggle());
+//       }
+//     }, 200);
 
-    window.addEventListener("resize", debouncedHandleResize);
+//     window.addEventListener("resize", debouncedHandleResize);
 
-    return () => {
-      window.removeEventListener("resize", debouncedHandleResize);
-    };
-  }, [innerWidth, dispatch]);
-  useEffect(() => {
-    setResizeLoading(true);
-    const timeout = setTimeout(() => {
-      setResizeLoading(false);
-    }, 300);
+//     return () => {
+//       window.removeEventListener("resize", debouncedHandleResize);
+//     };
+//   }, [innerWidth, dispatch]);
+//   useEffect(() => {
+//     setResizeLoading(true);
+//     const timeout = setTimeout(() => {
+//       setResizeLoading(false);
+//     }, 300);
 
-    return () => clearTimeout(timeout);
-  }, []);
+//     return () => clearTimeout(timeout);
+//   }, []);
 
-  return resizeLoading;
-};
+//   return resizeLoading;
+// };
