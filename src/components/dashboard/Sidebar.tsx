@@ -13,9 +13,12 @@ import {
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setToggle } from "@/redux/features/toggle/toggleSlice";
+import { usePathname } from "next/navigation";
 export default function Sidebar() {
   const { toggle } = useAppSelector((state) => state.toggle);
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
+  const isActive = (path: string) => path === pathname;
 
   return (
     <div
@@ -47,133 +50,50 @@ export default function Sidebar() {
         </div>
       </div>
       <div className=" mt-5 2xl:text-xl xl:text-lg lg:text-sm  text-xs  flex flex-col  gap-y-5   ">
-        <div className=" ">
-          <Link
-            className={` mx-auto  w-[90%] hover:bg-[#191919]  flex   h-16 px-2 ${
-              toggle ? "md:justify-center justify-between" : "justify-between"
-            } items-center`}
-            href="/profile"
-          >
-            <div className="flex gap-x-5 items-center">
-              <FontAwesomeIcon
-                style={{ width: "1.5em", height: "1.5em" }}
-                className={`  `}
-                icon={faUser}
-              />
+        <div>
+          {[
+            {
+              title: "Profile",
+              url: "profile",
+              icon: faUser,
+            },
+            { title: "Booking", url: "bookingHistory", icon: faUser },
+          ].map(({ title, url, icon }) => (
+            <Link
+              className={` mx-auto  w-[90%] hover:bg-[#191919]  flex   h-16 px-2 ${
+                toggle ? "md:justify-center justify-between" : "justify-between"
+              } items-center
 
-              <span
-                className={` ${
-                  toggle ? "md:hidden" : "block"
-                } capitalize font-bold `}
-              >
-                {" "}
-                profile
-              </span>
-            </div>
-            <div>
-              <FontAwesomeIcon
-                style={{ width: "1.5em", height: "1.5em" }}
-                className={` ${toggle ? "md:hidden" : "block"}  `}
-                icon={faCaretRight}
-              />
-            </div>
-          </Link>
-        </div>
-        <div className="  ">
-          <Link
-            className={`mx-auto  w-[90%] hover:bg-[#191919]  flex   h-16 px-2 ${
-              toggle ? "md:justify-center justify-between" : "justify-between"
-            } items-center`}
-            href="/profile"
-          >
-            <div className="flex gap-x-5 items-center">
-              <FontAwesomeIcon
-                style={{ width: "1.5em", height: "1.5em" }}
-                className=" "
-                icon={faUser}
-              />
+           
+            
+            `}
+              key={url}
+              href={url}
+            >
+              <div className="flex gap-x-5 items-center">
+                <FontAwesomeIcon
+                  style={{ width: "1.5em", height: "1.5em" }}
+                  className=" "
+                  icon={icon}
+                />
 
-              <span
-                className={` ${
-                  toggle ? "md:hidden" : "block"
-                } capitalize font-bold `}
-              >
-                {" "}
-                profile
-              </span>
-            </div>
-            <div>
-              <FontAwesomeIcon
-                style={{ width: "1.5em", height: "1.5em" }}
-                className={` ${toggle ? "md:hidden" : "block"}  `}
-                icon={faCaretRight}
-              />
-            </div>
-          </Link>
-        </div>
-        <div className="  ">
-          <Link
-            className={`mx-auto  w-[90%] hover:bg-[#191919]  flex   h-16 px-2 ${
-              toggle ? "md:justify-center justify-between" : "justify-between"
-            } items-center`}
-            href="/profile"
-          >
-            <div className="flex gap-x-5 items-center">
-              <FontAwesomeIcon
-                style={{ width: "1.5em", height: "1.5em" }}
-                className="  "
-                icon={faUser}
-              />
-
-              <span
-                className={` ${
-                  toggle ? "md:hidden" : "block"
-                } capitalize font-bold `}
-              >
-                {" "}
-                profile
-              </span>
-            </div>
-            <div>
-              <FontAwesomeIcon
-                style={{ width: "1.5em", height: "1.5em" }}
-                className={` ${toggle ? "md:hidden" : "block"}  `}
-                icon={faCaretRight}
-              />
-            </div>
-          </Link>
-        </div>
-        <div className="  ">
-          <Link
-            className={`mx-auto  w-[90%] hover:bg-[#191919]  flex   h-16 px-2 ${
-              toggle ? "md:justify-center justify-between" : "justify-between"
-            } items-center`}
-            href="/profile"
-          >
-            <div className="flex gap-x-5 items-center">
-              <FontAwesomeIcon
-                style={{ width: "1.5em", height: "1.5em" }}
-                className=" "
-                icon={faUser}
-              />
-
-              <span
-                className={` ${
-                  toggle ? "md:hidden" : "block"
-                } capitalize font-bold `}
-              >
-                {" "}
-                profile
-              </span>
-            </div>
-            <div>
-              <FontAwesomeIcon
-                style={{ width: "1.5em", height: "1.5em" }}
-                className={` ${toggle ? "md:hidden" : "block"}  `}
-                icon={faCaretRight}
-              />
-            </div>
-          </Link>
+                <span
+                  className={` ${
+                    toggle ? "md:hidden" : "block"
+                  } capitalize font-bold `}
+                >
+                  {title}
+                </span>
+              </div>
+              <div>
+                <FontAwesomeIcon
+                  style={{ width: "1.5em", height: "1.5em" }}
+                  className={` ${toggle ? "md:hidden" : "block"}  `}
+                  icon={faCaretRight}
+                />
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
