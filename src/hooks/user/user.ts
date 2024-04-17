@@ -45,7 +45,7 @@ export const useUserData = () => {
         const user = await getUserFromCookie();
 
         if (user) {
-          const userData = await getSingleUser(user._id);
+          const userData = await getSingleUser();
           // console.log(userData, "from useUser hook");
           dispatch(
             setUser({

@@ -8,17 +8,17 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className={` flex flex-row-reverse   ${montserrat.className}`}>
+    <section className={`  flex flex-row-reverse   ${montserrat.className}`}>
       <div
-        className="  w-full    h-screen 
+        className="  w-full    bg-[#d8dcdd]  
       "
       >
         <div className=" ">
           <Navbar />
         </div>
-        <div className="">{children}</div>
+        <div className="h-auto ">{children}</div>
       </div>
-      <div className={"   "}>
+      <div className={" h-screen   "}>
         <Sidebar />
       </div>
     </section>

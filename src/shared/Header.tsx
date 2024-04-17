@@ -35,12 +35,12 @@ export default function Header() {
 
   return (
     <div
-      className={`z-10  bg-white   lg:absolute top-0 w-full   lg:h-[25vh]  grid   lg:flex lg:justify-evenly items-center opacity-80 font-roboto 2xl:text-[25px]  xl:text-[15px]   lg:text-[12px]  text-[8px]     uppercase`}
+      className={`z-10  bg-white   lg:absolute top-0 w-full   lg:h-[25vh]  grid   lg:flex lg:justify-evenly items-center opacity-80  2xl:text-[25px]  xl:text-[15px]   lg:text-[12px]  text-[8px]     uppercase`}
     >
       <nav
         className={`${
           isMobileMenuOpen ? `lg:flex` : `hidden`
-        }  lg:flex grid  mx-5 lg:mx-0   gap-x-5  gap-y-5 xl:gap-y-0  xl:gap-x-18  items-center font-semibold `}
+        }  lg:flex grid  mx-5 lg:mx-0   gap-x-5 xl:gap-x-18  gap-y-5 xl:gap-y-0   items-center font-semibold `}
       >
         {[
           ["home", "/"],
