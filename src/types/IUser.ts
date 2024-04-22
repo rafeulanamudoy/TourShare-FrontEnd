@@ -53,3 +53,16 @@ export type ISendResponse<T> = {
     count?: number;
   };
 };
+
+export type IUpdateUserData = {
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  phoneNumber: string;
+  role: string;
+  profileImage: {
+    url: string;
+    public_id: string;
+  };
+};

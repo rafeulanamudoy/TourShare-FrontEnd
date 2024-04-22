@@ -5,9 +5,7 @@ import { getUserFromCookie, removeCookie } from "@/lib/actions/Server/cookies";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getSingleUser } from "@/lib/actions/Server/user";
-import useWindowSize from "@rooks/use-window-size";
-import _debounce from "lodash.debounce";
-import { setToggle } from "@/redux/features/toggle/toggleSlice";
+
 export const useRemoveAccount = () => {
   const dispatch = useAppDispatch();
   const { push } = useRouter();
@@ -91,7 +89,7 @@ export const useUserData = () => {
   // Return loading state along with other data if needed
   return isLoading;
 };
-// export const useResizeHandler = () => {
+
 //   const { innerWidth } = useWindowSize();
 //   const [resizeLoading, setResizeLoading] = useState(true);
 //   const dispatch = useAppDispatch();

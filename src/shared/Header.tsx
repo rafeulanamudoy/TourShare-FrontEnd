@@ -16,11 +16,10 @@ import { useState } from "react";
 import { useAppSelector } from "@/redux/hooks";
 
 import { useRemoveAccount, useUserData } from "@/hooks/user/user";
-import { roboto } from "@/app/styles/fonts";
 
 export default function Header() {
   const isLoading = useUserData();
-  console.log(isLoading, "loading check");
+  //console.log(isLoading, "loading check");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { email, profileImage } = useAppSelector((state) => state.auth.user);
   const handleLogOut = useRemoveAccount();
