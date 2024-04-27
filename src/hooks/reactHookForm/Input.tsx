@@ -12,6 +12,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   textarea?: boolean;
   selectOptions?: { value: string; label: string }[];
   autoComplete?: string;
+
+  defaultImageUrl?: string;
 }
 
 const Input: FC<InputProps> = ({
@@ -21,6 +23,8 @@ const Input: FC<InputProps> = ({
   label,
   textarea,
   selectOptions,
+
+  defaultImageUrl,
 
   ...rest
 }) => {

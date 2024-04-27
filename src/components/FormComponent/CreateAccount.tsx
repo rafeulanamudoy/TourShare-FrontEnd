@@ -17,7 +17,6 @@ import { SignUpSchema } from "@/lib/validation/yupValidation";
 import { override } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -54,10 +53,10 @@ export default function CreateAccount() {
           dispatch(
             setUser({
               user: {
-                email: res.data.email,
-                role: res.data.role,
-                profileImage: res.data.profileImage,
-                name: res.data.name,
+                email: res?.data?.email,
+                role: res?.data?.role,
+                profileImage: res?.data?.profileImage,
+                name: res?.data?.name,
               },
             })
           );
@@ -104,7 +103,6 @@ export default function CreateAccount() {
               placeholder="First Name"
               error={errors.name?.firstName?.message}
               register={register}
-              accept="image/*"
               autoFocus
             />
             <Input
@@ -117,8 +115,7 @@ export default function CreateAccount() {
               autoFocus
             />
           </div>
-        </div>
-
+        </div>{" "}
         <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2" htmlFor="email">
             Email
@@ -129,7 +126,7 @@ export default function CreateAccount() {
               name="email"
               type="email"
               placeholder="abcd@gmail.com"
-              error={errors.email?.message}
+              error={errors?.email?.message}
               register={register}
               autoFocus
             />
@@ -145,7 +142,7 @@ export default function CreateAccount() {
               name="profileImage"
               type="file"
               register={register}
-              error={errors.profileImage?.message}
+              error={errors?.profileImage?.message}
               autoFocus
             />
           </div>
@@ -161,7 +158,7 @@ export default function CreateAccount() {
               name="phoneNumber"
               type="tel"
               placeholder="+880"
-              error={errors.phoneNumber?.message}
+              error={errors?.phoneNumber?.message}
               register={register}
               autoFocus
             />
@@ -178,7 +175,7 @@ export default function CreateAccount() {
               name="password"
               type="password"
               placeholder="Password"
-              error={errors.password?.message}
+              error={errors?.password?.message}
               register={register}
               autoFocus
             />
@@ -195,7 +192,7 @@ export default function CreateAccount() {
               name="confirmPassword"
               type="password"
               placeholder="Confirm Password"
-              error={errors.confirmPassword?.message}
+              error={errors?.confirmPassword?.message}
               register={register}
               autoFocus
             />

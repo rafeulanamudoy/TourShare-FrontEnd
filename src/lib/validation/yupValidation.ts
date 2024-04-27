@@ -42,3 +42,27 @@ export const LoginSchema = yup.object().shape({
 
     .required("Password is required"),
 });
+
+export const UpdateSchema = yup.object().shape({
+  name: yup.object().shape({
+    firstName: yup.string().required("First Name is required"),
+    lastName: yup.string().required("Last Name is required"),
+  }),
+  phoneNumber: yup
+    .string()
+    .required("Phone Number is required")
+    .matches(/^\+88\d{11}$/, "Invalid phone number format"),
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  profileImage: yup
+    .mixed()
+    .test("fileType", "Only PNG, JPG, JPEG are allowedu", validateImageFileType)
+    .test(
+      "fileSize",
+      "File size must be less than 1 MB",
+      (value: any) => value && value[0] && value[0].size / 1024 / 1024 < 1
+    )
+    .required("Profile Image is required"),
+});

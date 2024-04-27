@@ -11,7 +11,7 @@ export default async function SignIn(searchParams: {
 
   if (user?.userEmail && destination) {
     redirect(`${destination}`);
-  } else if (user?.userEmail) {
+  } else if (user?.userEmail && !destination) {
     redirect("/");
   }
 

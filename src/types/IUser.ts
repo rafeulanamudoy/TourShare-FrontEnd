@@ -53,16 +53,29 @@ export type ISendResponse<T> = {
     count?: number;
   };
 };
-
-export type IUpdateUserData = {
+export type IUpdatedUser = {
   name: {
     firstName: string;
     lastName: string;
   };
-  phoneNumber: string;
-  role: string;
+  _id: string;
+
   profileImage: {
     url: string;
     public_id: string;
   };
+  phoneNumber?: string;
+  email: string;
+  role: ENUM_USER_ROLE;
+};
+export type IUserSchema = {
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+
+  profileImage: FileList;
+  phoneNumber?: string;
+  email: string;
+  role: ENUM_USER_ROLE;
 };

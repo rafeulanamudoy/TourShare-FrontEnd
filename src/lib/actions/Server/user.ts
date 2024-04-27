@@ -1,10 +1,10 @@
 "use server";
 
-import { ISignInData } from "@/types/IUser";
-import { cookies } from "next/headers";
+import { ENUM_USER_ROLE, ISignInData, IUserSchema } from "@/types/IUser";
 
 import { getUserFromCookie, setCookie, verifyToken } from "./cookies";
 import { Secret } from "jsonwebtoken";
+import { revalidateTag } from "next/cache";
 
 export async function signUp(data: FormData, role: string) {
   try {
@@ -71,13 +71,35 @@ export async function getSingleUser() {
       throw new Error("User not found in cookie");
     }
     const { _id } = user;
-    const response = await fetch(`${process.env.URL}/users/${_id}`);
+    const response = await fetch(`${process.env.URL}/users/${_id}`, {
+      next: { tags: ["update"] },
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    const data = await response.json(); // Parse JSON response
+    const data = await response.json();
+    // Parse JSON response
     return data;
   } catch (error) {
     throw error;
+  }
+}
+export async function updateSingleUser(
+  data: FormData,
+  id: string,
+  role: ENUM_USER_ROLE
+) {
+  try {
+    const response = await fetch(`${process.env.URL}/${role}/${id}`, {
+      method: "PATCH",
+      headers: {},
+      body: data,
+    });
+    const result = await response.json();
+    revalidateTag("update");
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log(error, "update user error from  user.ts server file");
   }
 }

@@ -32,12 +32,12 @@ const Form: FC<IFormProps> = ({
     <form autoComplete="off" action={handleSubmit(onSubmit)} {...rest}>
       {Array.isArray(children)
         ? children.map((child) => {
-            return child.props.name
-              ? createElement(child.type, {
+            return child?.props?.name
+              ? createElement(child?.type, {
                   ...{
-                    ...child.props,
+                    ...child?.props,
                     register,
-                    key: child.props.name,
+                    key: child?.props?.name,
                   },
                 })
               : child;
