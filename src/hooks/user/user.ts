@@ -24,6 +24,8 @@ export const useRemoveAccount = () => {
             public_id: "",
             url: "",
           },
+          _id: "",
+          phoneNumber: "",
         },
       })
     );
@@ -40,11 +42,9 @@ export const useUserData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const user = await getUserFromCookie();
-
-        if (user) {
-          const userData = await getSingleUser();
-          // console.log(userData, "from useUser hook");
+        const userData = await getSingleUser();
+        //console.log(userData, "userData");
+        if (userData) {
           dispatch(
             setUser({
               user: {
@@ -53,10 +53,14 @@ export const useUserData = () => {
                 email: userData?.data?.email,
                 role: userData?.data?.role,
                 profileImage: userData?.data?.profileImage,
+                phoneNumber: userData?.data?.phoneNumber,
+                _id: userData?.data?._id,
               },
             })
           );
-        } else {
+        }
+        // console.log(userData, "from useUser hook");
+        else {
           dispatch(
             setUser({
               user: {
@@ -70,12 +74,17 @@ export const useUserData = () => {
                   url: "",
                   public_id: "",
                 },
+                _id: "",
+                phoneNumber: "",
               },
             })
           );
         }
       } catch (error) {
-        console.log(error, "check error from useuserdata");
+        console.log(
+          error,
+          "check error from useuserdata from user.ts file hook folder"
+        );
       } finally {
         setIsLoading(false);
         // Update loading state when data fetching is done

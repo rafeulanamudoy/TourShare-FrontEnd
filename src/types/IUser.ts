@@ -10,6 +10,8 @@ export type IUser = {
       url: string;
       public_id: string;
     };
+    phoneNumber: string;
+    _id: string;
   };
 };
 
@@ -64,7 +66,7 @@ export type IUpdatedUser = {
     url: string;
     public_id: string;
   };
-  phoneNumber?: string;
+  phoneNumber: string;
   email: string;
   role: ENUM_USER_ROLE;
 };

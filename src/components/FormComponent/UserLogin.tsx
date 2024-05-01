@@ -12,7 +12,7 @@ import { LoginSchema } from "@/lib/validation/yupValidation";
 import { signIn } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
-import { override } from "@/utilities/css";
+import { override1 } from "@/utilities/css";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
 
@@ -53,6 +53,8 @@ export default function UserLogin() {
               role: res.role,
               profileImage: res?.data?.profileImage,
               name: res?.data?.name,
+              phoneNumber: res?.data?.phoneNumber,
+              _id: res?.data?._id,
             },
           })
         );
@@ -117,7 +119,7 @@ export default function UserLogin() {
             {loading ? (
               <ClipLoader
                 loading={loading}
-                cssOverride={override}
+                cssOverride={override1}
                 size={100}
                 aria-label="Loading Spinner"
                 data-testid="loader"

@@ -14,7 +14,7 @@ import { ISignUpData } from "@/types/IUser";
 import { signUp } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
 import { SignUpSchema } from "@/lib/validation/yupValidation";
-import { override } from "@/utilities/css";
+import { override1 } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 
@@ -57,6 +57,8 @@ export default function CreateAccount() {
                 role: res?.data?.role,
                 profileImage: res?.data?.profileImage,
                 name: res?.data?.name,
+                phoneNumber: res?.data?.phoneNumber,
+                _id: res?.data?._id,
               },
             })
           );
@@ -206,7 +208,7 @@ export default function CreateAccount() {
           {loading ? (
             <ClipLoader
               loading={loading}
-              cssOverride={override}
+              cssOverride={override1}
               size={100}
               aria-label="Loading Spinner"
               data-testid="loader"

@@ -14,12 +14,15 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
-import { override } from "@/utilities/css";
+import { override2 } from "@/utilities/css";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { setUser } from "@/redux/features/auth/authSlice";
 
 export default function Update() {
-  const [user, setUser] = useState<IUpdatedUser | null>();
+  const [userValue, setUserValue] = useState<IUpdatedUser | null>();
   const [loading, setLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -30,36 +33,81 @@ export default function Update() {
   useEffect(() => {
     (async () => {
       const user = await getSingleUser();
-      console.log(user, "check user data");
+      // console.log(user, "check user data");
       if (user) {
-        setUser(user?.data);
+        setUserValue(user?.data);
       }
     })();
   }, []);
   const onSubmit = async (userData: IUpdatedUser) => {
     const formData = new FormData();
-
-    userData.name.firstName &&
+    console.log(userData, "check data");
+    if (
+      userValue &&
+      userData.name.firstName.length > 0 &&
+      !userData.name.lastName
+    ) {
+      console.log(userValue?.name.lastName, "lastName check");
       formData.append("name[firstName]", userData.name.firstName);
-    userData.name.lastName &&
+      formData.append("name[lastName]", userValue.name.lastName);
+    }
+    if (
+      userValue &&
+      userData.name.lastName.length > 0 &&
+      !userData.name.firstName
+    ) {
+      console.log(userValue?.name.firstName, "firstName check");
       formData.append("name[lastName]", userData.name.lastName);
+      formData.append("name[firstName]", userValue.name.firstName);
+    }
+    if (
+      userData.name.firstName.length > 0 &&
+      userData.name.lastName.length > 0
+    ) {
+      console.log(userValue?.name.firstName, "firstName check");
+      formData.append("name[firstName]", userData.name.firstName);
+      formData.append("name[lastName]", userData.name.lastName);
+    }
+    // Append last name if it's updated
 
-    selectedFiles && formData.append("profileImage", selectedFiles[0]);
+    // Append profile image if selected
+    if (selectedFiles && selectedFiles.length > 0) {
+      formData.append("profileImage", selectedFiles[0]);
+    }
 
-    userData.phoneNumber &&
+    // Append phone number if it's updated
+    if (userData.phoneNumber.length > 0) {
       formData.append("phoneNumber", userData.phoneNumber);
+    }
+
     try {
       setLoading(true);
-      if (user?._id && user?.role) {
-        const res = await updateSingleUser(formData, user?._id, user?.role);
+      if (userValue?._id && userValue?.role) {
+        const res = await updateSingleUser(
+          formData,
+          userValue?._id,
+          userValue?.role
+        );
         if (res?.success) {
-          console.log(res);
+          // console.log(res);
           toast.success(res.message);
+          dispatch(
+            setUser({
+              user: {
+                email: res.email,
+                role: res.role,
+                profileImage: res?.data?.profileImage,
+                name: res?.data?.name,
+                phoneNumber: res?.data?.phoneNumber,
+                _id: res?.data?._id,
+              },
+            })
+          );
         }
       }
     } catch (error) {
-      console.log(error, "update user error");
-      toast.error("An error occurred while updating  your profile");
+      console.log(error, "update page user error");
+      toast.error("An error occurred while updating your profile");
     } finally {
       setLoading(false);
     }
@@ -96,8 +144,7 @@ export default function Update() {
               name="name.firstName"
               type="text"
               register={register}
-              defaultValue={user?.name?.firstName}
-              autoFocus
+              defaultValue={userValue?.name?.firstName}
             />
           </div>
 
@@ -109,9 +156,8 @@ export default function Update() {
               className="w-full text-white h-[4em] p-5 rounded-md bg-[#31363F] placeholder:text-white border-2 border-[#707070]"
               name="name.lastName"
               type="text"
-              defaultValue={user?.name?.lastName}
+              defaultValue={userValue?.name?.lastName}
               register={register}
-              autoFocus
             />
           </div>
 
@@ -123,10 +169,9 @@ export default function Update() {
               className="w-full text-white h-[4em] hover:cursor-not-allowed p-5 rounded-md bg-[#31363F] placeholder:text-white border-2 border-[#707070]"
               name="email"
               type="email"
-              defaultValue={user?.email}
+              defaultValue={userValue?.email}
               readOnly
               register={register}
-              autoFocus
             />
           </div>
 
@@ -139,9 +184,8 @@ export default function Update() {
               className="w-full text-white h-[4em] p-5 rounded-md bg-[#31363F] placeholder:text-white border-2 border-[#707070]"
               name="phoneNumber"
               type="phoneNumber"
-              defaultValue={user?.phoneNumber}
+              defaultValue={userValue?.phoneNumber}
               register={register}
-              autoFocus
             />
           </div>
 
@@ -178,9 +222,9 @@ export default function Update() {
                     height: "auto",
                   }}
                 />
-              ) : user?.profileImage?.url ? ( // Check if user profileImage url exists
+              ) : userValue?.profileImage?.url ? ( // Check if user profileImage url exists
                 <Image
-                  src={user.profileImage.url}
+                  src={userValue?.profileImage?.url}
                   alt="profile Image"
                   width={300}
                   height={300}
@@ -197,13 +241,15 @@ export default function Update() {
         </div>
         <div>
           <button
-            className=" grid  lg:float-right items-center mt-5     bg-[#FF914F] w-1/2 h-[3em] rounded-md"
+            className={`grid  lg:float-right items-center mt-5     bg-[#FF914F] w-1/2 ${
+              loading ? "h-auto" : "h-[3em]"
+            } rounded-md`}
             type="submit"
           >
             {loading ? (
               <ClipLoader
                 loading={loading}
-                cssOverride={override}
+                cssOverride={override2}
                 size={100}
                 aria-label="Loading Spinner"
                 data-testid="loader"

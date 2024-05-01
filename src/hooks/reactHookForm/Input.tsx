@@ -68,7 +68,7 @@ const Input: FC<InputProps> = ({
           />
         )}
         {error && (
-          <div className="  text-sm       ">
+          <div className="        ">
             <span style={{ fontSize: "0.6em" }} className="">
               {" "}
               {error}

@@ -69,7 +69,9 @@ export async function getSingleUser() {
     const user = await getUserFromCookie();
     if (!user) {
       throw new Error("User not found in cookie");
+    } else {
     }
+
     const { _id } = user;
     const response = await fetch(`${process.env.URL}/users/${_id}`, {
       next: { tags: ["update"] },
