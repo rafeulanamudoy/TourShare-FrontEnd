@@ -1,5 +1,5 @@
 import { getSingleUser } from "@/lib/actions/Server/user";
-import UserUpdateButton from "../buttons/UserUpdateButton";
+import UserUpdateButton from "../buttons/UserToggole";
 import Image from "next/image";
 
 export default async function PersonalInfo() {
@@ -9,7 +9,7 @@ export default async function PersonalInfo() {
     <>
       <div className="  w-[90%] mx-auto  flex justify-between items-center   2xl:text-5xl xl:text-4xl lg:text-2xl  text-xl mb-5">
         <span>personal information</span>
-        <UserUpdateButton />
+        <UserUpdateButton location={"/update"} />
       </div>
       <div className=" w-[90%]  mx-auto    ">
         <div className=" 2xl:h-80 2xl:w-80 xl:h-64 xl:w-64 lg:h-52 lg:w-52 md:h-44 md:w-44  w-32 h-32  w overflow-hidden">

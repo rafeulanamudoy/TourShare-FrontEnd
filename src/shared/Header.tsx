@@ -18,7 +18,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { useRemoveAccount, useUserData } from "@/hooks/user/user";
 
 export default function Header() {
-  const isLoading = useUserData();
+  const { isLoading } = useUserData();
   //console.log(isLoading, "loading check");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { email, profileImage } = useAppSelector((state) => state.auth.user);
@@ -43,7 +43,7 @@ export default function Header() {
       >
         {[
           ["home", "/"],
-          ["create team", "/createTeam"],
+          ["create team", "/createTeam/#createTeam"],
           ["join team", "/joinTeam"],
           ["about us", "/about us"],
         ].map(([title, url]) => (

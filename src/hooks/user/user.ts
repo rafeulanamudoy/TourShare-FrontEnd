@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
-import { ENUM_USER_ROLE } from "@/types/IUser";
+import { ENUM_USER_ROLE, IUpdatedUser } from "@/types/IUser";
 import { getUserFromCookie, removeCookie } from "@/lib/actions/Server/cookies";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -38,23 +38,25 @@ export const useRemoveAccount = () => {
 export const useUserData = () => {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState<IUpdatedUser | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await getSingleUser();
+        const fetchUserData = await getSingleUser();
         //console.log(userData, "userData");
-        if (userData) {
+        if (fetchUserData) {
+          setUserData(fetchUserData?.data);
           dispatch(
             setUser({
               user: {
-                name: userData?.data.name,
+                name: fetchUserData?.data.name,
 
-                email: userData?.data?.email,
-                role: userData?.data?.role,
-                profileImage: userData?.data?.profileImage,
-                phoneNumber: userData?.data?.phoneNumber,
-                _id: userData?.data?._id,
+                email: fetchUserData?.data?.email,
+                role: fetchUserData?.data?.role,
+                profileImage: fetchUserData?.data?.profileImage,
+                phoneNumber: fetchUserData?.data?.phoneNumber,
+                _id: fetchUserData?.data?._id,
               },
             })
           );
@@ -96,7 +98,7 @@ export const useUserData = () => {
   }, []);
 
   // Return loading state along with other data if needed
-  return isLoading;
+  return { isLoading, userData };
 };
 
 //   const { innerWidth } = useWindowSize();

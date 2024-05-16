@@ -20,13 +20,14 @@ export async function removeCookie(name: string) {
 export async function getUserFromCookie() {
   const cookieStore = cookies();
   const user = cookieStore.get("accessToken");
+  // console.log(user, "user check");
 
   if (user && user.value) {
     const payload = await verifyToken(
       user.value,
       process.env.JWT_SECRET as Secret
     );
-
+    console.log(payload, "check payload");
     if (payload) {
       const userEmail = payload.userEmail as string;
       const role = payload.role as string;

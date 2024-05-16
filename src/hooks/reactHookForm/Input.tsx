@@ -29,13 +29,13 @@ const Input: FC<InputProps> = ({
   ...rest
 }) => {
   return (
-    <div className=" w-full  ">
+    <div className="w-full   ">
       {label && (
         <label className="  " htmlFor={name}>
           {label}
         </label>
       )}
-      <div className="  ">
+      <div>
         {textarea ? (
           <textarea
             className="   "
@@ -60,7 +60,7 @@ const Input: FC<InputProps> = ({
           </select>
         ) : (
           <input
-            className="    "
+            className=" "
             aria-invalid={error ? "true" : "false"}
             {...register(name)}
             {...rest}

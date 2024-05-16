@@ -2,10 +2,14 @@
 import { faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-export default function UserUpdateButton() {
+interface UserUpdateButtonProps {
+  location: string; // Define the type of the location prop
+}
+export default function UserToggole({ location }: UserUpdateButtonProps) {
+  console.log(location, "check location");
   const { push } = useRouter();
   return (
-    <button onClick={() => push("/dashboard/update")}>
+    <button onClick={() => push(`/dashboard/${location}`)}>
       <FontAwesomeIcon
         style={{ width: "1.5em", height: "2em" }}
         icon={faPenSquare}

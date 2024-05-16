@@ -32,17 +32,16 @@ export type ISignUpData = {
   superRoleKey?: string;
 };
 
-export type ISignInData = {
-  email: string;
-  password: string;
-};
-
 export enum ENUM_USER_ROLE {
   SUPER_ADMIN = "superAdmin",
   ADMIN = "admin",
   CUSTOMER = "customer",
   DEFAULT = "",
 }
+export type ISignInData = {
+  email: string;
+  password: string;
+};
 
 export type ISendResponse<T> = {
   success: boolean;

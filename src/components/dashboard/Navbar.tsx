@@ -13,10 +13,13 @@ import Link from "next/link";
 
 export default function Navbar() {
   const handleLogOut = useRemoveAccount();
-
+  const { isLoading } = useUserData();
   const dispatch = useAppDispatch();
   const { profileImage } = useAppSelector((state) => state.auth.user);
 
+  if (isLoading) {
+    return null;
+  }
   return (
     <div className=" bg-white 2xl:text-[25px]   xl:text-[15px]   lg:text-[12px]  text-[8px]  px-5 flex items-center justify-between     h-36  border-b-2 ">
       <div>
@@ -35,7 +38,7 @@ export default function Navbar() {
             logout
           </button>
         </div>
-        <div className="  w-8 h-8  lg:w-10 lg:h-10   xl:w-12 xl:h-12 2xl:w-14 2xl:h-14  rounded-full overflow-hidden ">
+        <div className="  w-8 h-8  lg:w-10 lg:h-10   xl:w-12 xl:h-12 2xl:w-14 2xl:h-14  rounded-full  overflow-hidden ">
           {profileImage && (
             <Image
               src={profileImage?.url}

@@ -66,3 +66,47 @@ export const UpdateSchema = yup.object().shape({
     )
     .required("Profile Image is required"),
 });
+export const CreateTeamSchema = yup.object().shape({
+  destination: yup.string().required("Destination is required"),
+  phoneNumber: yup
+    .string()
+    .required("Phone Number is required")
+    .matches(
+      /^01\d{9}$/,
+      "Invalid phone number format. Must be 11 digits and start with '01'"
+    ),
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  address: yup.string().required("Address is required"),
+  currentMembers: yup
+    .number()
+    .transform((value, originalValue) =>
+      String(originalValue).trim() === "" ? null : value
+    )
+    .nullable()
+    .required("Current members count is required"),
+  neededMembers: yup
+    .number()
+    .transform((value, originalValue) =>
+      String(originalValue).trim() === "" ? null : value
+    )
+    .nullable()
+    .required("Needed members count is required"),
+  nationalIdNumber: yup.string().required("National ID Number is required"),
+  startDate: yup
+    .date()
+    .transform((value, originalValue) =>
+      String(originalValue).trim() === "" ? null : value
+    )
+    .nullable()
+    .required("Start date is required"),
+  endDate: yup
+    .date()
+    .transform((value, originalValue) =>
+      String(originalValue).trim() === "" ? null : value
+    )
+    .nullable()
+    .required("End date is required"),
+});

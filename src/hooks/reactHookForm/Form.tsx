@@ -29,7 +29,12 @@ const Form: FC<IFormProps> = ({
   ...rest
 }) => {
   return (
-    <form autoComplete="off" action={handleSubmit(onSubmit)} {...rest}>
+    <form
+      className=""
+      autoComplete="off"
+      action={handleSubmit(onSubmit)}
+      {...rest}
+    >
       {Array.isArray(children)
         ? children.map((child) => {
             return child?.props?.name

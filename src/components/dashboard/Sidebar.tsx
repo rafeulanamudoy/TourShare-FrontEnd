@@ -10,16 +10,47 @@ import {
   faUser,
   faCircleXmark,
   faBook,
+  faUsers,
+  IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setToggle } from "@/redux/features/toggle/toggleSlice";
 import { usePathname } from "next/navigation";
+import { ENUM_USER_ROLE } from "@/types/IUser";
 export default function Sidebar() {
   const { toggle } = useAppSelector((state) => state.toggle);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
+  const { role } = useAppSelector((state) => state.auth.user);
+  const commonSidebarItems = [
+    { title: "Profile", url: "/dashboard/profile", icon: faUser },
+  ];
+
+  // Define role-specific sidebar items
+  const roleSpecificSidebarItems: Partial<
+    Record<
+      ENUM_USER_ROLE,
+      { title: string; url: string; icon: IconDefinition }[]
+    >
+  > = {
+    [ENUM_USER_ROLE.CUSTOMER]: [
+      { title: "Booking", url: "/bookingHistory", icon: faBook },
+    ],
+    [ENUM_USER_ROLE.SUPER_ADMIN]: [
+      { title: "Manage Users", url: "/manageUsers", icon: faUsers },
+    ],
+    [ENUM_USER_ROLE.ADMIN]: [
+      { title: "Delete Users", url: "/deleteUsers", icon: faUsers },
+    ],
+  };
+
+  // Combine common and role-specific sidebar items
+  const allSidebarItems = [
+    ...commonSidebarItems,
+    ...(roleSpecificSidebarItems[role] || []),
+  ];
 
   return (
     <div
@@ -51,14 +82,7 @@ export default function Sidebar() {
         </div>
       </div>
       <div className=" mt-5  2xl:text-[25px]   xl:text-[15px]   lg:text-[12px]  text-[8px]   grid  gap-y-5   ">
-        {[
-          {
-            title: "Profile",
-            url: "/dashboard/profile",
-            icon: faUser,
-          },
-          { title: "Booking", url: "/bookingHistory", icon: faBook },
-        ].map(({ title, url, icon }) => (
+        {allSidebarItems.map(({ title, url, icon }) => (
           <Link
             className={` ${
               isActive(url) ? "bg-[#FF914F] " : ""
@@ -82,7 +106,7 @@ export default function Sidebar() {
               <span
                 className={` ${
                   toggle ? "md:hidden" : "block"
-                } capitalize font-bold `}
+                } capitalize font-bold whitespace-nowrap `}
               >
                 {title}
               </span>
