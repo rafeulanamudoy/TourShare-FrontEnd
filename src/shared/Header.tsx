@@ -22,6 +22,7 @@ export default function Header() {
   //console.log(isLoading, "loading check");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { email, profileImage } = useAppSelector((state) => state.auth.user);
+  //console.log(email, "from header");
   const handleLogOut = useRemoveAccount();
 
   const toggleMobileMenu = () => {

@@ -23,6 +23,7 @@ export type ISignUpData = {
   id?: string;
 
   email: string;
+  countryCode: string;
   role: ENUM_USER_ROLE;
   profileImage: FileList;
   password: string;

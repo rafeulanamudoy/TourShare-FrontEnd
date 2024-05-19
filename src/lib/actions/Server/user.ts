@@ -40,27 +40,19 @@ export async function signIn(data: ISignInData) {
       );
 
       if (payload) {
-        const { userEmail: email, role } = payload;
+        await setCookie("accessToken", result?.data?.accessToken);
+        const user = await getSingleUser();
+        // console.log(user, "user from login server action");
 
-        setCookie("accessToken", result?.data?.accessToken);
-
-        return {
-          ...result,
-          role: role,
-          email: email,
-        };
+        return user;
       } else {
-        // Handle case where token verification failed
-        console.error("Token verification failed");
-        // You can handle this case according to your application's requirements
-        // For example, you could redirect the user to the login page or display an error message
-        return result; // Or return some predefined error response
+        return result;
       }
     } else {
       return result;
     }
   } catch (error) {
-    console.log(error, "check error");
+    //console.log(error, "check error");
     throw error;
   }
 }
@@ -99,9 +91,9 @@ export async function updateSingleUser(
     });
     const result = await response.json();
     revalidateTag("update");
-    console.log(result);
+    //console.log(result);
     return result;
   } catch (error) {
-    console.log(error, "update user error from  user.ts server file");
+    // console.log(error, "update user error from  user.ts server file");
   }
 }

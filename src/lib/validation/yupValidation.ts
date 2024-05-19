@@ -68,17 +68,7 @@ export const UpdateSchema = yup.object().shape({
 });
 export const CreateTeamSchema = yup.object().shape({
   destination: yup.string().required("Destination is required"),
-  phoneNumber: yup
-    .string()
-    .required("Phone Number is required")
-    .matches(
-      /^01\d{9}$/,
-      "Invalid phone number format. Must be 11 digits and start with '01'"
-    ),
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
+
   address: yup.string().required("Address is required"),
   currentMembers: yup
     .number()

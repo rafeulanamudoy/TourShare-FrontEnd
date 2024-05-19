@@ -6,9 +6,9 @@ export async function verifyToken(token: string, secret: Secret) {
     return jwt.verify(token, secret) as JwtPayload;
   } catch (error) {
     if (error instanceof TokenExpiredError) {
-      console.error("token has expired");
+      // console.error("token has expired");
     } else {
-      console.error("error verifieng token ,erro.message");
+      // console.error("error verifieng token ,erro.message");
     }
     return null;
   }
@@ -27,7 +27,7 @@ export async function getUserFromCookie() {
       user.value,
       process.env.JWT_SECRET as Secret
     );
-    console.log(payload, "check payload");
+    //console.log(payload, "check payload");
     if (payload) {
       const userEmail = payload.userEmail as string;
       const role = payload.role as string;
@@ -47,7 +47,7 @@ export async function getUserFromCookie() {
   }
 }
 export async function setCookie(name: string, value: string) {
-  console.log(name, value, "check to set cookie from cookie.ts file");
+  // console.log(name, value, "check to set cookie from cookie.ts file");
   cookies().set({
     name: name,
     value: value,

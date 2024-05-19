@@ -18,6 +18,7 @@ import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { createTeam } from "@/lib/actions/Server/team";
 import { ICreateTeam } from "@/types/ICreateTeal";
+import { useUserData } from "@/hooks/user/user";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -26,9 +27,9 @@ const rosario = Rosario({
 
 export default function CreateTeam() {
   const [loading, setLoading] = useState(false);
-  const { email } = useAppSelector((state) => state.auth.user);
 
-  const dispatch = useAppDispatch();
+  //const { userData } = useUserData();
+  const { email, phoneNumber } = useAppSelector((state) => state.auth.user);
   const {
     register,
     handleSubmit,
@@ -38,19 +39,18 @@ export default function CreateTeam() {
   const onSubmit = async (data: ICreateTeam) => {
     try {
       setLoading(true);
-      const phoneNumber = (data.countryCode || "") + data.phoneNumber;
-      const { countryCode, ...createTeamData } = { ...data, phoneNumber };
 
-      console.log(createTeamData);
-      const res = await createTeam(createTeamData);
+      //console.log(data);
+      const res = await createTeam(data);
       if (res?.success) {
         toast.success(res?.message);
         reset();
       } else {
-        const errorMessage = res?.message || "Error message not available";
+        const errorMessage = res?.message;
         toast.error(errorMessage);
       }
     } catch (error) {
+      //  console.log(error, "from create team");
       toast.error("please try again");
     } finally {
       setLoading(false);
@@ -62,12 +62,12 @@ export default function CreateTeam() {
       className={` flex  flex-col  justify-center items-center  py-16   gap-y-16  h-auto  bg-[#FF914F]`}
     >
       <span
-        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px] text-[30px] block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
+        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[30px] text-[20px] block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
       >
         Create Team
       </span>
       <Form
-        className="  2xl:text-5xl xl:text-3xl  lg:text-2xl md:text-xl text-[10px] capitalize   text-white grid gap-y-16
+        className="  2xl:text-5xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-xs  text-[8px] capitalize   text-white grid gap-y-16
          items-center    md:w-[70%]   "
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
@@ -89,7 +89,7 @@ export default function CreateTeam() {
             />
           </div>
         </div>
-        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
+        <div className="   grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2" htmlFor="email">
             Email
           </label>
@@ -99,7 +99,6 @@ export default function CreateTeam() {
               name="email"
               type="email"
               placeholder="abcd@gmail.com"
-              error={errors?.email?.message}
               defaultValue={email}
               readOnly
               register={register}
@@ -107,37 +106,24 @@ export default function CreateTeam() {
             />
           </div>
         </div>
-        <div className=" w-full   grid     grid-cols-12  justify-center items-center   ">
+        <div className="    grid     grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2 grid gap-y-3" htmlFor="phoneNumber">
             <span>phone </span>
             <span>Number</span>
           </label>
-          <div className="   grid grid-cols-4   col-span-10  gap-x-5 ">
-            <div className=" col-span-1">
-              <Input
-                className="text-[#707070]  w-full   h-[3em]  bg-white p-5      border-2 border-[#707070] "
-                name="countryCode"
-                type="tel"
-                defaultValue={"+88"}
-                register={register}
-                autoFocus
-                readOnly
-              />
-            </div>
-            <div className=" col-span-3">
-              <Input
-                className="text-[#707070]  w-full   h-[3em]  bg-white p-5      border-2 border-[#707070] "
-                name="phoneNumber"
-                type="tel"
-                placeholder="Your Phone Number"
-                error={errors?.phoneNumber?.message}
-                register={register}
-                autoFocus
-              />
-            </div>
+          <div className="     col-span-10  ">
+            <Input
+              className="text-[#707070]  w-full   h-[3em]  bg-white p-5   hover:cursor-not-allowed    border-2 border-[#707070] "
+              name="phoneNumber"
+              type="tel"
+              defaultValue={phoneNumber}
+              register={register}
+              readOnly
+              autoFocus
+            />
           </div>
         </div>
-        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
+        <div className="    grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2" htmlFor="email">
             Current Members
           </label>
@@ -153,7 +139,7 @@ export default function CreateTeam() {
             />
           </div>
         </div>
-        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
+        <div className="  grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2" htmlFor="password">
             needed Members
           </label>
@@ -195,7 +181,7 @@ export default function CreateTeam() {
             />
           </div>
         </div>{" "}
-        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
+        <div className="    grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2 grid gap-y-3" htmlFor="password">
             Address
           </label>
@@ -211,7 +197,7 @@ export default function CreateTeam() {
             />
           </div>
         </div>
-        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
+        <div className="  grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2 grid gap-y-3" htmlFor="password">
             <span>NationalId </span>
             <span>Number</span>

@@ -1,7 +1,7 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { ENUM_USER_ROLE, IUpdatedUser } from "@/types/IUser";
-import { getUserFromCookie, removeCookie } from "@/lib/actions/Server/cookies";
+import { removeCookie } from "@/lib/actions/Server/cookies";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getSingleUser } from "@/lib/actions/Server/user";
@@ -83,10 +83,10 @@ export const useUserData = () => {
           );
         }
       } catch (error) {
-        console.log(
-          error,
-          "check error from useuserdata from user.ts file hook folder"
-        );
+        // console.log(
+        //   error,
+        //   "check error from useuserdata from user.ts file hook folder"
+        // );
       } finally {
         setIsLoading(false);
         // Update loading state when data fetching is done

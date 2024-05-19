@@ -8,7 +8,7 @@ export default async function SignIn(searchParams: {
 }) {
   const user = await getUserFromCookie();
   const { destination } = searchParams.searchParams;
-  console.log(destination);
+  //console.log(destination);
 
   if (user?.userEmail && destination) {
     redirect(`${destination}#${destination}`);

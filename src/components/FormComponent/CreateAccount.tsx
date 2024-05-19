@@ -34,19 +34,21 @@ export default function CreateAccount() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(SignUpSchema) });
   const onSubmit = async (userData: ISignUpData) => {
+    const phoneNumber = (userData.countryCode || "") + userData.phoneNumber;
+
     const formData = new FormData();
     formData.append("name[firstName]", userData.name.firstName);
     formData.append("name[lastName]", userData.name.lastName);
     formData.append("email", userData.email);
     formData.append("profileImage", userData.profileImage[0]);
     formData.append("password", userData.password);
-    formData.append("phoneNumber", userData.phoneNumber);
+    formData.append("phoneNumber", phoneNumber);
     formData.append("role", "customer");
 
     try {
       setLoading(true);
       const res = await signUp(formData, "customer");
-      console.log(res);
+      //   console.log(res);
       if (res?.success) {
         toast.success(res?.message);
         if (res.data) {
@@ -67,7 +69,7 @@ export default function CreateAccount() {
         toast.error(res?.message);
       }
     } catch (error) {
-      console.error("Error:", error);
+      //console.error("Error:", error);
       toast.error("An error occurred while creating the account");
     } finally {
       setLoading(false);
@@ -81,12 +83,12 @@ export default function CreateAccount() {
       className={` flex  flex-col  justify-center items-center  py-16   gap-y-16  h-auto  bg-[#FF914F]`}
     >
       <span
-        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px] text-[30px] block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
+        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px] md:text-[40px] sm:text-[30px]  text-[20px] block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
       >
         sign up
       </span>
       <Form
-        className="  2xl:text-5xl xl:text-3xl  lg:text-2xl md:text-xl text-[10px] capitalize   text-white grid gap-y-16
+        className="  2xl:text-5xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-lg text-[10px] capitalize   text-white grid gap-y-16
          items-center    md:w-[70%]   "
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
@@ -154,16 +156,29 @@ export default function CreateAccount() {
             <span>phone </span>
             <span>Number</span>
           </label>
-          <div className="     col-span-10  ">
-            <Input
-              className="text-[#707070]  w-full   h-[3em]  bg-white p-5      border-2 border-[#707070] "
-              name="phoneNumber"
-              type="tel"
-              placeholder="+880"
-              error={errors?.phoneNumber?.message}
-              register={register}
-              autoFocus
-            />
+          <div className="   grid grid-cols-4   col-span-10  gap-x-5 ">
+            <div className=" col-span-1">
+              <Input
+                className="text-[#707070]  w-full   h-[3em]  bg-white p-5      border-2 border-[#707070] "
+                name="countryCode"
+                type="tel"
+                defaultValue={"+88"}
+                register={register}
+                autoFocus
+                readOnly
+              />
+            </div>
+            <div className=" col-span-3">
+              <Input
+                className="text-[#707070]  w-full   h-[3em]  bg-white p-5      border-2 border-[#707070] "
+                name="phoneNumber"
+                type="tel"
+                placeholder="Your Phone Number"
+                error={errors?.phoneNumber?.message}
+                register={register}
+                autoFocus
+              />
+            </div>
           </div>
         </div>
         <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">

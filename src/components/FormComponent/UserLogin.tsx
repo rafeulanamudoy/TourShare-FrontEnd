@@ -41,7 +41,7 @@ export default function UserLogin() {
       setLoading(true);
 
       const res = await signIn(userData);
-      //console.log(res, "check the response");
+      // console.log(res.data, "check the user response");
       // console.log(res.data.profileImage, "profile image");
       if (res?.success) {
         toast.success(res?.message);
@@ -49,8 +49,8 @@ export default function UserLogin() {
         dispatch(
           setUser({
             user: {
-              email: res.email,
-              role: res.role,
+              email: res?.data?.email,
+              role: res?.data?.role,
               profileImage: res?.data?.profileImage,
               name: res?.data?.name,
               phoneNumber: res?.data?.phoneNumber,
@@ -63,7 +63,7 @@ export default function UserLogin() {
         toast.error(errorMessage);
       }
     } catch (error) {
-      console.error("Error:", error);
+      //console.error("Error:", error);
       toast.error("an error occured");
     } finally {
       setLoading(false);
@@ -79,12 +79,12 @@ export default function UserLogin() {
       className={` py-16   gap-y-16     h-auto flex  flex-col  items-center   bg-[#FFBD4A]`}
     >
       <span
-        className={`  uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px] text-[40px]    ${rosario.className}   text-[#2E4262]`}
+        className={`  uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[40px] sm:text-[30px]  text-[20px]   ${rosario.className}   text-[#2E4262]`}
       >
         sign In
       </span>
       <Form
-        className="   py-32 2xl:text-5xl xl:text-3xl text-xl  text-[#2E4262]      flex flex-col justify-items-center  items-center
+        className="   py-32 2xl:text-5xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-base  text-[#2E4262]      flex flex-col justify-items-center  items-center
         bg-white border-1 w-[50.5%]    "
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
