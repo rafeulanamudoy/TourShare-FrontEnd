@@ -12,12 +12,14 @@ import {
   faBook,
   faUsers,
   IconDefinition,
+  faPeopleGroup,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setToggle } from "@/redux/features/toggle/toggleSlice";
 import { usePathname } from "next/navigation";
 import { ENUM_USER_ROLE } from "@/types/IUser";
+import { useUserData } from "@/hooks/user/user";
 export default function Sidebar() {
   const { toggle } = useAppSelector((state) => state.toggle);
   const dispatch = useAppDispatch();
@@ -37,7 +39,10 @@ export default function Sidebar() {
   > = {
     [ENUM_USER_ROLE.CUSTOMER]: [
       { title: "Booking", url: "/bookingHistory", icon: faBook },
+
+      { title: "team", url: "/dashboard/team", icon: faPeopleGroup },
     ],
+
     [ENUM_USER_ROLE.SUPER_ADMIN]: [
       { title: "Manage Users", url: "/manageUsers", icon: faUsers },
     ],
@@ -52,10 +57,17 @@ export default function Sidebar() {
     ...(roleSpecificSidebarItems[role] || []),
   ];
 
+  const { isLoading } = useUserData();
+  // console.log("sidebar renderd", role);
+
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <div
       className={`${
-        toggle ? " w-80   md:w-24" : "md:w-80 text-[#31363F]   hidden md:block"
+        toggle ? " w-80   md:w-24" : "md:w-80 text-[#31363F]   hidden lg:block"
       }  
         border-2     md:relative absolute bg-white`}
     >

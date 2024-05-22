@@ -17,7 +17,7 @@ import { override1 } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { createTeam } from "@/lib/actions/Server/team";
-import { ICreateTeam } from "@/types/ICreateTeal";
+import { ICreateTeam } from "@/types/ICreateTeam";
 import { useUserData } from "@/hooks/user/user";
 
 const rosario = Rosario({
@@ -27,7 +27,7 @@ const rosario = Rosario({
 
 export default function CreateTeam() {
   const [loading, setLoading] = useState(false);
-
+  const [error, setError] = useState("");
   //const { userData } = useUserData();
   const { email, phoneNumber } = useAppSelector((state) => state.auth.user);
   const {
@@ -40,14 +40,20 @@ export default function CreateTeam() {
     try {
       setLoading(true);
 
-      //console.log(data);
+      console.log(data);
       const res = await createTeam(data);
       if (res?.success) {
         toast.success(res?.message);
+        setError("");
         reset();
       } else {
         const errorMessage = res?.message;
-        toast.error(errorMessage);
+
+        res.errorCode === 11000
+          ? setError(
+              "You can't start a new journey while another is active. Please end your current journey or update its status to 'Closed'."
+            )
+          : setError(errorMessage);
       }
     } catch (error) {
       //  console.log(error, "from create team");
@@ -66,8 +72,9 @@ export default function CreateTeam() {
       >
         Create Team
       </span>
+
       <Form
-        className="  2xl:text-5xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-xs  text-[8px] capitalize   text-white grid gap-y-16
+        className="  2xl:text-5xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-xs  text-[8px] capitalizecapitalize   text-white grid gap-y-16
          items-center    md:w-[70%]   "
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
@@ -232,6 +239,11 @@ export default function CreateTeam() {
           )}
         </button>
       </Form>
+      {error && (
+        <span className="  text-white 2xl:text-3xl xl:text-2xl  lg:text-xl md:text-lg  capitalize sm:text-xs  text-[8px] ">
+          {error}
+        </span>
+      )}
     </div>
   );
 }

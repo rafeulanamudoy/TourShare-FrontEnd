@@ -1,11 +1,11 @@
 import { getTeams } from "@/lib/actions/Server/team";
-import { ICreateTeam } from "@/types/ICreateTeal";
+import { ICreateTeam, TeamStatus } from "@/types/ICreateTeam";
 import { get } from "http";
 import React from "react";
 
 export default async function ShowTeam() {
   const data = await getTeams();
-  console.log(data?.data);
+  //console.log(data?.data);
   return (
     <div className="uppercase">
       <div className="grid  gap-y-5   ">
@@ -31,6 +31,7 @@ export default async function ShowTeam() {
               <th className=" border border-slate-600 p-2 ">Needed Members</th>
               <th className=" border border-slate-600 p-2 ">Start Journy</th>
               <th className=" border border-slate-600 p-2 ">End Journy</th>
+              <th className=" border border-slate-600 p-2 ">Status</th>
               <th className=" border border-slate-600 p-2 ">Join</th>
             </tr>
           </thead>
@@ -45,7 +46,7 @@ export default async function ShowTeam() {
 
               return (
                 <tr
-                  className=" border  2xl:text-3xl xl:text-2xl  lg:text-base   md:text-sm  sm:text-xs    text-[6px] border-slate-600 text-center"
+                  className=" border  2xl:text-3xl xl:text-2xl  lg:text-base   md:text-xs  sm:text-[10px]    text-[6px] border-slate-600 text-center"
                   key={team._id}
                 >
                   <td className=" border border-slate-600 p-2">
@@ -63,9 +64,14 @@ export default async function ShowTeam() {
                   <td className=" border border-slate-600 p-2">
                     {formattedEndDate}
                   </td>
+                  <td className=" border border-slate-600 p-2">
+                    {team.teamStatus}
+                  </td>
                   <td className=" border border-slate-600  p-2">
                     <button className="border border-slate-600 submit-button       lg:w-[140px]  ">
-                      join
+                      {team.teamStatus === TeamStatus.Ongoing
+                        ? "join"
+                        : "closed"}
                     </button>
                   </td>
                 </tr>

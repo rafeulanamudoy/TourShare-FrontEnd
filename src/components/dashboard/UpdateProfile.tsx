@@ -2,7 +2,7 @@
 
 import Form from "@/hooks/reactHookForm/Form";
 import Input from "@/hooks/reactHookForm/Input";
-import { getSingleUser, updateSingleUser } from "@/lib/actions/Server/user";
+import { updateSingleUser } from "@/lib/actions/Server/user";
 import Image from "next/image";
 
 import { IUpdatedUser, IUserSchema } from "@/types/IUser";
@@ -78,15 +78,15 @@ export default function UpdateProfile() {
           userData?.role
         );
         if (res?.success) {
-          // console.log(res);
+          //console.log(res);
           router.push("/dashboard/profile");
           toast.success(res.message);
 
           dispatch(
             setUser({
               user: {
-                email: res.email,
-                role: res.role,
+                email: res.data.email,
+                role: res.data.role,
                 profileImage: res?.data?.profileImage,
                 name: res?.data?.name,
                 phoneNumber: res?.data?.phoneNumber,

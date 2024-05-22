@@ -38,6 +38,14 @@
     color: white;
     text-transform: uppercase;
   }
+  .custom-date-picker::-webkit-calendar-picker-indicator {
+    color: white;
+    filter: invert(1);
+  }
+
+  .custom-date-picker::-webkit-datetime-edit {
+    color: white;
+  }
 }
 @layer utilities {
   .white-shadow {

@@ -9,4 +9,10 @@ export type ICreateTeam = {
   nationalIdNumber: string;
   startDate: Date;
   endDate: Date;
+  teamStatus?: TeamStatus;
 };
+
+export enum TeamStatus {
+  Ongoing = "ongoing",
+  Closed = "closed",
+}
