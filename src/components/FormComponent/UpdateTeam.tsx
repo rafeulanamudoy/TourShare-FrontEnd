@@ -13,6 +13,7 @@ import { override2 } from "@/utilities/css";
 
 import { ICreateTeam } from "@/types/ICreateTeam";
 import { updateSingleTeam } from "@/lib/actions/Server/team";
+import { useRouter } from "next/navigation";
 interface ITeamProps {
   team: ICreateTeam; // Define the type of the location prop
 }
@@ -23,6 +24,7 @@ const formatDateString = (date: Date | string) => {
 };
 export default function UpdateTeam({ team }: ITeamProps) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   //console.log(team, "team info");
 
   const { register, handleSubmit } = useForm();
@@ -32,6 +34,7 @@ export default function UpdateTeam({ team }: ITeamProps) {
       setLoading(true);
       const res = await updateSingleTeam(team._id, userValue);
       if (res?.success) {
+        router.push("/dashboard/team");
         toast.success(res?.message);
       } else {
         const errorMessage = res?.message || "Error message not available";
@@ -138,7 +141,9 @@ export default function UpdateTeam({ team }: ITeamProps) {
       <div>
         <button
           className={`grid  lg:float-right items-center mt-5     bg-[#FF914F] w-1/2 ${
-            loading ? "h-auto" : "h-[3em]"
+            loading
+              ? "h-auto"
+              : "h-[3em]  2xl:text-3xl xl:text-2xl lg:text-base  md:text-xs sm:text-[10px] text-[8px] "
           } rounded-md`}
           type="submit"
         >

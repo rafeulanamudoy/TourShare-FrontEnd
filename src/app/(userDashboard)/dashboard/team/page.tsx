@@ -15,7 +15,7 @@ export default async function Team() {
   const formattedEndDate = new Date(team?.data?.endDate).toLocaleDateString();
 
   return (
-    <div className="uppercase">
+    <div className="uppercase my-10">
       <div className="grid  gap-y-5   ">
         <h1 className=" text-[#0C264C] 2xl:text-8xl xl:text-6xl   lg:text-4xl sm:text-3xl text-2xl text-center">
           Team Info

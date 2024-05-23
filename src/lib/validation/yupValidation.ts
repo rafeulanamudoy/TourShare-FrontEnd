@@ -16,7 +16,13 @@ export const SignUpSchema = yup.object().shape({
     .string()
     .email("Enter a valid email")
     .required("Email is required"),
-  phoneNumber: yup.string().required("Phone Number is required"),
+  phoneNumber: yup
+    .string()
+    .required("Phone Number is required")
+    .matches(
+      /^01\d{9}$/,
+      "Phone number must start with 01 and contain exactly 11 digits"
+    ),
   profileImage: yup
     .mixed()
     .test("fileType", "Only PNG, JPG, JPEG are allowedu", validateImageFileType)
@@ -99,4 +105,16 @@ export const CreateTeamSchema = yup.object().shape({
     )
     .nullable()
     .required("End date is required"),
+});
+export const JoinTeamSchema = yup.object().shape({
+  address: yup.string().required("Address is required"),
+  groupMember: yup
+    .number()
+    .transform((value, originalValue) =>
+      String(originalValue).trim() === "" ? null : value
+    )
+    .nullable()
+    .required("Groupm member  count is required"),
+
+  nationalIdNumber: yup.string().required("National id number is required"),
 });

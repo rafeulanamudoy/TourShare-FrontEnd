@@ -11,7 +11,7 @@ export default async function page() {
   const team = await getSingleTeam(email);
 
   return (
-    <div>
+    <div className="my-10">
       <UpdateTeam team={team?.data} />
     </div>
   );

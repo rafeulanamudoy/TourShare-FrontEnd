@@ -17,9 +17,9 @@ export async function verifyToken(token: string, secret: Secret) {
 export async function removeCookie(name: string) {
   cookies().delete(name);
 }
-export async function getUserFromCookie() {
+export async function getCookie(name: string) {
   const cookieStore = cookies();
-  const user = cookieStore.get("accessToken");
+  const user = cookieStore.get(name);
   // console.log(user, "user check");
 
   if (user && user.value) {

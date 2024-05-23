@@ -1,7 +1,7 @@
 import { getSingleUser } from "@/lib/actions/Server/user";
-import User from "../buttons/UserToggole";
+
 import Image from "next/image";
-import UserToggole from "../buttons/UserToggole";
+import UserToggoleButton from "../buttons/UserToggoleButton";
 
 export default async function page() {
   const {
@@ -12,7 +12,7 @@ export default async function page() {
     <>
       <div className="  w-[90%] mx-auto  flex justify-between items-center   2xl:text-5xl xl:text-4xl lg:text-2xl md:text-xl  sm:text-lg text-base  mb-5">
         <span>personal information</span>
-        <UserToggole location={"profile/update"} />
+        <UserToggoleButton location={"profile/update"} />
       </div>
       <div className=" w-[90%]  mx-auto    ">
         <div className=" 2xl:h-80 2xl:w-80 xl:h-64 xl:w-64 lg:h-52 lg:w-52 md:h-44 md:w-44  sm:w-32 sm:h-32 w-28 h-28  w overflow-hidden">

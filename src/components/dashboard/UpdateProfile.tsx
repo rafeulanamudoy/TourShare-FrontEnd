@@ -5,16 +5,16 @@ import Input from "@/hooks/reactHookForm/Input";
 import { updateSingleUser } from "@/lib/actions/Server/user";
 import Image from "next/image";
 
-import { IUpdatedUser, IUserSchema } from "@/types/IUser";
+import { IUpdatedUser } from "@/types/IUser";
 import { faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { override2 } from "@/utilities/css";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
 import { useUserData } from "@/hooks/user/user";
@@ -234,7 +234,9 @@ export default function UpdateProfile() {
       <div>
         <button
           className={`grid  lg:float-right items-center mt-5     bg-[#FF914F] w-1/2 ${
-            loading ? "h-auto" : "h-[3em]"
+            loading
+              ? "h-auto"
+              : "h-[3em] 2xl:text-3xl xl:text-2xl lg:text-base  md:text-xs sm:text-[10px] text-[8px]"
           } rounded-md`}
           type="submit"
         >

@@ -17,6 +17,8 @@ import { SignUpSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -24,6 +26,7 @@ const rosario = Rosario({
 });
 
 export default function CreateAccount() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -64,6 +67,7 @@ export default function CreateAccount() {
               },
             })
           );
+          router.push("/");
         }
       } else {
         toast.error(res?.message);

@@ -1,5 +1,3 @@
-import SkeletonLoading from "@/components/Loader/SkeletionLoading";
-import UserUpdateButton from "@/components/buttons/UserToggole";
 import PersonalInfo from "@/components/dashboard/PersonalInfo";
 
 export default function Profile() {

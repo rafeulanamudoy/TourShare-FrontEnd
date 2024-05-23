@@ -1,6 +1,7 @@
 "use server";
 
 import { ICreateTeam } from "@/types/ICreateTeam";
+import { IJoinTeam } from "@/types/IJoinTeam";
 import { revalidateTag } from "next/cache";
 
 export async function createTeam(data: ICreateTeam) {
@@ -59,5 +60,22 @@ export async function updateSingleTeam(id: string, data: Partial<ICreateTeam>) {
     return result;
   } catch (error) {
     // console.log(error, "update user error from  user.ts server file");
+  }
+}
+export async function joinTeam(data: IJoinTeam) {
+  //console.log(data, "create team data");
+  try {
+    const response = await fetch(`${process.env.URL}/joinTeam`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    // revalidateTag("joinTeam");
+
+    return result;
+  } catch (error) {
+    // console.log(error, "from team.ts");
+    throw error;
   }
 }

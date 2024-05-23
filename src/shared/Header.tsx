@@ -45,7 +45,7 @@ export default function Header() {
         {[
           ["home", "/"],
           ["create team", "/createTeam/#createTeam"],
-          ["join team", "/joinTeam"],
+
           ["about us", "/about us"],
         ].map(([title, url]) => (
           <Link className="" key={url} href={url}>

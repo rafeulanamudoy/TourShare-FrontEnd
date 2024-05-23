@@ -1,48 +1,65 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import ClipLoader from "react-spinners/ClipLoader";
-import { Rosario as Rosario } from "next/font/google";
+import { IJoinTeam } from "@/types/IJoinTeam";
+import { useAppSelector } from "@/redux/hooks";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { JoinTeamSchema } from "@/lib/validation/yupValidation";
+import { useForm } from "react-hook-form";
 import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
-import { useForm } from "react-hook-form";
-
-import { yupResolver } from "@hookform/resolvers/yup";
-
-import { signUp } from "@/lib/actions/Server/user";
+import { Rosario } from "next/font/google";
+import { useSearchParams } from "next/navigation";
+import { joinTeam } from "@/lib/actions/Server/team";
 import toast from "react-hot-toast";
-import { CreateTeamSchema, SignUpSchema } from "@/lib/validation/yupValidation";
+import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
-import { setUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { createTeam } from "@/lib/actions/Server/team";
-import { ICreateTeam } from "@/types/ICreateTeam";
-import { useUserData } from "@/hooks/user/user";
 
 const rosario = Rosario({
   subsets: ["latin"],
   display: "swap",
 });
 
-export default function CreateTeam() {
+export default function JoinTeam() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  //const { userData } = useUserData();
+  const searchParams = useSearchParams();
+  const [joinId, setJoinId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    console.log("rendering");
+
+    const [path, queryString] = hash.split("?");
+    if (queryString) {
+      const params = new URLSearchParams(queryString);
+      const joinId = params.get("joinId");
+      setJoinId(joinId);
+    } else {
+      setJoinId(searchParams.get("joinId"));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const { email, phoneNumber } = useAppSelector((state) => state.auth.user);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(CreateTeamSchema) });
-  const onSubmit = async (data: ICreateTeam) => {
+  } = useForm({ resolver: yupResolver(JoinTeamSchema) });
+  const onSubmit = async (data: IJoinTeam) => {
+    if (!joinId) {
+      setError("Invalid join id.Please again Go to home and rejoin");
+      return;
+    }
+
     try {
       setLoading(true);
-
-      //console.log(data);
-      const res = await createTeam(data);
-      //console.log(res, "check response");
+      const joinTeamData: IJoinTeam = { ...data, teamInfo: joinId };
+      const res = await joinTeam(joinTeamData);
+      console.log(res, "response message");
       if (res?.success) {
         toast.success(res?.message);
         setError("");
@@ -52,26 +69,27 @@ export default function CreateTeam() {
 
         res.errorCode === 11000
           ? setError(
-              "You can't start a new journey while another is active. Please end your current journey or update its status to 'Closed'."
+              "You can't Join to   a new team  while you already join a team .To Start a new journy please end your current journey ."
             )
           : setError(errorMessage);
       }
     } catch (error) {
-      //  console.log(error, "from create team");
-      toast.error("please try again");
+      console.log(error, "error from catch message");
     } finally {
       setLoading(false);
+
+      reset();
     }
   };
   return (
     <div
-      id="createTeam"
+      id="joinTeam"
       className={` flex  flex-col  justify-center items-center  py-16   gap-y-16  h-auto  bg-[#FF914F]`}
     >
       <span
         className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[30px] text-[20px] block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
       >
-        Create Team
+        Join Team
       </span>
 
       <Form
@@ -81,22 +99,6 @@ export default function CreateTeam() {
         onSubmit={onSubmit}
         register={register}
       >
-        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
-          <label className=" col-span-2" htmlFor="destination">
-            Destination
-          </label>
-          <div className="     col-span-10  ">
-            <Input
-              className="text-[#707070] w-full  h-[3em]  bg-white px-5  py-5   border-2   border-[#707070] "
-              name="destination"
-              type="text"
-              placeholder="destination"
-              error={errors?.destination?.message}
-              register={register}
-              autoFocus
-            />
-          </div>
-        </div>
         <div className="   grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2" htmlFor="email">
             Email
@@ -132,63 +134,22 @@ export default function CreateTeam() {
           </div>
         </div>
         <div className="    grid    grid-cols-12  justify-center items-center   ">
-          <label className=" col-span-2" htmlFor="currentMembers">
-            Current Members
+          <label className=" col-span-2" htmlFor="groupMember">
+            Group Members
           </label>
           <div className="     col-span-10  ">
             <Input
               className="text-[#707070] w-full  h-[3em]    bg-white  p-5   border-2    border-[#707070] "
-              name="currentMembers"
+              name="groupMember"
               type="number"
               register={register}
               placeholder="current members"
-              error={errors?.currentMembers?.message}
+              error={errors?.groupMember?.message}
               autoFocus
             />
           </div>
         </div>
-        <div className="  grid    grid-cols-12  justify-center items-center   ">
-          <label className=" col-span-2" htmlFor="neededMembers">
-            needed Members
-          </label>
-          <div className="     col-span-10  ">
-            <Input
-              className=" text-[#707070]
-              w-full  h-[3em]  bg-white p-5    border-2 border-[#707070] "
-              name="neededMembers"
-              type="number"
-              placeholder="needed members"
-              error={errors?.neededMembers?.message}
-              register={register}
-              autoFocus
-            />
-          </div>
-        </div>
-        <div className="      grid       grid-cols-12   justify-center items-center ">
-          <label className=" col-span-2 " htmlFor="name">
-            Name
-          </label>
 
-          <div className=" col-span-10     flex gap-x-5   ">
-            <Input
-              className=" w-full    text-[#707070] h-[3em] bg-white p-5   border-2 border-[#707070]  "
-              name="startDate"
-              type="date"
-              error={errors?.startDate?.message}
-              register={register}
-              autoFocus
-            />
-            <span className="my-auto">To</span>
-            <Input
-              className="text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]  "
-              name="endDate"
-              type="date"
-              error={errors?.endDate?.message}
-              register={register}
-              autoFocus
-            />
-          </div>
-        </div>{" "}
         <div className="    grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2 grid gap-y-3" htmlFor="address">
             Address
@@ -225,6 +186,11 @@ export default function CreateTeam() {
             />
           </div>
         </div>
+        {error && (
+          <span className="  text-white 2xl:text-3xl xl:text-2xl  lg:text-xl md:text-lg  capitalize sm:text-xs  text-[8px] ">
+            {error}
+          </span>
+        )}
         <button
           className="submit-button mx-auto w-1/2 h-[3em]"
           type="submit"
@@ -239,15 +205,10 @@ export default function CreateTeam() {
               data-testid="loader"
             />
           ) : (
-            "Create Team"
+            "Join  Team"
           )}
         </button>
       </Form>
-      {error && (
-        <span className="  text-white 2xl:text-3xl xl:text-2xl  lg:text-xl md:text-lg  capitalize sm:text-xs  text-[8px] ">
-          {error}
-        </span>
-      )}
     </div>
   );
 }

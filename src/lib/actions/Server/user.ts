@@ -2,7 +2,7 @@
 
 import { ENUM_USER_ROLE, ISignInData, IUserSchema } from "@/types/IUser";
 
-import { getUserFromCookie, setCookie, verifyToken } from "./cookies";
+import { getCookie, setCookie, verifyToken } from "./cookies";
 import { Secret } from "jsonwebtoken";
 import { revalidateTag } from "next/cache";
 
@@ -58,7 +58,7 @@ export async function signIn(data: ISignInData) {
 }
 export async function getSingleUser() {
   try {
-    const user = await getUserFromCookie();
+    const user = await getCookie("accessToken");
     if (!user) {
       throw new Error("User not found in cookie");
     } else {

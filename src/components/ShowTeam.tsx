@@ -3,6 +3,8 @@ import { ICreateTeam, TeamStatus } from "@/types/ICreateTeam";
 import { get } from "http";
 import React from "react";
 
+import JoinTeamButton from "./buttons/JoinTeamButton";
+
 export default async function ShowTeam() {
   const data = await getTeams();
   //console.log(data?.data);
@@ -67,13 +69,14 @@ export default async function ShowTeam() {
                   <td className=" border border-slate-600 p-2">
                     {team.teamStatus}
                   </td>
-                  <td className=" border border-slate-600  p-2">
-                    <button className="border border-slate-600 submit-button       lg:w-[140px]  ">
-                      {team.teamStatus === TeamStatus.Ongoing
-                        ? "join"
-                        : "closed"}
-                    </button>
-                  </td>
+                  {team.teamStatus && (
+                    <td className=" border border-slate-600  p-2">
+                      <JoinTeamButton
+                        teamId={team._id}
+                        status={team?.teamStatus}
+                      />
+                    </td>
+                  )}
                 </tr>
               );
             })}
