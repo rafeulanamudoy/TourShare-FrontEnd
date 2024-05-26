@@ -1,13 +1,16 @@
+import ShowJoinPeople from "@/components/ShowJoinPeople";
 import TeamUpdateButton from "@/components/buttons/TeamUpdateButton";
-import { getSingleTeam } from "@/lib/actions/Server/team";
+import { getSingleTeamByEmail } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
+import { IJoinTeam } from "@/types/IJoinTeam";
 import React from "react";
 
 export default async function Team() {
   const {
     data: { email },
   } = await getSingleUser();
-  const team = await getSingleTeam(email);
+  const team = await getSingleTeamByEmail(email);
+  console.log(team, "tream info");
 
   const formattedStartDate = new Date(
     team?.data?.startDate
@@ -33,7 +36,7 @@ export default async function Team() {
         <div className=" ">
           <table className=" mx-auto  my-5 table-auto    border-collapse border border-slate-400 ">
             <thead
-              className="    2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[8px]
+              className="    2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[5px]
            "
             >
               <tr className="">
@@ -52,7 +55,7 @@ export default async function Team() {
             </thead>
             <tbody>
               <tr
-                className=" border  2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[8px] border-slate-600 text-center"
+                className=" border  2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[5px] border-slate-600 text-center"
                 key={team._id}
               >
                 <td className=" border border-slate-600 p-2">
@@ -81,6 +84,18 @@ export default async function Team() {
           </table>
         </div>
       )}
+
+      <div>
+        <h1
+          className=" text-[#0C264C]  2xl:text-4xl xl:text-3xl lg:text-xl sm:text-lg  text-base text-center  underline"
+          style={{ textUnderlineOffset: "0.4em", margin: "1rem" }}
+        >
+          Join People Request Info
+        </h1>
+        {team?.data?.joinPeople.map((people: IJoinTeam) => (
+          <ShowJoinPeople key={people._id} people={people} />
+        ))}
+      </div>
     </div>
   );
 }

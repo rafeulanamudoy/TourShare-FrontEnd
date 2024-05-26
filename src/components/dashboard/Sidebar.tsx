@@ -13,6 +13,7 @@ import {
   faUsers,
   IconDefinition,
   faPeopleGroup,
+  faPeopleArrows,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -40,7 +41,8 @@ export default function Sidebar() {
     [ENUM_USER_ROLE.CUSTOMER]: [
       { title: "Booking", url: "/bookingHistory", icon: faBook },
 
-      { title: "team", url: "/dashboard/team", icon: faPeopleGroup },
+      { title: "Your team", url: "/dashboard/team", icon: faPeopleGroup },
+      { title: "Join Team", url: "/dashboard/joinTeam", icon: faPeopleArrows },
     ],
 
     [ENUM_USER_ROLE.SUPER_ADMIN]: [

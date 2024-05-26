@@ -1,5 +1,6 @@
 export type IJoinTeam = {
   phoneNumber: string;
+  _id?: string;
   email: string;
   address: string;
 

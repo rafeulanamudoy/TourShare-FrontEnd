@@ -11,7 +11,7 @@ import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
 import { Rosario } from "next/font/google";
 import { useSearchParams } from "next/navigation";
-import { joinTeam } from "@/lib/actions/Server/team";
+import { createJoinTeam } from "@/lib/actions/Server/team";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
@@ -29,7 +29,7 @@ export default function JoinTeam() {
 
   useEffect(() => {
     const hash = window.location.hash;
-    console.log("rendering");
+    // console.log("rendering");
 
     const [path, queryString] = hash.split("?");
     if (queryString) {
@@ -58,8 +58,8 @@ export default function JoinTeam() {
     try {
       setLoading(true);
       const joinTeamData: IJoinTeam = { ...data, teamInfo: joinId };
-      const res = await joinTeam(joinTeamData);
-      console.log(res, "response message");
+      const res = await createJoinTeam(joinTeamData);
+      // console.log(res, "response message");
       if (res?.success) {
         toast.success(res?.message);
         setError("");
@@ -74,7 +74,7 @@ export default function JoinTeam() {
           : setError(errorMessage);
       }
     } catch (error) {
-      console.log(error, "error from catch message");
+      // console.log(error, "error from catch message");
     } finally {
       setLoading(false);
 
