@@ -1,6 +1,6 @@
 "use server";
 
-import { ICreateTeam } from "@/types/ICreateTeam";
+import { IAccept, ICreateTeam } from "@/types/ICreateTeam";
 import { IJoinTeam } from "@/types/IJoinTeam";
 import { revalidateTag } from "next/cache";
 
@@ -25,7 +25,7 @@ export async function getTeams() {
   try {
     const response = await fetch(`${process.env.URL}/team`, {
       cache: "no-store",
-      next: { tags: ["teams", "updateTeam"] },
+      next: { tags: ["teams", "updateTeam", "acceptTeam"] },
     });
 
     const data = await response.json();
@@ -39,7 +39,7 @@ export async function getSingleTeamByEmail(email: string) {
   console.log(email, "check email");
   try {
     const response = await fetch(`${process.env.URL}/team/email/${email}`, {
-      next: { tags: ["updateTeam", "teams"] },
+      next: { tags: ["updateTeam", "teams", "acceptTeam"] },
     });
 
     const data = await response.json();
@@ -51,7 +51,7 @@ export async function getSingleTeamByEmail(email: string) {
 export async function getSingleTeamById(id: string) {
   try {
     const response = await fetch(`${process.env.URL}/team/id/${id}`, {
-      next: { tags: ["updateTeam", "teams"] },
+      next: { tags: ["updateTeam", "teams", "acceptTeam"] },
     });
 
     const data = await response.json();
@@ -143,9 +143,24 @@ export async function deleteSingleJoinTeam(id: string) {
     });
     const result = await response.json();
     revalidateTag("deleteJoinTeam");
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
-    console.log(error, "update user error from  user.ts server file");
+    // console.log(error, "update user error from  user.ts server file");
+  }
+}
+export async function acceptJoinTeam(id: string, data: IAccept) {
+  try {
+    const response = await fetch(`${process.env.URL}/team/accept/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    revalidateTag("acceptTeam");
+    //  console.log(result);
+    return result;
+  } catch (error) {
+    //  console.log(error, "update user error from  user.ts server file");
   }
 }

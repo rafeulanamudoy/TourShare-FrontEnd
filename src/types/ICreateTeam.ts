@@ -16,3 +16,14 @@ export enum TeamStatus {
   Ongoing = "ongoing",
   Closed = "closed",
 }
+export type IAccept = {
+  members: number;
+  joinTeamId: string;
+  status: ENUM_JOIN_TEAM_STATUS;
+  teamId?: string;
+};
+export enum ENUM_JOIN_TEAM_STATUS {
+  ACCEPTED = "accepted",
+  NOTACCEPTED = "notAccepted",
+  PENDING = "pending",
+}

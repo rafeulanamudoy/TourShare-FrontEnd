@@ -38,7 +38,7 @@ export default async function ShowTeam() {
             </tr>
           </thead>
           <tbody>
-            {data.data.map((team: ICreateTeam) => {
+            {data?.data?.map((team: ICreateTeam) => {
               const formattedStartDate = new Date(
                 team.startDate
               ).toLocaleDateString();

@@ -2,7 +2,7 @@ import ShowJoinPeople from "@/components/ShowJoinPeople";
 import TeamUpdateButton from "@/components/buttons/TeamUpdateButton";
 import { getSingleTeamByEmail } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
-import { IJoinTeam } from "@/types/IJoinTeam";
+import { IJoinPerson, IJoinTeam } from "@/types/IJoinTeam";
 import React from "react";
 
 export default async function Team() {
@@ -10,7 +10,7 @@ export default async function Team() {
     data: { email },
   } = await getSingleUser();
   const team = await getSingleTeamByEmail(email);
-  console.log(team, "tream info");
+  //console.log(team, "tream info");
 
   const formattedStartDate = new Date(
     team?.data?.startDate
@@ -92,8 +92,12 @@ export default async function Team() {
         >
           Join People Request Info
         </h1>
-        {team?.data?.joinPeople.map((people: IJoinTeam) => (
-          <ShowJoinPeople key={people._id} people={people} />
+        {team?.data?.joinPeople.map((people: IJoinPerson) => (
+          <ShowJoinPeople
+            key={people.joinTeamId?._id}
+            people={people.joinTeamId}
+            teamId={team?.data?._id}
+          />
         ))}
       </div>
     </div>

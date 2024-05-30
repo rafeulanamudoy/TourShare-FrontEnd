@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getCookie, setCookie } from "./lib/actions/Server/cookies";
 import { cookies } from "next/headers";
-import { redirect } from "next/dist/server/api-utils";
 
-const protectedRoutes = ["/dashboard", "/createTeam", "/joinTeam"];
+const protectedRoutes = [
+  "/dashboard",
+  "/dashboard/team",
+  "/dashboard/team",
+  "/createTeam",
+  "/joinTeam",
+];
 const publicRoutes = ["/signIn", "/signUp"];
 
 export default async function middleware(req: NextRequest) {

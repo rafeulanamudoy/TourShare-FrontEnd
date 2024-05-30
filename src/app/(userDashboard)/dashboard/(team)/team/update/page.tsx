@@ -1,5 +1,5 @@
 import UpdateTeam from "@/components/formComponent/UpdateTeam";
-import { getSingleTeam } from "@/lib/actions/Server/team";
+import { getSingleTeamByEmail } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
 import React from "react";
 
@@ -8,7 +8,7 @@ export default async function page() {
     data: { email },
   } = await getSingleUser();
 
-  const team = await getSingleTeam(email);
+  const team = await getSingleTeamByEmail(email);
 
   return (
     <div className="my-10">

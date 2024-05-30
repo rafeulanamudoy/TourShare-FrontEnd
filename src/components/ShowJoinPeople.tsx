@@ -1,14 +1,28 @@
 import { IJoinTeam } from "@/types/IJoinTeam";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+
+import { ENUM_JOIN_TEAM_STATUS, IAccept } from "@/types/ICreateTeam";
+import TeamAcceptButton from "./buttons/TeamAcceptButton";
+import StatusSelect from "./StatusSelect";
 
 interface JoinPeopleProps {
   people: IJoinTeam;
+  teamId: string;
 }
 
-export default function ShowJoinPeople({ people }: JoinPeopleProps) {
-  console.log(people);
+export default function ShowJoinPeople({ people, teamId }: JoinPeopleProps) {
+  //console.log(people, "from showjoinpeople");
+  const payload: IAccept | null =
+    people && people?._id
+      ? {
+          members: people?.groupMember,
+          joinTeamId: people?._id,
+          status: people?.status as ENUM_JOIN_TEAM_STATUS,
+          teamId: teamId, // Ensure correct typing
+        }
+      : null;
+
   return (
     <div className=" ">
       <table className=" mx-auto  my-5 table-auto    border-collapse border border-slate-400 ">
@@ -23,7 +37,8 @@ export default function ShowJoinPeople({ people }: JoinPeopleProps) {
             <th className=" border border-slate-600 p-2 ">Group Members</th>
 
             <th className=" border border-slate-600 p-2 ">Connect</th>
-            <th className=" border border-slate-600 p-2 ">Accept</th>
+            <th className=" border border-slate-600 p-2 ">Accept Request</th>
+            <th className=" border border-slate-600 p-2 ">Confirm</th>
           </tr>
         </thead>
         <tbody>
@@ -34,15 +49,20 @@ export default function ShowJoinPeople({ people }: JoinPeopleProps) {
             <td className=" border border-slate-600 p-2">{people?.email}</td>
 
             <td className=" border border-slate-600 p-2">
-              {people.phoneNumber}
+              {people?.phoneNumber}
             </td>
             <td className=" border border-slate-600 p-2">
-              {people.groupMember}
+              {people?.groupMember}
             </td>
             <td className=" border border-slate-600 p-2">
               <FontAwesomeIcon icon={faMessage} />
             </td>
-            <td className=" border border-slate-600  p-2">accept</td>
+            <td className=" border border-slate-600  p-2">
+              <StatusSelect value={people?.status} />
+            </td>
+            <td className=" border border-slate-600  p-2">
+              {payload && teamId && <TeamAcceptButton payload={payload} />}
+            </td>
           </tr>
         </tbody>
       </table>

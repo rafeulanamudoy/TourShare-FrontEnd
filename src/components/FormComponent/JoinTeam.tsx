@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { IJoinTeam } from "@/types/IJoinTeam";
+import { ENUM_jOIN_TEAM_STATUS, IJoinTeam } from "@/types/IJoinTeam";
 import { useAppSelector } from "@/redux/hooks";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { JoinTeamSchema } from "@/lib/validation/yupValidation";
@@ -57,7 +57,11 @@ export default function JoinTeam() {
 
     try {
       setLoading(true);
-      const joinTeamData: IJoinTeam = { ...data, teamInfo: joinId };
+      const joinTeamData: IJoinTeam = {
+        ...data,
+        teamInfo: joinId,
+        status: ENUM_jOIN_TEAM_STATUS.PENDING,
+      };
       const res = await createJoinTeam(joinTeamData);
       // console.log(res, "response message");
       if (res?.success) {

@@ -43,7 +43,7 @@ export default async function Team() {
         <div className=" ">
           <table className=" mx-auto  my-5 table-auto    border-collapse border border-slate-400 ">
             <thead
-              className="    2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[8px]
+              className="    2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[4px]
            "
             >
               <tr className="">
@@ -56,13 +56,14 @@ export default async function Team() {
                 </th>
                 <th className=" border border-slate-600 p-2 ">Start Journy</th>
                 <th className=" border border-slate-600 p-2 ">End Journy</th>
-                <th className=" border border-slate-600 p-2 ">Status</th>
+                <th className=" border border-slate-600 p-2 ">Team Status</th>
+                <th className=" border border-slate-600 p-2 ">Request</th>
                 <th className=" border border-slate-600 p-2 ">Cancel</th>
               </tr>
             </thead>
             <tbody>
               <tr
-                className=" border  2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[8px] border-slate-600 text-center"
+                className=" border  2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[4px] border-slate-600 text-center"
                 key={team._id}
               >
                 <td className=" border border-slate-600 p-2">
@@ -83,8 +84,13 @@ export default async function Team() {
                 <td className=" border border-slate-600 p-2">
                   {teamInfo?.data?.teamStatus}
                 </td>
+                <td className=" border border-slate-600 p-2">
+                  {team?.data?.status}
+                </td>
                 <td className=" border border-slate-600  p-2">
-                  <JoinTeamDeleteButton id={team?.data?._id} />
+                  {team.data._id && (
+                    <JoinTeamDeleteButton id={team?.data?._id} />
+                  )}
                 </td>
               </tr>
             </tbody>
