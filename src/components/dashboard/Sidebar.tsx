@@ -14,6 +14,7 @@ import {
   IconDefinition,
   faPeopleGroup,
   faPeopleArrows,
+  faMessage,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -29,6 +30,8 @@ export default function Sidebar() {
   const { role } = useAppSelector((state) => state.auth.user);
   const commonSidebarItems = [
     { title: "Profile", url: "/dashboard/profile", icon: faUser },
+
+    { title: "Message", url: "/dashboard/messages", icon: faMessage },
   ];
 
   // Define role-specific sidebar items

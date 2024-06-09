@@ -27,7 +27,7 @@ export default function TeamAcceptButton({ payload }: UserJoinTeamProps) {
           toast.error(errorMessage);
         }
       } catch (error) {
-        console.log(error, "check error ");
+        //console.log(error, "check error ");
         toast.error("an error occuredplease refresh the page");
       }
     }

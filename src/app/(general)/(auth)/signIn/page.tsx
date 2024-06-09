@@ -1,9 +1,11 @@
+import SkeletonLoading from "@/components/Loader/SkeletionLoading";
 import UserLogin from "@/components/formComponent/UserLogin";
 import { getCookie } from "@/lib/actions/Server/cookies";
 
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
-export default async function SignIn(searchParams: {
+export default async function page(searchParams: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const user = await getCookie("accessToken");
@@ -23,7 +25,9 @@ export default async function SignIn(searchParams: {
 
   return (
     <main>
-      <UserLogin />
+      <Suspense fallback={<SkeletonLoading />}>
+        <UserLogin />
+      </Suspense>
     </main>
   );
 }

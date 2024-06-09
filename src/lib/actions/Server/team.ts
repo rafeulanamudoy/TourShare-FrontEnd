@@ -36,7 +36,7 @@ export async function getTeams() {
   }
 }
 export async function getSingleTeamByEmail(email: string) {
-  console.log(email, "check email");
+  //console.log(email, "check email");
   try {
     const response = await fetch(`${process.env.URL}/team/email/${email}`, {
       next: { tags: ["updateTeam", "teams", "acceptTeam"] },

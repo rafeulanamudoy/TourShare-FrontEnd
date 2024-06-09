@@ -1,28 +1,31 @@
 import JoinTeamDeleteButton from "@/components/buttons/JoinTeamDeleteButton";
-import TeamUpdateButton from "@/components/buttons/TeamUpdateButton";
+
 import {
   getSingleJoinTeam,
   getSingleTeamById,
 } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
-import { get } from "http";
-import React from "react";
 
 export default async function Team() {
   const {
     data: { email },
   } = await getSingleUser();
   const team = await getSingleJoinTeam(email);
+  let formattedStartDate;
+  let formattedEndDate;
+  // console.log(team.data.teamInfo.startDate, "join team info");
 
-  const teamInfo = await getSingleTeamById(team?.data?.teamInfo);
-  console.log(teamInfo, "team info");
+  //const teamInfo = await getSingleTeamById(team?.data?.teamInfo);
+  //console.log(teamInfo, "team info");
 
-  const formattedStartDate = new Date(
-    teamInfo?.data?.startDate
-  ).toLocaleDateString();
-  const formattedEndDate = new Date(
-    teamInfo?.data?.endDate
-  ).toLocaleDateString();
+  if (team?.data) {
+    formattedStartDate = new Date(
+      team?.data?.teamInfo?.startDate
+    ).toLocaleDateString();
+    formattedEndDate = new Date(
+      team?.data?.teamInfo?.startDate
+    ).toLocaleDateString();
+  }
 
   return (
     <div className="uppercase my-10">
@@ -34,13 +37,13 @@ export default async function Team() {
           className="  text-[#0C264C]  2xl:text-4xl xl:text-3xl lg:text-xl sm:text-lg  text-base text-center  underline   "
           style={{ textUnderlineOffset: "0.4em", margin: "1rem" }}
         >
-          {team.data
+          {team?.data
             ? " Detailed Overview of Your Team's Journey That You Jointed"
             : "You Currently Have no JoinTeam Details To Show "}
         </p>
       </div>
-      {team?.data && teamInfo?.data && (
-        <div className=" ">
+      <div className=" ">
+        {team?.data && (
           <table className=" mx-auto  my-5 table-auto    border-collapse border border-slate-400 ">
             <thead
               className="    2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[4px]
@@ -64,16 +67,16 @@ export default async function Team() {
             <tbody>
               <tr
                 className=" border  2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[4px] border-slate-600 text-center"
-                key={team._id}
+                key={team?._id}
               >
                 <td className=" border border-slate-600 p-2">
-                  {teamInfo?.data?.destination}
+                  {team?.data?.teamInfo?.destination}
                 </td>
                 <td className=" border border-slate-600 p-2">
-                  {teamInfo?.data?.email}
+                  {team?.data?.teamInfo?.email}
                 </td>
                 <td className=" border border-slate-600 p-2">
-                  {teamInfo?.data?.phoneNumber}
+                  {team?.data?.teamInfo?.phoneNumber}
                 </td>
                 <td className=" border border-slate-600 p-2">
                   {formattedStartDate}
@@ -82,22 +85,21 @@ export default async function Team() {
                   {formattedEndDate}
                 </td>
                 <td className=" border border-slate-600 p-2">
-                  {teamInfo?.data?.teamStatus}
+                  {team?.data?.teamInfo?.teamStatus}
                 </td>
                 <td className=" border border-slate-600 p-2">
                   {team?.data?.status}
                 </td>
                 <td className=" border border-slate-600  p-2">
-                  {team.data._id && (
+                  {team?.data?._id && (
                     <JoinTeamDeleteButton id={team?.data?._id} />
                   )}
                 </td>
               </tr>
             </tbody>
           </table>
-          {}
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
