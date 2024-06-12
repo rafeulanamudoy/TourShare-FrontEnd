@@ -6,10 +6,10 @@ export default async function MessageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className=" flex h-[calc(100vh - 144px )]">
+    <section className=" md:flex grid  md:justify-normal    justify-center md:h-[calc(100vh - 144px )]">
       <ChatLists />
 
-      <div className=" ">{children}</div>
+      <div className=" md:mx-0 mx-auto ">{children}</div>
     </section>
   );
 }

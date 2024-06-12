@@ -1,4 +1,3 @@
-// components/chat/ChatHistory.tsx
 import React from "react";
 import { ImessageResponse } from "@/types/IMessage";
 import { getSingleUser } from "@/lib/actions/Server/user";
@@ -11,7 +10,22 @@ type IChats = {
 
 export default async function ChatHistory({ messages }: IChats) {
   const user = await getSingleUser();
-  // console.log(user.data.email);
+
+  const formatTimestamp = (timestamp: Date) => {
+    const date = new Date(timestamp);
+    const dateString = date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+    const timeString = date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+    return `${dateString} at ${timeString}`;
+  };
+
   return (
     <div className="flex flex-col space-y-4">
       {messages.data.map((message) => (
@@ -23,8 +37,15 @@ export default async function ChatHistory({ messages }: IChats) {
               : "self-start bg-gray-200 text-black"
           }`}
         >
-          <p className="mb-1">{message.message}</p>
-          <span className={` text-xs`}>{message.sender}</span>
+          <p className="mb-1 2xl:text-xl xl:text-base lg:text-xs md:text-[10x] sm:text-[8px] text-[6px]">
+            {message.message}
+          </p>
+          <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+            {message.sender}
+          </span>
+          <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+            {formatTimestamp(message.createdAt)}
+          </span>
         </div>
       ))}
     </div>

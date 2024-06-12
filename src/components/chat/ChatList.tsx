@@ -1,26 +1,26 @@
 "use client";
 import { IJoinPerson } from "@/types/IJoinTeam";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 export type Iconversation = {
   conversations: IJoinPerson[];
 };
 export default function ChatList({ conversations }: Iconversation) {
-  const [selectedConversation, setSelectedConversation] = useState<
-    string | null
-  >(null);
-  console.log(selectedConversation);
+  // console.log(selectedConversation);
   const router = useRouter();
+  const pathname = usePathname();
+  //console.log(pathname);
+  const isActive = (path: string) => path === pathname;
   return (
-    <div className="">
-      <h2 className="text-2xl font-bold mb-4">Conversations</h2>
-      <ul>
+    <div className=" md:border-b-0 border-b-2 md:w-full  w-screen md:text-start  text-center">
+      <h2 className="   font-bold mb-4">Conversations List</h2>
+      <ul className="grid gap-y-4">
         {conversations?.map((conversation: IJoinPerson) => (
           <li
             key={conversation?.joinTeamId?._id}
-            className={`p-4 cursor-pointer hover:bg-gray-100 ${
-              selectedConversation === conversation?.joinTeamId?._id
-                ? "bg-gray-200"
+            className={`   cursor-pointer hover:bg-gray-100 ${
+              isActive(`/dashboard/messages/${conversation?.joinTeamId?.email}`)
+                ? "bg-[#FFFFFF] "
                 : ""
             }`}
             onClick={() =>
@@ -29,7 +29,7 @@ export default function ChatList({ conversations }: Iconversation) {
               )
             }
           >
-            <h3 className="text-lg font-semibold">
+            <h3 className="2xl:text-xl xl:text-base lg:text-xs  md:text-[10x] sm:text-[8px] text-[6px] font-semibold">
               {conversation?.joinTeamId?.email}
             </h3>
             <p className="text-sm text-gray-500">

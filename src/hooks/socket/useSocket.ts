@@ -7,12 +7,13 @@ export const useSocket = (email: string) => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const socketInstance: Socket = io("http://localhost:5000"); // Ensure this matches your server URL
-    setSocket(socketInstance);
+    const socketInstance: Socket = io("http://localhost:5000", {
+      transports: ["websocket"], // Prefer websocket transport
+      reconnectionAttempts: 5, // Number of reconnection attempts before giving up
+      reconnectionDelay: 2000, // Time in ms between reconnection attempts
+    });
 
-    if (socketInstance.connected) {
-      onConnect();
-    }
+    setSocket(socketInstance);
 
     function onConnect() {
       setIsConnected(true);
@@ -24,7 +25,8 @@ export const useSocket = (email: string) => {
       });
     }
 
-    function onDisconnect() {
+    function onDisconnect(reason: string) {
+      console.error(`Socket disconnected: ${reason}`);
       setIsConnected(false);
       setTransport("N/A");
     }
@@ -39,12 +41,15 @@ export const useSocket = (email: string) => {
     };
   }, [email]);
 
-  const sendPrivateMessage = (toEmail: string, message: string) => {
+  const sendPrivateMessage = (
+    toEmail: string,
+    message: string,
+    timestamp: string
+  ) => {
     if (socket) {
-      socket.emit("privateMessage", { toEmail, message });
+      socket.emit("privateMessage", { toEmail, message, timestamp });
     }
   };
+
   return { socket, isConnected, transport, sendPrivateMessage };
 };
-
-// MessagePage component remains unchanged from the previous update

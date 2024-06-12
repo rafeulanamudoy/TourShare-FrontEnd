@@ -14,3 +14,8 @@ export type ImessageResponse = {
   message: string;
   createdAt: Date;
 };
+export type ICreateMessage = {
+  sender: string;
+  recipient: string;
+  message: string;
+};
