@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../../public/images/logo.png";
 
 import Link from "next/link";
@@ -22,32 +22,45 @@ import { setToggle } from "@/redux/features/toggle/toggleSlice";
 import { usePathname } from "next/navigation";
 import { ENUM_USER_ROLE } from "@/types/IUser";
 import { useUserData } from "@/hooks/user/user";
+import NotificationModal from "../notifications/NotificationModal";
+
+interface SidebarItem {
+  title: string;
+  url: string;
+  icon: IconDefinition;
+  count?: number; // Optional count property
+}
+
 export default function Sidebar() {
   const { toggle } = useAppSelector((state) => state.toggle);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
   const { role } = useAppSelector((state) => state.auth.user);
-  const commonSidebarItems = [
-    { title: "Profile", url: "/dashboard/profile", icon: faUser },
+  const notifications = useAppSelector(
+    (state) => state.notifications.notifications
+  );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    { title: "Message", url: "/dashboard/messages", icon: faMessage },
+  const commonSidebarItems: SidebarItem[] = [
+    { title: "Profile", url: "/dashboard/profile", icon: faUser },
+    {
+      title: "Message",
+      url: "/dashboard/messages",
+      icon: faMessage,
+      count: notifications.length,
+    },
   ];
 
   // Define role-specific sidebar items
   const roleSpecificSidebarItems: Partial<
-    Record<
-      ENUM_USER_ROLE,
-      { title: string; url: string; icon: IconDefinition }[]
-    >
+    Record<ENUM_USER_ROLE, SidebarItem[]>
   > = {
     [ENUM_USER_ROLE.CUSTOMER]: [
       { title: "Booking", url: "/bookingHistory", icon: faBook },
-
       { title: "Your team", url: "/dashboard/team", icon: faPeopleGroup },
       { title: "Join Team", url: "/dashboard/joinTeam", icon: faPeopleArrows },
     ],
-
     [ENUM_USER_ROLE.SUPER_ADMIN]: [
       { title: "Manage Users", url: "/manageUsers", icon: faUsers },
     ],
@@ -57,13 +70,13 @@ export default function Sidebar() {
   };
 
   // Combine common and role-specific sidebar items
-  const allSidebarItems = [
+  const allSidebarItems: SidebarItem[] = [
     ...commonSidebarItems,
     ...(roleSpecificSidebarItems[role] || []),
   ];
 
   const { isLoading } = useUserData();
-  // console.log("sidebar renderd", role);
+  // console.log("sidebar rendered", role);
 
   if (isLoading) {
     return null;
@@ -72,72 +85,73 @@ export default function Sidebar() {
   return (
     <div
       className={`${
-        toggle ? " w-80   md:w-24" : "md:w-80 text-[#31363F]   hidden lg:block"
-      }  
-        border-2     md:relative absolute bg-white`}
+        toggle ? "w-80 md:w-24" : "md:w-80 text-[#31363F] hidden lg:block"
+      } border-2 md:relative absolute bg-white`}
     >
-      <div className="   flex  justify-end  p-5 md:hidden ">
+      <div className="flex justify-end p-5 md:hidden">
         <button onClick={() => dispatch(setToggle())}>
           <FontAwesomeIcon
             style={{ width: "1.5em", height: "2em" }}
             icon={faCircleXmark}
-          ></FontAwesomeIcon>
+          />
         </button>
       </div>
-      <div className="   md:border-b-2     h-36 flex  items-center justify-center  ">
-        <div className="      ">
-          <Image
-            className={`  `}
-            src={logo}
-            style={{
-              width: `${toggle ? "70px" : "150px"}`,
-              height: "auto",
-            }}
-            placeholder="blur"
-            alt="logo"
-          />
-        </div>
+      <div className="md:border-b-2 h-36 flex items-center justify-center">
+        <Image
+          className=""
+          src={logo}
+          style={{
+            width: `${toggle ? "70px" : "150px"}`,
+            height: "auto",
+          }}
+          placeholder="blur"
+          alt="logo"
+        />
       </div>
-      <div className=" mt-5  2xl:text-[25px]   xl:text-[15px]   lg:text-[12px]  text-[8px]   grid  gap-y-5   ">
-        {allSidebarItems.map(({ title, url, icon }) => (
+      <div className="mt-5 2xl:text-[25px] xl:text-[15px] lg:text-[12px] text-[8px] grid gap-y-5">
+        {allSidebarItems.map(({ title, url, icon, count }) => (
           <Link
-            className={` ${
+            className={`${
               isActive(url) ? "bg-[#FF914F] " : ""
-            } mx-auto  w-[90%] hover:bg-[#FF914F] flex    h-16 px-2 ${
+            } mx-auto w-[90%] hover:bg-[#FF914F] flex h-16 px-2 ${
               toggle ? "md:justify-center justify-between" : "justify-between"
-            } items-center
-
-           
-            
-            `}
+            } items-center`}
             key={url}
             href={url}
           >
-            <div className="flex gap-x-5 items-center">
+            <div className="relative flex gap-x-5 items-center">
               <FontAwesomeIcon
                 style={{ width: "1.5em", height: "1.5em" }}
-                className=" "
                 icon={icon}
               />
 
+              {/* {icon === faMessage && count !== undefined && count > 0 && (
+                <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-[10px]">
+                  {count}
+                </span>
+              )} */}
               <span
-                className={` ${
+                className={`${
                   toggle ? "md:hidden" : "block"
-                } capitalize font-bold whitespace-nowrap `}
+                } capitalize font-bold whitespace-nowrap`}
               >
                 {title}
               </span>
             </div>
-            <div>
-              <FontAwesomeIcon
-                style={{ width: "1.5em", height: "1.5em" }}
-                className={` ${toggle ? "md:hidden" : "block"}  `}
-                icon={faCaretRight}
-              />
-            </div>
+            <FontAwesomeIcon
+              style={{ width: "1.5em", height: "1.5em" }}
+              className={`${toggle ? "md:hidden" : "block"}`}
+              icon={faCaretRight}
+            />
           </Link>
         ))}
       </div>
+      {/* {notifications.length && isModalOpen && (
+        <NotificationModal
+          notifications={notifications}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )} */}
     </div>
   );
 }

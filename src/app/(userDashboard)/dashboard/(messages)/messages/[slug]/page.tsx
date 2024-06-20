@@ -1,4 +1,3 @@
-// pages/chat/[slug].tsx
 import ChatComponent from "@/components/chat/ChatComponent";
 import ChatHistory from "@/components/chat/ChatHistory";
 import { getMessages } from "@/lib/actions/Server/messages";

@@ -1,4 +1,5 @@
 "use client";
+import { useAppSelector } from "@/redux/hooks";
 import { IJoinPerson } from "@/types/IJoinTeam";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -9,7 +10,8 @@ export default function ChatList({ conversations }: Iconversation) {
   // console.log(selectedConversation);
   const router = useRouter();
   const pathname = usePathname();
-  //console.log(pathname);
+  const state = useAppSelector((state) => state.auth.user);
+
   const isActive = (path: string) => path === pathname;
   return (
     <div className=" md:border-b-0 border-b-2 md:w-full  w-screen md:text-start  text-center">

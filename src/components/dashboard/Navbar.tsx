@@ -1,45 +1,30 @@
 "use client";
 
-import { useSocket } from "@/hooks/socket/useSocket";
 import { useRemoveAccount, useUserData } from "@/hooks/user/user";
-import { getSingleUser } from "@/lib/actions/Server/user";
+
 import { setToggle } from "@/redux/features/toggle/toggleSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { IUpdatedUser } from "@/types/IUser";
+
 import { faBars, faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NotificationModal from "../notifications/NotificationModal";
 
 export default function Navbar() {
   const handleLogOut = useRemoveAccount();
   const { isLoading } = useUserData();
   const dispatch = useAppDispatch();
-  const { profileImage, email } = useAppSelector((state) => state.auth.user);
-  const { socket } = useSocket(email);
-  const [notifications, setNotifications] = useState<string[]>([]);
+  const { profileImage } = useAppSelector((state) => state.auth.user);
+  // const { socket } = useSocketContext();
+  const notifications = useAppSelector(
+    (state) => state.notifications.notifications
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  useEffect(() => {
-    if (socket) {
-      socket.on("messageNotification", ({ from, message }) => {
-        setNotifications((prevNotifications) => [
-          ...prevNotifications,
-          `${from} sends you  a message`,
-        ]);
-        console.log(from, "sender email");
-      });
-      return () => {
-        socket.off("messageNotification");
-      };
-    }
-  }, [socket]);
-  if (isLoading) {
-    return null;
-  }
-  console.log(notifications, "check notification");
+
+  //console.log(notifications, "check notification");
 
   return (
     <div className=" bg-white 2xl:text-[25px]   xl:text-[15px]   lg:text-[12px]  text-[8px]  px-5 flex items-center justify-between     h-36  border-b-2 ">
@@ -72,7 +57,7 @@ export default function Navbar() {
         <div className="  w-8 h-8  lg:w-10 lg:h-10   xl:w-12 xl:h-12 2xl:w-14 2xl:h-14  rounded-full  overflow-hidden ">
           {profileImage && (
             <Image
-              src={profileImage?.url}
+              src={profileImage.url ? profileImage?.url : ""}
               alt="Picture of the author"
               className="rounded-full"
               width={100}

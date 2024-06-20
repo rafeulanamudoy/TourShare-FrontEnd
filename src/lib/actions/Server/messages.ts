@@ -1,11 +1,16 @@
 "use server";
 
 import { ICreateMessage } from "@/types/IMessage";
+import { revalidateTag } from "next/cache";
 
 export async function getMessages(senderId: string, recipientId: string) {
   try {
     const response = await fetch(
-      `${process.env.URL}/messages?senderId=${senderId}&recipientId=${recipientId}`
+      `${process.env.URL}/messages?senderId=${senderId}&recipientId=${recipientId}`,
+      {
+        cache: "no-store",
+        next: { tags: ["privateMessage"] },
+      }
     );
 
     const data = await response.json();
@@ -24,7 +29,7 @@ export async function createMessage(data: ICreateMessage) {
       body: JSON.stringify(data),
     });
     const result = await response.json();
-    // revalidateTag("teams");
+    revalidateTag("privateMessage");
 
     return result;
   } catch (error) {

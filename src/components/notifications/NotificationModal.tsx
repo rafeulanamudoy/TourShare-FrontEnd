@@ -1,7 +1,8 @@
-import React from "react";
+import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
+import { Notification } from "@/redux/features/notifications/notificationsSlice";
 
 interface NotificationModalProps {
-  notifications: string[];
+  notifications: Notification[];
   onClose: () => void;
 }
 
@@ -24,7 +25,10 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
           ) : (
             notifications.map((notification, index) => (
               <li key={index} className="border-b py-2">
-                {notification}
+                {notification.type ===
+                  ENUM_NOTIFICATION_TYPE.PRIVATEMESSAGE && (
+                  <>{notification.sender} send you a message</>
+                )}
               </li>
             ))
           )}

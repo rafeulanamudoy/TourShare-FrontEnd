@@ -44,7 +44,8 @@ export default function UserLogin() {
       // console.log(res.data, "check the user response");
       // console.log(res.data.profileImage, "profile image");
       if (res?.success) {
-        toast.success(res?.message);
+        //console.log(res.message);
+        toast.success("User logged in successfully!");
 
         dispatch(
           setUser({

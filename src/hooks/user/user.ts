@@ -100,31 +100,3 @@ export const useUserData = () => {
   // Return loading state along with other data if needed
   return { isLoading, userData };
 };
-
-//   const { innerWidth } = useWindowSize();
-//   const [resizeLoading, setResizeLoading] = useState(true);
-//   const dispatch = useAppDispatch();
-//   useEffect(() => {
-//     const debouncedHandleResize = _debounce(() => {
-//       if (innerWidth && innerWidth < 1024) {
-//         dispatch(setToggle());
-//       }
-//     }, 200);
-
-//     window.addEventListener("resize", debouncedHandleResize);
-
-//     return () => {
-//       window.removeEventListener("resize", debouncedHandleResize);
-//     };
-//   }, [innerWidth, dispatch]);
-//   useEffect(() => {
-//     setResizeLoading(true);
-//     const timeout = setTimeout(() => {
-//       setResizeLoading(false);
-//     }, 300);
-
-//     return () => clearTimeout(timeout);
-//   }, []);
-
-//   return resizeLoading;
-// };
