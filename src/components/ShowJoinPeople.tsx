@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ENUM_JOIN_TEAM_STATUS, IAccept } from "@/types/ICreateTeam";
 import TeamAcceptButton from "./buttons/TeamAcceptButton";
 import StatusSelect from "./StatusSelect";
+import TeamMessageButton from "./buttons/TeamMessageButton";
 
 interface JoinPeopleProps {
   people: IJoinTeam;
@@ -19,7 +20,8 @@ export default function ShowJoinPeople({ people, teamId }: JoinPeopleProps) {
           members: people?.groupMember,
           joinTeamId: people?._id,
           status: people?.status as ENUM_JOIN_TEAM_STATUS,
-          teamId: teamId, // Ensure correct typing
+          teamId: teamId,
+          joinTeamEmail: people.email,
         }
       : null;
 
@@ -55,7 +57,9 @@ export default function ShowJoinPeople({ people, teamId }: JoinPeopleProps) {
               {people?.groupMember}
             </td>
             <td className=" border border-slate-600 p-2">
-              <FontAwesomeIcon icon={faMessage} />
+              <TeamMessageButton email={people.email}>
+                <FontAwesomeIcon icon={faMessage} />
+              </TeamMessageButton>
             </td>
             <td className=" border border-slate-600  p-2">
               <StatusSelect value={people?.status} />

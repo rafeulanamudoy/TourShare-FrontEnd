@@ -3,7 +3,7 @@ import {
   ENUM_NOTIFICATION_STATUS,
   ENUM_NOTIFICATION_TYPE,
 } from "@/enums/notification";
-import { useSocket } from "@/hooks/socket/useSocket";
+
 import { createMessage, getMessages } from "@/lib/actions/Server/messages";
 import {
   addMessage,
@@ -13,6 +13,7 @@ import { addNotification } from "@/redux/features/notifications/notificationsSli
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useSocketContext } from "@/socket/context/SocketContext";
+import { formatTimestamp } from "@/utilities/TimeFormat";
 import React, { useEffect, useRef, useState } from "react";
 
 type IRecepient = {
@@ -30,6 +31,8 @@ export default function ChatComponent({
   const messageInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null); // Ref for the end of messages container
 
+  console.log("check chat component");
+
   // Function to scroll messages container to the bottom
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -46,9 +49,13 @@ export default function ChatComponent({
     e.preventDefault();
     if (messageInputRef.current) {
       const message = messageInputRef.current.value;
+
+      const _id = Date.now().toString();
       const timestamp = new Date().toISOString();
+      const type = ENUM_NOTIFICATION_TYPE.PRIVATEMESSAGE;
       sendPrivateMessage(recepient, message, timestamp);
-      sendUserNotification(recepient, message);
+      sendUserNotification(recepient, message, type, timestamp, _id);
+
       dispatch(
         addMessage({
           _id: Date.now().toString(),
@@ -57,32 +64,9 @@ export default function ChatComponent({
           createdAt: timestamp,
         })
       );
-      messageInputRef.current.value = "";
-      try {
-        await createMessage({
-          sender: user.email,
-          message: message,
-          recipient: recepient,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
 
-  const formatTimestamp = (timestamp: string) => {
-    const date = new Date(timestamp);
-    const dateString = date.toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
-    const timeString = date.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-    return `${dateString} at ${timeString}`;
+      messageInputRef.current.value = "";
+    }
   };
 
   return (
@@ -99,7 +83,7 @@ export default function ChatComponent({
             } `}
           >
             <p className="mb-1">{message.message}</p>
-            <span className="block">{message.sender}</span>
+            <span className="block ">{message.sender}</span>
             <span className="block">{formatTimestamp(message.createdAt)}</span>
           </div>
         ))}

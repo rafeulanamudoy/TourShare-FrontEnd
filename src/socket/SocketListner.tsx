@@ -5,7 +5,10 @@ import {
   ENUM_NOTIFICATION_TYPE,
 } from "@/enums/notification";
 import { addMessage } from "@/redux/features/messages/messagesSlice";
-import { addNotification } from "@/redux/features/notifications/notificationsSlice";
+import {
+  addNotification,
+  setNotification,
+} from "@/redux/features/notifications/notificationsSlice";
 
 import {
   MessageNotificationPayload,
@@ -36,27 +39,52 @@ export default function SocketListener() {
         );
       };
 
-      const handleMessageNotification = ({
+      const handleNotification = ({
         from,
         message,
+        timestamp,
+        _id,
+        type,
       }: MessageNotificationPayload) => {
         dispatch(
           addNotification({
-            _id: Date.now().toString(),
+            _id: _id,
             sender: from,
             message,
-            type: ENUM_NOTIFICATION_TYPE.PRIVATEMESSAGE,
+            type: type,
             status: ENUM_NOTIFICATION_STATUS.UNSEEN,
+            createdAt: timestamp,
           })
         );
       };
+      const handleTeamRequest = ({
+        from,
+        message,
+        timestamp,
 
+        _id,
+        type,
+      }: MessageNotificationPayload) => {
+        dispatch(
+          addNotification({
+            _id: _id,
+            sender: from,
+            message,
+            type: type,
+            status: ENUM_NOTIFICATION_STATUS.UNSEEN,
+            createdAt: timestamp,
+          })
+        );
+      };
       socket.on("privateMessage", handlePrivateMessage);
-      socket.on("messageNotification", handleMessageNotification);
+      socket.on("notification", handleNotification);
+
+      socket.on("teamRequest", handleTeamRequest);
 
       return () => {
         socket.off("privateMessage", handlePrivateMessage);
-        socket.off("messageNotification", handleMessageNotification);
+        socket.off("notification", handleNotification);
+        socket.off("teamRequest", handleTeamRequest);
       };
     }
   }, [socket, dispatch]);

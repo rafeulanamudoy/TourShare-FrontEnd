@@ -6,11 +6,8 @@ import { revalidateTag } from "next/cache";
 export async function getMessages(senderId: string, recipientId: string) {
   try {
     const response = await fetch(
-      `${process.env.URL}/messages?senderId=${senderId}&recipientId=${recipientId}`,
-      {
-        cache: "no-store",
-        next: { tags: ["privateMessage"] },
-      }
+      `${process.env.URL}/messages?senderId=${senderId}&recipientId=${recipientId}`
+      // { next: { tags: ["message"] } }
     );
 
     const data = await response.json();
@@ -29,8 +26,7 @@ export async function createMessage(data: ICreateMessage) {
       body: JSON.stringify(data),
     });
     const result = await response.json();
-    revalidateTag("privateMessage");
-
+    // revalidateTag("message");
     return result;
   } catch (error) {
     // console.log(error, "from team.ts");

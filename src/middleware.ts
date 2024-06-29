@@ -5,7 +5,9 @@ import { cookies } from "next/headers";
 const protectedRoutes = [
   "/dashboard",
   "/dashboard/team",
-  "/dashboard/team",
+  "/dashboard/joinTeam",
+  "/dashboard/profile",
+  "/dashboard/messages",
   "/createTeam",
   "/joinTeam",
 ];

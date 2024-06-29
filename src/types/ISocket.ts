@@ -1,3 +1,5 @@
+import { INotificationType } from "./INotification";
+
 export type PrivateMessagePayload = {
   from: string;
   message: string;
@@ -7,4 +9,7 @@ export type PrivateMessagePayload = {
 export type MessageNotificationPayload = {
   from: string;
   message: string;
+  timestamp: string;
+  _id: string;
+  type: INotificationType;
 };

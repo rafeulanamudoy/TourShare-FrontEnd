@@ -1,7 +1,9 @@
 "use client";
 
-import { acceptJoinTeam } from "@/lib/actions/Server/team";
+import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
+import { acceptJoinTeam, getSingleJoinTeam } from "@/lib/actions/Server/team";
 import { useAppSelector } from "@/redux/hooks";
+import { useSocketContext } from "@/socket/context/SocketContext";
 import { IAccept } from "@/types/ICreateTeam";
 import toast from "react-hot-toast";
 
@@ -11,6 +13,7 @@ interface UserJoinTeamProps {
 
 export default function TeamAcceptButton({ payload }: UserJoinTeamProps) {
   const state = useAppSelector((state) => state.toggle.requestValue);
+  const { sendTeamRequest } = useSocketContext();
   const handleAccept = async () => {
     const requestValue = {
       members: payload.members,
@@ -20,8 +23,18 @@ export default function TeamAcceptButton({ payload }: UserJoinTeamProps) {
     if (payload.teamId && requestValue) {
       try {
         const res = await acceptJoinTeam(payload?.teamId, requestValue);
-        if (res.success) {
+
+        if (res.success && payload.joinTeamEmail) {
           toast.success(res?.message);
+          sendTeamRequest(
+            payload.joinTeamEmail,
+            `${res?.data?.teamName} ${state} your team`,
+            ENUM_NOTIFICATION_TYPE.JOINTEAMSTATUSUPDATE,
+            state,
+            res.updatedAt
+          );
+          // sendTeamRequest()
+          console.log(res, "check response ");
         } else {
           const errorMessage = res?.message || "Error message not available";
           toast.error(errorMessage);

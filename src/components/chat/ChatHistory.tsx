@@ -1,6 +1,7 @@
 import React from "react";
 import { ImessageResponse } from "@/types/IMessage";
 import { getSingleUser } from "@/lib/actions/Server/user";
+import { formatTimestamp } from "@/utilities/TimeFormat";
 
 type IChats = {
   messages: {
@@ -10,21 +11,6 @@ type IChats = {
 
 export default async function ChatHistory({ messages }: IChats) {
   const user = await getSingleUser();
-
-  const formatTimestamp = (timestamp: Date) => {
-    const date = new Date(timestamp);
-    const dateString = date.toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
-    const timeString = date.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-    return `${dateString} at ${timeString}`;
-  };
 
   return (
     <div className="flex flex-col space-y-4">

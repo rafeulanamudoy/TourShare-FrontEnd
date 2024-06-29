@@ -39,7 +39,16 @@ export async function getSingleTeamByEmail(email: string) {
   //console.log(email, "check email");
   try {
     const response = await fetch(`${process.env.URL}/team/email/${email}`, {
-      next: { tags: ["updateTeam", "teams", "acceptTeam"] },
+      cache: "no-store",
+      next: {
+        tags: [
+          "updateTeam",
+          "teams",
+          "acceptTeam",
+          "joinTeam",
+          "deleteJoinTeam",
+        ],
+      },
     });
 
     const data = await response.json();
@@ -51,7 +60,16 @@ export async function getSingleTeamByEmail(email: string) {
 export async function getSingleTeamById(id: string) {
   try {
     const response = await fetch(`${process.env.URL}/team/id/${id}`, {
-      next: { tags: ["updateTeam", "teams", "acceptTeam"] },
+      cache: "no-store",
+      next: {
+        tags: [
+          "updateTeam",
+          "teams",
+          "acceptTeam",
+          "joinTeam",
+          "deleteJoinTeam",
+        ],
+      },
     });
 
     const data = await response.json();
@@ -109,7 +127,9 @@ export async function getJoinTeams() {
 export async function getSingleJoinTeam(email: string) {
   try {
     const response = await fetch(`${process.env.URL}/joinTeam/${email}`, {
-      next: { tags: ["joinTeam", "updateJoinTeam", "deleteJoinTeam"] },
+      next: {
+        tags: ["joinTeam", "updateJoinTeam", "deleteJoinTeam", "acceptTeam"],
+      },
     });
 
     const data = await response.json();

@@ -18,6 +18,7 @@ export enum TeamStatus {
 }
 export type IAccept = {
   members: number;
+  joinTeamEmail?: string;
   joinTeamId: string;
   status: ENUM_JOIN_TEAM_STATUS;
   teamId?: string;
@@ -27,3 +28,4 @@ export enum ENUM_JOIN_TEAM_STATUS {
   NOTACCEPTED = "notAccepted",
   PENDING = "pending",
 }
+export type IJoinTeamStatus = "pending" | "accepted" | "notAccepted";

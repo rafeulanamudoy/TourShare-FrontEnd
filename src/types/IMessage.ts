@@ -12,7 +12,7 @@ export type ImessageResponse = {
   sender: string;
   recipient: string;
   message: string;
-  createdAt: Date;
+  createdAt: string;
 };
 export type ICreateMessage = {
   sender: string;

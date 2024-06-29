@@ -2,7 +2,7 @@ import {
   ENUM_NOTIFICATION_STATUS,
   ENUM_NOTIFICATION_TYPE,
 } from "@/enums/notification";
-import { useSocket } from "@/hooks/socket/useSocket";
+
 import { getMessages } from "@/lib/actions/Server/messages";
 import { addMessage } from "@/redux/features/messages/messagesSlice";
 import { addNotification } from "@/redux/features/notifications/notificationsSlice";
