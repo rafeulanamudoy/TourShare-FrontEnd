@@ -25,13 +25,14 @@ export default function TeamAcceptButton({ payload }: UserJoinTeamProps) {
         const res = await acceptJoinTeam(payload?.teamId, requestValue);
 
         if (res.success && payload.joinTeamEmail) {
+          const timestamp = new Date().toISOString();
           toast.success(res?.message);
           sendTeamRequest(
             payload.joinTeamEmail,
             `${res?.data?.teamName} ${state} your team`,
             ENUM_NOTIFICATION_TYPE.JOINTEAMSTATUSUPDATE,
             state,
-            res.updatedAt
+            timestamp
           );
           // sendTeamRequest()
           console.log(res, "check response ");

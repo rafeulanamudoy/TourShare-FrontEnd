@@ -29,18 +29,15 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [tempAllNotifications, setTempAllNotifications] = useState<
-    INotification[]
-  >([]);
-  const [tempUnseenNotifications, setTempUnseenNotifications] = useState<
-    INotification[]
-  >([]);
+
   const [showUnseen, setShowUnseen] = useState(false);
 
   const instantNotifications = useAppSelector(
     (state) => state.notifications.notifications as INotification[]
   );
   console.log(instantNotifications, "instant notification");
+  const { combinedAllNotifications, combinedUnseenNotifications } =
+    useCombinedNotifications(instantNotifications, allNotifications);
 
   // const { combinedAllNotifications, combinedUnseenNotifications } =
   //   useCombinedNotifications(instantNotifications, allNotifications);
@@ -65,7 +62,7 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
       router.push(`/dashboard/messages/${sender}`);
     } else if (type === ENUM_NOTIFICATION_TYPE.JOINTEAMSTATUSUPDATE) {
       router.push("/dashboard/joinTeam");
-    } else if (type === ENUM_NOTIFICATION_TYPE.JOINTEAMWITHDRAWAL) {
+    } else if (type === ENUM_NOTIFICATION_TYPE.JOINTEAMREQUESTSTATUS) {
       router.push("/dashboard/team");
     }
   };
@@ -99,12 +96,12 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
         <div className="mt-4 max-h-[calc(100%-100px)] overflow-y-auto">
           {!showUnseen ? (
             <AllNotificationHistory
-              notifications={allNotifications}
+              notifications={combinedAllNotifications}
               onNotificationClick={handleNotificationClick}
             />
           ) : (
             <UnseenNotificationHistory
-              notifications={unseenNotifications}
+              notifications={combinedUnseenNotifications}
               onNotificationClick={handleNotificationClick}
             />
           )}

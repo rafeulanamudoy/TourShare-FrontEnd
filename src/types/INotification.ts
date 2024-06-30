@@ -15,6 +15,6 @@ export type NotificationPayload = {
 };
 export type INotificationType =
   | "privateMessage"
-  | "joinTeamWithdrawal"
+  | "joinTeamRequestStatus"
   | "joinTeamStatusUpdate";
 export type INotificationStatus = "seen" | "unseen";

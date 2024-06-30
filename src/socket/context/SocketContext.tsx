@@ -36,11 +36,10 @@ interface SocketContextProps {
     status: IJoinTeamStatus,
     timestamp: string
   ) => void;
-  sendTeamWithdraw: (
+  sendJoinTeamRequest: (
     toEmail: string,
     message: string,
     type: INotificationType,
-    status: IJoinTeamStatus,
     timestamp: string
   ) => void;
 }
@@ -162,11 +161,12 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
     toEmail: string,
     message: string,
     type: INotificationType,
+
     status: IJoinTeamStatus,
     timestamp: string
   ) => {
     if (socket) {
-      socket.emit("teamRequest", { toEmail, message, status, type });
+      socket.emit("teamRequest", { toEmail, message, status, type, timestamp });
       // try {
       //   await createUserNotification({
       //     sender: user.email,
@@ -179,15 +179,14 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
       // }
     }
   };
-  const sendTeamWithdraw = async (
+  const sendJoinTeamRequest = async (
     toEmail: string,
     message: string,
     type: INotificationType,
-    status: IJoinTeamStatus,
     timestamp: string
   ) => {
     if (socket) {
-      socket.emit("JoinTeamWithdraw", { toEmail, message, status, type });
+      socket.emit("JoinTeamRequest", { toEmail, message, type, timestamp });
       // try {
       //   await createUserNotification({
       //     sender: user.email,
@@ -209,7 +208,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
         sendPrivateMessage,
         sendUserNotification,
         sendTeamRequest,
-        sendTeamWithdraw,
+        sendJoinTeamRequest,
       }}
     >
       {children}

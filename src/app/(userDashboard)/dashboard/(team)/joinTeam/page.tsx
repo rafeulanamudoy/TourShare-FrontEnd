@@ -92,7 +92,10 @@ export default async function Team() {
                 </td>
                 <td className=" border border-slate-600  p-2">
                   {team?.data?._id && (
-                    <JoinTeamDeleteButton id={team?.data?._id} />
+                    <JoinTeamDeleteButton
+                      id={team?.data?._id}
+                      teamEmail={team?.data?.teamInfo?.email}
+                    />
                   )}
                 </td>
               </tr>

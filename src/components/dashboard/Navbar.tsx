@@ -30,7 +30,7 @@ export default function Navbar({
     (state) => state.notifications.notifications as INotification[]
   );
 
-  console.log(instantNotifications, "check instant notification from navbar");
+  // console.log(instantNotifications, "check instant notification from navbar");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 

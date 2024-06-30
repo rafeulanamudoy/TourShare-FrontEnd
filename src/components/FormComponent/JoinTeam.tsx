@@ -11,10 +11,12 @@ import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
 import { Rosario } from "next/font/google";
 import { useSearchParams } from "next/navigation";
-import { createJoinTeam } from "@/lib/actions/Server/team";
+import { createJoinTeam, getSingleTeamById } from "@/lib/actions/Server/team";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
+import { useSocketContext } from "@/socket/context/SocketContext";
+import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -26,19 +28,25 @@ export default function JoinTeam() {
   const [error, setError] = useState("");
   const searchParams = useSearchParams();
   const [joinId, setJoinId] = useState<string | null>(null);
+  const { sendJoinTeamRequest } = useSocketContext();
 
   useEffect(() => {
-    const hash = window.location.hash;
-    // console.log("rendering");
+    const handleAsyncOp = async () => {
+      const hash = window.location.hash;
 
-    const [path, queryString] = hash.split("?");
-    if (queryString) {
-      const params = new URLSearchParams(queryString);
-      const joinId = params.get("joinId");
-      setJoinId(joinId);
-    } else {
-      setJoinId(searchParams.get("joinId"));
-    }
+      // console.log("rendering");
+
+      const [path, queryString] = hash.split("?");
+      if (queryString) {
+        const params = new URLSearchParams(queryString);
+        const joinId = params.get("joinId");
+
+        setJoinId(joinId);
+      } else {
+        setJoinId(searchParams.get("joinId"));
+      }
+    };
+    handleAsyncOp();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -66,6 +74,15 @@ export default function JoinTeam() {
       // console.log(res, "response message");
       if (res?.success) {
         toast.success(res?.message);
+        const timestamp = new Date().toISOString();
+        console.log(res, "check respone");
+        sendJoinTeamRequest(
+          res?.data?.teamInfo?.email,
+          `${email} send  request to join with your team`,
+          ENUM_NOTIFICATION_TYPE.JOINTEAMREQUESTSTATUS,
+          timestamp
+        );
+
         setError("");
         reset();
       } else {
