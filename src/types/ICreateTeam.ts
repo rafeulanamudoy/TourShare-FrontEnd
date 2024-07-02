@@ -1,20 +1,40 @@
 export type ICreateTeam = {
-  email: string;
   _id: string;
+  email: string;
+
   phoneNumber: string;
+  teamName: string;
   address: string;
   destination: string;
   currentMembers: number;
   neededMembers: number;
   nationalIdNumber: string;
+  budget: number;
+  teamDetails?: ITeamDetails;
   startDate: Date;
   endDate: Date;
   teamStatus?: TeamStatus;
 };
+export type ITeamDetails = {
+  description: string;
+  meetingPoint: string;
+  meetingDate: Date;
+  meetingTime: string;
 
+  accommodations: string;
+  transportation: TRANSPORTATION;
+  activities: { activity: string }[];
+  costBreakdown?: string; // optional field
+  responsibilities?: { responsibility: string }[]; // optional field
+};
 export enum TeamStatus {
   Ongoing = "ongoing",
   Closed = "closed",
+}
+export enum TRANSPORTATION {
+  BUS = "bus",
+  TRAIN = "train",
+  AIRPLANE = "airplane",
 }
 export type IAccept = {
   members: number;

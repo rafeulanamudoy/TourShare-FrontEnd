@@ -6,7 +6,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { Rosario as Rosario } from "next/font/google";
 import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -34,15 +34,33 @@ export default function CreateTeam() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm({ resolver: yupResolver(CreateTeamSchema) });
+  const {
+    fields: activityFields,
+    append: appendActivity,
+    remove: removeActivity,
+  } = useFieldArray({
+    control,
+    name: "teamDetails.activities",
+  });
+  const {
+    fields: responsibilityFields,
+    append: appendResponsibilities,
+    remove: removeResponsibilities,
+  } = useFieldArray({
+    control,
+    name: "teamDetails.responsibilities",
+  });
   const onSubmit = async (data: ICreateTeam) => {
     try {
       setLoading(true);
 
-      //console.log(data);
+      console.log(data, "create team data");
+
       const res = await createTeam(data);
-      //console.log(res, "check response");
+      console.log(res, "check response");
       if (res?.success) {
         toast.success(res?.message);
         setError("");
@@ -81,6 +99,22 @@ export default function CreateTeam() {
         onSubmit={onSubmit}
         register={register}
       >
+        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
+          <label className=" col-span-2" htmlFor="destination">
+            team name
+          </label>
+          <div className="     col-span-10  ">
+            <Input
+              className="text-[#707070] w-full  h-[3em]  bg-white px-5  py-5   border-2   border-[#707070] "
+              name="teamName"
+              type="text"
+              placeholder="teamName"
+              error={errors?.teamName?.message}
+              register={register}
+              autoFocus
+            />
+          </div>
+        </div>
         <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2" htmlFor="destination">
             Destination
@@ -164,9 +198,25 @@ export default function CreateTeam() {
             />
           </div>
         </div>
+        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
+          <label className=" col-span-2" htmlFor="destination">
+            Budget
+          </label>
+          <div className="     col-span-10  ">
+            <Input
+              className="text-[#707070] w-full  h-[3em]  bg-white px-5  py-5   border-2   border-[#707070] "
+              name="budget"
+              type="number"
+              placeholder="budget in taka"
+              error={errors?.budget?.message}
+              register={register}
+              autoFocus
+            />
+          </div>
+        </div>
         <div className="      grid       grid-cols-12   justify-center items-center ">
-          <label className=" col-span-2 " htmlFor="name">
-            Name
+          <label className=" col-span-2 " htmlFor="Date">
+            Start And End Date
           </label>
 
           <div className=" col-span-10     flex gap-x-5   ">
@@ -225,8 +275,204 @@ export default function CreateTeam() {
             />
           </div>
         </div>
+        <div className="    grid  grid-cols-12  ">
+          <div className="col-span-2"></div>
+          <div className="col-span-10 ">
+            <label
+              className="  block  mb-16 text-center   2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[30px] text-[20px]  uppercase   text-[#2E4262]    "
+              htmlFor="teamDetails"
+            >
+              Team Details
+            </label>
+
+            <div className="   grid  grid-cols-2   gap-16 ">
+              <div className="grid gap-y-5">
+                <label className="   " htmlFor="description">
+                  Meeting Point
+                </label>
+
+                <Input
+                  className="text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]  "
+                  name="teamDetails.meetingPoint"
+                  placeholder="Meeting Point"
+                  type="text"
+                  error={errors?.teamDetails?.meetingPoint?.message}
+                  register={register}
+                  autoFocus
+                />
+              </div>
+              <div className="grid gap-y-5">
+                <label className="   " htmlFor="meetingTime">
+                  Meeting Date
+                </label>
+
+                <Input
+                  className="text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]  "
+                  name="teamDetails.meetingDate"
+                  placeholder=" Meeting Date"
+                  type="date"
+                  error={errors?.teamDetails?.meetingDate?.message}
+                  register={register}
+                  autoFocus
+                />
+              </div>
+              <div className="grid gap-y-5">
+                <label className="   " htmlFor="meetingTime">
+                  Meeting Time
+                </label>
+
+                <Input
+                  className="text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]  "
+                  name="teamDetails.meetingTime"
+                  placeholder=" Meeting Date"
+                  type="time"
+                  error={errors?.teamDetails?.meetingTime?.message}
+                  register={register}
+                  autoFocus
+                />
+              </div>
+
+              <div className="grid gap-y-5">
+                <label className="   " htmlFor="meetingTime">
+                  Transportation
+                </label>
+
+                <Input
+                  selectOptions={[
+                    { value: "bus", label: "Bus" },
+                    { value: "train", label: "Train" },
+                    { value: "airplane", label: "Airplane" },
+                  ]}
+                  className="text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]  "
+                  name="teamDetails.transportation"
+                  placeholder=" Transportation"
+                  type="text"
+                  error={errors?.teamDetails?.transportation?.message}
+                  register={register}
+                  autoFocus
+                />
+              </div>
+            </div>
+
+            <div className="mt-16 gap-y-16 grid">
+              <div className="grid  gap-y-5">
+                <label className="   " htmlFor="description">
+                  Team Description
+                </label>
+                <Input
+                  textarea={true}
+                  className=" w-full    text-[#707070]  bg-white p-5   border-2 border-[#707070]  "
+                  name="teamDetails.description"
+                  type="text"
+                  placeholder="team Description"
+                  error={errors?.teamDetails?.description?.message}
+                  register={register}
+                  autoFocus
+                />
+              </div>
+              <div className="grid gap-y-5">
+                <label className="   " htmlFor="meetingTime">
+                  Accommodations
+                </label>
+
+                <Input
+                  textarea={true}
+                  className="text-[#707070]  w-full   bg-white  p-5    border-2 border-[#707070]  "
+                  name="teamDetails.accommodations"
+                  placeholder="Describe the type of accommodation planned for the journey (e.g., hotel, AirBnB, hostel, camping)."
+                  type="text "
+                  error={errors?.teamDetails?.accommodations?.message}
+                  register={register}
+                  autoFocus
+                />
+              </div>
+              <div className="grid gap-y-5">
+                <label className="   " htmlFor="costBreakdown">
+                  Cost Breakdown
+                </label>
+
+                <Input
+                  className="text-[#707070]  w-full   bg-white  p-5    border-2 border-[#707070]  "
+                  name="teamDetails.costBreakdown"
+                  textarea={true}
+                  placeholder="Provide details about how costs are needed for this journey (e.g., transportation, accommodation, food, activities). "
+                  type="string"
+                  error={errors?.teamDetails?.costBreakdown?.message}
+                  register={register}
+                  autoFocus
+                />
+              </div>
+              <div className="grid gap-y-5">
+                <label className=" ">Activities</label>
+                <div className="  grid gap-y-5">
+                  {activityFields.map((field, index) => (
+                    <div key={field.id} className="flex gap-x-5">
+                      <Input
+                        className=" text-[#707070] w-full h-[3em] bg-white p-5 border-2 border-[#707070]"
+                        name={`teamDetails.activities.[${index}].activity`}
+                        type="text"
+                        placeholder="Activity"
+                        error={errors.teamDetails?.activities?.[index]?.message}
+                        register={register}
+                        autoFocus
+                      />
+                      <button
+                        type="button"
+                        className="bg-red-500 hover:bg-red-700  text-white   py-2 px-4 rounded"
+                        onClick={() => removeActivity(index)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    className="bg-[#31363F] hover:bg-[#1c1f24] text-white  py-2 px-4 rounded "
+                    onClick={() => appendActivity({ activity: "" })}
+                  >
+                    Add Activity
+                  </button>
+                </div>
+              </div>
+              <div className="grid gap-y-5">
+                <label className=" ">Responsibilities</label>
+                <div className="  grid gap-y-5">
+                  {responsibilityFields.map((field, index) => (
+                    <div key={field.id} className="flex gap-x-5">
+                      <Input
+                        className=" text-[#707070] w-full h-[3em] bg-white p-5 border-2 border-[#707070]"
+                        name={`teamDetails.responsibilities.[${index}].responsibility`}
+                        type="text"
+                        placeholder="Activity"
+                        error={errors.teamDetails?.responsibilities?.message}
+                        register={register}
+                        autoFocus
+                      />
+                      <button
+                        type="button"
+                        className="bg-red-500 hover:bg-red-700  text-white   py-2 px-4 rounded"
+                        onClick={() => removeResponsibilities(index)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    className="bg-[#31363F] hover:bg-[#1c1f24] text-white  py-2 px-4 rounded "
+                    onClick={() =>
+                      appendResponsibilities({ responsibility: "" })
+                    }
+                  >
+                    Add Responsibility
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>{" "}
         <button
-          className="submit-button mx-auto w-1/2 h-[3em]"
+          className="submit-button mx-auto w-1/2 h-[3em] hover:bg-[#18253a]"
           type="submit"
           disabled={loading}
         >

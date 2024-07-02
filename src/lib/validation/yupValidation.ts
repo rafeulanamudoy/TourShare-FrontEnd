@@ -74,7 +74,14 @@ export const UpdateSchema = yup.object().shape({
 });
 export const CreateTeamSchema = yup.object().shape({
   destination: yup.string().required("Destination is required"),
-
+  teamName: yup.string().required("Team Name is required"),
+  budget: yup
+    .number()
+    .transform((value, originalValue) =>
+      String(originalValue).trim() === "" ? null : value
+    )
+    .nullable()
+    .required("Budget is required"),
   address: yup.string().required("Address is required"),
   currentMembers: yup
     .number()
@@ -91,20 +98,34 @@ export const CreateTeamSchema = yup.object().shape({
     .nullable()
     .required("Needed members count is required"),
   nationalIdNumber: yup.string().required("National ID Number is required"),
-  startDate: yup
-    .date()
-    .transform((value, originalValue) =>
-      String(originalValue).trim() === "" ? null : value
-    )
-    .nullable()
-    .required("Start date is required"),
-  endDate: yup
-    .date()
-    .transform((value, originalValue) =>
-      String(originalValue).trim() === "" ? null : value
-    )
-    .nullable()
-    .required("End date is required"),
+  startDate: yup.date().required("Start date is required"),
+  endDate: yup.date().required("End date is required"),
+  teamDetails: yup.object().shape({
+    description: yup.string().required("Description is required"),
+    meetingPoint: yup.string().required("Meeting Point is required"),
+    meetingDate: yup.date().required("Meeting Date is required"),
+    meetingTime: yup.string().required("Meeting Time is required"),
+
+    accommodations: yup.string().required("Accommodations are required"),
+    costBreakdown: yup.string().required("cost breakdown is required"),
+    transportation: yup.string().required("Transportation is required"),
+    activities: yup
+      .array()
+      .of(
+        yup.object().shape({
+          activity: yup.string().optional(),
+        })
+      )
+      .optional(),
+    responsibilities: yup
+      .array()
+      .of(
+        yup.object().shape({
+          responsibility: yup.string().optional(),
+        })
+      )
+      .optional(),
+  }),
 });
 export const JoinTeamSchema = yup.object().shape({
   address: yup.string().required("Address is required"),

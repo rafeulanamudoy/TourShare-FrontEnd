@@ -38,6 +38,8 @@ const Input: FC<InputProps> = ({
       <div>
         {textarea ? (
           <textarea
+            rows="4"
+            cols="50"
             className="   "
             aria-invalid={error ? "true" : "false"}
             {...register(name)}
