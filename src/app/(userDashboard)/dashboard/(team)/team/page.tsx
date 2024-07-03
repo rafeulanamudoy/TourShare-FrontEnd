@@ -36,11 +36,13 @@ export default async function Team() {
         <div className=" ">
           <table className=" mx-auto  my-5 table-auto    border-collapse border border-slate-400 ">
             <thead
-              className="    2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[5px]
+              className="     2xl:text-xl xl:text-lg lg:text-base  md:text-sm      sm:text-[8px] text-[4px]
            "
             >
               <tr className="">
+                <th className=" border border-slate-600  p-2">Team Name</th>
                 <th className=" border border-slate-600  p-2">Destination</th>
+                <th className=" border border-slate-600  p-2">Budget</th>
                 <th className=" border border-slate-600  p-2">
                   Current Members
                 </th>
@@ -55,11 +57,17 @@ export default async function Team() {
             </thead>
             <tbody>
               <tr
-                className=" border  2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[5px] border-slate-600 text-center"
+                className=" border   2xl:text-lg xl:text-base lg:text-xs    md:text-[10px]  sm:text-[6px]    text-[3px] border-slate-600 text-center"
                 key={team._id}
               >
                 <td className=" border border-slate-600 p-2">
+                  {team?.data?.teamName}
+                </td>
+                <td className=" border border-slate-600 p-2">
                   {team?.data?.destination}
+                </td>
+                <td className=" border border-slate-600 p-2">
+                  {team?.data?.budget}
                 </td>
                 <td className=" border border-slate-600 p-2">
                   {team?.data?.currentMembers}

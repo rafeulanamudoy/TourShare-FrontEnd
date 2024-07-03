@@ -19,6 +19,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { createTeam } from "@/lib/actions/Server/team";
 import { ICreateTeam } from "@/types/ICreateTeam";
 import { useUserData } from "@/hooks/user/user";
+import { format, parse } from "date-fns";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -56,9 +57,17 @@ export default function CreateTeam() {
   const onSubmit = async (data: ICreateTeam) => {
     try {
       setLoading(true);
+      console.log(data, "check data");
 
-      console.log(data, "create team data");
-
+      if (data?.teamDetails) {
+        const parsedMeetingTime = parse(
+          data.teamDetails.meetingTime,
+          "HH:mm",
+          new Date()
+        );
+        const formattedMeetingTime = format(parsedMeetingTime, "HH:mm");
+        data.teamDetails.meetingTime = formattedMeetingTime;
+      }
       const res = await createTeam(data);
       console.log(res, "check response");
       if (res?.success) {

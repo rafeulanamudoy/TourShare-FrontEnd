@@ -24,16 +24,19 @@ export default async function ShowTeam() {
       <div className=" ">
         <table className=" mx-auto  my-5 table-auto    border-collapse border border-slate-400 ">
           <thead
-            className="    2xl:text-4xl xl:text-2xl lg:text-lg  md:text-base    sm:text-sm text-[8px]
+            className="    2xl:text-xl xl:text-lg lg:text-base  md:text-sm    sm:text-[8px] text-[4px]
            "
           >
-            <tr className="">
+            <tr className=" ">
+              <th className=" border border-slate-600  p-2">Group Name</th>
               <th className=" border border-slate-600  p-2">Destination</th>
+              <th className=" border border-slate-600  p-2">Budget</th>
               <th className=" border border-slate-600  p-2">Current Members</th>
               <th className=" border border-slate-600 p-2 ">Needed Members</th>
               <th className=" border border-slate-600 p-2 ">Start Journy</th>
               <th className=" border border-slate-600 p-2 ">End Journy</th>
               <th className=" border border-slate-600 p-2 ">Status</th>
+              <th className=" border border-slate-600 p-2 ">Team Details</th>
               <th className=" border border-slate-600 p-2 ">Join</th>
             </tr>
           </thead>
@@ -48,11 +51,17 @@ export default async function ShowTeam() {
 
               return (
                 <tr
-                  className=" border  2xl:text-3xl xl:text-2xl  lg:text-base   md:text-xs  sm:text-[10px]    text-[6px] border-slate-600 text-center"
+                  className=" border  2xl:text-lg xl:text-base lg:text-xs    md:text-[8px]  sm:text-[6px]    text-[3px] border-slate-600 text-center"
                   key={team._id}
                 >
                   <td className=" border border-slate-600 p-2">
+                    {team.teamName}
+                  </td>
+                  <td className=" border border-slate-600 p-2">
                     {team.destination}
+                  </td>
+                  <td className=" border border-slate-600 p-2">
+                    {team.budget}
                   </td>
                   <td className=" border border-slate-600 p-2">
                     {team.currentMembers}
@@ -69,6 +78,7 @@ export default async function ShowTeam() {
                   <td className=" border border-slate-600 p-2">
                     {team.teamStatus}
                   </td>
+                  <td className=" border border-slate-600 p-2">details</td>
                   {team.teamStatus && (
                     <td className=" border border-slate-600  p-2">
                       <JoinTeamButton
