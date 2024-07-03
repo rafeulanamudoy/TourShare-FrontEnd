@@ -7,4 +7,5 @@ export enum ENUM_NOTIFICATION_TYPE {
   PRIVATEMESSAGE = "privateMessage",
   JOINTEAMREQUESTSTATUS = "joinTeamRequestStatus",
   JOINTEAMSTATUSUPDATE = "joinTeamStatusUpdate",
+  UPDATECREATETEAM = "updateCreateTeam",
 }

@@ -16,5 +16,6 @@ export type NotificationPayload = {
 export type INotificationType =
   | "privateMessage"
   | "joinTeamRequestStatus"
-  | "joinTeamStatusUpdate";
+  | "joinTeamStatusUpdate"
+  | "updateCreateTeam";
 export type INotificationStatus = "seen" | "unseen";

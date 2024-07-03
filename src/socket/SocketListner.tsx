@@ -95,16 +95,37 @@ export default function SocketListener() {
           })
         );
       };
+      const handleUpdateCreateTeam = ({
+        from,
+        message,
+        timestamp,
+
+        _id,
+        type,
+      }: MessageNotificationPayload) => {
+        dispatch(
+          addNotification({
+            _id: _id,
+            sender: from,
+            message,
+            type: type,
+            status: ENUM_NOTIFICATION_STATUS.UNSEEN,
+            createdAt: timestamp,
+          })
+        );
+      };
       socket.on("privateMessage", handlePrivateMessage);
       socket.on("notification", handleNotification);
 
       socket.on("teamRequest", handleTeamRequest);
       socket.on("JoinTeamRequest", handleJoinTeamRequest);
+      socket.on("updateCreateTeam", handleUpdateCreateTeam);
       return () => {
         socket.off("privateMessage", handlePrivateMessage);
         socket.off("notification", handleNotification);
         socket.off("teamRequest", handleTeamRequest);
         socket.off("JoinTeamRequest", handleJoinTeamRequest);
+        socket.off("updateCreateTeam", handleUpdateCreateTeam);
       };
     }
   }, [socket, dispatch]);

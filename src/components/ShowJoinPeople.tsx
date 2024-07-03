@@ -29,7 +29,7 @@ export default function ShowJoinPeople({ people, teamId }: JoinPeopleProps) {
     <div className=" ">
       <table className=" mx-auto  my-5 table-auto    border-collapse border border-slate-400 ">
         <thead
-          className="    2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[8px]
+          className="    2xl:text-xl xl:text-lg lg:text-base  md:text-sm      sm:text-[8px] text-[4px]
            "
         >
           <tr className="">
@@ -45,7 +45,7 @@ export default function ShowJoinPeople({ people, teamId }: JoinPeopleProps) {
         </thead>
         <tbody>
           <tr
-            className=" border  2xl:text-2xl xl:text-base lg:text-sm   md:text-xs    sm:text-[10px] text-[5px] border-slate-600 text-center"
+            className=" border   2xl:text-lg xl:text-base lg:text-xs    md:text-[10px]  sm:text-[6px]    text-[3px] border-slate-600 text-center"
             key={people?._id}
           >
             <td className=" border border-slate-600 p-2">{people?.email}</td>

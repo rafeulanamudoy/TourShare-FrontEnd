@@ -42,6 +42,12 @@ interface SocketContextProps {
     type: INotificationType,
     timestamp: string
   ) => void;
+  sendUpdateCreateTeamNotify: (
+    toEmails: string[],
+    message: string,
+    type: INotificationType,
+    timestamp: string
+  ) => void;
 }
 
 interface SocketProviderProps {
@@ -199,6 +205,31 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
       // }
     }
   };
+  const sendUpdateCreateTeamNotify = async (
+    toEmails: string[],
+    message: string,
+    type: INotificationType,
+    timestamp: string
+  ) => {
+    if (socket) {
+      socket.emit("updateCreateTeam", {
+        toEmails,
+        message,
+        type,
+        timestamp,
+      });
+      // try {
+      //   await createUserNotification({
+      //     sender: user.email,
+      //     message: message,
+      //     recipient: toEmail,
+      //     type: type,
+      //   });
+      // } catch (error) {
+      //   console.log(error);
+      // }
+    }
+  };
   return (
     <SocketContext.Provider
       value={{
@@ -209,6 +240,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
         sendUserNotification,
         sendTeamRequest,
         sendJoinTeamRequest,
+        sendUpdateCreateTeamNotify,
       }}
     >
       {children}

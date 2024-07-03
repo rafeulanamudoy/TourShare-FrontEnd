@@ -12,8 +12,16 @@ import { ClipLoader } from "react-spinners";
 import { override2 } from "@/utilities/css";
 
 import { ICreateTeam } from "@/types/ICreateTeam";
-import { updateSingleTeam } from "@/lib/actions/Server/team";
+import {
+  getSingleTeamByEmail,
+  getSingleTeamById,
+  updateSingleTeam,
+} from "@/lib/actions/Server/team";
 import { useRouter } from "next/navigation";
+import { useSocketContext } from "@/socket/context/SocketContext";
+import { useAppSelector } from "@/redux/hooks";
+import { IJoinTeam } from "@/types/IJoinTeam";
+import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 interface ITeamProps {
   team: ICreateTeam; // Define the type of the location prop
 }
@@ -26,6 +34,7 @@ const formatDateString = (date: Date | string | undefined | null) => {
 export default function UpdateTeam({ team }: ITeamProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { sendUpdateCreateTeamNotify } = useSocketContext();
   //console.log(team, "team info");
 
   const { register, handleSubmit, control } = useForm({
@@ -70,8 +79,25 @@ export default function UpdateTeam({ team }: ITeamProps) {
   const onSubmit = async (userValue: IUpdatedUser) => {
     try {
       setLoading(true);
-      const res = await updateSingleTeam(team._id, userValue);
+      let joinPeopleEmail: any[] = [];
+      const res = await updateSingleTeam(team?._id, userValue);
+      const createTeam = await getSingleTeamByEmail(team?.email);
+      if (createTeam?.data?.joinPeople?.length > 0) {
+        console.log(createTeam, "create team");
+        createTeam.data.joinPeople.map((people: { joinTeamId: IJoinTeam }) =>
+          joinPeopleEmail.push(people?.joinTeamId?.email)
+        );
+      }
+      console.log(joinPeopleEmail, joinPeopleEmail);
       if (res?.success) {
+        const timestamp = new Date().toISOString();
+        joinPeopleEmail.length > 0 &&
+          sendUpdateCreateTeamNotify(
+            joinPeopleEmail,
+            `${team.teamName} has updated some info about his team`,
+            ENUM_NOTIFICATION_TYPE.UPDATECREATETEAM,
+            timestamp
+          );
         router.push("/dashboard/team");
         toast.success(res?.message);
       } else {

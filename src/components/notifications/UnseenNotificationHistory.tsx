@@ -46,6 +46,11 @@ export default function UnseenNotificationHistory({
               {notification.message}
             </span>
           )}
+          {notification.type === ENUM_NOTIFICATION_TYPE.UPDATECREATETEAM && (
+            <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+              {notification.message}
+            </span>
+          )}
 
           <span className="2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px] text-blue-700">
             {formatTimeDifference(notification.createdAt)}
