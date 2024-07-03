@@ -1,4 +1,5 @@
 import ShowJoinPeople from "@/components/ShowJoinPeople";
+import TeamDeleteButton from "@/components/buttons/TeamDeleteButton";
 import TeamUpdateButton from "@/components/buttons/TeamUpdateButton";
 import { getSingleTeamByEmail } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
@@ -53,6 +54,7 @@ export default async function Team() {
                 <th className=" border border-slate-600 p-2 ">End Journy</th>
                 <th className=" border border-slate-600 p-2 ">Status</th>
                 <th className=" border border-slate-600 p-2 ">Update</th>
+                <th className=" border border-slate-600 p-2 ">Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -86,6 +88,9 @@ export default async function Team() {
                 </td>
                 <td className=" border border-slate-600  p-2">
                   <TeamUpdateButton />
+                </td>
+                <td className=" border border-slate-600  p-2">
+                  <TeamDeleteButton id={team?.data?._id} />
                 </td>
               </tr>
             </tbody>

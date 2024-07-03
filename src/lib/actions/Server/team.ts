@@ -25,7 +25,7 @@ export async function getTeams() {
   try {
     const response = await fetch(`${process.env.URL}/team`, {
       cache: "no-store",
-      next: { tags: ["teams", "updateTeam", "acceptTeam"] },
+      next: { tags: ["teams", "updateTeam", "acceptTeam", "deleteTeam"] },
     });
 
     const data = await response.json();
@@ -47,6 +47,7 @@ export async function getSingleTeamByEmail(email: string) {
           "acceptTeam",
           "joinTeam",
           "deleteJoinTeam",
+          "deleteTeam",
         ],
       },
     });
@@ -68,6 +69,7 @@ export async function getSingleTeamById(id: string) {
           "acceptTeam",
           "joinTeam",
           "deleteJoinTeam",
+          "deleteTeam",
         ],
       },
     });
@@ -163,6 +165,19 @@ export async function deleteSingleJoinTeam(id: string) {
     });
     const result = await response.json();
     revalidateTag("deleteJoinTeam");
+    // console.log(result);
+    return result;
+  } catch (error) {
+    // console.log(error, "update user error from  user.ts server file");
+  }
+}
+export async function deleteSingleTeam(id: string) {
+  try {
+    const response = await fetch(`${process.env.URL}/team/${id}`, {
+      method: "DELETE",
+    });
+    const result = await response.json();
+    revalidateTag("deleteTeam");
     // console.log(result);
     return result;
   } catch (error) {
