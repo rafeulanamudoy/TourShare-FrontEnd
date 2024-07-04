@@ -83,12 +83,12 @@ export default function UpdateTeam({ team }: ITeamProps) {
       const res = await updateSingleTeam(team?._id, userValue);
       const createTeam = await getSingleTeamByEmail(team?.email);
       if (createTeam?.data?.joinPeople?.length > 0) {
-        console.log(createTeam, "create team");
+        // console.log(createTeam, "create team");
         createTeam.data.joinPeople.map((people: { joinTeamId: IJoinTeam }) =>
           joinPeopleEmail.push(people?.joinTeamId?.email)
         );
       }
-      console.log(joinPeopleEmail, joinPeopleEmail);
+      // console.log(joinPeopleEmail, joinPeopleEmail);
       if (res?.success) {
         const timestamp = new Date().toISOString();
         joinPeopleEmail.length > 0 &&

@@ -17,5 +17,6 @@ export type INotificationType =
   | "privateMessage"
   | "joinTeamRequestStatus"
   | "joinTeamStatusUpdate"
-  | "updateCreateTeam";
+  | "updateCreateTeam"
+  | "deleteCreateTeam";
 export type INotificationStatus = "seen" | "unseen";

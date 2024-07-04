@@ -48,6 +48,12 @@ interface SocketContextProps {
     type: INotificationType,
     timestamp: string
   ) => void;
+  sendDeleteCreateTeamNotifiy: (
+    toEmails: string[],
+    message: string,
+    type: INotificationType,
+    timestamp: string
+  ) => void;
 }
 
 interface SocketProviderProps {
@@ -193,16 +199,6 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
   ) => {
     if (socket) {
       socket.emit("JoinTeamRequest", { toEmail, message, type, timestamp });
-      // try {
-      //   await createUserNotification({
-      //     sender: user.email,
-      //     message: message,
-      //     recipient: toEmail,
-      //     type: type,
-      //   });
-      // } catch (error) {
-      //   console.log(error);
-      // }
     }
   };
   const sendUpdateCreateTeamNotify = async (
@@ -218,16 +214,21 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
         type,
         timestamp,
       });
-      // try {
-      //   await createUserNotification({
-      //     sender: user.email,
-      //     message: message,
-      //     recipient: toEmail,
-      //     type: type,
-      //   });
-      // } catch (error) {
-      //   console.log(error);
-      // }
+    }
+  };
+  const sendDeleteCreateTeamNotifiy = async (
+    toEmails: string[],
+    message: string,
+    type: INotificationType,
+    timestamp: string
+  ) => {
+    if (socket) {
+      socket.emit("deleteCreateTeam", {
+        toEmails,
+        message,
+        type,
+        timestamp,
+      });
     }
   };
   return (
@@ -241,6 +242,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
         sendTeamRequest,
         sendJoinTeamRequest,
         sendUpdateCreateTeamNotify,
+        sendDeleteCreateTeamNotifiy,
       }}
     >
       {children}

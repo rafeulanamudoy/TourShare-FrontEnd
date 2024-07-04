@@ -8,4 +8,5 @@ export enum ENUM_NOTIFICATION_TYPE {
   JOINTEAMREQUESTSTATUS = "joinTeamRequestStatus",
   JOINTEAMSTATUSUPDATE = "joinTeamStatusUpdate",
   UPDATECREATETEAM = "updateCreateTeam",
+  DELETECREATETEAM = "deleteCreateTeam",
 }
