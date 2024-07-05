@@ -31,7 +31,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       id="details"
       className="  w-[80%] mx-auto grid items-center justify-center"
     >
-      <h1 className="2xl:text-6xl xl:text-4xl lg:text-2xl md:text-xl sm:text-base text-sm capitalize">
+      <h1 className=" mt-5 2xl:text-6xl xl:text-4xl lg:text-2xl md:text-xl sm:text-base text-sm capitalize">
         Group Details
       </h1>
       <div>
@@ -139,8 +139,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
           </div>
           {team?.data?.teamDetails?.activities?.length > 0 && (
-            <div>
-              <h1 className="2xl:text-4xl xl:text-2xl lg:text-xl md:text-xl sm:text-base  text-xs capitalize mb-5">
+            <div className="grid gap-y-5">
+              <h1 className="2xl:text-4xl xl:text-2xl lg:text-xl md:text-xl sm:text-base  text-xs capitalize ">
                 What We Will Do
               </h1>
               {team?.data?.teamDetails?.activities.map(
@@ -157,8 +157,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
           )}
         </div>
         {team?.data?.teamDetails?.responsibilities?.length > 0 && (
-          <div>
-            <h1 className="2xl:text-4xl xl:text-2xl lg:text-xl md:text-xl sm:text-base  text-xs capitalize mb-5">
+          <div className="grid gap-y-5">
+            <h1 className="2xl:text-4xl xl:text-2xl lg:text-xl md:text-xl sm:text-base  text-xs capitalize ">
               Responsibility
             </h1>
             {team?.data?.teamDetails?.responsibilities?.map(
@@ -174,11 +174,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div>
         )}
 
-        <div>
-          <h1 className="2xl:text-4xl xl:text-2xl lg:text-xl md:text-xl sm:text-base text-xs capitalize mb-5">
+        <div className="grid gap-y-5">
+          <h1 className="2xl:text-4xl xl:text-2xl lg:text-xl md:text-xl sm:text-base text-xs capitalize ">
             Expense Breakdown
           </h1>
-          <span className="2xl:text-2xl xl:text-xl lg:text-base md:text-sm sm:text-xs text-[8px]">
+          <span className="2xl:text-2xl xl:text-xl lg:text-base md:text-sm sm:text-xs text-[8px] mb-5  ">
             {team?.data?.teamDetails?.costBreakDown}
           </span>
         </div>

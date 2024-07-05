@@ -384,7 +384,7 @@ export default function UpdateTeam({ team }: ITeamProps) {
           <Input
             textarea={true}
             className="w-full text-white p-5 rounded-md bg-[#31363F] placeholder:text-white border-2 border-[#707070]  custom-date-picker"
-            name="teamDetails.costBreakdown"
+            name="teamDetails.costBreakDown"
             type="text"
             defaultValue={team?.teamDetails?.costBreakDown}
             register={register}
