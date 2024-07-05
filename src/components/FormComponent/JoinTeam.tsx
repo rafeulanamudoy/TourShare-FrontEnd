@@ -11,17 +11,12 @@ import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
 import { Rosario } from "next/font/google";
 import { useSearchParams } from "next/navigation";
-import { createJoinTeam, getSingleTeamById } from "@/lib/actions/Server/team";
+import { createJoinTeam } from "@/lib/actions/Server/team";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { useSocketContext } from "@/socket/context/SocketContext";
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-
-const rosario = Rosario({
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export default function JoinTeam() {
   const [loading, setLoading] = useState(false);
@@ -108,7 +103,7 @@ export default function JoinTeam() {
       className={` flex  flex-col  justify-center items-center  py-16   gap-y-16  h-auto  bg-[#FF914F]`}
     >
       <span
-        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[30px] text-[20px] block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
+        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[30px] text-[20px]    w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
       >
         Join Team
       </span>

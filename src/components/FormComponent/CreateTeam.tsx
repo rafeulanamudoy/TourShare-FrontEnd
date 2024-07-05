@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import ClipLoader from "react-spinners/ClipLoader";
-import { Rosario as Rosario } from "next/font/google";
+
 import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -18,13 +18,8 @@ import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { createTeam } from "@/lib/actions/Server/team";
 import { ICreateTeam } from "@/types/ICreateTeam";
-import { useUserData } from "@/hooks/user/user";
-import { format, parse } from "date-fns";
 
-const rosario = Rosario({
-  subsets: ["latin"],
-  display: "swap",
-});
+import { format, parse } from "date-fns";
 
 export default function CreateTeam() {
   const [loading, setLoading] = useState(false);
@@ -59,15 +54,6 @@ export default function CreateTeam() {
       setLoading(true);
       console.log(data, "check data");
 
-      if (data?.teamDetails) {
-        const parsedMeetingTime = parse(
-          data.teamDetails.meetingTime,
-          "HH:mm",
-          new Date()
-        );
-        const formattedMeetingTime = format(parsedMeetingTime, "HH:mm");
-        data.teamDetails.meetingTime = formattedMeetingTime;
-      }
       const res = await createTeam(data);
       console.log(res, "check response");
       if (res?.success) {
@@ -96,7 +82,7 @@ export default function CreateTeam() {
       className={` flex  flex-col  justify-center items-center  py-16   gap-y-16  h-auto  bg-[#FF914F]`}
     >
       <span
-        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[30px] text-[20px] block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
+        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[30px] text-[20px] w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
       >
         Create Team
       </span>
@@ -296,46 +282,46 @@ export default function CreateTeam() {
 
             <div className="   grid  grid-cols-2   gap-16 ">
               <div className="grid gap-y-5">
-                <label className="   " htmlFor="description">
-                  Meeting Point
+                <label className="   " htmlFor="depurture">
+                  Depurture
                 </label>
 
                 <Input
                   className="text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]  "
-                  name="teamDetails.meetingPoint"
-                  placeholder="Meeting Point"
+                  name="teamDetails.depurture"
+                  placeholder=" Where You Depurture From"
                   type="text"
-                  error={errors?.teamDetails?.meetingPoint?.message}
+                  error={errors?.teamDetails?.depurture?.message}
                   register={register}
                   autoFocus
                 />
               </div>
               <div className="grid gap-y-5">
-                <label className="   " htmlFor="meetingTime">
-                  Meeting Date
+                <label className="   " htmlFor="depurtureTime">
+                  Depurture Time
                 </label>
 
                 <Input
                   className="text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]  "
-                  name="teamDetails.meetingDate"
-                  placeholder=" Meeting Date"
-                  type="date"
-                  error={errors?.teamDetails?.meetingDate?.message}
+                  name="teamDetails.depurtureTime"
+                  placeholder=" Depurture Time"
+                  type="text"
+                  error={errors?.teamDetails?.depurtureTime?.message}
                   register={register}
                   autoFocus
                 />
               </div>
               <div className="grid gap-y-5">
-                <label className="   " htmlFor="meetingTime">
-                  Meeting Time
+                <label className="   " htmlFor="returnTime">
+                  Return Time
                 </label>
 
                 <Input
                   className="text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]  "
-                  name="teamDetails.meetingTime"
-                  placeholder=" Meeting Date"
-                  type="time"
-                  error={errors?.teamDetails?.meetingTime?.message}
+                  name="teamDetails.returnTime"
+                  placeholder="Return Time"
+                  type="text"
+                  error={errors?.teamDetails?.returnTime?.message}
                   register={register}
                   autoFocus
                 />
@@ -396,17 +382,17 @@ export default function CreateTeam() {
                 />
               </div>
               <div className="grid gap-y-5">
-                <label className="   " htmlFor="costBreakdown">
+                <label className="   " htmlFor="costBreakDown">
                   Cost Breakdown
                 </label>
 
                 <Input
                   className="text-[#707070]  w-full   bg-white  p-5    border-2 border-[#707070]  "
-                  name="teamDetails.costBreakdown"
+                  name="teamDetails.costBreakDown"
                   textarea={true}
                   placeholder="Provide details about how costs are needed for this journey (e.g., transportation, accommodation, food, activities). "
                   type="string"
-                  error={errors?.teamDetails?.costBreakdown?.message}
+                  error={errors?.teamDetails?.costBreakDown?.message}
                   register={register}
                   autoFocus
                 />

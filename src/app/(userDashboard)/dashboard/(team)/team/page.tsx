@@ -4,6 +4,7 @@ import TeamUpdateButton from "@/components/buttons/TeamUpdateButton";
 import { getSingleTeamByEmail } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
 import { IJoinPerson, IJoinTeam } from "@/types/IJoinTeam";
+import { formattedDate } from "@/utilities/TimeFormat";
 import React from "react";
 
 export default async function Team() {
@@ -12,11 +13,6 @@ export default async function Team() {
   } = await getSingleUser();
   const team = await getSingleTeamByEmail(email);
   //console.log(team, "tream info");
-
-  const formattedStartDate = new Date(
-    team?.data?.startDate
-  ).toLocaleDateString();
-  const formattedEndDate = new Date(team?.data?.endDate).toLocaleDateString();
 
   return (
     <div className="uppercase my-10">
@@ -78,10 +74,10 @@ export default async function Team() {
                   {team?.data?.neededMembers}
                 </td>
                 <td className=" border border-slate-600 p-2">
-                  {formattedStartDate}
+                  {formattedDate(team.data.startDate)}
                 </td>
                 <td className=" border border-slate-600 p-2">
-                  {formattedEndDate}
+                  {formattedDate(team.data.endDate)}
                 </td>
                 <td className=" border border-slate-600 p-2">
                   {team?.data?.teamStatus}

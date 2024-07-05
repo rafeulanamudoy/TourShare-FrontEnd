@@ -1,3 +1,11 @@
+export type IActivity = {
+  day: string;
+  morning: string;
+  afternoon: string;
+  evening: string;
+  dinner: string;
+};
+
 export type ICreateTeam = {
   _id: string;
   email: string;
@@ -17,14 +25,15 @@ export type ICreateTeam = {
 };
 export type ITeamDetails = {
   description: string;
-  meetingPoint: string;
-  meetingDate: Date;
-  meetingTime: string;
+  depurture: string;
+  depurtureTime: string;
+  returnTime: string;
 
   accommodations: string;
   transportation: TRANSPORTATION;
   activities: { activity: string }[];
-  costBreakdown?: string; // optional field
+
+  costBreakDown: string; // optional field
   responsibilities?: { responsibility: string }[]; // optional field
 };
 export enum TeamStatus {

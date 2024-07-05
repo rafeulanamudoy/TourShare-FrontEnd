@@ -1,3 +1,4 @@
+import { Rosario as Rosario } from "next/font/google";
 import { CSSProperties } from "react";
 
 export const override1: CSSProperties = {

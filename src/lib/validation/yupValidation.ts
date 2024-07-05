@@ -102,12 +102,12 @@ export const CreateTeamSchema = yup.object().shape({
   endDate: yup.date().required("End date is required"),
   teamDetails: yup.object().shape({
     description: yup.string().required("Description is required"),
-    meetingPoint: yup.string().required("Meeting Point is required"),
-    meetingDate: yup.date().required("Meeting Date is required"),
-    meetingTime: yup.string().required("Meeting Time is required"),
+    depurture: yup.string().required("depurture is required"),
+    depurtureTime: yup.string().required("depurture time is required"),
+    returnTime: yup.string().required("return  time is required"),
 
     accommodations: yup.string().required("Accommodations are required"),
-    costBreakdown: yup.string().required("cost breakdown is required"),
+    costBreakDown: yup.string().required("cost breakdown is required"),
     transportation: yup.string().required("Transportation is required"),
     activities: yup
       .array()

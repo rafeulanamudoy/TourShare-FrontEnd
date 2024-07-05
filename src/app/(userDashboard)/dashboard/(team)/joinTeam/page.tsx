@@ -1,9 +1,6 @@
 import JoinTeamDeleteButton from "@/components/buttons/JoinTeamDeleteButton";
 
-import {
-  getSingleJoinTeam,
-  getSingleTeamById,
-} from "@/lib/actions/Server/team";
+import { getSingleJoinTeam } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
 
 export default async function Team() {
@@ -13,10 +10,6 @@ export default async function Team() {
   const team = await getSingleJoinTeam(email);
   let formattedStartDate;
   let formattedEndDate;
-  // console.log(team.data.teamInfo.startDate, "join team info");
-
-  //const teamInfo = await getSingleTeamById(team?.data?.teamInfo);
-  //console.log(teamInfo, "team info");
 
   if (team?.data) {
     formattedStartDate = new Date(

@@ -14,7 +14,6 @@ import { override2 } from "@/utilities/css";
 import { ICreateTeam } from "@/types/ICreateTeam";
 import {
   getSingleTeamByEmail,
-  getSingleTeamById,
   updateSingleTeam,
 } from "@/lib/actions/Server/team";
 import { useRouter } from "next/navigation";
@@ -42,13 +41,13 @@ export default function UpdateTeam({ team }: ITeamProps) {
       teamDetails: {
         activities: team?.teamDetails?.activities || [],
         responsibilities: team?.teamDetails?.responsibilities || [],
-        meetingPoint: team?.teamDetails?.meetingPoint || "",
-        meetingDate: team?.teamDetails?.meetingDate || "",
-        meetingTime: team?.teamDetails?.meetingTime || "",
+        depurture: team?.teamDetails?.depurture || "",
+        depurtureTime: team?.teamDetails?.depurtureTime || "",
+        returnTime: team?.teamDetails?.returnTime || "",
         accommodations: team?.teamDetails?.accommodations || "",
         transportation: team?.teamDetails?.transportation || "",
         description: team?.teamDetails?.description || "",
-        costBreakdown: team?.teamDetails?.costBreakdown || "",
+        costBreakdown: team?.teamDetails?.costBreakDown || "",
       },
       teamName: team?.teamName || "",
       destination: team?.destination || "",
@@ -227,40 +226,40 @@ export default function UpdateTeam({ team }: ITeamProps) {
         </div>
 
         <div className="grid gap-y-5">
-          <label className="" htmlFor="meetingPoint">
-            Meeting Point
+          <label className="" htmlFor="depurture">
+            Depurture
           </label>
 
           <Input
             className="w-full text-white h-[4em] p-5 rounded-md bg-[#31363F] placeholder:text-white border-2 border-[#707070]  custom-date-picker"
-            name="teamDetails.meetingPoint"
+            name="teamDetails.depurture"
             type="text"
-            defaultValue={team?.teamDetails?.meetingPoint}
+            defaultValue={team?.teamDetails?.depurture}
             register={register}
           />
         </div>
         <div className="grid gap-y-5">
-          <label className="" htmlFor="meetingDate">
-            Meeting Date
+          <label className="" htmlFor="depurtureTime">
+            Depurture Time
           </label>
 
           <Input
             className="w-full text-white h-[4em] p-5 rounded-md bg-[#31363F] placeholder:text-white border-2 border-[#707070]  custom-date-picker"
-            name="teamDetails.meetingDate"
-            type="date"
-            defaultValue={formatDateString(team?.teamDetails?.meetingDate)}
+            name="teamDetails.depurtureTime"
+            type="text"
+            defaultValue={team?.teamDetails?.depurtureTime}
             register={register}
           />
         </div>
         <div className="grid gap-y-5">
-          <label className="" htmlFor="meetingTime">
-            Meeting Time
+          <label className="" htmlFor="returnTime">
+            Return Time
           </label>
           <Input
             className="w-full text-white h-[4em] p-5 rounded-md bg-[#31363F] placeholder:text-white border-2 border-[#707070] custom-date-picker"
-            name="teamDetails.meetingTime"
-            type="time" // Set input type to time
-            defaultValue={team?.teamDetails?.meetingTime}
+            name="teamDetails.returnTime"
+            type="text" // Set input type to time
+            defaultValue={team?.teamDetails?.returnTime}
             register={register}
           />
         </div>
@@ -387,7 +386,7 @@ export default function UpdateTeam({ team }: ITeamProps) {
             className="w-full text-white p-5 rounded-md bg-[#31363F] placeholder:text-white border-2 border-[#707070]  custom-date-picker"
             name="teamDetails.costBreakdown"
             type="text"
-            defaultValue={team?.teamDetails?.costBreakdown}
+            defaultValue={team?.teamDetails?.costBreakDown}
             register={register}
           />
         </div>

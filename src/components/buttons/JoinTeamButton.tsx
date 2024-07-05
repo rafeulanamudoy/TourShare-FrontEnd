@@ -12,7 +12,7 @@ export default function JoinTeamButton({ teamId, status }: UserJoinTeamProps) {
   return (
     <button
       className="border border-slate-600 submit-button       lg:w-[140px]"
-      onClick={() => push(`joinTeam/?joinId=${teamId}`)}
+      onClick={() => push(`/joinTeam/?joinId=${teamId}#joinTeam`)}
     >
       {status === TeamStatus.Ongoing ? "join" : "closed"}
     </button>

@@ -37,3 +37,5 @@ export const formatTimeDifference = (timestamp: string) => {
   if (seconds === 1) return "1 second ago";
   return `${seconds} seconds ago`;
 };
+export const formattedDate = (date: string) =>
+  new Date(date).toLocaleDateString();
