@@ -15,6 +15,8 @@ import {
   faPeopleGroup,
   faPeopleArrows,
   faMessage,
+  faPeopleRoof,
+  faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -61,10 +63,15 @@ export default function Sidebar() {
       { title: "Join Team", url: "/dashboard/joinTeam", icon: faPeopleArrows },
     ],
     [ENUM_USER_ROLE.SUPER_ADMIN]: [
-      { title: "Manage Users", url: "/manageUsers", icon: faUsers },
+      {
+        title: "Manage Users",
+        url: "/dashboard/manageUsers",
+        icon: faPeopleRoof,
+      },
+      { title: "Create Admin", url: "/dashboard/createAdmin", icon: faUserTie },
     ],
     [ENUM_USER_ROLE.ADMIN]: [
-      { title: "Delete Users", url: "/deleteUsers", icon: faUsers },
+      { title: "Delete Users", url: "/deleteUsers", icon: faUserTie },
     ],
   };
 

@@ -1,6 +1,6 @@
 "use server";
 
-import { ENUM_USER_ROLE, ISignInData, IUserSchema } from "@/types/IUser";
+import { ENUM_USER_ROLE, ISignInData } from "@/types/IUser";
 
 import { getCookie, setCookie, verifyToken } from "./cookies";
 import { Secret } from "jsonwebtoken";
@@ -18,6 +18,7 @@ export async function signUp(data: FormData, role: string) {
     if (result.data?.email) {
       setCookie("accessToken", result?.data?.accessToken);
     }
+    revalidateTag("createUser");
     return result;
   } catch (error) {
     throw error;
@@ -105,8 +106,38 @@ export async function updateSingleUser(
       body: data,
     });
     const result = await response.json();
-    revalidateTag("update");
+    revalidateTag("updateUser");
     //console.log(result);
+    return result;
+  } catch (error) {
+    // console.log(error, "update user error from  user.ts server file");
+  }
+}
+
+export async function getAllUsers() {
+  try {
+    const response = await fetch(`${process.env.URL}/superAdmin/users`, {
+      next: { tags: ["createUser", "updateUser", "deleteSingleUser"] },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    // Parse JSON response
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deleteSingleUser(id: string) {
+  try {
+    const response = await fetch(`${process.env.URL}/superAdmin/${id}`, {
+      method: "DELETE",
+    });
+    const result = await response.json();
+    revalidateTag("deleteSingleUser");
+    // console.log(result);
     return result;
   } catch (error) {
     // console.log(error, "update user error from  user.ts server file");

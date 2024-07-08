@@ -1,3 +1,5 @@
+import { types } from "util";
+
 export type IUser = {
   user: {
     name: {
@@ -77,8 +79,13 @@ export type IUserSchema = {
     lastName: string;
   };
 
-  profileImage: FileList;
+  profileImage: {
+    url: string;
+    public_id: string;
+  };
+
   phoneNumber?: string;
   email: string;
   role: ENUM_USER_ROLE;
+  _id: string;
 };

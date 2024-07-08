@@ -55,10 +55,11 @@ export default async function middleware(req: NextRequest) {
           path: "/",
           domain: req.nextUrl.hostname, // Adjust the domain to match  current request's domain
         });
-        console.log(req.nextUrl.hostname, "check host name");
+
         return response;
       }
     } catch (error) {
+      console.log(error, "check error from middleware");
       const response = NextResponse.next();
       response.cookies.set("accessToken", "", {
         maxAge: -1,

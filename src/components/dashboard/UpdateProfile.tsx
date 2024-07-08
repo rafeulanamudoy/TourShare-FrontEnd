@@ -9,7 +9,7 @@ import { IUpdatedUser } from "@/types/IUser";
 import { faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
@@ -18,6 +18,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
 import { useUserData } from "@/hooks/user/user";
+import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
 
 export default function UpdateProfile() {
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,8 @@ export default function UpdateProfile() {
   const { isLoading, userData } = useUserData();
 
   const { register, handleSubmit } = useForm();
-
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const loaderSize = useDynamicLoaderSize(buttonRef);
   const onSubmit = async (userValue: IUpdatedUser) => {
     const formData = new FormData();
     //console.log(userValue, "check data");
@@ -233,6 +235,7 @@ export default function UpdateProfile() {
       </div>
       <div>
         <button
+          ref={buttonRef}
           className={`grid  lg:float-right items-center mt-5     bg-[#FF914F] w-1/2 ${
             loading
               ? "h-auto"
@@ -244,7 +247,7 @@ export default function UpdateProfile() {
             <ClipLoader
               loading={loading}
               cssOverride={override2}
-              size={100}
+              size={loaderSize}
               aria-label="Loading Spinner"
               data-testid="loader"
             />
