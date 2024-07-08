@@ -20,7 +20,7 @@ import { createTeam } from "@/lib/actions/Server/team";
 import { ICreateTeam } from "@/types/ICreateTeam";
 
 import { format, parse } from "date-fns";
-import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
+// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
 
 export default function CreateTeam() {
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ export default function CreateTeam() {
   //const { userData } = useUserData();
   const { email, phoneNumber } = useAppSelector((state) => state.auth.user);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const loaderSize = useDynamicLoaderSize(buttonRef);
+  // const loaderSize = UseDynamicLoaderSize(buttonRef);
   const {
     register,
     handleSubmit,
@@ -479,7 +479,7 @@ export default function CreateTeam() {
             <ClipLoader
               loading={loading}
               cssOverride={override1}
-              size={loaderSize}
+              size={10}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

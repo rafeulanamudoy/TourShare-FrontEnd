@@ -15,7 +15,7 @@ import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
-import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
+// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -25,7 +25,7 @@ const rosario = Rosario({
 export default function UserLogin() {
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const loaderSize = useDynamicLoaderSize(buttonRef);
+  // const loaderSize = UseDynamicLoaderSize(buttonRef);
   const dispatch = useAppDispatch();
   //console.log("render userLogin component");
 
@@ -124,7 +124,7 @@ export default function UserLogin() {
               <ClipLoader
                 loading={loading}
                 cssOverride={override1}
-                size={loaderSize}
+                size={10}
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />

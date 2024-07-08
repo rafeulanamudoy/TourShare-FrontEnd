@@ -21,7 +21,8 @@ import { useSocketContext } from "@/socket/context/SocketContext";
 import { useAppSelector } from "@/redux/hooks";
 import { IJoinTeam } from "@/types/IJoinTeam";
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
+// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
+
 interface ITeamProps {
   team: ICreateTeam; // Define the type of the location prop
 }
@@ -36,7 +37,7 @@ export default function UpdateTeam({ team }: ITeamProps) {
   const router = useRouter();
   const { sendUpdateCreateTeamNotify } = useSocketContext();
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const loaderSize = useDynamicLoaderSize(buttonRef);
+  // const loaderSize = UseDynamicLoaderSize(buttonRef);
 
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
@@ -408,7 +409,7 @@ export default function UpdateTeam({ team }: ITeamProps) {
             <ClipLoader
               loading={loading}
               cssOverride={override2}
-              size={loaderSize}
+              size={10}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

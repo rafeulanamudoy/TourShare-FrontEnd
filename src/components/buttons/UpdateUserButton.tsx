@@ -9,7 +9,8 @@ import { useSocketContext } from "@/socket/context/SocketContext";
 import { IAccept } from "@/types/ICreateTeam";
 import { IUserSchema } from "@/types/IUser";
 import { override2 } from "@/utilities/css";
-import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
+// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
+
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
@@ -22,7 +23,7 @@ export default function UpdateUserButton({ payload }: UserProps) {
   const role = useAppSelector((state) => state.toggle.roleValue);
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const loaderSize = useDynamicLoaderSize(buttonRef);
+  // const loaderSize = UseDynamicLoaderSize(buttonRef);
   const handleUpdateRole = async () => {
     const formData = new FormData();
     if (payload.role) {
@@ -58,7 +59,7 @@ export default function UpdateUserButton({ payload }: UserProps) {
           <ClipLoader
             loading={loading}
             cssOverride={override2}
-            size={loaderSize}
+            size={10}
             aria-label="Loading Spinner"
             data-testid="loader"
           />

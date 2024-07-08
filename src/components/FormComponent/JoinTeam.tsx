@@ -17,7 +17,7 @@ import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { useSocketContext } from "@/socket/context/SocketContext";
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
+// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
 
 export default function JoinTeam() {
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ export default function JoinTeam() {
   const [joinId, setJoinId] = useState<string | null>(null);
   const { sendJoinTeamRequest } = useSocketContext();
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const loaderSize = useDynamicLoaderSize(buttonRef);
+  // const loaderSize = UseDynamicLoaderSize(buttonRef);
 
   useEffect(() => {
     const handleAsyncOp = async () => {
@@ -220,7 +220,7 @@ export default function JoinTeam() {
             <ClipLoader
               loading={loading}
               cssOverride={override1}
-              size={loaderSize}
+              size={10}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

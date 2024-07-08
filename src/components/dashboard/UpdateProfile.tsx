@@ -18,7 +18,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
 import { useUserData } from "@/hooks/user/user";
-import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
+// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
 
 export default function UpdateProfile() {
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ export default function UpdateProfile() {
 
   const { register, handleSubmit } = useForm();
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const loaderSize = useDynamicLoaderSize(buttonRef);
+  // const loaderSize = UseDynamicLoaderSize(buttonRef);
   const onSubmit = async (userValue: IUpdatedUser) => {
     const formData = new FormData();
     //console.log(userValue, "check data");
@@ -247,7 +247,7 @@ export default function UpdateProfile() {
             <ClipLoader
               loading={loading}
               cssOverride={override2}
-              size={loaderSize}
+              size={10}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

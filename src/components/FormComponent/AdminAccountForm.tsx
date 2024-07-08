@@ -13,24 +13,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ENUM_USER_ROLE, ISignUpData, ISuperAdmin } from "@/types/IUser";
 import { signUp } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
-import { SignUpSchema, SuperAdminSchema } from "@/lib/validation/yupValidation";
+import { SignUpSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { redirect } from "next/dist/server/api-utils";
+
 import { useRouter } from "next/navigation";
-import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
+// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
 
 const rosario = Rosario({
   subsets: ["latin"],
   display: "swap",
 });
 
-export default function SupereAdminForm() {
+export default function AdminAccountForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const loaderSize = useDynamicLoaderSize(buttonRef);
+  // const loaderSize = UseDynamicLoaderSize(buttonRef);
 
   const dispatch = useAppDispatch();
   const {
@@ -38,7 +38,7 @@ export default function SupereAdminForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(SuperAdminSchema) });
+  } = useForm({ resolver: yupResolver(SignUpSchema) });
   const onSubmit = async (userData: ISuperAdmin) => {
     const phoneNumber = (userData.countryCode || "") + userData.phoneNumber;
 
@@ -49,13 +49,11 @@ export default function SupereAdminForm() {
     formData.append("profileImage", userData.profileImage[0]);
     formData.append("password", userData.password);
     formData.append("phoneNumber", phoneNumber);
-    formData.append("role", ENUM_USER_ROLE.SUPER_ADMIN);
-
-    formData.append("secret_key", userData.secret_key);
+    formData.append("role", ENUM_USER_ROLE.ADMIN);
 
     try {
       setLoading(true);
-      const res = await signUp(formData, ENUM_USER_ROLE.SUPER_ADMIN);
+      const res = await signUp(formData, ENUM_USER_ROLE.ADMIN);
       //   console.log(res);
       if (res?.success) {
         toast.success(res?.message);
@@ -92,12 +90,12 @@ export default function SupereAdminForm() {
       className={` flex  flex-col  justify-center items-center  py-16   gap-y-16  h-auto  bg-[#FF914F]`}
     >
       <span
-        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px] md:text-[40px] sm:text-[30px]  text-[20px] block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
+        className={` uppercase  2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl  text-base block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
       >
-        sign up
+        Create Admin Account
       </span>
       <Form
-        className="  2xl:text-5xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-lg text-[10px] capitalize   text-white grid gap-y-16
+        className="  2xl:text-4xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-lg text-[8px] capitalize   text-white grid gap-y-16
          items-center    md:w-[70%]   "
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
@@ -191,22 +189,6 @@ export default function SupereAdminForm() {
           </div>
         </div>
         <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
-          <label className=" col-span-2" htmlFor="email">
-            Secret Key
-          </label>
-          <div className="     col-span-10  ">
-            <Input
-              className="text-[#707070] w-full  h-[3em]  bg-white px-5  py-5   border-2   border-[#707070] "
-              name="secret_key"
-              type="text"
-              placeholder="provide the secret key"
-              error={errors?.secret_key?.message}
-              register={register}
-              autoFocus
-            />
-          </div>
-        </div>
-        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2" htmlFor="password">
             password
           </label>
@@ -250,7 +232,7 @@ export default function SupereAdminForm() {
             <ClipLoader
               loading={loading}
               cssOverride={override1}
-              size={loaderSize}
+              size={10}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

@@ -12,12 +12,11 @@ import { dancing_script, override1 } from "@/utilities/css";
 import { useAppSelector } from "@/redux/hooks";
 import { IContactData } from "@/types/IContact";
 import { createContact } from "@/lib/actions/Server/contact";
-import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
-
+// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const loaderSize = useDynamicLoaderSize(buttonRef); // Reference for the submit button
+  // const loaderSize = UseDynamicLoaderSize(buttonRef); // Reference for the submit button
   const { email, name } = useAppSelector((state) => state.auth.user);
 
   const {
@@ -119,7 +118,7 @@ export default function ContactForm() {
               <ClipLoader
                 loading={loading}
                 cssOverride={override1}
-                size={loaderSize} // Set the loader size dynamically
+                size={10} // Set the loader size dynamically
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />
