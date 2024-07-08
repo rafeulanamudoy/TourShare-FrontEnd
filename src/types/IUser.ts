@@ -30,9 +30,10 @@ export type ISignUpData = {
 
   confirmPassword?: string;
   phoneNumber: string;
-  superRoleKey?: string;
 };
-
+export interface ISuperAdmin extends ISignUpData {
+  secret_key: string;
+}
 export enum ENUM_USER_ROLE {
   SUPER_ADMIN = "superAdmin",
   ADMIN = "admin",

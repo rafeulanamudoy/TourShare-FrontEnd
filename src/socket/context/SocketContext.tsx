@@ -81,7 +81,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
   const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
-    const socketInstance: Socket = io("http://localhost:5000", {
+    const socketInstance: Socket = io(`${process.env.NEXT_PUBLIC_URL}`, {
       transports: ["polling", "websocket"],
       reconnectionAttempts: Infinity,
       reconnectionDelay: 2000,

@@ -30,7 +30,9 @@
     justify-content: center;
     align-items: center;
   }
-
+  .no-scroll {
+    overflow: hidden;
+  }
   .submit-button {
     border: 1px solid #707070;
 

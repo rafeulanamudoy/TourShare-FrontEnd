@@ -3,7 +3,7 @@ import JoinTeamDeleteButton from "@/components/buttons/JoinTeamDeleteButton";
 import { getSingleJoinTeam } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
 
-export default async function Team() {
+export default async function page() {
   const {
     data: { email },
   } = await getSingleUser();

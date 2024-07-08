@@ -1,19 +1,7 @@
 "use client";
-import {
-  ENUM_NOTIFICATION_STATUS,
-  ENUM_NOTIFICATION_TYPE,
-} from "@/enums/notification";
 
-import { addMessage } from "@/redux/features/messages/messagesSlice";
-import { addNotification } from "@/redux/features/notifications/notificationsSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useSocketContext } from "@/socket/context/SocketContext";
-import {
-  MessageNotificationPayload,
-  PrivateMessagePayload,
-} from "@/types/ISocket";
-import React, { useEffect } from "react";
+import React from "react";
 
-export default function Dashboard() {
+export default function page() {
   return <div>dashboard</div>;
 }

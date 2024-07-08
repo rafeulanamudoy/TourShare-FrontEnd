@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -20,12 +20,15 @@ import { createTeam } from "@/lib/actions/Server/team";
 import { ICreateTeam } from "@/types/ICreateTeam";
 
 import { format, parse } from "date-fns";
+import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
 
 export default function CreateTeam() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   //const { userData } = useUserData();
   const { email, phoneNumber } = useAppSelector((state) => state.auth.user);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const loaderSize = useDynamicLoaderSize(buttonRef);
   const {
     register,
     handleSubmit,
@@ -467,6 +470,7 @@ export default function CreateTeam() {
           </div>
         </div>{" "}
         <button
+          ref={buttonRef}
           className="submit-button mx-auto w-1/2 h-[3em] hover:bg-[#18253a]"
           type="submit"
           disabled={loading}
@@ -475,7 +479,7 @@ export default function CreateTeam() {
             <ClipLoader
               loading={loading}
               cssOverride={override1}
-              size={100}
+              size={loaderSize}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

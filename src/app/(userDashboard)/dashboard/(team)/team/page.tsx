@@ -7,7 +7,7 @@ import { IJoinPerson, IJoinTeam } from "@/types/IJoinTeam";
 import { formattedDate } from "@/utilities/TimeFormat";
 import React from "react";
 
-export default async function Team() {
+export default async function page() {
   const {
     data: { email },
   } = await getSingleUser();

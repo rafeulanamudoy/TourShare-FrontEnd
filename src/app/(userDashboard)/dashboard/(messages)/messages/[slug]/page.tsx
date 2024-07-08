@@ -3,7 +3,7 @@ import ChatHistory from "@/components/chat/ChatHistory";
 import { getMessages } from "@/lib/actions/Server/messages";
 import { getSingleUser } from "@/lib/actions/Server/user";
 
-export default async function Chat({ params }: { params: { slug: string } }) {
+export default async function page({ params }: { params: { slug: string } }) {
   const recepientUser = decodeURIComponent(params.slug);
 
   const user = await getSingleUser();

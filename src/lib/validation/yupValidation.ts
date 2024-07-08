@@ -23,9 +23,10 @@ export const SignUpSchema = yup.object().shape({
       /^01\d{9}$/,
       "Phone number must start with 01 and contain exactly 11 digits"
     ),
+
   profileImage: yup
     .mixed()
-    .test("fileType", "Only PNG, JPG, JPEG are allowedu", validateImageFileType)
+    .test("fileType", "Only PNG, JPG, JPEG are allowed", validateImageFileType)
     .test(
       "fileSize",
       "File size must be less than 1 MB",
@@ -38,6 +39,11 @@ export const SignUpSchema = yup.object().shape({
     .required("Confirm Password is required")
     .oneOf([yup.ref("password")], "Passwords must match"),
 });
+export const SuperAdminSchema = SignUpSchema.concat(
+  yup.object().shape({
+    secret_key: yup.string().required("Secret Key is required"),
+  })
+);
 export const LoginSchema = yup.object().shape({
   email: yup
     .string()
@@ -47,6 +53,24 @@ export const LoginSchema = yup.object().shape({
     .string()
 
     .required("Password is required"),
+});
+export const ContactSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  name: yup
+    .string()
+
+    .required("name is required"),
+  subject: yup
+    .string()
+
+    .required("subject  is required"),
+  message: yup
+    .string()
+
+    .required("message  is required"),
 });
 
 export const UpdateSchema = yup.object().shape({

@@ -5,7 +5,7 @@ import Input from "@/hooks/reactHookForm/Input";
 
 import { IUpdatedUser } from "@/types/IUser";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
@@ -21,6 +21,7 @@ import { useSocketContext } from "@/socket/context/SocketContext";
 import { useAppSelector } from "@/redux/hooks";
 import { IJoinTeam } from "@/types/IJoinTeam";
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
+import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
 interface ITeamProps {
   team: ICreateTeam; // Define the type of the location prop
 }
@@ -34,7 +35,8 @@ export default function UpdateTeam({ team }: ITeamProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { sendUpdateCreateTeamNotify } = useSocketContext();
-  //console.log(team, "team info");
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const loaderSize = useDynamicLoaderSize(buttonRef);
 
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
@@ -394,6 +396,7 @@ export default function UpdateTeam({ team }: ITeamProps) {
 
       <div>
         <button
+          ref={buttonRef}
           className={`grid  lg:float-right items-center mt-5     bg-[#FF914F] w-1/2 ${
             loading
               ? "h-auto"
@@ -405,7 +408,7 @@ export default function UpdateTeam({ team }: ITeamProps) {
             <ClipLoader
               loading={loading}
               cssOverride={override2}
-              size={100}
+              size={loaderSize}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

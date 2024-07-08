@@ -1,10 +1,12 @@
 import ShowTeam from "@/components/ShowTeam";
 
-export default function Home() {
+export default function page() {
   // console.log("render home component");
   return (
     <main className="  ">
-      <ShowTeam />
+      <div id="showTeam">
+        <ShowTeam />
+      </div>
     </main>
   );
 }

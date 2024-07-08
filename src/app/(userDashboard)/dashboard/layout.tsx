@@ -10,6 +10,7 @@ import {
   getStatusNotification,
 } from "@/lib/actions/Server/notifications";
 import { ENUM_NOTIFICATION_STATUS } from "@/enums/notification";
+import Footer from "@/shared/Footer";
 
 export default async function DashboardLayout({
   children,

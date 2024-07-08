@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  ENUM_NOTIFICATION_TYPE,
-  ENUM_NOTIFICATION_STATUS,
-} from "@/enums/notification";
+import React, { useState } from "react";
+import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 import {
   clearNotification,
   markAsRead,

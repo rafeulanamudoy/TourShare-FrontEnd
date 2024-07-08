@@ -57,7 +57,6 @@ export default function Sidebar() {
     Record<ENUM_USER_ROLE, SidebarItem[]>
   > = {
     [ENUM_USER_ROLE.CUSTOMER]: [
-      { title: "Booking", url: "/bookingHistory", icon: faBook },
       { title: "Your team", url: "/dashboard/team", icon: faPeopleGroup },
       { title: "Join Team", url: "/dashboard/joinTeam", icon: faPeopleArrows },
     ],
@@ -125,11 +124,6 @@ export default function Sidebar() {
                 icon={icon}
               />
 
-              {/* {icon === faMessage && count !== undefined && count > 0 && (
-                <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-[10px]">
-                  {count}
-                </span>
-              )} */}
               <span
                 className={`${
                   toggle ? "md:hidden" : "block"
@@ -146,12 +140,6 @@ export default function Sidebar() {
           </Link>
         ))}
       </div>
-      {/* {notifications.length && isModalOpen && (
-        <NotificationModal
-          notifications={notifications}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )} */}
     </div>
   );
 }

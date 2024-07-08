@@ -78,6 +78,21 @@ export async function getSingleUser() {
     throw error;
   }
 }
+export async function getSingleUserById(userId: string) {
+  try {
+    const response = await fetch(`${process.env.URL}/users/${userId}`, {
+      next: { tags: ["update"] },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    // Parse JSON response
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 export async function updateSingleUser(
   data: FormData,
   id: string,

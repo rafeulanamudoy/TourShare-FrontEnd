@@ -6,26 +6,16 @@ import {
   faCoins,
   faEnvelope,
   faLayerGroup,
-  faLocationDot,
   faMapLocation,
   faPeopleGroup,
   faPhone,
-  faPlaceOfWorship,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Key,
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  ReactPortal,
-  AwaitedReactNode,
-} from "react";
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function page({ params }: { params: { slug: string } }) {
   const team = await getSingleTeamById(params.slug);
-  console.log(team);
+
   return (
     <div
       id="details"

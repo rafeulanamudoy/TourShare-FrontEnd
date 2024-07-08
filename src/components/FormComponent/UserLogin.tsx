@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Rosario } from "next/font/google";
 import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
@@ -15,6 +15,7 @@ import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
+import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -23,7 +24,8 @@ const rosario = Rosario({
 
 export default function UserLogin() {
   const [loading, setLoading] = useState(false);
-
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const loaderSize = useDynamicLoaderSize(buttonRef);
   const dispatch = useAppDispatch();
   //console.log("render userLogin component");
 
@@ -112,6 +114,7 @@ export default function UserLogin() {
             autoFocus
           />
           <button
+            ref={buttonRef}
             className="      w-full  submit-button  h-[3em]     "
             type="submit"
             value="Login"
@@ -121,7 +124,7 @@ export default function UserLogin() {
               <ClipLoader
                 loading={loading}
                 cssOverride={override1}
-                size={100}
+                size={loaderSize}
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />

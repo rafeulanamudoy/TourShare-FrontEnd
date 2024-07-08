@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { ENUM_jOIN_TEAM_STATUS, IJoinTeam } from "@/types/IJoinTeam";
 import { useAppSelector } from "@/redux/hooks";
@@ -17,6 +17,7 @@ import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { useSocketContext } from "@/socket/context/SocketContext";
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
+import useDynamicLoaderSize from "@/utilities/UseDynamicLoaderSize";
 
 export default function JoinTeam() {
   const [loading, setLoading] = useState(false);
@@ -24,6 +25,8 @@ export default function JoinTeam() {
   const searchParams = useSearchParams();
   const [joinId, setJoinId] = useState<string | null>(null);
   const { sendJoinTeamRequest } = useSocketContext();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const loaderSize = useDynamicLoaderSize(buttonRef);
 
   useEffect(() => {
     const handleAsyncOp = async () => {
@@ -208,6 +211,7 @@ export default function JoinTeam() {
           </span>
         )}
         <button
+          ref={buttonRef}
           className="submit-button mx-auto w-1/2 h-[3em]"
           type="submit"
           disabled={loading}
@@ -216,7 +220,7 @@ export default function JoinTeam() {
             <ClipLoader
               loading={loading}
               cssOverride={override1}
-              size={100}
+              size={loaderSize}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

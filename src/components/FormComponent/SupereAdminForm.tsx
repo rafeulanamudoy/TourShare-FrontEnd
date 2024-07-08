@@ -10,10 +10,10 @@ import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { ENUM_USER_ROLE, ISignUpData } from "@/types/IUser";
+import { ENUM_USER_ROLE, ISignUpData, ISuperAdmin } from "@/types/IUser";
 import { signUp } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
-import { SignUpSchema } from "@/lib/validation/yupValidation";
+import { SignUpSchema, SuperAdminSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
@@ -26,7 +26,7 @@ const rosario = Rosario({
   display: "swap",
 });
 
-export default function CreateAccount() {
+export default function SupereAdminForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -38,8 +38,8 @@ export default function CreateAccount() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(SignUpSchema) });
-  const onSubmit = async (userData: ISignUpData) => {
+  } = useForm({ resolver: yupResolver(SuperAdminSchema) });
+  const onSubmit = async (userData: ISuperAdmin) => {
     const phoneNumber = (userData.countryCode || "") + userData.phoneNumber;
 
     const formData = new FormData();
@@ -49,11 +49,13 @@ export default function CreateAccount() {
     formData.append("profileImage", userData.profileImage[0]);
     formData.append("password", userData.password);
     formData.append("phoneNumber", phoneNumber);
-    formData.append("role", ENUM_USER_ROLE.CUSTOMER);
+    formData.append("role", ENUM_USER_ROLE.SUPER_ADMIN);
+
+    formData.append("secret_key", userData.secret_key);
 
     try {
       setLoading(true);
-      const res = await signUp(formData, "customer");
+      const res = await signUp(formData, ENUM_USER_ROLE.SUPER_ADMIN);
       //   console.log(res);
       if (res?.success) {
         toast.success(res?.message);
@@ -186,6 +188,22 @@ export default function CreateAccount() {
                 autoFocus
               />
             </div>
+          </div>
+        </div>
+        <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
+          <label className=" col-span-2" htmlFor="email">
+            Secret Key
+          </label>
+          <div className="     col-span-10  ">
+            <Input
+              className="text-[#707070] w-full  h-[3em]  bg-white px-5  py-5   border-2   border-[#707070] "
+              name="secret_key"
+              type="text"
+              placeholder="provide the secret key"
+              error={errors?.secret_key?.message}
+              register={register}
+              autoFocus
+            />
           </div>
         </div>
         <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">

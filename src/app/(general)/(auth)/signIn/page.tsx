@@ -10,7 +10,7 @@ export default async function page(searchParams: {
 }) {
   const user = await getCookie("accessToken");
   let { destination, joinId } = searchParams.searchParams;
-  //console.log(searchParams.searchParams, "destination");
+
   if (typeof destination === "string") {
     destination = destination.replace(/^\/+/, "");
   }

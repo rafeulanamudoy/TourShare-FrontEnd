@@ -1,6 +1,8 @@
 "use server";
 import { cookies } from "next/headers";
 import jwt, { JwtPayload, Secret, TokenExpiredError } from "jsonwebtoken";
+import { NextRequest, NextResponse } from "next/server";
+import { getSingleUserById } from "./user";
 export async function verifyToken(token: string, secret: Secret) {
   try {
     return jwt.verify(token, secret) as JwtPayload;
@@ -15,6 +17,7 @@ export async function verifyToken(token: string, secret: Secret) {
 }
 
 export async function removeCookie(name: string) {
+  console.log(name, "check name");
   cookies().delete(name);
 }
 export async function getCookie(name: string) {
@@ -54,4 +57,46 @@ export async function setCookie(name: string, value: string) {
     httpOnly: true,
     secure: true,
   });
+}
+
+export async function verifyJwt(token: string, secret: string) {
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw",
+    encoder.encode(secret),
+    { name: "HMAC", hash: { name: "SHA-256" } },
+    false,
+    ["verify"]
+  );
+
+  const [header, payload, signature] = token.split(".");
+  const data = `${header}.${payload}`;
+  const decodedSignature = Uint8Array.from(atob(signature), (c) =>
+    c.charCodeAt(0)
+  );
+
+  const valid = await crypto.subtle.verify(
+    "HMAC",
+    key,
+    decodedSignature,
+    encoder.encode(data)
+  );
+
+  if (!valid) {
+    throw new Error("Invalid token");
+  }
+
+  const decodedPayload = JSON.parse(atob(payload));
+  return decodedPayload;
+}
+//
+export async function deleteCookie() {
+  "use server";
+
+  cookies().delete("accessToken");
+}
+export async function removeUser() {
+  const response = NextResponse.next();
+  response.cookies.delete("accessToken");
+  return response;
 }

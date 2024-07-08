@@ -30,7 +30,6 @@ export default async function RootLayout({
 
             <Toaster />
             {children}
-            <Footer />
           </SocketProvider>
         </StoreProvider>
       </body>

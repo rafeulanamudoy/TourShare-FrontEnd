@@ -1,4 +1,4 @@
-import { Rosario as Rosario } from "next/font/google";
+import { Dancing_Script, Rosario as Rosario } from "next/font/google";
 import { CSSProperties } from "react";
 
 export const override1: CSSProperties = {
@@ -15,3 +15,7 @@ export const override2: CSSProperties = {
 
   backgroundColor: "red",
 };
+export const dancing_script = Dancing_Script({
+  subsets: ["latin"],
+  display: "swap",
+});
