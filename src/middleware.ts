@@ -8,6 +8,7 @@ const protectedRoutes = [
   "/dashboard/joinTeam",
   "/dashboard/profile",
   "/dashboard/messages",
+  "/dashboard/createAdmin",
   "/createTeam",
   "/joinTeam",
 ];

@@ -1,5 +1,5 @@
 "use client";
-// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
+
 import React, { useRef, useState } from "react";
 
 import ClipLoader from "react-spinners/ClipLoader";
@@ -19,6 +19,7 @@ import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 
 import { useRouter } from "next/navigation";
+import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -29,7 +30,7 @@ export default function CreateAccount() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  // const loaderSize = UseDynamicLoaderSize(buttonRef);
+  const loaderSize = UseDynamicLoading(buttonRef);
 
   const dispatch = useAppDispatch();
   const {
@@ -231,7 +232,7 @@ export default function CreateAccount() {
             <ClipLoader
               loading={loading}
               cssOverride={override1}
-              size={10}
+              size={loaderSize}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

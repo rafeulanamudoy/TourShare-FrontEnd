@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect, RefObject } from "react";
 
-export const UseDynamicLoaderSize = (
+export const UseDynamicLoading = (
   buttonRef: RefObject<HTMLButtonElement>,
   factor = 0.5
 ) => {

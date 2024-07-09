@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { ENUM_USER_ROLE, ISignUpData, ISuperAdmin } from "@/types/IUser";
+import { ENUM_USER_ROLE, ISuperAdmin } from "@/types/IUser";
 import { signUp } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
 import { SignUpSchema } from "@/lib/validation/yupValidation";
@@ -19,7 +19,7 @@ import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 
 import { useRouter } from "next/navigation";
-// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
+import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -30,7 +30,7 @@ export default function AdminAccountForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  // const loaderSize = UseDynamicLoaderSize(buttonRef);
+  const loaderSize = UseDynamicLoading(buttonRef);
 
   const dispatch = useAppDispatch();
   const {
@@ -232,7 +232,7 @@ export default function AdminAccountForm() {
             <ClipLoader
               loading={loading}
               cssOverride={override1}
-              size={10}
+              size={loaderSize}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

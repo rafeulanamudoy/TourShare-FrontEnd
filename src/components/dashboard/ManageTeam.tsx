@@ -2,21 +2,12 @@ import { getTeams } from "@/lib/actions/Server/team";
 import { ICreateTeam } from "@/types/ICreateTeam";
 
 import React from "react";
+import TeamDetailsButton from "../buttons/TeamDetailsButton";
+import TeamDeleteButton from "../buttons/TeamDeleteButton";
 
-import JoinTeamButton from "./buttons/JoinTeamButton";
-
-import TeamDetailsButton from "./buttons/TeamDetailsButton";
-import { headers } from "next/headers";
-import TeamDeleteButton from "./buttons/TeamDeleteButton";
-
-export default async function ShowTeam() {
+export default async function ManageTeam() {
   const data = await getTeams();
 
-  const headersList = headers();
-  const fullUrl = headersList.get("referer") || "";
-  const isManageDashboard = fullUrl.includes("/dashboard/manageTeam");
-
-  console.log(isManageDashboard, "check path name");
   return (
     <div className="uppercase">
       <div className="grid  gap-y-5   ">
@@ -47,7 +38,7 @@ export default async function ShowTeam() {
               <th className=" border border-slate-600 p-2 ">Status</th>
               <th className=" border border-slate-600 p-2 ">Team Details</th>
 
-              <th className=" border border-slate-600 p-2 ">Join</th>
+              <th className=" border border-slate-600 p-2 ">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -92,14 +83,11 @@ export default async function ShowTeam() {
                     <TeamDetailsButton teamId={team?._id} />
                   </td>
 
-                  {team.teamStatus && (
+                  {
                     <td className=" border border-slate-600  p-2">
-                      <JoinTeamButton
-                        teamId={team._id}
-                        status={team?.teamStatus}
-                      />
+                      <TeamDeleteButton id={team._id} />
                     </td>
-                  )}
+                  }
                 </tr>
               );
             })}

@@ -15,7 +15,7 @@ import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
-// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
+import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -25,9 +25,8 @@ const rosario = Rosario({
 export default function UserLogin() {
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  // const loaderSize = UseDynamicLoaderSize(buttonRef);
+  const loaderSize = UseDynamicLoading(buttonRef);
   const dispatch = useAppDispatch();
-  //console.log("render userLogin component");
 
   const {
     register,
@@ -37,16 +36,12 @@ export default function UserLogin() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(LoginSchema) });
   const onSubmit = async (userData: ISignInData) => {
-    //   console.log(userData, "usedata");
-
     try {
       setLoading(true);
 
       const res = await signIn(userData);
-      // console.log(res.data, "check the user response");
-      // console.log(res.data.profileImage, "profile image");
+
       if (res?.success) {
-        //console.log(res.message);
         toast.success("User logged in successfully!");
 
         dispatch(
@@ -66,7 +61,6 @@ export default function UserLogin() {
         toast.error(errorMessage);
       }
     } catch (error) {
-      //console.error("Error:", error);
       toast.error("an error occured");
     } finally {
       setLoading(false);
@@ -124,7 +118,7 @@ export default function UserLogin() {
               <ClipLoader
                 loading={loading}
                 cssOverride={override1}
-                size={10}
+                size={loaderSize}
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />

@@ -71,7 +71,7 @@ export default function Sidebar() {
       { title: "Create Admin", url: "/dashboard/createAdmin", icon: faUserTie },
     ],
     [ENUM_USER_ROLE.ADMIN]: [
-      { title: "Delete Users", url: "/deleteUsers", icon: faUserTie },
+      { title: "Manage Team", url: "/dashboard/manageTeam", icon: faUserTie },
     ],
   };
 

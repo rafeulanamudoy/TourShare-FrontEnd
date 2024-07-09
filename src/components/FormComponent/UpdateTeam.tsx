@@ -18,13 +18,13 @@ import {
 } from "@/lib/actions/Server/team";
 import { useRouter } from "next/navigation";
 import { useSocketContext } from "@/socket/context/SocketContext";
-import { useAppSelector } from "@/redux/hooks";
+
 import { IJoinTeam } from "@/types/IJoinTeam";
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
+import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 
 interface ITeamProps {
-  team: ICreateTeam; // Define the type of the location prop
+  team: ICreateTeam;
 }
 const formatDateString = (date: Date | string | undefined | null) => {
   if (!date) return "";
@@ -37,7 +37,7 @@ export default function UpdateTeam({ team }: ITeamProps) {
   const router = useRouter();
   const { sendUpdateCreateTeamNotify } = useSocketContext();
   const buttonRef = useRef<HTMLButtonElement>(null);
-  // const loaderSize = UseDynamicLoaderSize(buttonRef);
+  const loaderSize = UseDynamicLoading(buttonRef);
 
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
@@ -409,7 +409,7 @@ export default function UpdateTeam({ team }: ITeamProps) {
             <ClipLoader
               loading={loading}
               cssOverride={override2}
-              size={10}
+              size={loaderSize}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

@@ -10,25 +10,23 @@ import { useFieldArray, useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { signUp } from "@/lib/actions/Server/user";
 import toast from "react-hot-toast";
-import { CreateTeamSchema, SignUpSchema } from "@/lib/validation/yupValidation";
+import { CreateTeamSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
-import { setUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+
+import { useAppSelector } from "@/redux/hooks";
 import { createTeam } from "@/lib/actions/Server/team";
 import { ICreateTeam } from "@/types/ICreateTeam";
 
-import { format, parse } from "date-fns";
-// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
+import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 
 export default function CreateTeam() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  //const { userData } = useUserData();
+
   const { email, phoneNumber } = useAppSelector((state) => state.auth.user);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  // const loaderSize = UseDynamicLoaderSize(buttonRef);
+  const loaderSize = UseDynamicLoading(buttonRef);
   const {
     register,
     handleSubmit,
@@ -479,7 +477,7 @@ export default function CreateTeam() {
             <ClipLoader
               loading={loading}
               cssOverride={override1}
-              size={10}
+              size={loaderSize}
               aria-label="Loading Spinner"
               data-testid="loader"
             />

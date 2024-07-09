@@ -9,7 +9,7 @@ import { useSocketContext } from "@/socket/context/SocketContext";
 import { IAccept } from "@/types/ICreateTeam";
 import { IUserSchema } from "@/types/IUser";
 import { override2 } from "@/utilities/css";
-// import { UseDynamicLoaderSize } from "@/utilities/UseDynamicLoaderSize";
+import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -23,7 +23,7 @@ export default function UpdateUserButton({ payload }: UserProps) {
   const role = useAppSelector((state) => state.toggle.roleValue);
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  // const loaderSize = UseDynamicLoaderSize(buttonRef);
+  const loaderSize = UseDynamicLoading(buttonRef);
   const handleUpdateRole = async () => {
     const formData = new FormData();
     if (payload.role) {
@@ -59,7 +59,7 @@ export default function UpdateUserButton({ payload }: UserProps) {
           <ClipLoader
             loading={loading}
             cssOverride={override2}
-            size={10}
+            size={loaderSize}
             aria-label="Loading Spinner"
             data-testid="loader"
           />

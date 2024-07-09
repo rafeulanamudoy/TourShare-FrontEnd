@@ -13,11 +13,12 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useAppSelector } from "@/redux/hooks";
 import { useRemoveAccount, useUserData } from "@/hooks/user/user";
 import DasboardModal from "@/components/dashboard/DashboardModal";
+import { ENUM_USER_ROLE } from "@/types/IUser";
 
 export default function Header() {
   const { isLoading } = useUserData();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { email, profileImage, name } = useAppSelector(
+  const { email, profileImage, name, role } = useAppSelector(
     (state) => state.auth.user
   );
   const handleLogOut = useRemoveAccount();
@@ -171,9 +172,28 @@ export default function Header() {
             view profile{" "}
           </Link>{" "}
           <nav className="2xl:text-sm  xl:text-xs  lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px] capitalize text-white  grid gap-y-3">
-            <Link href={"/dashboard/team"}>Create Team</Link>
-            <hr className="leading-4 border-gray-500  " />
-            <Link href={"/dashboard/joinTeam"}>Join Team</Link>
+            {role === ENUM_USER_ROLE.CUSTOMER && (
+              <>
+                <Link href={"/dashboard/team"}>Create Team</Link>
+                <hr className="leading-4 border-gray-500  " />
+                <Link href={"/dashboard/joinTeam"}>Join Team</Link>
+              </>
+            )}
+            {role === ENUM_USER_ROLE.ADMIN && (
+              <>
+                <Link href={"/dashboard/manageTeam"}>Manage Team</Link>
+                <hr className="leading-4 border-gray-500  " />
+              </>
+            )}
+            {role === ENUM_USER_ROLE.SUPER_ADMIN && (
+              <>
+                <Link href={"/dashboard/manageUsers"}>Manage Users</Link>
+                <hr className="leading-4 border-gray-500  " />
+                <Link href={"/dashboard/createAdmin"}>
+                  Create Admin Account
+                </Link>
+              </>
+            )}
           </nav>
         </div>
       </DasboardModal>
