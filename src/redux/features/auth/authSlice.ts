@@ -16,6 +16,7 @@ const initialState: IUser = {
     },
     phoneNumber: "",
     _id: "",
+    emailVerified: false,
   },
 };
 

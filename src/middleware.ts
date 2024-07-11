@@ -58,6 +58,9 @@ export default async function middleware(req: NextRequest) {
         });
 
         return response;
+        //handle case if user didnt verify the email user cannot access the protected route
+      } else if (isProtectedRoute && !user.data.emailVerified) {
+        return NextResponse.redirect(new URL("/verify-reminder", req.nextUrl));
       }
     } catch (error) {
       console.log(error, "check error from middleware");

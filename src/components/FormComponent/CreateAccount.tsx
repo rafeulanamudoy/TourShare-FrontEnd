@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 import { SignUpSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 import { useRouter } from "next/navigation";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
@@ -31,7 +31,8 @@ export default function CreateAccount() {
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
-
+  const { user } = useAppSelector((state) => state.auth);
+  console.log(user, "user from create account");
   const dispatch = useAppDispatch();
   const {
     register,
@@ -54,7 +55,7 @@ export default function CreateAccount() {
     try {
       setLoading(true);
       const res = await signUp(formData, "customer");
-      //   console.log(res);
+      console.log(res);
       if (res?.success) {
         toast.success(res?.message);
         if (res.data) {
@@ -67,6 +68,7 @@ export default function CreateAccount() {
                 name: res?.data?.name,
                 phoneNumber: res?.data?.phoneNumber,
                 _id: res?.data?._id,
+                emailVerified: res.data.emailVerified,
               },
             })
           );
@@ -76,7 +78,7 @@ export default function CreateAccount() {
         toast.error(res?.message);
       }
     } catch (error) {
-      //console.error("Error:", error);
+      console.error("Error:", error);
       toast.error("An error occurred while creating the account");
     } finally {
       setLoading(false);

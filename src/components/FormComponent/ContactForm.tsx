@@ -38,7 +38,6 @@ export default function ContactForm() {
         toast.error(errorMessage);
       }
     } catch (error) {
-      // Handle error appropriately
     } finally {
       setLoading(false);
       reset();

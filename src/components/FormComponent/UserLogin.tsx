@@ -40,6 +40,7 @@ export default function UserLogin() {
       setLoading(true);
 
       const res = await signIn(userData);
+      console.log(res, "user loggin response");
 
       if (res?.success) {
         toast.success("User logged in successfully!");

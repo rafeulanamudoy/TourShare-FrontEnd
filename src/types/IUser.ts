@@ -14,6 +14,7 @@ export type IUser = {
     };
     phoneNumber: string;
     _id: string;
+    emailVerified: boolean;
   };
 };
 

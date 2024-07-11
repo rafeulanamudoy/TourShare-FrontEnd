@@ -13,6 +13,7 @@ export async function signUp(data: FormData, role: string) {
       headers: {},
       body: data,
     });
+    console.log(`${process.env.URL}/${role}/signUp`, "Check sign in url");
     const result = await response.json();
     //
     if (result.data?.email) {
@@ -63,7 +64,7 @@ export async function getSingleUser() {
     if (user) {
       const { _id } = user;
       const response = await fetch(`${process.env.URL}/users/${_id}`, {
-        next: { tags: ["update"] },
+        next: { tags: ["update", "verifyEmail"] },
       });
       // console.log(response, "check response from user.ts server action file");
       if (!response.ok) {
@@ -82,7 +83,7 @@ export async function getSingleUser() {
 export async function getSingleUserById(userId: string) {
   try {
     const response = await fetch(`${process.env.URL}/users/${userId}`, {
-      next: { tags: ["update"] },
+      next: { tags: ["update", "verifyEmail"] },
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -137,6 +138,23 @@ export async function deleteSingleUser(id: string) {
     });
     const result = await response.json();
     revalidateTag("deleteSingleUser");
+    // console.log(result);
+    return result;
+  } catch (error) {
+    // console.log(error, "update user error from  user.ts server file");
+  }
+}
+
+export async function verifyEmail(token: string) {
+  try {
+    const response = await fetch(
+      `${process.env.URL}/users/verify-email/?token=${token}`,
+      {
+        method: "PATCH",
+      }
+    );
+    const result = await response.json();
+    revalidateTag("verifyEmail");
     // console.log(result);
     return result;
   } catch (error) {
