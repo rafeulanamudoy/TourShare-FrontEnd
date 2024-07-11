@@ -32,7 +32,8 @@ export default function CreateAccount() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
   const { user } = useAppSelector((state) => state.auth);
-  console.log(user, "user from create account");
+  const [message, setMessage] = useState("");
+
   const dispatch = useAppDispatch();
   const {
     register,
@@ -57,23 +58,24 @@ export default function CreateAccount() {
       const res = await signUp(formData, "customer");
       console.log(res);
       if (res?.success) {
-        toast.success(res?.message);
-        if (res.data) {
-          dispatch(
-            setUser({
-              user: {
-                email: res?.data?.email,
-                role: res?.data?.role,
-                profileImage: res?.data?.profileImage,
-                name: res?.data?.name,
-                phoneNumber: res?.data?.phoneNumber,
-                _id: res?.data?._id,
-                emailVerified: res.data.emailVerified,
-              },
-            })
-          );
-          router.push("/");
-        }
+        setMessage(
+          "Please Check Your Gmail Message To Complete The Registration"
+        );
+        // if (res.data) {
+        //   dispatch(
+        //     setUser({
+        //       user: {
+        //         email: res?.data?.email,
+        //         role: res?.data?.role,
+        //         profileImage: res?.data?.profileImage,
+        //         name: res?.data?.name,
+        //         phoneNumber: res?.data?.phoneNumber,
+        //         _id: res?.data?._id,
+        //         emailVerified: res.data.emailVerified,
+        //       },
+        //     })
+        //   );
+        // }
       } else {
         toast.error(res?.message);
       }
@@ -224,6 +226,11 @@ export default function CreateAccount() {
             />
           </div>
         </div>
+        {message && (
+          <div className="mt-6 p-4 bg-green-100 border  border-green-400 text-green-700 rounded-md    w-full mx-auto text-center 2xl:text:xl xl:text-lg lg:text-xl md:text-base sm:text-xs text-[10px]">
+            <p>{message}</p>
+          </div>
+        )}
         <button
           ref={buttonRef}
           className="submit-button mx-auto w-1/2 h-[3em]"

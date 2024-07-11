@@ -1,23 +1,39 @@
 "use client";
-import { verifyEmail } from "@/lib/actions/Server/user";
-import { useRouter } from "next/navigation";
-import React from "react";
+import { resendVerifyEmail, verifyEmail } from "@/lib/actions/Server/user";
+import { useAppSelector } from "@/redux/hooks";
+import { override1 } from "@/utilities/css";
+import { showToast } from "@/utilities/ToastOptions";
+import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useRef, useState } from "react";
 
-import toast from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
 
 export default function VerifyReminder() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const loaderSize = UseDynamicLoading(buttonRef);
+  const [loading, setLoading] = useState(false);
+
+  console.log(email, "check email");
 
   const handleResendEmail = async () => {
-    // try {
-    //   if (res.ok) {
-    //     toast.success("Verification email sent!");
-    //   } else {
-    //     toast.error("Failed to send verification email.");
-    //   }
-    // } catch (error) {
-    //   toast.error("An error occurred. Please try again later.");
-    // }
+    try {
+      setLoading(true);
+      const res = await resendVerifyEmail({ email: email as string });
+      if (res.success) {
+        showToast("success", res?.message);
+        router.push("/signIn#signIn");
+      } else {
+        showToast("error", res.message);
+      }
+    } catch (error) {
+      showToast("error", "An error occurred. Please try again later");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -32,10 +48,21 @@ export default function VerifyReminder() {
         </p>
         <div className="mt-6 flex justify-center">
           <button
+            ref={buttonRef}
             onClick={handleResendEmail}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
           >
-            Resend Verification Email
+            {loading ? (
+              <ClipLoader
+                loading={loading}
+                cssOverride={override1}
+                size={loaderSize}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Resend Verification Email"
+            )}
           </button>
         </div>
       </div>

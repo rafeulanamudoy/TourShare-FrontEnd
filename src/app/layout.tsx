@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { getSingleUser } from "@/lib/actions/Server/user";
 import { SocketProvider } from "@/socket/context/SocketContext";
 import SocketListener from "@/socket/SocketListner";
+import ToastProvider from "@/utilities/ToastProvider";
 
 export const metadata: Metadata = {
   title: "Tour Share",
@@ -28,8 +29,7 @@ export default async function RootLayout({
           <SocketProvider email={user?.data?.email}>
             <SocketListener />
 
-            <Toaster />
-            {children}
+            <ToastProvider>{children}</ToastProvider>
           </SocketProvider>
         </StoreProvider>
       </body>

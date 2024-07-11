@@ -16,9 +16,9 @@ export async function signUp(data: FormData, role: string) {
     console.log(`${process.env.URL}/${role}/signUp`, "Check sign in url");
     const result = await response.json();
     //
-    if (result.data?.email) {
-      setCookie("accessToken", result?.data?.accessToken);
-    }
+    // if (result.data?.email) {
+    //   setCookie("accessToken", result?.data?.accessToken);
+    // }
     revalidateTag("createUser");
     return result;
   } catch (error) {
@@ -153,6 +153,21 @@ export async function verifyEmail(token: string) {
         method: "PATCH",
       }
     );
+    const result = await response.json();
+    revalidateTag("verifyEmail");
+    // console.log(result);
+    return result;
+  } catch (error) {
+    // console.log(error, "update user error from  user.ts server file");
+  }
+}
+export async function resendVerifyEmail(data: { email: string }) {
+  try {
+    const response = await fetch(`${process.env.URL}/users/resend-verfyEmail`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
     const result = await response.json();
     revalidateTag("verifyEmail");
     // console.log(result);

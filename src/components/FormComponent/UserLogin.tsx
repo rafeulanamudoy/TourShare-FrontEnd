@@ -16,6 +16,7 @@ import { override1 } from "@/utilities/css";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { showToast } from "@/utilities/ToastOptions";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -43,7 +44,7 @@ export default function UserLogin() {
       console.log(res, "user loggin response");
 
       if (res?.success) {
-        toast.success("User logged in successfully!");
+        showToast("success", "User Logged In Succesfully");
 
         dispatch(
           setUser({
@@ -54,6 +55,7 @@ export default function UserLogin() {
               name: res?.data?.name,
               phoneNumber: res?.data?.phoneNumber,
               _id: res?.data?._id,
+              emailVerified: res?.data?.emailVerified,
             },
           })
         );

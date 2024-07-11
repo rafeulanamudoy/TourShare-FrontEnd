@@ -7,36 +7,66 @@ import { roboto } from "../styles/fonts";
 import Header from "@/shared/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
-import { verifyEmail } from "@/lib/actions/Server/user";
+import {
+  getSingleUser,
+  resendVerifyEmail,
+  verifyEmail,
+} from "@/lib/actions/Server/user";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
+import { showToast } from "@/utilities/ToastOptions";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function VerifyEmail() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [verifyloading, setVerifyLoading] = useState(false);
+  const [resendLoading, sendResendLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
+  const [email, setEmail] = useState("");
 
   const search = searchParams.get("token");
   console.log(search);
 
   const handleVerifyEmail = async () => {
     try {
-      setLoading(true);
+      setVerifyLoading(true);
       const res = await verifyEmail(token as string);
+      const user = await getSingleUser();
+      setEmail(user?.data?.email);
       if (res?.success) {
-        toast.success(res.message);
+        showToast("success", res?.message);
+        router.push("/signIn#signIn");
       } else {
-        const errorMessage = res?.message || "Error message not available";
-        toast.error(errorMessage);
+        showToast("error", res?.message);
       }
     } catch (error) {
+      showToast("error", error as string);
     } finally {
-      setLoading(false);
+      setVerifyLoading(false);
+    }
+  };
+  const handleResendEmail = async () => {
+    try {
+      sendResendLoading(true);
+      const user = await getSingleUser();
+      const res = await resendVerifyEmail({
+        email: user?.data?.email as string,
+      });
+      if (res.success) {
+        showToast("success", res?.message);
+        router.push("/signIn#signIn");
+      } else {
+        showToast("error", res.message);
+      }
+    } catch (error) {
+      showToast("error", "An error occurred. Please try again later");
+    } finally {
+      sendResendLoading(false);
     }
   };
   return (
@@ -71,16 +101,16 @@ export default function VerifyEmail() {
             />
           </div>
         </div>
-        <div className="mt-4 flex justify-center">
+        <div className="mt-4 flex flex-col md:flex-row  items-center  gap-5 justify-center">
           <button
             onClick={handleVerifyEmail}
             ref={buttonRef}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-            disabled={loading}
+            className="bg-blue-500 w-[50%] text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            disabled={verifyloading}
           >
-            {loading ? (
+            {verifyloading ? (
               <ClipLoader
-                loading={loading}
+                loading={verifyloading}
                 cssOverride={override1}
                 size={loaderSize}
                 aria-label="Loading Spinner"
@@ -88,6 +118,23 @@ export default function VerifyEmail() {
               />
             ) : (
               "Verify Email Address"
+            )}
+          </button>
+          <button
+            onClick={handleResendEmail}
+            className="bg-[#2e4262] w-[50%] text-white px-4 py-2 rounded hover:bg-[#213350] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >
+            {" "}
+            {resendLoading ? (
+              <ClipLoader
+                loading={resendLoading}
+                cssOverride={override1}
+                size={loaderSize}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Resend Email"
             )}
           </button>
         </div>
