@@ -3,14 +3,12 @@ import Sidebar from "@/components/dashboard/Sidebar";
 import { getSingleUser } from "@/lib/actions/Server/user";
 
 import Navbar from "@/components/dashboard/Navbar";
-import { SocketProvider } from "@/socket/context/SocketContext";
-import SocketListener from "@/socket/SocketListner";
+
 import {
   getAllUserNotification,
   getStatusNotification,
 } from "@/lib/actions/Server/notifications";
 import { ENUM_NOTIFICATION_STATUS } from "@/enums/notification";
-import Footer from "@/shared/Footer";
 
 export default async function DashboardLayout({
   children,
@@ -23,7 +21,7 @@ export default async function DashboardLayout({
     user?.data?.email,
     ENUM_NOTIFICATION_STATUS.UNSEEN
   );
-  console.log(allNotifs.length, "notifies length");
+
   return (
     <section className={`flex flex-row-reverse ${montserrat.className}`}>
       <div className="w-full bg-[#d8dcdd]">

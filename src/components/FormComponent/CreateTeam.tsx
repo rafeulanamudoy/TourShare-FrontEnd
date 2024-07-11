@@ -10,7 +10,6 @@ import { useFieldArray, useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import toast from "react-hot-toast";
 import { CreateTeamSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
 
@@ -19,6 +18,7 @@ import { createTeam } from "@/lib/actions/Server/team";
 import { ICreateTeam } from "@/types/ICreateTeam";
 
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { showToast } from "@/utilities/ToastOptions";
 
 export default function CreateTeam() {
   const [loading, setLoading] = useState(false);
@@ -53,12 +53,12 @@ export default function CreateTeam() {
   const onSubmit = async (data: ICreateTeam) => {
     try {
       setLoading(true);
-      console.log(data, "check data");
 
       const res = await createTeam(data);
-      console.log(res, "check response");
+
       if (res?.success) {
-        toast.success(res?.message);
+        showToast("success", res?.message);
+
         setError("");
         reset();
       } else {
@@ -66,13 +66,12 @@ export default function CreateTeam() {
 
         res.errorCode === 11000
           ? setError(
-              "You can't start a new journey while another is active. Please end your current journey or update its status to 'Closed'."
+              "you can't start a new journey while another is active. Please end your current journey or update its status to 'Closed'."
             )
           : setError(errorMessage);
       }
     } catch (error) {
-      //  console.log(error, "from create team");
-      toast.error("please try again");
+      showToast("error", "an error occurred. please try again later");
     } finally {
       setLoading(false);
     }

@@ -5,11 +5,11 @@ import { deleteSingleTeam } from "@/lib/actions/Server/team";
 import { useAppSelector } from "@/redux/hooks";
 import { useSocketContext } from "@/socket/context/SocketContext";
 import { IJoinTeam } from "@/types/IJoinTeam";
+import { showToast } from "@/utilities/ToastOptions";
 
 import { faPenSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import toast from "react-hot-toast";
 interface TeamDeleteIdProps {
   id: string;
   // Define the type of the location prop
@@ -44,12 +44,12 @@ export default function TeamDeleteButton({ id }: TeamDeleteIdProps) {
             ENUM_NOTIFICATION_TYPE.DELETECREATETEAM,
             timestamp
           );
-        toast.success(res.message);
+        showToast("success", res?.message);
       } else {
-        toast.error(res.message);
+        showToast("error", res.message);
       }
     } catch (error) {
-      toast.error("please try again");
+      showToast("error", "an error occurred. please try again later");
     }
   };
   return (

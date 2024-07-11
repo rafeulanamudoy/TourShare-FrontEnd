@@ -1,11 +1,11 @@
 "use client";
 
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import { acceptJoinTeam, getSingleJoinTeam } from "@/lib/actions/Server/team";
+import { acceptJoinTeam } from "@/lib/actions/Server/team";
 import { useAppSelector } from "@/redux/hooks";
 import { useSocketContext } from "@/socket/context/SocketContext";
 import { IAccept } from "@/types/ICreateTeam";
-import toast from "react-hot-toast";
+import { showToast } from "@/utilities/ToastOptions";
 
 interface UserJoinTeamProps {
   payload: IAccept; // Define the type of the location prop
@@ -26,7 +26,7 @@ export default function TeamAcceptButton({ payload }: UserJoinTeamProps) {
 
         if (res.success && payload.joinTeamEmail) {
           const timestamp = new Date().toISOString();
-          toast.success(res?.message);
+          showToast("success", res?.message);
           sendTeamRequest(
             payload.joinTeamEmail,
             `${res?.data?.teamName} ${state} your team`,
@@ -34,15 +34,11 @@ export default function TeamAcceptButton({ payload }: UserJoinTeamProps) {
             state,
             timestamp
           );
-          // sendTeamRequest()
-          console.log(res, "check response ");
         } else {
-          const errorMessage = res?.message || "Error message not available";
-          toast.error(errorMessage);
+          showToast("success", res?.message);
         }
       } catch (error) {
-        //console.log(error, "check error ");
-        toast.error("an error occuredplease refresh the page");
+        showToast("error", "an error occurred. please try again later");
       }
     }
   };

@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { ENUM_USER_ROLE, ISuperAdmin } from "@/types/IUser";
 import { signUp } from "@/lib/actions/Server/user";
-import toast from "react-hot-toast";
+
 import { SuperAdminSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
@@ -20,6 +20,7 @@ import { useAppDispatch } from "@/redux/hooks";
 
 import { useRouter } from "next/navigation";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { showToast } from "@/utilities/ToastOptions";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export default function SupereAdminForm() {
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
-
+  const [message, setMessage] = useState("");
   const dispatch = useAppDispatch();
   const {
     register,
@@ -58,7 +59,9 @@ export default function SupereAdminForm() {
       const res = await signUp(formData, ENUM_USER_ROLE.SUPER_ADMIN);
 
       if (res?.success) {
-        toast.success(res?.message);
+        setMessage(
+          "Please Check Your Gmail Message To Complete The Registration"
+        );
         if (res.data) {
           dispatch(
             setUser({
@@ -69,16 +72,16 @@ export default function SupereAdminForm() {
                 name: res?.data?.name,
                 phoneNumber: res?.data?.phoneNumber,
                 _id: res?.data?._id,
+                emailVerified: res?.data?.emailVerified,
               },
             })
           );
-          router.push("/");
         }
       } else {
-        toast.error(res?.message);
+        showToast("error", res.message);
       }
     } catch (error) {
-      toast.error("An error occurred while creating the account");
+      showToast("error", "An error occurred. Please try again later");
     } finally {
       setLoading(false);
 
@@ -239,6 +242,11 @@ export default function SupereAdminForm() {
             />
           </div>
         </div>
+        {message && (
+          <div className="mt-6 p-4 bg-green-100 border  border-green-400 text-green-700 rounded-md    w-full mx-auto text-center 2xl:text:xl xl:text-lg lg:text-xl md:text-base sm:text-xs text-[10px]">
+            <p>{message}</p>
+          </div>
+        )}
         <button
           ref={buttonRef}
           className="submit-button mx-auto w-1/2 h-[3em]"

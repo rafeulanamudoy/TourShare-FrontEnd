@@ -2,12 +2,11 @@
 import { useAppSelector } from "@/redux/hooks";
 import { IJoinPerson } from "@/types/IJoinTeam";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 export type Iconversation = {
   conversations: IJoinPerson[];
 };
 export default function ChatList({ conversations }: Iconversation) {
-  // console.log(selectedConversation);
   const router = useRouter();
   const pathname = usePathname();
   const state = useAppSelector((state) => state.auth.user);

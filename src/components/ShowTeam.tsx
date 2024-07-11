@@ -6,17 +6,10 @@ import React from "react";
 import JoinTeamButton from "./buttons/JoinTeamButton";
 
 import TeamDetailsButton from "./buttons/TeamDetailsButton";
-import { headers } from "next/headers";
-import TeamDeleteButton from "./buttons/TeamDeleteButton";
 
 export default async function ShowTeam() {
   const data = await getTeams();
 
-  const headersList = headers();
-  const fullUrl = headersList.get("referer") || "";
-  const isManageDashboard = fullUrl.includes("/dashboard/manageTeam");
-
-  console.log(isManageDashboard, "check path name");
   return (
     <div className="uppercase">
       <div className="grid  gap-y-5   ">

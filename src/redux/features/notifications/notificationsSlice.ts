@@ -1,4 +1,3 @@
-// src/redux/slices/messagesSlice.ts
 import { ENUM_NOTIFICATION_STATUS } from "@/enums/notification";
 import { INotification } from "@/types/INotification";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -29,7 +28,6 @@ const notificationsSlice = createSlice({
       }
     },
     setNotification: (state, action: PayloadAction<INotification[]>) => {
-      console.log(action.payload, "check payload");
       state.notifications = action.payload;
     },
     clearNotification: (state) => {

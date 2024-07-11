@@ -6,13 +6,14 @@ import Form from "@/hooks/reactHookForm/Form";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ContactSchema } from "@/lib/validation/yupValidation";
-import toast from "react-hot-toast";
+
 import { ClipLoader } from "react-spinners";
 import { dancing_script, override1 } from "@/utilities/css";
 import { useAppSelector } from "@/redux/hooks";
 import { IContactData } from "@/types/IContact";
 import { createContact } from "@/lib/actions/Server/contact";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { showToast } from "@/utilities/ToastOptions";
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
@@ -32,12 +33,12 @@ export default function ContactForm() {
       setLoading(true);
       const res = await createContact(contactData);
       if (res?.success) {
-        toast.success("Your Message Sent Successfully!");
+        showToast("success", "Your Message Sent Successfully!");
       } else {
-        const errorMessage = res?.message || "Error message not available";
-        toast.error(errorMessage);
+        showToast("success", res?.message);
       }
     } catch (error) {
+      showToast("error", "an error occurred. please try again later");
     } finally {
       setLoading(false);
       reset();

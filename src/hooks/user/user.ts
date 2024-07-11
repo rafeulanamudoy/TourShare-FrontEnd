@@ -26,6 +26,7 @@ export const useRemoveAccount = () => {
           },
           _id: "",
           phoneNumber: "",
+          emailVerified: false,
         },
       })
     );
@@ -44,7 +45,7 @@ export const useUserData = () => {
     const fetchData = async () => {
       try {
         const fetchUserData = await getSingleUser();
-        //console.log(userData, "userData");
+
         if (fetchUserData) {
           setUserData(fetchUserData?.data);
           dispatch(
@@ -57,12 +58,11 @@ export const useUserData = () => {
                 profileImage: fetchUserData?.data?.profileImage,
                 phoneNumber: fetchUserData?.data?.phoneNumber,
                 _id: fetchUserData?.data?._id,
+                emailVerified: fetchUserData?.data?.emailVerified,
               },
             })
           );
-        }
-        // console.log(userData, "from useUser hook");
-        else {
+        } else {
           dispatch(
             setUser({
               user: {
@@ -78,18 +78,14 @@ export const useUserData = () => {
                 },
                 _id: "",
                 phoneNumber: "",
+                emailVerified: false,
               },
             })
           );
         }
       } catch (error) {
-        // console.log(
-        //   error,
-        //   "check error from useuserdata from user.ts file hook folder"
-        // );
       } finally {
         setIsLoading(false);
-        // Update loading state when data fetching is done
       }
     };
 
@@ -97,6 +93,5 @@ export const useUserData = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Return loading state along with other data if needed
   return { isLoading, userData };
 };

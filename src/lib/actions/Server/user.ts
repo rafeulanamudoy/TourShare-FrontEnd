@@ -13,12 +13,9 @@ export async function signUp(data: FormData, role: string) {
       headers: {},
       body: data,
     });
-    console.log(`${process.env.URL}/${role}/signUp`, "Check sign in url");
+
     const result = await response.json();
-    //
-    // if (result.data?.email) {
-    //   setCookie("accessToken", result?.data?.accessToken);
-    // }
+
     revalidateTag("createUser");
     return result;
   } catch (error) {
@@ -44,7 +41,6 @@ export async function signIn(data: ISignInData) {
       if (payload) {
         await setCookie("accessToken", result?.data?.accessToken);
         const user = await getSingleUser();
-        // console.log(user, "user from login server action");
 
         return user;
       } else {
@@ -53,10 +49,7 @@ export async function signIn(data: ISignInData) {
     } else {
       return result;
     }
-  } catch (error) {
-    //console.log(error, "check error");
-    // throw error;
-  }
+  } catch (error) {}
 }
 export async function getSingleUser() {
   try {
@@ -66,7 +59,7 @@ export async function getSingleUser() {
       const response = await fetch(`${process.env.URL}/users/${_id}`, {
         next: { tags: ["update", "verifyEmail"] },
       });
-      // console.log(response, "check response from user.ts server action file");
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -110,9 +103,7 @@ export async function updateSingleUser(
     revalidateTag("updateUser");
     //console.log(result);
     return result;
-  } catch (error) {
-    // console.log(error, "update user error from  user.ts server file");
-  }
+  } catch (error) {}
 }
 
 export async function getAllUsers() {
@@ -138,11 +129,9 @@ export async function deleteSingleUser(id: string) {
     });
     const result = await response.json();
     revalidateTag("deleteSingleUser");
-    // console.log(result);
+
     return result;
-  } catch (error) {
-    // console.log(error, "update user error from  user.ts server file");
-  }
+  } catch (error) {}
 }
 
 export async function verifyEmail(token: string) {
@@ -155,11 +144,9 @@ export async function verifyEmail(token: string) {
     );
     const result = await response.json();
     revalidateTag("verifyEmail");
-    // console.log(result);
+
     return result;
-  } catch (error) {
-    // console.log(error, "update user error from  user.ts server file");
-  }
+  } catch (error) {}
 }
 export async function resendVerifyEmail(data: { email: string }) {
   try {
@@ -172,7 +159,5 @@ export async function resendVerifyEmail(data: { email: string }) {
     revalidateTag("verifyEmail");
     // console.log(result);
     return result;
-  } catch (error) {
-    // console.log(error, "update user error from  user.ts server file");
-  }
+  } catch (error) {}
 }

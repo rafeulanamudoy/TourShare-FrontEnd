@@ -1,6 +1,6 @@
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 import { INotification } from "@/types/INotification";
-import { formatTimeDifference, formatTimestamp } from "@/utilities/TimeFormat";
+import { formatTimeDifference } from "@/utilities/TimeFormat";
 import React from "react";
 interface NotificationHistoryProps {
   notifications: INotification[];
@@ -14,7 +14,6 @@ export default function AllNotificationHistory({
   notifications,
   onNotificationClick,
 }: NotificationHistoryProps) {
-  //console.log(notifications, "check all notification");
   return (
     <div className="">
       {notifications?.map((notification) => (

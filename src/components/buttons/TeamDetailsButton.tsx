@@ -2,7 +2,7 @@
 import React from "react";
 
 import { useRouter } from "next/navigation";
-import { Rosario } from "next/font/google";
+
 interface UserJoinTeamProps {
   teamId: string;
 }

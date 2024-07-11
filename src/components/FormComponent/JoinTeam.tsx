@@ -9,15 +9,16 @@ import { JoinTeamSchema } from "@/lib/validation/yupValidation";
 import { useForm } from "react-hook-form";
 import Input from "@/hooks/reactHookForm/Input";
 import Form from "@/hooks/reactHookForm/Form";
-import { Rosario } from "next/font/google";
+
 import { useSearchParams } from "next/navigation";
 import { createJoinTeam } from "@/lib/actions/Server/team";
-import toast from "react-hot-toast";
+
 import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { useSocketContext } from "@/socket/context/SocketContext";
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { showToast } from "@/utilities/ToastOptions";
 
 export default function JoinTeam() {
   const [loading, setLoading] = useState(false);
@@ -31,8 +32,6 @@ export default function JoinTeam() {
   useEffect(() => {
     const handleAsyncOp = async () => {
       const hash = window.location.hash;
-
-      // console.log("rendering");
 
       const [path, queryString] = hash.split("?");
       if (queryString) {
@@ -69,11 +68,11 @@ export default function JoinTeam() {
         status: ENUM_jOIN_TEAM_STATUS.PENDING,
       };
       const res = await createJoinTeam(joinTeamData);
-      // console.log(res, "response message");
+
       if (res?.success) {
-        toast.success(res?.message);
+        showToast("success", res?.message);
         const timestamp = new Date().toISOString();
-        console.log(res, "check respone");
+
         sendJoinTeamRequest(
           res?.data?.teamInfo?.email,
           `${email} send  request to join with your team`,
@@ -88,12 +87,13 @@ export default function JoinTeam() {
 
         res.errorCode === 11000
           ? setError(
-              "You can't Join to   a new team  while you already join a team .To Start a new journy please end your current journey ."
+              "you can't join to   a new team  while you already join a team .to start a new journy please end your current journey ."
             )
           : setError(errorMessage);
       }
     } catch (error) {
       // console.log(error, "error from catch message");
+      showToast("error", "An error occurred. Please try again later");
     } finally {
       setLoading(false);
 

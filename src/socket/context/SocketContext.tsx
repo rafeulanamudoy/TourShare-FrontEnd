@@ -98,28 +98,19 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
     }
 
     function onDisconnect(reason: string) {
-      console.error(`Socket disconnected: ${reason}`);
       setIsConnected(false);
       setTransport("N/A");
     }
 
-    function onError(error: any) {
-      console.error("Socket Error:", error);
-    }
+    function onError(error: any) {}
 
     socketInstance.on("connect", onConnect);
     socketInstance.on("disconnect", onDisconnect);
     socketInstance.on("error", onError);
     socketInstance.on("connect_error", onError);
-    socketInstance.on("reconnect_attempt", (attempt) => {
-      console.log(`Reconnect attempt ${attempt}`);
-    });
-    socketInstance.on("reconnect_failed", () => {
-      console.error("Reconnection failed");
-    });
-    socketInstance.on("reconnect_error", (error) => {
-      console.error("Reconnection error:", error);
-    });
+    socketInstance.on("reconnect_attempt", (attempt) => {});
+    socketInstance.on("reconnect_failed", () => {});
+    socketInstance.on("reconnect_error", (error) => {});
 
     return () => {
       socketInstance.off("connect", onConnect);
@@ -136,15 +127,6 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
   ) => {
     if (socket) {
       socket.emit("privateMessage", { toEmail, message, timestamp });
-      // try {
-      //   await createMessage({
-      //     sender: user.email,
-      //     message: message,
-      //     recipient: toEmail,
-      //   });
-      // } catch (error) {
-      //   console.log(error);
-      // }
     }
   };
 
@@ -157,16 +139,6 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
   ) => {
     if (socket) {
       socket.emit("notification", { toEmail, message, timestamp, _id, type });
-      // try {
-      //   await createUserNotification({
-      //     sender: user.email,
-      //     message: message,
-      //     recipient: toEmail,
-      //     type: type,
-      //   });
-      // } catch (error) {
-      //   console.log(error);
-      // }
     }
   };
   const sendTeamRequest = async (
@@ -179,16 +151,6 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
   ) => {
     if (socket) {
       socket.emit("teamRequest", { toEmail, message, status, type, timestamp });
-      // try {
-      //   await createUserNotification({
-      //     sender: user.email,
-      //     message: message,
-      //     recipient: toEmail,
-      //     type: type,
-      //   });
-      // } catch (error) {
-      //   console.log(error);
-      // }
     }
   };
   const sendJoinTeamRequest = async (

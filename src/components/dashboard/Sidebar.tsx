@@ -9,8 +9,6 @@ import {
   faCaretRight,
   faUser,
   faCircleXmark,
-  faBook,
-  faUsers,
   IconDefinition,
   faPeopleGroup,
   faPeopleArrows,
@@ -24,7 +22,6 @@ import { setToggle } from "@/redux/features/toggle/toggleSlice";
 import { usePathname } from "next/navigation";
 import { ENUM_USER_ROLE } from "@/types/IUser";
 import { useUserData } from "@/hooks/user/user";
-import NotificationModal from "../notifications/NotificationModal";
 
 interface SidebarItem {
   title: string;
@@ -75,14 +72,12 @@ export default function Sidebar() {
     ],
   };
 
-  // Combine common and role-specific sidebar items
   const allSidebarItems: SidebarItem[] = [
     ...commonSidebarItems,
     ...(roleSpecificSidebarItems[role] || []),
   ];
 
   const { isLoading } = useUserData();
-  // console.log("sidebar rendered", role);
 
   if (isLoading) {
     return null;

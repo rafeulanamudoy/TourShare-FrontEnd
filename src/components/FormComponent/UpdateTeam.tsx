@@ -7,7 +7,7 @@ import { IUpdatedUser } from "@/types/IUser";
 
 import { useRef, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+
 import { ClipLoader } from "react-spinners";
 import { override2 } from "@/utilities/css";
 
@@ -22,6 +22,7 @@ import { useSocketContext } from "@/socket/context/SocketContext";
 import { IJoinTeam } from "@/types/IJoinTeam";
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { showToast } from "@/utilities/ToastOptions";
 
 interface ITeamProps {
   team: ICreateTeam;
@@ -101,14 +102,14 @@ export default function UpdateTeam({ team }: ITeamProps) {
             timestamp
           );
         router.push("/dashboard/team");
-        toast.success(res?.message);
+        showToast("success", res?.message);
+        showToast("error", res.message);
       } else {
-        const errorMessage = res?.message || "Error message not available";
-        toast.error(errorMessage);
+        showToast("error", res.message);
       }
       // console.log(userValue);
     } catch (error) {
-      toast.error("an error occured");
+      showToast("error", "Something Went Wrong.Please Try Again!");
     } finally {
       setLoading(false);
     }

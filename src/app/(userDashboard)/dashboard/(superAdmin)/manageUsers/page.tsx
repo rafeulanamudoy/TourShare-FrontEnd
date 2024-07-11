@@ -1,11 +1,9 @@
-import JoinTeamDeleteButton from "@/components/buttons/JoinTeamDeleteButton";
 import UpdateUserButton from "@/components/buttons/UpdateUserButton";
 import UserDeleteButton from "@/components/buttons/UserDeleteButton";
 import RoleSelect from "@/components/RoleSelect";
 
-import { getSingleJoinTeam } from "@/lib/actions/Server/team";
-import { getAllUsers, getSingleUser } from "@/lib/actions/Server/user";
-import { IUser, IUserSchema } from "@/types/IUser";
+import { getAllUsers } from "@/lib/actions/Server/user";
+import { IUserSchema } from "@/types/IUser";
 
 export default async function page() {
   const users = await getAllUsers();

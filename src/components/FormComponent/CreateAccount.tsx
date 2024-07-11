@@ -12,14 +12,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { ENUM_USER_ROLE, ISignUpData } from "@/types/IUser";
 import { signUp } from "@/lib/actions/Server/user";
-import toast from "react-hot-toast";
+
 import { SignUpSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
-import { setUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
-import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
+
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { showToast } from "@/utilities/ToastOptions";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -27,14 +27,12 @@ const rosario = Rosario({
 });
 
 export default function CreateAccount() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
   const { user } = useAppSelector((state) => state.auth);
   const [message, setMessage] = useState("");
 
-  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -56,32 +54,16 @@ export default function CreateAccount() {
     try {
       setLoading(true);
       const res = await signUp(formData, "customer");
-      console.log(res);
+
       if (res?.success) {
         setMessage(
           "Please Check Your Gmail Message To Complete The Registration"
         );
-        // if (res.data) {
-        //   dispatch(
-        //     setUser({
-        //       user: {
-        //         email: res?.data?.email,
-        //         role: res?.data?.role,
-        //         profileImage: res?.data?.profileImage,
-        //         name: res?.data?.name,
-        //         phoneNumber: res?.data?.phoneNumber,
-        //         _id: res?.data?._id,
-        //         emailVerified: res.data.emailVerified,
-        //       },
-        //     })
-        //   );
-        // }
       } else {
-        toast.error(res?.message);
+        showToast("error", res?.message);
       }
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("An error occurred while creating the account");
+      showToast("error", "An error occurred while creating the account");
     } finally {
       setLoading(false);
 

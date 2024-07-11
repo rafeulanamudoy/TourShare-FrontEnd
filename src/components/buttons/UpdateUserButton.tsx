@@ -9,10 +9,11 @@ import { useSocketContext } from "@/socket/context/SocketContext";
 import { IAccept } from "@/types/ICreateTeam";
 import { IUserSchema } from "@/types/IUser";
 import { override2 } from "@/utilities/css";
+import { showToast } from "@/utilities/ToastOptions";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 
 import { useRef, useState } from "react";
-import toast from "react-hot-toast";
+
 import { ClipLoader } from "react-spinners";
 
 interface UserProps {
@@ -32,17 +33,15 @@ export default function UpdateUserButton({ payload }: UserProps) {
     try {
       setLoading(true);
       if (payload._id && payload.role) {
-        const response = await updateSingleUser(
-          formData,
-          payload._id,
-          payload.role
-        );
-        if (response.success) {
-          toast.success("user role updated successfully");
+        const res = await updateSingleUser(formData, payload._id, payload.role);
+        if (res.success) {
+          showToast("success", res?.message);
+        } else {
+          showToast("error", res.message);
         }
       }
     } catch (error) {
-      toast.error("an error occuredplease refresh the page");
+      showToast("error", "an error occurred. please try again later");
     } finally {
       setLoading(false);
     }

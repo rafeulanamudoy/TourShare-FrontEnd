@@ -12,20 +12,14 @@ export default async function ChatLists() {
   const user = await getSingleUser();
 
   let convirstationList: IJoinPerson[] = [];
-  //console.log(user.data.email);
-  //console.log(user);
 
   if (!user?.data?.email) {
     return <div>No user found.</div>;
   }
 
   const team = await getSingleTeamByEmail(user?.data?.email);
-  //console.log(team?.data?.joinPeopl, " create team info");
+
   const joinTeam = await getSingleJoinTeam(user?.data?.email);
-
-  //console.log(joinTeam, "join team info");
-
-  //console.log(joinTeam, "convirstation list");
 
   if (team?.data?.joinPeople) {
     convirstationList = team?.data?.joinPeople;

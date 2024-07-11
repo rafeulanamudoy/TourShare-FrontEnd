@@ -65,7 +65,6 @@ export default async function middleware(req: NextRequest) {
         );
       }
     } catch (error) {
-      console.log(error, "check error from middleware");
       const response = NextResponse.next();
       response.cookies.set("accessToken", "", {
         maxAge: -1,

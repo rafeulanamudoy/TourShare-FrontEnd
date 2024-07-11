@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+
 import { ClipLoader } from "react-spinners";
 import { override2 } from "@/utilities/css";
 import { useAppDispatch } from "@/redux/hooks";
@@ -19,6 +19,7 @@ import { setUser } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
 import { useUserData } from "@/hooks/user/user";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { showToast } from "@/utilities/ToastOptions";
 
 export default function UpdateProfile() {
   const [loading, setLoading] = useState(false);
@@ -82,7 +83,7 @@ export default function UpdateProfile() {
         if (res?.success) {
           //console.log(res);
           router.push("/dashboard/profile");
-          toast.success(res.message);
+          showToast("success", res.message);
 
           dispatch(
             setUser({
@@ -93,14 +94,16 @@ export default function UpdateProfile() {
                 name: res?.data?.name,
                 phoneNumber: res?.data?.phoneNumber,
                 _id: res?.data?._id,
+                emailVerified: res?.data?.emailVerified,
               },
             })
           );
+        } else {
+          showToast("error", res.message);
         }
       }
     } catch (error) {
-      // console.log(error, "update page user error");
-      toast.error("An error occurred while updating your profile");
+      showToast("error", "an error occurred. please try again later");
     } finally {
       setLoading(false);
     }
@@ -109,14 +112,6 @@ export default function UpdateProfile() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     setSelectedFiles(files);
-    // const file = event.target.files?.[0];
-    // if (file) {
-    //   const reader = new FileReader();
-    //   reader.onloadend = () => {
-    //     setImagePreview(reader.result as string);
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
   };
   if (isLoading) {
     return null;

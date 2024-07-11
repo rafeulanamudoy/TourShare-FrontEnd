@@ -13,7 +13,7 @@ import {
   verifyEmail,
 } from "@/lib/actions/Server/user";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
-import toast from "react-hot-toast";
+
 import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { showToast } from "@/utilities/ToastOptions";
@@ -30,7 +30,6 @@ export default function VerifyEmail() {
   const [email, setEmail] = useState("");
 
   const search = searchParams.get("token");
-  console.log(search);
 
   const handleVerifyEmail = async () => {
     try {
@@ -64,7 +63,7 @@ export default function VerifyEmail() {
         showToast("error", res.message);
       }
     } catch (error) {
-      showToast("error", "An error occurred. Please try again later");
+      showToast("error", "An error occurred. please try again later");
     } finally {
       sendResendLoading(false);
     }

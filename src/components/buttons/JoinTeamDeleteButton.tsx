@@ -3,11 +3,11 @@ import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 import { deleteSingleJoinTeam } from "@/lib/actions/Server/team";
 import { useAppSelector } from "@/redux/hooks";
 import { useSocketContext } from "@/socket/context/SocketContext";
+import { showToast } from "@/utilities/ToastOptions";
 
-import { faPenSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import toast from "react-hot-toast";
 interface TeamDeleteIdProps {
   id: string;
   teamEmail: string; // Define the type of the location prop
@@ -30,7 +30,8 @@ export default function JoinTeamDeleteButton({
     try {
       const res = await deleteSingleJoinTeam(id);
       if (res.success) {
-        toast.success(res.message);
+        showToast("success", res.message);
+
         const timestamp = new Date().toISOString();
         //console.log(res, "check delete  response");
         sendJoinTeamRequest(
@@ -40,10 +41,10 @@ export default function JoinTeamDeleteButton({
           timestamp
         );
       } else {
-        toast.error(res.message);
+        showToast("error", res.message);
       }
     } catch (error) {
-      toast.error("please try again");
+      showToast("error", "Something Went Wrong Please Try Again!");
     }
   };
   return (

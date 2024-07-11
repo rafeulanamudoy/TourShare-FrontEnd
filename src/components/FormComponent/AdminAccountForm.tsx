@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { ENUM_USER_ROLE, ISuperAdmin } from "@/types/IUser";
 import { signUp } from "@/lib/actions/Server/user";
-import toast from "react-hot-toast";
+
 import { SignUpSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
@@ -20,6 +20,7 @@ import { useAppDispatch } from "@/redux/hooks";
 
 import { useRouter } from "next/navigation";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { showToast } from "@/utilities/ToastOptions";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -56,7 +57,7 @@ export default function AdminAccountForm() {
       const res = await signUp(formData, ENUM_USER_ROLE.ADMIN);
       //   console.log(res);
       if (res?.success) {
-        toast.success(res?.message);
+        showToast("success", res?.message);
         if (res.data) {
           dispatch(
             setUser({
@@ -67,17 +68,17 @@ export default function AdminAccountForm() {
                 name: res?.data?.name,
                 phoneNumber: res?.data?.phoneNumber,
                 _id: res?.data?._id,
+                emailVerified: res?.data?.emailVerified,
               },
             })
           );
           router.push("/");
         }
       } else {
-        toast.error(res?.message);
+        showToast("error", res?.message);
       }
     } catch (error) {
-      //console.error("Error:", error);
-      toast.error("An error occurred while creating the account");
+      showToast("error", "an error occurred. please try again later");
     } finally {
       setLoading(false);
 

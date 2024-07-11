@@ -17,8 +17,6 @@ export default function VerifyReminder() {
   const loaderSize = UseDynamicLoading(buttonRef);
   const [loading, setLoading] = useState(false);
 
-  console.log(email, "check email");
-
   const handleResendEmail = async () => {
     try {
       setLoading(true);
@@ -30,7 +28,7 @@ export default function VerifyReminder() {
         showToast("error", res.message);
       }
     } catch (error) {
-      showToast("error", "An error occurred. Please try again later");
+      showToast("error", "an error occurred. please try again later");
     } finally {
       setLoading(false);
     }

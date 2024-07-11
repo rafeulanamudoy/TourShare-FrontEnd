@@ -1,15 +1,7 @@
 "use client";
-import {
-  ENUM_NOTIFICATION_STATUS,
-  ENUM_NOTIFICATION_TYPE,
-} from "@/enums/notification";
+import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 
-import { createMessage, getMessages } from "@/lib/actions/Server/messages";
-import {
-  addMessage,
-  setMessages,
-} from "@/redux/features/messages/messagesSlice";
-import { addNotification } from "@/redux/features/notifications/notificationsSlice";
+import { addMessage } from "@/redux/features/messages/messagesSlice";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useSocketContext } from "@/socket/context/SocketContext";
@@ -30,8 +22,6 @@ export default function ChatComponent({
   const { sendPrivateMessage, sendUserNotification } = useSocketContext();
   const messageInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null); // Ref for the end of messages container
-
-  console.log("check chat component");
 
   // Function to scroll messages container to the bottom
   const scrollToBottom = () => {

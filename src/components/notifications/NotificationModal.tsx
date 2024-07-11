@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import {
-  clearNotification,
-  markAsRead,
-} from "@/redux/features/notifications/notificationsSlice";
+import { clearNotification } from "@/redux/features/notifications/notificationsSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import AllNotificationHistory from "./AllNotificationHistory";
@@ -32,30 +29,24 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
   const instantNotifications = useAppSelector(
     (state) => state.notifications.notifications as INotification[]
   );
-  console.log(instantNotifications, "instant notification");
+
   const { combinedAllNotifications, combinedUnseenNotifications } =
     useCombinedNotifications(instantNotifications, allNotifications);
 
-  // const { combinedAllNotifications, combinedUnseenNotifications } =
-  //   useCombinedNotifications(instantNotifications, allNotifications);
   const handleNotificationClick = async (
     notificationId: string,
     type: string,
     sender: string
   ) => {
-    // dispatch(markAsRead(notificationId));
     try {
       const result = await updateNotificationStatus(notificationId);
       if (result.success) {
         dispatch(clearNotification());
         dispatch(clearMessage());
       }
-    } catch (error) {
-      console.error("Failed to update notification status:", error);
-    }
+    } catch (error) {}
     onClose();
     if (type === ENUM_NOTIFICATION_TYPE.PRIVATEMESSAGE) {
-      console.log(notificationId, "check notificationid");
       router.push(`/dashboard/messages/${sender}`);
     } else if (type === ENUM_NOTIFICATION_TYPE.JOINTEAMSTATUSUPDATE) {
       router.push("/dashboard/joinTeam");

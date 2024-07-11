@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ISignInData } from "@/types/IUser";
 import { LoginSchema } from "@/lib/validation/yupValidation";
 import { signIn } from "@/lib/actions/Server/user";
-import toast from "react-hot-toast";
+
 import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { useAppDispatch } from "@/redux/hooks";
@@ -41,7 +41,6 @@ export default function UserLogin() {
       setLoading(true);
 
       const res = await signIn(userData);
-      console.log(res, "user loggin response");
 
       if (res?.success) {
         showToast("success", "User Logged In Succesfully");
@@ -60,11 +59,10 @@ export default function UserLogin() {
           })
         );
       } else {
-        const errorMessage = res?.message || "Error message not available";
-        toast.error(errorMessage);
+        showToast("error", res.message);
       }
     } catch (error) {
-      toast.error("an error occured");
+      showToast("error", "an error occurred. please try again later");
     } finally {
       setLoading(false);
 

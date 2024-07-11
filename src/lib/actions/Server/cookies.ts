@@ -1,36 +1,31 @@
 "use server";
 import { cookies } from "next/headers";
 import jwt, { JwtPayload, Secret, TokenExpiredError } from "jsonwebtoken";
-import { NextRequest, NextResponse } from "next/server";
-import { getSingleUserById } from "./user";
+
 export async function verifyToken(token: string, secret: Secret) {
   try {
     return jwt.verify(token, secret) as JwtPayload;
   } catch (error) {
     if (error instanceof TokenExpiredError) {
-      // console.error("token has expired");
     } else {
-      // console.error("error verifieng token ,erro.message");
     }
     return null;
   }
 }
 
 export async function removeCookie(name: string) {
-  console.log(name, "check name");
   cookies().delete(name);
 }
 export async function getCookie(name: string) {
   const cookieStore = cookies();
   const user = cookieStore.get(name);
-  // console.log(user, "user check");
 
   if (user && user.value) {
     const payload = await verifyToken(
       user.value,
       process.env.JWT_SECRET as Secret
     );
-    //console.log(payload, "check payload");
+
     if (payload) {
       const userEmail = payload.userEmail as string;
       const role = payload.role as string;
@@ -42,7 +37,6 @@ export async function getCookie(name: string) {
         _id,
       };
     } else {
-      // Handle case where token verification failed
       return null;
     }
   } else {
@@ -90,13 +84,3 @@ export async function verifyJwt(token: string, secret: string) {
   return decodedPayload;
 }
 //
-export async function deleteCookie() {
-  "use server";
-
-  cookies().delete("accessToken");
-}
-export async function removeUser() {
-  const response = NextResponse.next();
-  response.cookies.delete("accessToken");
-  return response;
-}
