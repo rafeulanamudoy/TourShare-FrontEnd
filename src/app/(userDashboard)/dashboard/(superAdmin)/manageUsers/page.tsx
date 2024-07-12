@@ -1,4 +1,5 @@
-import UserDeleteButton from "@/components/Buttons/UserDeleteButton";
+import DeleteUserButton from "@/components/Buttons/DeleteUserButton";
+
 import UserUpdateButton from "@/components/Buttons/UserUpdateButton";
 import RoleSelect from "@/components/RoleSelect";
 
@@ -59,7 +60,7 @@ export default async function page() {
                   </td>
 
                   <td className=" border border-slate-600  p-2">
-                    <UserDeleteButton id={user._id} />
+                    <DeleteUserButton id={user._id} />
                   </td>
                 </tr>
               ))}

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 interface UserUpdateButtonProps {
   location: string; // Define the type of the location prop
 }
-export default function UserToggoleButton({ location }: UserUpdateButtonProps) {
+export default function ToggoleUseButton({ location }: UserUpdateButtonProps) {
   // console.log(location, "check location");
   const { push } = useRouter();
   return (

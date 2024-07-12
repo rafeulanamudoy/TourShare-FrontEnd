@@ -11,8 +11,8 @@ import { useState } from "react";
 
 import { INotification } from "@/types/INotification";
 
-import useCombinedNotifications from "@/hooks/notifications/useCombinedNotification";
-import NotificationModal from "../Notifications/NotificationModal";
+import NotificationModal from "../NotificationModal";
+import UseCombinedNotifications from "@/hooks/notifications/UseCombineNotifcations";
 
 type NavbarProps = {
   allNotifications: INotification[];
@@ -33,7 +33,7 @@ export default function DashNavBar({ allNotifications }: NavbarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { combinedAllNotifications, combinedUnseenNotifications } =
-    useCombinedNotifications(instantNotifications, allNotifications);
+    UseCombinedNotifications(instantNotifications, allNotifications);
 
   return (
     <div className="bg-white 2xl:text-[25px] xl:text-[15px] lg:text-[12px] text-[8px] px-5 flex items-center justify-between h-36 border-b-2">

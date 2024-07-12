@@ -3,12 +3,14 @@ import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 import { clearNotification } from "@/redux/features/notifications/notificationsSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
-import AllNotificationHistory from "./AllNotificationHistory";
-import UnseenNotificationHistory from "./UnseenNotificationHistory";
+
 import { INotification } from "@/types/INotification";
 import { updateNotificationStatus } from "@/lib/actions/Server/notifications";
-import useCombinedNotifications from "@/hooks/notifications/useCombinedNotification";
+
 import { clearMessage } from "@/redux/features/messages/messagesSlice";
+import AllNotificationHistory from "./Notifications/AllNotificationHistory";
+import UnseenNotificationHistory from "./Notifications/UnseenNotificationHistory";
+import UseCombinedNotifications from "@/hooks/notifications/UseCombineNotifcations";
 
 interface NotificationModalProps {
   allNotifications: INotification[];
@@ -31,7 +33,7 @@ export default function NotificationModal({
   );
 
   const { combinedAllNotifications, combinedUnseenNotifications } =
-    useCombinedNotifications(instantNotifications, allNotifications);
+    UseCombinedNotifications(instantNotifications, allNotifications);
 
   const handleNotificationClick = async (
     notificationId: string,
