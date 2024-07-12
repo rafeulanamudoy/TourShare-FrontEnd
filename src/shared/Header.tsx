@@ -70,7 +70,6 @@ export default function Header() {
             alt="logo"
           />
         </div>
-
         <div className="lg:hidden">
           <button
             className="text-xl font-bold text-black"

@@ -1,20 +1,14 @@
 import Image from "next/image";
 export default function Banner() {
   return (
-    <div>
+    <div style={{ position: "relative", width: "100vw", height: "90vh" }}>
       <Image
-        src={"/images/home.png"}
+        src="/images/home.png"
+        alt="home"
+        layout="fill"
+        objectFit="cover"
+        objectPosition="bottom"
         quality={100}
-        style={{
-          objectFit: "cover",
-          objectPosition: "bottom",
-
-          zIndex: -1,
-          width: "100vw",
-          height: "90vh",
-        }}
-        placeholder="blur"
-        alt={"home"}
       />
     </div>
   );
