@@ -1,4 +1,4 @@
-import JoinTeamButton from "@/components/Buttons/JoinTeamButton";
+import TeamJoinButton from "@/components/Buttons/TeamJoinButton";
 import { getSingleTeamById } from "@/lib/actions/Server/team";
 import { formattedDate } from "@/utilities/TimeFormat";
 import {
@@ -89,7 +89,7 @@ export default async function page({ params }: { params: { slug: string } }) {
             <span>Needed members: {team?.data?.neededMembers}</span>
           </div>
           <div>
-            <JoinTeamButton
+            <TeamJoinButton
               teamId={team?.data?._id}
               status={team?.data?.teamStatus}
             />

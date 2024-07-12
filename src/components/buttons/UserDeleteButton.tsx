@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface TeamDeleteIdProps {
   id: string;
 }
-export default function DeleteUserButton({ id }: TeamDeleteIdProps) {
+export default function UserDeleteButton({ id }: TeamDeleteIdProps) {
   const handleDelete = async () => {
     const confirmed = window.confirm("Are you sure you want to delete?");
     if (!confirmed) {

@@ -16,11 +16,11 @@ interface NotificationModalProps {
   onClose: () => void;
 }
 
-export const NotifyModal: React.FC<NotificationModalProps> = ({
+export default function NotificationModal({
   allNotifications,
 
   onClose,
-}) => {
+}: NotificationModalProps) {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -97,4 +97,4 @@ export const NotifyModal: React.FC<NotificationModalProps> = ({
       </div>
     </div>
   );
-};
+}
