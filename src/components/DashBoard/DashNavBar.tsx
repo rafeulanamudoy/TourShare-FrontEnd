@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import NotificationModal from "@/src/hooks/notifications/NotificationModal";
-import UseCombinedNotifications from "@/src/hooks/notifications/UseCombineNotifcations";
+import NotificationModal from "@/src/hooks/Notifications/NotificationModal";
+import UseCombinedNotifications from "@/src/hooks/Notifications/UseCombineNotifcations";
 import { useRemoveAccount } from "@/src/hooks/user/user";
 import { setToggle } from "@/src/redux/features/toggle/toggleSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";

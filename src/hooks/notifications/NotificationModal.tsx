@@ -2,13 +2,14 @@ import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { INotification } from "@/src/types/INotification";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import UseCombinedNotifications from "./UseCombineNotifcations";
+
 import { updateNotificationStatus } from "@/src/lib/actions/Server/notifications";
 import { clearNotification } from "@/src/redux/features/notifications/notificationsSlice";
 import { clearMessage } from "@/src/redux/features/messages/messagesSlice";
 import { ENUM_NOTIFICATION_TYPE } from "@/src/enums/notification";
 import AllNotificationHistory from "@/src/components/Notifications/AllNotificationHistory";
 import UnseenNotificationHistory from "@/src/components/Notifications/UnseenNotificationHistory";
+import UseCombinedNotifications from "./UseCombineNotifcations";
 
 interface NotificationModalProps {
   allNotifications: INotification[];
