@@ -1,8 +1,8 @@
 import { montserrat } from "@/app/styles/fonts";
-import Sidebar from "@/components/dashboard/Sidebar";
+import Sidebar from "@/components/Dashboard/Sidebar";
 import { getSingleUser } from "@/lib/actions/Server/user";
 
-import Navbar from "@/components/dashboard/Navbar";
+import Navbar from "@/components/Dashboard/Navbar";
 
 import {
   getAllUserNotification,

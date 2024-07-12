@@ -1,4 +1,4 @@
-import JoinTeamButton from "@/components/buttons/JoinTeamButton";
+import JoinTeamButton from "@/components/Buttons/JoinTeamButton";
 import { getSingleTeamById } from "@/lib/actions/Server/team";
 import { formattedDate } from "@/utilities/TimeFormat";
 import {

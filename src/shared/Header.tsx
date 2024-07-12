@@ -12,7 +12,7 @@ import {
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useAppSelector } from "@/redux/hooks";
 import { useRemoveAccount, useUserData } from "@/hooks/user/user";
-import DasboardModal from "@/components/dashboard/DashboardModal";
+import DasboardModal from "@/components/Dashboard/DashboardModal";
 import { ENUM_USER_ROLE } from "@/types/IUser";
 
 export default function Header() {

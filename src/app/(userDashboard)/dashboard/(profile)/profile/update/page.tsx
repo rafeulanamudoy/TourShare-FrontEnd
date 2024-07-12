@@ -1,5 +1,5 @@
-import UserToggoleButton from "@/components/buttons/UserToggoleButton";
-import UpdateProfile from "@/components/dashboard/UpdateProfile";
+import UserToggoleButton from "@/components/Buttons/UserToggoleButton";
+import UpdateProfile from "@/components/Dashboard/UpdateProfile";
 
 export default function page() {
   return (

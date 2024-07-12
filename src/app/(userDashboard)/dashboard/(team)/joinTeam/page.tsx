@@ -1,4 +1,4 @@
-import JoinTeamDeleteButton from "@/components/buttons/JoinTeamDeleteButton";
+import JoinTeamDeleteButton from "@/components/Buttons/JoinTeamDeleteButton";
 
 import { getSingleJoinTeam } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";

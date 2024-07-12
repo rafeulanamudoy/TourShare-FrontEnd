@@ -1,4 +1,3 @@
-import ContactForm from "@/components/formComponent/ContactForm";
 import { dancing_script } from "@/utilities/css";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 
@@ -6,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
 import React from "react";
+import ContactForm from "@/components/FormComponent/ContactForm";
 
 export default function page() {
   return (

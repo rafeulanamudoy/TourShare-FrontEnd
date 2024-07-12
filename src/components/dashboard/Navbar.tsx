@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { NotificationModal } from "../notifications/NotificationModal";
+import { NotificationModal } from "../Notifications/NotificationModal";
 import { INotification } from "@/types/INotification";
 
 import useCombinedNotifications from "@/hooks/notifications/useCombinedNotification";

@@ -1,4 +1,4 @@
-import TeamJoin from "@/components/formComponent/TeamJoin";
+import TeamJoin from "@/components/FormComponent/TeamJoin";
 import SkeletonLoading from "@/components/Loader/SkeletionLoading";
 
 import React, { Suspense } from "react";

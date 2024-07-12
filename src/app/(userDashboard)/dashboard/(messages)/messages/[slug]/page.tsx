@@ -1,5 +1,5 @@
-import ChatComponent from "@/components/chat/ChatComponent";
-import ChatHistory from "@/components/chat/ChatHistory";
+import ChatComponent from "@/components/Chat/ChatComponent";
+import ChatHistory from "@/components/Chat/ChatHistory";
 import { getMessages } from "@/lib/actions/Server/messages";
 import { getSingleUser } from "@/lib/actions/Server/user";
 

@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.2.1",
     "@rooks/use-window-size": "^4.11.2",
+    "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2",

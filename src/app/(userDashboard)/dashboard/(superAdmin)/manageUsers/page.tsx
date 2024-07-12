@@ -1,5 +1,5 @@
-import UpdateUserButton from "@/components/buttons/UpdateUserButton";
-import UserDeleteButton from "@/components/buttons/UserDeleteButton";
+import UpdateUserButton from "@/components/Buttons/UpdateUserButton";
+import UserDeleteButton from "@/components/Buttons/UserDeleteButton";
 import RoleSelect from "@/components/RoleSelect";
 
 import { getAllUsers } from "@/lib/actions/Server/user";

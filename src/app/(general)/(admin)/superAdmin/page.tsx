@@ -1,4 +1,4 @@
-import SupereAdminAccount from "@/components/formComponent/SuperAdminAccount";
+import SupereAdminAccount from "@/components/FormComponent/SuperAdminAccount";
 import React from "react";
 
 export default function page() {

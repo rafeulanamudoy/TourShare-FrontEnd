@@ -1,7 +1,7 @@
 import { getSingleUser } from "@/lib/actions/Server/user";
 
 import Image from "next/image";
-import UserToggoleButton from "../buttons/UserToggoleButton";
+import UserToggoleButton from "../Buttons/UserToggoleButton";
 
 export default async function page() {
   const {

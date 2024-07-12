@@ -1,4 +1,4 @@
-import SignIn from "@/components/formComponent/SignIn";
+import SignIn from "@/components/FormComponent/SignIn";
 import SkeletonLoading from "@/components/Loader/SkeletionLoading";
 
 import { getCookie } from "@/lib/actions/Server/cookies";

@@ -1,4 +1,4 @@
-import PersonalInfo from "@/components/dashboard/PersonalInfo";
+import PersonalInfo from "@/components/Dashboard/PersonalInfo";
 
 export default function page() {
   return (

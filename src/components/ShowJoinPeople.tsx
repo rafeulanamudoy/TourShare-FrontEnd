@@ -3,9 +3,9 @@ import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { ENUM_JOIN_TEAM_STATUS, IAccept } from "@/types/ICreateTeam";
-import TeamAcceptButton from "./buttons/TeamAcceptButton";
+import TeamAcceptButton from "./Buttons/TeamAcceptButton";
 import StatusSelect from "./StatusSelect";
-import TeamMessageButton from "./buttons/TeamMessageButton";
+import TeamMessageButton from "./Buttons/TeamMessageButton";
 
 interface JoinPeopleProps {
   people: IJoinTeam;

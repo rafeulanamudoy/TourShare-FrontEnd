@@ -1,6 +1,6 @@
 import ShowJoinPeople from "@/components/ShowJoinPeople";
-import TeamDeleteButton from "@/components/buttons/TeamDeleteButton";
-import TeamUpdateButton from "@/components/buttons/TeamUpdateButton";
+import TeamDeleteButton from "@/components/Buttons/TeamDeleteButton";
+import TeamUpdateButton from "@/components/Buttons/TeamUpdateButton";
 import { getSingleTeamByEmail } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
 import { IJoinPerson } from "@/types/IJoinTeam";

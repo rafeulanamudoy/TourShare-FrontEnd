@@ -1,4 +1,4 @@
-import CustomerAccount from "@/components/formComponent/CustomerAccount";
+import CustomerAccount from "@/components/FormComponent/CustomerAccount";
 
 export default async function page() {
   return (
