@@ -1,11 +1,12 @@
 "use client";
+import React from "react";
 import { faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 interface UserUpdateButtonProps {
   location: string; // Define the type of the location prop
 }
-export default function ToggoleUseButton({ location }: UserUpdateButtonProps) {
+export default function UserToggoleButton({ location }: UserUpdateButtonProps) {
   // console.log(location, "check location");
   const { push } = useRouter();
   return (

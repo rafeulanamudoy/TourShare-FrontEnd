@@ -1,7 +1,6 @@
+import { useEffect, useState } from "react";
 import { ENUM_NOTIFICATION_STATUS } from "@/src/enums/notification";
 import { INotification } from "@/src/types/INotification";
-import { useEffect, useState } from "react";
-
 export default function UseCombinedNotifications(
   instantNotifications: INotification[],
   fetchedNotifications: INotification[]

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import NotificationModal from "@/src/hooks/Notifications/NotificationModal";
-import UseCombinedNotifications from "@/src/hooks/Notifications/UseCombineNotifcations";
+
 import { useRemoveAccount } from "@/src/hooks/user/user";
 import { setToggle } from "@/src/redux/features/toggle/toggleSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
@@ -11,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import NotificationModal from "../Notifications/NotificationModal";
+import UseCombinedNotifications from "../Notifications/UseCombineNotifcations";
 
 type NavbarProps = {
   allNotifications: INotification[];
