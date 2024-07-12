@@ -14,7 +14,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { useRemoveAccount, useUserData } from "@/hooks/user/user";
 
 import { ENUM_USER_ROLE } from "@/types/IUser";
-import DashModal from "@/components/Dashboard/DashModal";
+import DashBoardModal from "@/components/DashBoard/DashBoardModal";
 
 export default function Header() {
   const { isLoading } = useUserData();
@@ -146,7 +146,7 @@ export default function Header() {
         )}
       </nav>
 
-      <DashModal
+      <DashBoardModal
         isOpen={isModalOpen}
         onClose={toggleModal}
         targetRef={profileImageRef}
@@ -196,7 +196,7 @@ export default function Header() {
             )}
           </nav>
         </div>
-      </DashModal>
+      </DashBoardModal>
     </div>
   );
 }

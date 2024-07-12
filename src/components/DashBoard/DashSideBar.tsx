@@ -30,7 +30,7 @@ interface SidebarItem {
   count?: number; // Optional count property
 }
 
-export default function Sidebar() {
+export default function DashSideBar() {
   const { toggle } = useAppSelector((state) => state.toggle);
   const dispatch = useAppDispatch();
   const pathname = usePathname();

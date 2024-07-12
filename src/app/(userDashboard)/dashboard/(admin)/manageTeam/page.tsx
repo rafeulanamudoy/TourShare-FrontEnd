@@ -1,10 +1,10 @@
-import TeamManage from "@/components/Dashboard/TeamManage";
+import ManageTeam from "@/components/DashBoard/ManageTeam";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <TeamManage />
+      <ManageTeam />
     </div>
   );
 }

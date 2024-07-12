@@ -21,7 +21,7 @@ import { useUserData } from "@/hooks/user/user";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 import { showToast } from "@/utilities/ToastOptions";
 
-export default function UpdateProfile() {
+export default function ProfileUpdate() {
   const [loading, setLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
   const router = useRouter();

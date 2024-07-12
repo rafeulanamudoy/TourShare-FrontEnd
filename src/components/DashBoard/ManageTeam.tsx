@@ -5,7 +5,7 @@ import React from "react";
 import TeamDetailsButton from "../Buttons/TeamDetailsButton";
 import TeamDeleteButton from "../Buttons/TeamDeleteButton";
 
-export default async function TeamManage() {
+export default async function ManageTeam() {
   const data = await getTeams();
 
   return (

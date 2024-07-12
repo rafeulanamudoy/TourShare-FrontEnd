@@ -1,5 +1,5 @@
 import UserToggoleButton from "@/components/Buttons/UserToggoleButton";
-import UpdateProfile from "@/components/Dashboard/UpdateProfile";
+import ProfileUpdate from "@/components/DashBoard/ProfileUpdate";
 
 export default function page() {
   return (
@@ -9,7 +9,7 @@ export default function page() {
         <UserToggoleButton location={"/dashboard/profile"} />
       </div>
 
-      <UpdateProfile />
+      <ProfileUpdate />
     </div>
   );
 }

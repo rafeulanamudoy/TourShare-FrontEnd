@@ -1,14 +1,14 @@
 import { montserrat } from "@/app/styles/fonts";
-import Sidebar from "@/components/Dashboard/Sidebar";
-import { getSingleUser } from "@/lib/actions/Server/user";
 
-import Navbar from "@/components/Dashboard/Navbar";
+import { getSingleUser } from "@/lib/actions/Server/user";
 
 import {
   getAllUserNotification,
   getStatusNotification,
 } from "@/lib/actions/Server/notifications";
 import { ENUM_NOTIFICATION_STATUS } from "@/enums/notification";
+import DashNavBar from "@/components/DashBoard/DashNavBar";
+import DashSideBar from "@/components/DashBoard/DashSideBar";
 
 export default async function DashboardLayout({
   children,
@@ -25,7 +25,7 @@ export default async function DashboardLayout({
   return (
     <section className={`flex flex-row-reverse ${montserrat.className}`}>
       <div className="w-full bg-[#d8dcdd]">
-        <Navbar
+        <DashNavBar
           allNotifications={allNotifs}
           unseenNotifications={unseenNotifs}
         />
@@ -33,7 +33,7 @@ export default async function DashboardLayout({
         <div className="h-auto">{children}</div>
       </div>
       <div className="h-screen">
-        <Sidebar />
+        <DashSideBar />
       </div>
     </section>
   );

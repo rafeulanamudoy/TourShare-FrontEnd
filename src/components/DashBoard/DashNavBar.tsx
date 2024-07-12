@@ -18,7 +18,7 @@ type NavbarProps = {
   unseenNotifications: INotification[];
 };
 
-export default function Navbar({ allNotifications }: NavbarProps) {
+export default function DashNavBar({ allNotifications }: NavbarProps) {
   const handleLogOut = useRemoveAccount();
 
   const dispatch = useAppDispatch();
