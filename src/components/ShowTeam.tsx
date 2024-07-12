@@ -3,9 +3,8 @@ import { ICreateTeam } from "@/types/ICreateTeam";
 
 import React from "react";
 
-import JoinTeamButton from "./Buttons/JoinTeamButton";
-
 import TeamDetailsButton from "./Buttons/TeamDetailsButton";
+import TeamJoinButton from "./Buttons/TeamJoinButton";
 
 export default async function ShowTeam() {
   const data = await getTeams();
@@ -87,7 +86,7 @@ export default async function ShowTeam() {
 
                   {team.teamStatus && (
                     <td className=" border border-slate-600  p-2">
-                      <JoinTeamButton
+                      <TeamJoinButton
                         teamId={team._id}
                         status={team?.teamStatus}
                       />

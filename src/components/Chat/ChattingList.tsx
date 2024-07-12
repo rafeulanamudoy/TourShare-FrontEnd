@@ -6,7 +6,7 @@ import React from "react";
 export type Iconversation = {
   conversations: IJoinPerson[];
 };
-export default function ChatList({ conversations }: Iconversation) {
+export default function ChattingList({ conversations }: Iconversation) {
   const router = useRouter();
   const pathname = usePathname();
 

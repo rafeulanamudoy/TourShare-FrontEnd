@@ -9,7 +9,7 @@ interface NotificationModalProps {
   targetRef: React.RefObject<HTMLDivElement>; // Add targetRef
 }
 
-export default function DasboardModal({
+export default function DashModal({
   isOpen,
   onClose,
   children,

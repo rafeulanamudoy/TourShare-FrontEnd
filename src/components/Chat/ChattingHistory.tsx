@@ -9,7 +9,7 @@ type IChats = {
   };
 };
 
-export default async function ChatHistory({ messages }: IChats) {
+export default async function ChattingHistory({ messages }: IChats) {
   const user = await getSingleUser();
 
   return (

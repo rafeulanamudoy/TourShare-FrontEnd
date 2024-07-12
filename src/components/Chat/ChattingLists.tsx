@@ -6,9 +6,9 @@ import { getSingleUser } from "@/lib/actions/Server/user";
 import { IJoinPerson } from "@/types/IJoinTeam";
 
 import React from "react";
-import ChatList from "./ChatList";
+import ChattingList from "./ChattingList";
 
-export default async function ChatLists() {
+export default async function ChattingLists() {
   const user = await getSingleUser();
 
   let convirstationList: IJoinPerson[] = [];
@@ -29,7 +29,7 @@ export default async function ChatLists() {
 
   return (
     <div className="w-1/3 md:border-r-2  border-black p-4  2xl:text-3xl xl:text-2xl lg:text-base  md:text-xs sm:text-[10px] text-[8px]      md:h-[calc(100vh-144px)]">
-      <ChatList conversations={convirstationList} />
+      <ChattingList conversations={convirstationList} />
     </div>
   );
 }

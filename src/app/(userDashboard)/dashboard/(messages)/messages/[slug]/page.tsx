@@ -1,5 +1,5 @@
-import ChatComponent from "@/components/Chat/ChatComponent";
-import ChatHistory from "@/components/Chat/ChatHistory";
+import ChattingComponent from "@/components/Chat/ChattingComponent";
+import ChattingHistory from "@/components/Chat/ChattingHistory";
 import { getMessages } from "@/lib/actions/Server/messages";
 import { getSingleUser } from "@/lib/actions/Server/user";
 
@@ -17,9 +17,9 @@ export default async function page({ params }: { params: { slug: string } }) {
       </h1>
       <div className=" overflow-y-auto "></div>
       <div className="overflow-y-auto ">
-        <ChatComponent recepient={recepientUser}>
-          <ChatHistory messages={messages} />
-        </ChatComponent>
+        <ChattingComponent recepient={recepientUser}>
+          <ChattingHistory messages={messages} />
+        </ChattingComponent>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ type IRecepient = {
   recepient: string;
 };
 
-export default function ChatComponent({
+export default function ChattingComponent({
   recepient,
   children,
 }: React.PropsWithChildren<IRecepient>) {

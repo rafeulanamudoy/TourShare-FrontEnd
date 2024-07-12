@@ -12,8 +12,9 @@ import {
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useAppSelector } from "@/redux/hooks";
 import { useRemoveAccount, useUserData } from "@/hooks/user/user";
-import DasboardModal from "@/components/Dashboard/DashboardModal";
+
 import { ENUM_USER_ROLE } from "@/types/IUser";
+import DashModal from "@/components/Dashboard/DashModal";
 
 export default function Header() {
   const { isLoading } = useUserData();
@@ -145,7 +146,7 @@ export default function Header() {
         )}
       </nav>
 
-      <DasboardModal
+      <DashModal
         isOpen={isModalOpen}
         onClose={toggleModal}
         targetRef={profileImageRef}
@@ -195,7 +196,7 @@ export default function Header() {
             )}
           </nav>
         </div>
-      </DasboardModal>
+      </DashModal>
     </div>
   );
 }
