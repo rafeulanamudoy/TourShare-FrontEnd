@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import NotificationModal from "@/src/hooks/notifications/NotificationModal";
 import UseCombinedNotifications from "@/src/hooks/notifications/UseCombineNotifcations";
 import { useRemoveAccount } from "@/src/hooks/user/user";
