@@ -23,7 +23,7 @@ const rosario = Rosario({
   display: "swap",
 });
 
-export default function UserLogin() {
+export default function SignIn() {
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);

@@ -1,9 +1,9 @@
-import CreateAccount from "@/components/formComponent/CreateAccount";
+import CustomerAccount from "@/components/formComponent/CustomerAccount";
 
 export default async function page() {
   return (
     <main>
-      <CreateAccount />
+      <CustomerAccount />
     </main>
   );
 }

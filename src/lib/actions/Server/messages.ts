@@ -5,7 +5,7 @@ import { ICreateMessage } from "@/types/IMessage";
 export async function getMessages(senderId: string, recipientId: string) {
   try {
     const response = await fetch(
-      `${process.env.URL}/messages?senderId=${senderId}&recipientId=${recipientId}`
+      `${process.env.NEXT_PUBLIC_FULL_URL}/messages?senderId=${senderId}&recipientId=${recipientId}`
     );
 
     const data = await response.json();
@@ -17,11 +17,14 @@ export async function getMessages(senderId: string, recipientId: string) {
 
 export async function createMessage(data: ICreateMessage) {
   try {
-    const response = await fetch(`${process.env.URL}/messages`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/messages`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
 
     return result;

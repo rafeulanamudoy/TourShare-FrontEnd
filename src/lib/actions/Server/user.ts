@@ -8,11 +8,14 @@ import { revalidateTag } from "next/cache";
 
 export async function signUp(data: FormData, role: string) {
   try {
-    const response = await fetch(`${process.env.URL}/${role}/signUp`, {
-      method: "POST",
-      headers: {},
-      body: data,
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/${role}/signUp`,
+      {
+        method: "POST",
+        headers: {},
+        body: data,
+      }
+    );
 
     const result = await response.json();
 
@@ -25,11 +28,14 @@ export async function signUp(data: FormData, role: string) {
 
 export async function signIn(data: ISignInData) {
   try {
-    const response = await fetch(`${process.env.URL}/users/signIn`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/users/signIn`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
 
     if (result.success && result.data?.accessToken) {
@@ -56,9 +62,12 @@ export async function getSingleUser() {
     const user = await getCookie("accessToken");
     if (user) {
       const { _id } = user;
-      const response = await fetch(`${process.env.URL}/users/${_id}`, {
-        next: { tags: ["update", "verifyEmail"] },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_FULL_URL}/users/${_id}`,
+        {
+          next: { tags: ["update", "verifyEmail"] },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -74,9 +83,12 @@ export async function getSingleUser() {
 }
 export async function getSingleUserById(userId: string) {
   try {
-    const response = await fetch(`${process.env.URL}/users/${userId}`, {
-      next: { tags: ["update", "verifyEmail"] },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/users/${userId}`,
+      {
+        next: { tags: ["update", "verifyEmail"] },
+      }
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -93,11 +105,14 @@ export async function updateSingleUser(
   role: ENUM_USER_ROLE
 ) {
   try {
-    const response = await fetch(`${process.env.URL}/${role}/${id}`, {
-      method: "PATCH",
-      headers: {},
-      body: data,
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/${role}/${id}`,
+      {
+        method: "PATCH",
+        headers: {},
+        body: data,
+      }
+    );
     const result = await response.json();
     revalidateTag("updateUser");
 
@@ -107,9 +122,12 @@ export async function updateSingleUser(
 
 export async function getAllUsers() {
   try {
-    const response = await fetch(`${process.env.URL}/superAdmin/users`, {
-      next: { tags: ["createUser", "updateUser", "deleteSingleUser"] },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/superAdmin/users`,
+      {
+        next: { tags: ["createUser", "updateUser", "deleteSingleUser"] },
+      }
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -123,9 +141,12 @@ export async function getAllUsers() {
 
 export async function deleteSingleUser(id: string) {
   try {
-    const response = await fetch(`${process.env.URL}/superAdmin/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/superAdmin/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     const result = await response.json();
     revalidateTag("deleteSingleUser");
 
@@ -136,7 +157,7 @@ export async function deleteSingleUser(id: string) {
 export async function verifyEmail(token: string) {
   try {
     const response = await fetch(
-      `${process.env.URL}/users/verify-email/?token=${token}`,
+      `${process.env.NEXT_PUBLIC_FULL_URL}/users/verify-email/?token=${token}`,
       {
         method: "PATCH",
       }
@@ -149,11 +170,14 @@ export async function verifyEmail(token: string) {
 }
 export async function resendVerifyEmail(data: { email: string }) {
   try {
-    const response = await fetch(`${process.env.URL}/users/resend-verfyEmail`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/users/resend-verfyEmail`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
     revalidateTag("verifyEmail");
 

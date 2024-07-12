@@ -1,5 +1,6 @@
+import SignIn from "@/components/formComponent/SignIn";
 import SkeletonLoading from "@/components/Loader/SkeletionLoading";
-import UserLogin from "@/components/formComponent/UserLogin";
+
 import { getCookie } from "@/lib/actions/Server/cookies";
 
 import { redirect } from "next/navigation";
@@ -26,7 +27,7 @@ export default async function page(searchParams: {
   return (
     <main>
       <Suspense fallback={<SkeletonLoading />}>
-        <UserLogin />
+        <SignIn />
       </Suspense>
     </main>
   );

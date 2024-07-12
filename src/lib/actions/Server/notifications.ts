@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 export async function getAllUserNotification(user: string) {
   try {
     const response = await fetch(
-      `${process.env.URL}/notification?recipient=${user}`
+      `${process.env.NEXT_PUBLIC_FULL_URL}/notification?recipient=${user}`
     );
 
     const data = await response.json();
@@ -19,7 +19,7 @@ export async function getAllUserNotification(user: string) {
 export async function getStatusNotification(user: string, status: string) {
   try {
     const response = await fetch(
-      `${process.env.URL}/notification?recipient=${user}&status=${status}`
+      `${process.env.NEXT_PUBLIC_FULL_URL}/notification?recipient=${user}&status=${status}`
     );
 
     const data = await response.json();
@@ -31,11 +31,14 @@ export async function getStatusNotification(user: string, status: string) {
 
 export async function createUserNotification(data: NotificationPayload) {
   try {
-    const response = await fetch(`${process.env.URL}/notification`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/notification`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
     revalidateTag("notification");
 
@@ -47,10 +50,13 @@ export async function createUserNotification(data: NotificationPayload) {
 
 export async function updateNotificationStatus(id: string) {
   try {
-    const response = await fetch(`${process.env.URL}/notification/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/notification/${id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const result = await response.json();
     revalidateTag("updateNotification");
 

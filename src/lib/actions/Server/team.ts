@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 
 export async function createTeam(data: ICreateTeam) {
   try {
-    const response = await fetch(`${process.env.URL}/team`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FULL_URL}/team`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -21,7 +21,7 @@ export async function createTeam(data: ICreateTeam) {
 }
 export async function getTeams() {
   try {
-    const response = await fetch(`${process.env.URL}/team`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FULL_URL}/team`, {
       cache: "no-store",
       next: { tags: ["teams", "updateTeam", "acceptTeam", "deleteTeam"] },
     });
@@ -35,19 +35,22 @@ export async function getTeams() {
 }
 export async function getSingleTeamByEmail(email: string) {
   try {
-    const response = await fetch(`${process.env.URL}/team/email/${email}`, {
-      cache: "no-store",
-      next: {
-        tags: [
-          "updateTeam",
-          "teams",
-          "acceptTeam",
-          "joinTeam",
-          "deleteJoinTeam",
-          "deleteTeam",
-        ],
-      },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/team/email/${email}`,
+      {
+        cache: "no-store",
+        next: {
+          tags: [
+            "updateTeam",
+            "teams",
+            "acceptTeam",
+            "joinTeam",
+            "deleteJoinTeam",
+            "deleteTeam",
+          ],
+        },
+      }
+    );
 
     const data = await response.json();
     return data;
@@ -57,19 +60,22 @@ export async function getSingleTeamByEmail(email: string) {
 }
 export async function getSingleTeamById(id: string) {
   try {
-    const response = await fetch(`${process.env.URL}/team/id/${id}`, {
-      cache: "no-store",
-      next: {
-        tags: [
-          "updateTeam",
-          "teams",
-          "acceptTeam",
-          "joinTeam",
-          "deleteJoinTeam",
-          "deleteTeam",
-        ],
-      },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/team/id/${id}`,
+      {
+        cache: "no-store",
+        next: {
+          tags: [
+            "updateTeam",
+            "teams",
+            "acceptTeam",
+            "joinTeam",
+            "deleteJoinTeam",
+            "deleteTeam",
+          ],
+        },
+      }
+    );
 
     const data = await response.json();
     return data;
@@ -79,11 +85,14 @@ export async function getSingleTeamById(id: string) {
 }
 export async function updateSingleTeam(id: string, data: Partial<ICreateTeam>) {
   try {
-    const response = await fetch(`${process.env.URL}/team/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/team/${id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
     revalidateTag("updateTeam");
 
@@ -92,11 +101,14 @@ export async function updateSingleTeam(id: string, data: Partial<ICreateTeam>) {
 }
 export async function createJoinTeam(data: IJoinTeam) {
   try {
-    const response = await fetch(`${process.env.URL}/joinTeam`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/joinTeam`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
     revalidateTag("joinTeam");
 
@@ -107,10 +119,13 @@ export async function createJoinTeam(data: IJoinTeam) {
 }
 export async function getJoinTeams() {
   try {
-    const response = await fetch(`${process.env.URL}/joinTeam`, {
-      cache: "no-store",
-      next: { tags: ["joinTeam", "updateJoinTeam"] },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/joinTeam`,
+      {
+        cache: "no-store",
+        next: { tags: ["joinTeam", "updateJoinTeam"] },
+      }
+    );
 
     const data = await response.json();
 
@@ -121,11 +136,14 @@ export async function getJoinTeams() {
 }
 export async function getSingleJoinTeam(email: string) {
   try {
-    const response = await fetch(`${process.env.URL}/joinTeam/${email}`, {
-      next: {
-        tags: ["joinTeam", "updateJoinTeam", "deleteJoinTeam", "acceptTeam"],
-      },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/joinTeam/${email}`,
+      {
+        next: {
+          tags: ["joinTeam", "updateJoinTeam", "deleteJoinTeam", "acceptTeam"],
+        },
+      }
+    );
 
     const data = await response.json();
     return data;
@@ -138,11 +156,14 @@ export async function updateSingleJoinTeam(
   data: Partial<IJoinTeam>
 ) {
   try {
-    const response = await fetch(`${process.env.URL}/joinTeam/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/joinTeam/${id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
     revalidateTag("updateJoinTeam");
 
@@ -151,9 +172,12 @@ export async function updateSingleJoinTeam(
 }
 export async function deleteSingleJoinTeam(id: string) {
   try {
-    const response = await fetch(`${process.env.URL}/joinTeam/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/joinTeam/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     const result = await response.json();
     revalidateTag("deleteJoinTeam");
 
@@ -162,9 +186,12 @@ export async function deleteSingleJoinTeam(id: string) {
 }
 export async function deleteSingleTeam(id: string) {
   try {
-    const response = await fetch(`${process.env.URL}/team/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/team/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     const result = await response.json();
     revalidateTag("deleteTeam");
 
@@ -173,11 +200,14 @@ export async function deleteSingleTeam(id: string) {
 }
 export async function acceptJoinTeam(id: string, data: IAccept) {
   try {
-    const response = await fetch(`${process.env.URL}/team/accept/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/team/accept/${id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
     revalidateTag("acceptTeam");
 

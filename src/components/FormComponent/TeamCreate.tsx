@@ -20,7 +20,7 @@ import { ICreateTeam } from "@/types/ICreateTeam";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 import { showToast } from "@/utilities/ToastOptions";
 
-export default function CreateTeam() {
+export default function TeamCreate() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 

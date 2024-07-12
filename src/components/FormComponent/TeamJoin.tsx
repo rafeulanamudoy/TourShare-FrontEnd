@@ -20,7 +20,7 @@ import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 import { showToast } from "@/utilities/ToastOptions";
 
-export default function JoinTeam() {
+export default function TeamJoin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const searchParams = useSearchParams();
