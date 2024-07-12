@@ -6,7 +6,7 @@ interface UserJoinTeamProps {
   teamId: string;
   status: string; // Define the type of the location prop
 }
-export default function TeamJoinButton({ teamId, status }: UserJoinTeamProps) {
+export default function JoinTeamButton({ teamId, status }: UserJoinTeamProps) {
   // console.log(location, "check location");
   const { push } = useRouter();
   return (

@@ -16,7 +16,7 @@ interface NotificationModalProps {
   onClose: () => void;
 }
 
-export const NotificationModal: React.FC<NotificationModalProps> = ({
+export const NotifyModal: React.FC<NotificationModalProps> = ({
   allNotifications,
 
   onClose,
@@ -98,5 +98,3 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
     </div>
   );
 };
-
-export default NotificationModal;

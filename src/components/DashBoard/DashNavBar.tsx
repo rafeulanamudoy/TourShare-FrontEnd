@@ -8,10 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { NotificationModal } from "../Notifications/NotificationModal";
+
 import { INotification } from "@/types/INotification";
 
 import useCombinedNotifications from "@/hooks/notifications/useCombinedNotification";
+import { NotifyModal } from "../Notifications/NotifyModal";
 
 type NavbarProps = {
   allNotifications: INotification[];
@@ -73,7 +74,7 @@ export default function DashNavBar({ allNotifications }: NavbarProps) {
         </div>
       </div>
       {isModalOpen && (
-        <NotificationModal
+        <NotifyModal
           allNotifications={combinedAllNotifications}
           unseenNotifications={combinedUnseenNotifications}
           onClose={() => setIsModalOpen(false)}

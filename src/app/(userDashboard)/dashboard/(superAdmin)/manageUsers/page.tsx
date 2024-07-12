@@ -1,5 +1,5 @@
-import UpdateUserButton from "@/components/Buttons/UpdateUserButton";
-import UserDeleteButton from "@/components/Buttons/UserDeleteButton";
+import DeleteUserButton from "@/components/Buttons/DeleteUserButton";
+import UserUpdateButton from "@/components/Buttons/UserUpdateButton";
 import RoleSelect from "@/components/RoleSelect";
 
 import { getAllUsers } from "@/lib/actions/Server/user";
@@ -55,11 +55,11 @@ export default async function page() {
                     <RoleSelect value={user?.role} />
                   </td>
                   <td className=" border border-slate-600 p-2">
-                    <UpdateUserButton payload={user} />
+                    <UserUpdateButton payload={user} />
                   </td>
 
                   <td className=" border border-slate-600  p-2">
-                    <UserDeleteButton id={user._id} />
+                    <DeleteUserButton id={user._id} />
                   </td>
                 </tr>
               ))}

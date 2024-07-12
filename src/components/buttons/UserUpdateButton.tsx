@@ -16,7 +16,7 @@ interface UserProps {
   payload: Partial<IUserSchema>; // Define the type of the location prop
 }
 
-export default function UpdateUserButton({ payload }: UserProps) {
+export default function UserUpdateButton({ payload }: UserProps) {
   const role = useAppSelector((state) => state.toggle.roleValue);
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
