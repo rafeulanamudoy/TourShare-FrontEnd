@@ -16,12 +16,11 @@ import {
   faPeopleRoof,
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
-
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { setToggle } from "@/redux/features/toggle/toggleSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { usePathname } from "next/navigation";
-import { ENUM_USER_ROLE } from "@/types/IUser";
-import { useUserData } from "@/hooks/user/user";
+import { ENUM_USER_ROLE } from "@/src/types/IUser";
+import { useUserData } from "@/src/hooks/user/user";
+import { setToggle } from "@/src/redux/features/toggle/toggleSlice";
 
 interface SidebarItem {
   title: string;

@@ -1,16 +1,15 @@
 "use client";
 
-import { ENUM_NOTIFICATION_STATUS } from "@/enums/notification";
-import { addMessage } from "@/redux/features/messages/messagesSlice";
-import { addNotification } from "@/redux/features/notifications/notificationsSlice";
-
+import { useEffect } from "react";
+import { useAppDispatch } from "../redux/hooks";
+import { useSocketContext } from "./context/SocketContext";
 import {
   MessageNotificationPayload,
   PrivateMessagePayload,
-} from "@/types/ISocket";
-import { useEffect } from "react";
-import { useSocketContext } from "./context/SocketContext";
-import { useAppDispatch } from "@/redux/hooks";
+} from "../types/ISocket";
+import { addMessage } from "../redux/features/messages/messagesSlice";
+import { addNotification } from "../redux/features/notifications/notificationsSlice";
+import { ENUM_NOTIFICATION_STATUS } from "../enums/notification";
 
 export default function SocketListener() {
   const { socket } = useSocketContext();

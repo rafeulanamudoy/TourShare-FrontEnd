@@ -1,7 +1,7 @@
 "use client";
 
-import { IJoinTeamStatus } from "@/types/ICreateTeam";
-import { INotificationType } from "@/types/INotification";
+import { IJoinTeamStatus } from "@/src/types/ICreateTeam";
+import { INotificationType } from "@/src/types/INotification";
 import React, {
   createContext,
   useContext,

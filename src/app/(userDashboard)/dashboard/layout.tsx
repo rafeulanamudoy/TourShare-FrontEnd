@@ -1,14 +1,12 @@
-import { montserrat } from "@/app/styles/fonts";
-
-import { getSingleUser } from "@/lib/actions/Server/user";
-
+import { ENUM_NOTIFICATION_STATUS } from "@/src/enums/notification";
 import {
   getAllUserNotification,
   getStatusNotification,
-} from "@/lib/actions/Server/notifications";
-import { ENUM_NOTIFICATION_STATUS } from "@/enums/notification";
-import DashNavBar from "@/components/DashBoard/DashNavBar";
-import DashSideBar from "@/components/DashBoard/DashSideBar";
+} from "@/src/lib/actions/Server/notifications";
+import { getSingleUser } from "@/src/lib/actions/Server/user";
+import { montserrat } from "../../styles/fonts";
+import DashNavBar from "@/src/components/DashBoard/DashNavBar";
+import DashSideBar from "@/src/components/DashBoard/DashSideBar";
 
 export default async function DashboardLayout({
   children,

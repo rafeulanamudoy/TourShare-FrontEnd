@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSingleUserById } from "./lib/actions/Server/user";
 import { verifyJwt } from "./lib/actions/Server/cookies";
+import { getSingleUserById } from "./lib/actions/Server/user";
 
 const protectedRoutes = [
   "/dashboard",

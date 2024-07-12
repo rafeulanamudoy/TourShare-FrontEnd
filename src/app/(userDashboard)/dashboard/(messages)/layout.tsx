@@ -1,4 +1,4 @@
-import ChattingLists from "@/components/Chat/ChattingLists";
+import ChattingLists from "@/src/components/Chat/ChattingLists";
 
 export default async function MessageLayout({
   children, // will be a page or nested layout

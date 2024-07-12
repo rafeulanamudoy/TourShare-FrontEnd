@@ -1,25 +1,22 @@
 "use client";
 
-import Form from "@/hooks/reactHookForm/Form";
-import Input from "@/hooks/reactHookForm/Input";
-import { updateSingleUser } from "@/lib/actions/Server/user";
-import Image from "next/image";
-
-import { IUpdatedUser } from "@/types/IUser";
+import Form from "@/src/hooks/reactHookForm/Form";
+import Input from "@/src/hooks/reactHookForm/Input";
+import { useUserData } from "@/src/hooks/user/user";
+import { updateSingleUser } from "@/src/lib/actions/Server/user";
+import { setUser } from "@/src/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/src/redux/hooks";
+import { IUpdatedUser } from "@/src/types/IUser";
+import { override2 } from "@/src/utilities/css";
+import { showToast } from "@/src/utilities/ToastOptions";
+import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
 import { faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-
 import { ClipLoader } from "react-spinners";
-import { override2 } from "@/utilities/css";
-import { useAppDispatch } from "@/redux/hooks";
-import { setUser } from "@/redux/features/auth/authSlice";
-import { useRouter } from "next/navigation";
-import { useUserData } from "@/hooks/user/user";
-import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
-import { showToast } from "@/utilities/ToastOptions";
 
 export default function ProfileUpdate() {
   const [loading, setLoading] = useState(false);

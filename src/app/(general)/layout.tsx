@@ -1,7 +1,7 @@
-import Banner from "@/shared/Banner";
-import Header from "@/shared/Header";
+import Header from "@/src/shared/Header";
 import { roboto } from "../styles/fonts";
-import Footer from "@/shared/Footer";
+import Banner from "@/src/shared/Banner";
+import Footer from "@/src/shared/Footer";
 
 export default function BaseLayout({
   children, // will be a page or nested layout

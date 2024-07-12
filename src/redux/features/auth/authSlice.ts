@@ -1,5 +1,5 @@
+import { ENUM_USER_ROLE, IUser } from "@/src/types/IUser";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ENUM_USER_ROLE, IUser } from "../../../types/IUser";
 
 const initialState: IUser = {
   user: {

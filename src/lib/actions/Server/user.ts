@@ -1,7 +1,6 @@
 "use server";
 
-import { ENUM_USER_ROLE, ISignInData } from "@/types/IUser";
-
+import { ENUM_USER_ROLE, ISignInData } from "@/src/types/IUser";
 import { getCookie, setCookie, verifyToken } from "./cookies";
 import { Secret } from "jsonwebtoken";
 import { revalidateTag } from "next/cache";

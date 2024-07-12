@@ -1,11 +1,10 @@
 "use client";
-import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 
-import { addMessage } from "@/redux/features/messages/messagesSlice";
-
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useSocketContext } from "@/socket/context/SocketContext";
-import { formatTimestamp } from "@/utilities/TimeFormat";
+import { ENUM_NOTIFICATION_TYPE } from "@/src/enums/notification";
+import { addMessage } from "@/src/redux/features/messages/messagesSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { useSocketContext } from "@/src/socket/context/SocketContext";
+import { formatTimestamp } from "@/src/utilities/TimeFormat";
 import React, { useEffect, useRef } from "react";
 
 type IRecepient = {

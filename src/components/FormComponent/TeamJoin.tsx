@@ -1,24 +1,21 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-
-import { ENUM_jOIN_TEAM_STATUS, IJoinTeam } from "@/types/IJoinTeam";
-import { useAppSelector } from "@/redux/hooks";
+import { ENUM_NOTIFICATION_TYPE } from "@/src/enums/notification";
+import Form from "@/src/hooks/reactHookForm/Form";
+import Input from "@/src/hooks/reactHookForm/Input";
+import { createJoinTeam } from "@/src/lib/actions/Server/team";
+import { JoinTeamSchema } from "@/src/lib/validation/yupValidation";
+import { useAppSelector } from "@/src/redux/hooks";
+import { useSocketContext } from "@/src/socket/context/SocketContext";
+import { ENUM_jOIN_TEAM_STATUS, IJoinTeam } from "@/src/types/IJoinTeam";
+import { override1 } from "@/src/utilities/css";
+import { showToast } from "@/src/utilities/ToastOptions";
+import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { JoinTeamSchema } from "@/lib/validation/yupValidation";
-import { useForm } from "react-hook-form";
-import Input from "@/hooks/reactHookForm/Input";
-import Form from "@/hooks/reactHookForm/Form";
-
 import { useSearchParams } from "next/navigation";
-import { createJoinTeam } from "@/lib/actions/Server/team";
-
+import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
-import { override1 } from "@/utilities/css";
-import { useSocketContext } from "@/socket/context/SocketContext";
-import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
-import { showToast } from "@/utilities/ToastOptions";
 
 export default function TeamJoin() {
   const [loading, setLoading] = useState(false);

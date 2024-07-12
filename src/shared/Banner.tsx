@@ -1,10 +1,9 @@
-import homeBanner from "../../public/images/home.png";
 import Image from "next/image";
 export default function Banner() {
   return (
     <div>
       <Image
-        src={homeBanner}
+        src={"/images/home.png"}
         quality={100}
         style={{
           objectFit: "cover",

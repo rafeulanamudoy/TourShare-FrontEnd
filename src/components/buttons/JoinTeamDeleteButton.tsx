@@ -1,10 +1,10 @@
 "use client";
-import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import { deleteSingleJoinTeam } from "@/lib/actions/Server/team";
-import { useAppSelector } from "@/redux/hooks";
-import { useSocketContext } from "@/socket/context/SocketContext";
-import { showToast } from "@/utilities/ToastOptions";
 
+import { ENUM_NOTIFICATION_TYPE } from "@/src/enums/notification";
+import { deleteSingleJoinTeam } from "@/src/lib/actions/Server/team";
+import { useAppSelector } from "@/src/redux/hooks";
+import { useSocketContext } from "@/src/socket/context/SocketContext";
+import { showToast } from "@/src/utilities/ToastOptions";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

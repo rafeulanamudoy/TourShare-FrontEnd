@@ -1,11 +1,11 @@
-import { IJoinTeam } from "@/types/IJoinTeam";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { ENUM_JOIN_TEAM_STATUS, IAccept } from "@/types/ICreateTeam";
 import TeamAcceptButton from "./Buttons/TeamAcceptButton";
 import StatusSelect from "./StatusSelect";
 import TeamMessageButton from "./Buttons/TeamMessageButton";
+import { IJoinTeam } from "../types/IJoinTeam";
+import { ENUM_JOIN_TEAM_STATUS, IAccept } from "../types/ICreateTeam";
 
 interface JoinPeopleProps {
   people: IJoinTeam;

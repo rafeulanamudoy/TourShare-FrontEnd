@@ -1,10 +1,10 @@
-import { useAppDispatch } from "@/redux/hooks";
-import { setUser } from "@/redux/features/auth/authSlice";
-import { ENUM_USER_ROLE, IUpdatedUser } from "@/types/IUser";
-import { removeCookie } from "@/lib/actions/Server/cookies";
+import { removeCookie } from "@/src/lib/actions/Server/cookies";
+import { getSingleUser } from "@/src/lib/actions/Server/user";
+import { setUser } from "@/src/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/src/redux/hooks";
+import { ENUM_USER_ROLE, IUpdatedUser } from "@/src/types/IUser";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getSingleUser } from "@/lib/actions/Server/user";
 
 export const useRemoveAccount = () => {
   const dispatch = useAppDispatch();

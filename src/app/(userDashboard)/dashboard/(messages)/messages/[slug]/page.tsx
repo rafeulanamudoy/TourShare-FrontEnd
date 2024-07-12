@@ -1,7 +1,7 @@
-import ChattingComponent from "@/components/Chat/ChattingComponent";
-import ChattingHistory from "@/components/Chat/ChattingHistory";
-import { getMessages } from "@/lib/actions/Server/messages";
-import { getSingleUser } from "@/lib/actions/Server/user";
+import ChattingComponent from "@/src/components/Chat/ChattingComponent";
+import ChattingHistory from "@/src/components/Chat/ChattingHistory";
+import { getMessages } from "@/src/lib/actions/Server/messages";
+import { getSingleUser } from "@/src/lib/actions/Server/user";
 
 export default async function page({ params }: { params: { slug: string } }) {
   const recepientUser = decodeURIComponent(params.slug);

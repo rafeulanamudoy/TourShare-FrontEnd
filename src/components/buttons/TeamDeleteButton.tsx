@@ -1,12 +1,10 @@
 "use client";
 
-import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import { deleteSingleTeam } from "@/lib/actions/Server/team";
-
-import { useSocketContext } from "@/socket/context/SocketContext";
-import { IJoinTeam } from "@/types/IJoinTeam";
-import { showToast } from "@/utilities/ToastOptions";
-
+import { ENUM_NOTIFICATION_TYPE } from "@/src/enums/notification";
+import { deleteSingleTeam } from "@/src/lib/actions/Server/team";
+import { useSocketContext } from "@/src/socket/context/SocketContext";
+import { IJoinTeam } from "@/src/types/IJoinTeam";
+import { showToast } from "@/src/utilities/ToastOptions";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

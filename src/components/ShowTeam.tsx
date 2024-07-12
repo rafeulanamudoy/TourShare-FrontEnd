@@ -1,10 +1,9 @@
-import { getTeams } from "@/lib/actions/Server/team";
-import { ICreateTeam } from "@/types/ICreateTeam";
-
 import React from "react";
 
 import TeamDetailsButton from "./Buttons/TeamDetailsButton";
 import JoinTeamButton from "./Buttons/JoinTeamButton";
+import { getTeams } from "../lib/actions/Server/team";
+import { ICreateTeam } from "../types/ICreateTeam";
 
 export default async function ShowTeam() {
   const data = await getTeams();

@@ -1,6 +1,6 @@
 "use server";
 
-import { ICreateMessage } from "@/types/IMessage";
+import { ICreateMessage } from "@/src/types/IMessage";
 
 export async function getMessages(senderId: string, recipientId: string) {
   try {

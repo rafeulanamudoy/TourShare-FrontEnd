@@ -1,6 +1,6 @@
 "use client";
 
-import { IJoinPerson } from "@/types/IJoinTeam";
+import { IJoinPerson } from "@/src/types/IJoinTeam";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 export type Iconversation = {

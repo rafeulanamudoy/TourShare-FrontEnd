@@ -1,28 +1,23 @@
 "use client";
 
-import Form from "@/hooks/reactHookForm/Form";
-import Input from "@/hooks/reactHookForm/Input";
-
-import { IUpdatedUser } from "@/types/IUser";
-
-import { useRef, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-
-import { ClipLoader } from "react-spinners";
-import { override2 } from "@/utilities/css";
-
-import { ICreateTeam } from "@/types/ICreateTeam";
+import { ENUM_NOTIFICATION_TYPE } from "@/src/enums/notification";
+import Form from "@/src/hooks/reactHookForm/Form";
+import Input from "@/src/hooks/reactHookForm/Input";
 import {
   getSingleTeamByEmail,
   updateSingleTeam,
-} from "@/lib/actions/Server/team";
+} from "@/src/lib/actions/Server/team";
+import { useSocketContext } from "@/src/socket/context/SocketContext";
+import { ICreateTeam } from "@/src/types/ICreateTeam";
+import { IJoinTeam } from "@/src/types/IJoinTeam";
+import { IUpdatedUser } from "@/src/types/IUser";
+import { override2 } from "@/src/utilities/css";
+import { showToast } from "@/src/utilities/ToastOptions";
+import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
 import { useRouter } from "next/navigation";
-import { useSocketContext } from "@/socket/context/SocketContext";
-
-import { IJoinTeam } from "@/types/IJoinTeam";
-import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
-import { showToast } from "@/utilities/ToastOptions";
+import { useRef, useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
+import { ClipLoader } from "react-spinners";
 
 interface ITeamProps {
   team: ICreateTeam;

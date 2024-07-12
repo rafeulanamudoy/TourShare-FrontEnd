@@ -1,18 +1,16 @@
 "use client";
 
-import { useRemoveAccount } from "@/hooks/user/user";
-import { setToggle } from "@/redux/features/toggle/toggleSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import NotificationModal from "@/src/hooks/notifications/NotificationModal";
+import UseCombinedNotifications from "@/src/hooks/notifications/UseCombineNotifcations";
+import { useRemoveAccount } from "@/src/hooks/user/user";
+import { setToggle } from "@/src/redux/features/toggle/toggleSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { INotification } from "@/src/types/INotification";
 import { faBars, faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
-import { INotification } from "@/types/INotification";
-
-import UseCombinedNotifications from "@/hooks/notifications/UseCombineNotifcations";
-import NotificationModal from "@/hooks/notifications/NotificationModal";
 
 type NavbarProps = {
   allNotifications: INotification[];

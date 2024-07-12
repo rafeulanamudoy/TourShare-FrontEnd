@@ -1,7 +1,6 @@
 "use server";
 
-import { IContactData } from "@/types/IContact";
-
+import { IContactData } from "@/src/types/IContact";
 import { revalidateTag } from "next/cache";
 
 export async function getContacts() {

@@ -4,21 +4,17 @@ import React, { useRef, useState } from "react";
 
 import ClipLoader from "react-spinners/ClipLoader";
 
-import Input from "@/hooks/reactHookForm/Input";
-import Form from "@/hooks/reactHookForm/Form";
 import { useFieldArray, useForm } from "react-hook-form";
-
+import { useAppSelector } from "@/src/redux/hooks";
+import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import { CreateTeamSchema } from "@/lib/validation/yupValidation";
-import { override1 } from "@/utilities/css";
-
-import { useAppSelector } from "@/redux/hooks";
-import { createTeam } from "@/lib/actions/Server/team";
-import { ICreateTeam } from "@/types/ICreateTeam";
-
-import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
-import { showToast } from "@/utilities/ToastOptions";
+import { CreateTeamSchema } from "@/src/lib/validation/yupValidation";
+import { createTeam } from "@/src/lib/actions/Server/team";
+import { showToast } from "@/src/utilities/ToastOptions";
+import { ICreateTeam } from "@/src/types/ICreateTeam";
+import Input from "@/src/hooks/reactHookForm/Input";
+import Form from "@/src/hooks/reactHookForm/Form";
+import { override1 } from "@/src/utilities/css";
 
 export default function TeamCreate() {
   const [loading, setLoading] = useState(false);

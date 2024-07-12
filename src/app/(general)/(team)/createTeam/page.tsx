@@ -1,4 +1,4 @@
-import TeamCreate from "@/components/FormComponent/TeamCreate";
+import TeamCreate from "@/src/components/FormComponent/TeamCreate";
 import React from "react";
 
 export default function page() {

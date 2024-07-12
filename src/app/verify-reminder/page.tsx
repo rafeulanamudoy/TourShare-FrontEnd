@@ -1,9 +1,9 @@
 "use client";
-import { resendVerifyEmail } from "@/lib/actions/Server/user";
 
-import { override1 } from "@/utilities/css";
-import { showToast } from "@/utilities/ToastOptions";
-import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
+import { resendVerifyEmail } from "@/src/lib/actions/Server/user";
+import { override1 } from "@/src/utilities/css";
+import { showToast } from "@/src/utilities/ToastOptions";
+import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useRef, useState } from "react";
 

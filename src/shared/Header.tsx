@@ -10,11 +10,10 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { useAppSelector } from "@/redux/hooks";
-import { useRemoveAccount, useUserData } from "@/hooks/user/user";
-
-import { ENUM_USER_ROLE } from "@/types/IUser";
-import DashBoardModal from "@/components/DashBoard/DashBoardModal";
+import { useRemoveAccount, useUserData } from "../hooks/user/user";
+import { useAppSelector } from "../redux/hooks";
+import DashBoardModal from "../components/DashBoard/DashBoardModal";
+import { ENUM_USER_ROLE } from "../types/IUser";
 
 export default function Header() {
   const { isLoading } = useUserData();

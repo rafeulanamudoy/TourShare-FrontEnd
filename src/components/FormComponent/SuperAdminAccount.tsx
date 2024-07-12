@@ -4,22 +4,20 @@ import React, { useRef, useState } from "react";
 
 import ClipLoader from "react-spinners/ClipLoader";
 import { Rosario as Rosario } from "next/font/google";
-import Input from "@/hooks/reactHookForm/Input";
-import Form from "@/hooks/reactHookForm/Form";
+
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import { ENUM_USER_ROLE, ISuperAdmin } from "@/types/IUser";
-import { signUp } from "@/lib/actions/Server/user";
-
-import { SuperAdminSchema } from "@/lib/validation/yupValidation";
-import { override1 } from "@/utilities/css";
-import { setUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
-
-import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
-import { showToast } from "@/utilities/ToastOptions";
+import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
+import { useAppDispatch } from "@/src/redux/hooks";
+import { SuperAdminSchema } from "@/src/lib/validation/yupValidation";
+import { ENUM_USER_ROLE, ISuperAdmin } from "@/src/types/IUser";
+import { signUp } from "@/src/lib/actions/Server/user";
+import { setUser } from "@/src/redux/features/auth/authSlice";
+import { showToast } from "@/src/utilities/ToastOptions";
+import Input from "@/src/hooks/reactHookForm/Input";
+import Form from "@/src/hooks/reactHookForm/Form";
+import { override1 } from "@/src/utilities/css";
 
 const rosario = Rosario({
   subsets: ["latin"],

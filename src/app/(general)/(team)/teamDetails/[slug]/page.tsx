@@ -1,6 +1,6 @@
-import JoinTeamButton from "@/components/Buttons/JoinTeamButton";
-import { getSingleTeamById } from "@/lib/actions/Server/team";
-import { formattedDate } from "@/utilities/TimeFormat";
+import JoinTeamButton from "@/src/components/Buttons/JoinTeamButton";
+import { getSingleTeamById } from "@/src/lib/actions/Server/team";
+import { formattedDate } from "@/src/utilities/TimeFormat";
 import {
   faCalendarDays,
   faCoins,

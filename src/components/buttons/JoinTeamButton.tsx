@@ -1,6 +1,6 @@
 "use client";
 
-import { TeamStatus } from "@/types/ICreateTeam";
+import { TeamStatus } from "@/src/types/ICreateTeam";
 import { useRouter } from "next/navigation";
 interface UserJoinTeamProps {
   teamId: string;

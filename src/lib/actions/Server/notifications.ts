@@ -1,6 +1,6 @@
 "use server";
 
-import { NotificationPayload } from "@/types/INotification";
+import { NotificationPayload } from "@/src/types/INotification";
 import { revalidateTag } from "next/cache";
 
 export async function getAllUserNotification(user: string) {

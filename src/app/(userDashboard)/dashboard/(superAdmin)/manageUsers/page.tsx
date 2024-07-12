@@ -1,10 +1,8 @@
-import DeleteUserButton from "@/components/Buttons/DeleteUserButton";
-
-import UserUpdateButton from "@/components/Buttons/UserUpdateButton";
-import RoleSelect from "@/components/RoleSelect";
-
-import { getAllUsers } from "@/lib/actions/Server/user";
-import { IUserSchema } from "@/types/IUser";
+import DeleteUserButton from "@/src/components/Buttons/DeleteUserButton";
+import UserUpdateButton from "@/src/components/Buttons/UserUpdateButton";
+import RoleSelect from "@/src/components/RoleSelect";
+import { getAllUsers } from "@/src/lib/actions/Server/user";
+import { IUserSchema } from "@/src/types/IUser";
 
 export default async function page() {
   const users = await getAllUsers();

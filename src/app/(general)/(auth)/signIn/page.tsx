@@ -1,8 +1,6 @@
-import SignIn from "@/components/FormComponent/SignIn";
-import SkeletonLoading from "@/components/Loader/SkeletionLoading";
-
-import { getCookie } from "@/lib/actions/Server/cookies";
-
+import SignIn from "@/src/components/FormComponent/SignIn";
+import SkeletonLoading from "@/src/components/Loader/SkeletionLoading";
+import { getCookie } from "@/src/lib/actions/Server/cookies";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 

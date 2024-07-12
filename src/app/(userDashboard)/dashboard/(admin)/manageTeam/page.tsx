@@ -1,5 +1,4 @@
-import ManageTeam from "@/components/DashBoard/ManageTeam";
-import React from "react";
+import ManageTeam from "@/src/components/DashBoard/ManageTeam";
 
 export default function page() {
   return (

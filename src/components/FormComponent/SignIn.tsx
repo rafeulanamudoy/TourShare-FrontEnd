@@ -1,22 +1,19 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { Rosario } from "next/font/google";
-import Input from "@/hooks/reactHookForm/Input";
-import Form from "@/hooks/reactHookForm/Form";
+import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
+import { useAppDispatch } from "@/src/redux/hooks";
 import { useForm } from "react-hook-form";
-
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import { ISignInData } from "@/types/IUser";
-import { LoginSchema } from "@/lib/validation/yupValidation";
-import { signIn } from "@/lib/actions/Server/user";
-
+import { ISignInData } from "@/src/types/IUser";
+import { LoginSchema } from "@/src/lib/validation/yupValidation";
+import { signIn } from "@/src/lib/actions/Server/user";
+import { showToast } from "@/src/utilities/ToastOptions";
+import { setUser } from "@/src/redux/features/auth/authSlice";
+import Form from "@/src/hooks/reactHookForm/Form";
+import Input from "@/src/hooks/reactHookForm/Input";
 import { ClipLoader } from "react-spinners";
-import { override1 } from "@/utilities/css";
-import { useAppDispatch } from "@/redux/hooks";
-import { setUser } from "@/redux/features/auth/authSlice";
-import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
-import { showToast } from "@/utilities/ToastOptions";
+import { override1 } from "@/src/utilities/css";
 
 const rosario = Rosario({
   subsets: ["latin"],

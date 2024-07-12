@@ -1,15 +1,10 @@
-import TeamJoin from "@/components/FormComponent/TeamJoin";
-import SkeletonLoading from "@/components/Loader/SkeletionLoading";
-
-import React, { Suspense } from "react";
+import TeamJoin from "@/src/components/FormComponent/TeamJoin";
 
 export default function page() {
   return (
     <div>
       <main>
-        <Suspense fallback={<SkeletonLoading />}>
-          <TeamJoin />
-        </Suspense>
+        <TeamJoin />
       </main>
     </div>
   );

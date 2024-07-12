@@ -1,7 +1,6 @@
-import UpdateTeam from "@/components/FormComponent/UpdateTeam";
-import { getSingleTeamByEmail } from "@/lib/actions/Server/team";
-import { getSingleUser } from "@/lib/actions/Server/user";
-import React from "react";
+import UpdateTeam from "@/src/components/FormComponent/UpdateTeam";
+import { getSingleTeamByEmail } from "@/src/lib/actions/Server/team";
+import { getSingleUser } from "@/src/lib/actions/Server/user";
 
 export default async function page() {
   const {

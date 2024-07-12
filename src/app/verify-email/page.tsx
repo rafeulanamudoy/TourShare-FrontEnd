@@ -6,16 +6,16 @@ import React, { useRef, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
+import { ClipLoader } from "react-spinners";
+import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
 import {
   getSingleUser,
   resendVerifyEmail,
   verifyEmail,
-} from "@/lib/actions/Server/user";
-import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
-
-import { ClipLoader } from "react-spinners";
-import { override1 } from "@/utilities/css";
-import { showToast } from "@/utilities/ToastOptions";
+} from "@/src/lib/actions/Server/user";
+import { showToast } from "@/src/utilities/ToastOptions";
+import { override1 } from "@/src/utilities/css";
 
 export default function VerifyEmail() {
   const searchParams = useSearchParams();

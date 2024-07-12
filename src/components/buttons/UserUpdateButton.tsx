@@ -1,13 +1,11 @@
 "use client";
 
-import { updateSingleUser } from "@/lib/actions/Server/user";
-import { useAppSelector } from "@/redux/hooks";
-
-import { IUserSchema } from "@/types/IUser";
-import { override2 } from "@/utilities/css";
-import { showToast } from "@/utilities/ToastOptions";
-import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
-
+import { updateSingleUser } from "@/src/lib/actions/Server/user";
+import { useAppSelector } from "@/src/redux/hooks";
+import { IUserSchema } from "@/src/types/IUser";
+import { override2 } from "@/src/utilities/css";
+import { showToast } from "@/src/utilities/ToastOptions";
+import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
 import { useRef, useState } from "react";
 
 import { ClipLoader } from "react-spinners";

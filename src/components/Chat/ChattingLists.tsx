@@ -1,12 +1,11 @@
+import React from "react";
+import ChattingList from "./ChattingList";
+import { getSingleUser } from "@/src/lib/actions/Server/user";
+import { IJoinPerson } from "@/src/types/IJoinTeam";
 import {
   getSingleJoinTeam,
   getSingleTeamByEmail,
-} from "@/lib/actions/Server/team";
-import { getSingleUser } from "@/lib/actions/Server/user";
-import { IJoinPerson } from "@/types/IJoinTeam";
-
-import React from "react";
-import ChattingList from "./ChattingList";
+} from "@/src/lib/actions/Server/team";
 
 export default async function ChattingLists() {
   const user = await getSingleUser();

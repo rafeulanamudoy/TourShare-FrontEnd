@@ -1,7 +1,6 @@
-import JoinTeamDeleteButton from "@/components/Buttons/JoinTeamDeleteButton";
-
-import { getSingleJoinTeam } from "@/lib/actions/Server/team";
-import { getSingleUser } from "@/lib/actions/Server/user";
+import JoinTeamDeleteButton from "@/src/components/Buttons/JoinTeamDeleteButton";
+import { getSingleJoinTeam } from "@/src/lib/actions/Server/team";
+import { getSingleUser } from "@/src/lib/actions/Server/user";
 
 export default async function page() {
   const {

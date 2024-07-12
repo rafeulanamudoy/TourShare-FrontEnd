@@ -1,8 +1,7 @@
+import { ENUM_JOIN_TEAM_STATUS } from "@/src/types/ICreateTeam";
+import { IToggle } from "@/src/types/IToggle";
+import { ENUM_USER_ROLE } from "@/src/types/IUser";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-import { IToggle } from "@/types/IToggle";
-import { ENUM_JOIN_TEAM_STATUS } from "@/types/ICreateTeam";
-import { ENUM_USER_ROLE } from "@/types/IUser";
 
 const initialState: IToggle = {
   toggle: false,

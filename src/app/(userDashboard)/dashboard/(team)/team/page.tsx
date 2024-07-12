@@ -1,11 +1,10 @@
-import ShowJoinPeople from "@/components/ShowJoinPeople";
-import TeamDeleteButton from "@/components/Buttons/TeamDeleteButton";
-import TeamUpdateButton from "@/components/Buttons/TeamUpdateButton";
-import { getSingleTeamByEmail } from "@/lib/actions/Server/team";
-import { getSingleUser } from "@/lib/actions/Server/user";
-import { IJoinPerson } from "@/types/IJoinTeam";
-import { formattedDate } from "@/utilities/TimeFormat";
-import React from "react";
+import TeamDeleteButton from "@/src/components/Buttons/TeamDeleteButton";
+import TeamUpdateButton from "@/src/components/Buttons/TeamUpdateButton";
+import ShowJoinPeople from "@/src/components/ShowJoinPeople";
+import { getSingleTeamByEmail } from "@/src/lib/actions/Server/team";
+import { getSingleUser } from "@/src/lib/actions/Server/user";
+import { IJoinPerson } from "@/src/types/IJoinTeam";
+import { formattedDate } from "@/src/utilities/TimeFormat";
 
 export default async function page() {
   const {

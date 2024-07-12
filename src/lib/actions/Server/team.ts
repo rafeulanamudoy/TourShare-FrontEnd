@@ -1,7 +1,7 @@
 "use server";
 
-import { IAccept, ICreateTeam } from "@/types/ICreateTeam";
-import { IJoinTeam } from "@/types/IJoinTeam";
+import { IAccept, ICreateTeam } from "@/src/types/ICreateTeam";
+import { IJoinTeam } from "@/src/types/IJoinTeam";
 import { revalidateTag } from "next/cache";
 
 export async function createTeam(data: ICreateTeam) {

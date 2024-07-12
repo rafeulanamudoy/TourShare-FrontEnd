@@ -1,11 +1,11 @@
 "use client";
 
-import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import { acceptJoinTeam } from "@/lib/actions/Server/team";
-import { useAppSelector } from "@/redux/hooks";
-import { useSocketContext } from "@/socket/context/SocketContext";
-import { IAccept } from "@/types/ICreateTeam";
-import { showToast } from "@/utilities/ToastOptions";
+import { ENUM_NOTIFICATION_TYPE } from "@/src/enums/notification";
+import { acceptJoinTeam } from "@/src/lib/actions/Server/team";
+import { useAppSelector } from "@/src/redux/hooks";
+import { useSocketContext } from "@/src/socket/context/SocketContext";
+import { IAccept } from "@/src/types/ICreateTeam";
+import { showToast } from "@/src/utilities/ToastOptions";
 
 interface UserJoinTeamProps {
   payload: IAccept; // Define the type of the location prop

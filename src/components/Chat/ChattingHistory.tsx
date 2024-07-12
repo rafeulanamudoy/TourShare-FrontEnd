@@ -1,7 +1,7 @@
+import { getSingleUser } from "@/src/lib/actions/Server/user";
+import { ImessageResponse } from "@/src/types/IMessage";
+import { formatTimestamp } from "@/src/utilities/TimeFormat";
 import React from "react";
-import { ImessageResponse } from "@/types/IMessage";
-import { getSingleUser } from "@/lib/actions/Server/user";
-import { formatTimestamp } from "@/utilities/TimeFormat";
 
 type IChats = {
   messages: {

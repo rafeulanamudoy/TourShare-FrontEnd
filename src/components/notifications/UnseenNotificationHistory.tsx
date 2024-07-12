@@ -1,6 +1,6 @@
-import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import { INotification } from "@/types/INotification";
-import { formatTimeDifference } from "@/utilities/TimeFormat";
+import { ENUM_NOTIFICATION_TYPE } from "@/src/enums/notification";
+import { INotification } from "@/src/types/INotification";
+import { formatTimeDifference } from "@/src/utilities/TimeFormat";
 import React from "react";
 interface NotificationHistoryProps {
   notifications: INotification[];

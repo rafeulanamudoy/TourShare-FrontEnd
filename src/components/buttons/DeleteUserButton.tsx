@@ -1,9 +1,7 @@
 "use client";
 
-import { deleteSingleUser } from "@/lib/actions/Server/user";
-
-import { showToast } from "@/utilities/ToastOptions";
-
+import { deleteSingleUser } from "@/src/lib/actions/Server/user";
+import { showToast } from "@/src/utilities/ToastOptions";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

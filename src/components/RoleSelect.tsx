@@ -1,10 +1,9 @@
 "use client";
 
 import React, { ChangeEvent } from "react";
-
-import { useAppDispatch } from "@/redux/hooks";
-import { setToggoleRole } from "@/redux/features/toggle/toggleSlice";
-import { ENUM_USER_ROLE } from "@/types/IUser";
+import { useAppDispatch } from "../redux/hooks";
+import { ENUM_USER_ROLE } from "../types/IUser";
+import { setToggoleRole } from "../redux/features/toggle/toggleSlice";
 
 interface RoleSelectProps {
   value: string;

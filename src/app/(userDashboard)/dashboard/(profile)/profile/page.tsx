@@ -1,5 +1,5 @@
-import ToggoleUseButton from "@/components/Buttons/ToggoleUserButton";
-import { getSingleUser } from "@/lib/actions/Server/user";
+import ToggoleUseButton from "@/src/components/Buttons/ToggoleUserButton";
+import { getSingleUser } from "@/src/lib/actions/Server/user";
 import Image from "next/image";
 
 export default async function page() {

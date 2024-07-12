@@ -1,4 +1,4 @@
-import ShowTeam from "@/components/ShowTeam";
+import ShowTeam from "@/src/components/ShowTeam";
 
 export default function page() {
   // console.log("render home component");

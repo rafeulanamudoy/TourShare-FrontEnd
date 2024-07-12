@@ -1,5 +1,5 @@
-import { ENUM_NOTIFICATION_STATUS } from "@/enums/notification";
-import { INotification } from "@/types/INotification";
+import { ENUM_NOTIFICATION_STATUS } from "@/src/enums/notification";
+import { INotification } from "@/src/types/INotification";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export type INotificationType = "privateMessage" | "joinTeam" | "createTeam";
 export type INotificationStatus = "seen" | "unseen";
