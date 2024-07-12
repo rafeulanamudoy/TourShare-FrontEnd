@@ -11,8 +11,8 @@ import { useState } from "react";
 
 import { INotification } from "@/types/INotification";
 
-import NotificationModal from "../NotificationModal";
 import UseCombinedNotifications from "@/hooks/notifications/UseCombineNotifcations";
+import NotificationModal from "@/hooks/notifications/NotificationModal";
 
 type NavbarProps = {
   allNotifications: INotification[];

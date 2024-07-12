@@ -8,9 +8,10 @@ import { INotification } from "@/types/INotification";
 import { updateNotificationStatus } from "@/lib/actions/Server/notifications";
 
 import { clearMessage } from "@/redux/features/messages/messagesSlice";
-import AllNotificationHistory from "./Notifications/AllNotificationHistory";
-import UnseenNotificationHistory from "./Notifications/UnseenNotificationHistory";
+
 import UseCombinedNotifications from "@/hooks/notifications/UseCombineNotifcations";
+import AllNotificationHistory from "@/components/Notifications/AllNotificationHistory";
+import UnseenNotificationHistory from "@/components/Notifications/UnseenNotificationHistory";
 
 interface NotificationModalProps {
   allNotifications: INotification[];
