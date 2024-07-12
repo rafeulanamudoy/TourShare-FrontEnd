@@ -1,20 +1,14 @@
 "use client";
 
-import {
-  ENUM_NOTIFICATION_STATUS,
-  ENUM_NOTIFICATION_TYPE,
-} from "@/enums/notification";
+import { ENUM_NOTIFICATION_STATUS } from "@/enums/notification";
 import { addMessage } from "@/redux/features/messages/messagesSlice";
-import {
-  addNotification,
-  setNotification,
-} from "@/redux/features/notifications/notificationsSlice";
+import { addNotification } from "@/redux/features/notifications/notificationsSlice";
 
 import {
   MessageNotificationPayload,
   PrivateMessagePayload,
 } from "@/types/ISocket";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSocketContext } from "./context/SocketContext";
 import { useAppDispatch } from "@/redux/hooks";
 
@@ -57,11 +51,11 @@ export default function SocketListener() {
           })
         );
       };
+
       const handleTeamRequest = ({
         from,
         message,
         timestamp,
-
         _id,
         type,
       }: MessageNotificationPayload) => {
@@ -76,11 +70,11 @@ export default function SocketListener() {
           })
         );
       };
+
       const handleJoinTeamRequest = ({
         from,
         message,
         timestamp,
-
         _id,
         type,
       }: MessageNotificationPayload) => {
@@ -95,11 +89,11 @@ export default function SocketListener() {
           })
         );
       };
+
       const handleUpdateCreateTeam = ({
         from,
         message,
         timestamp,
-
         _id,
         type,
       }: MessageNotificationPayload) => {
@@ -114,11 +108,11 @@ export default function SocketListener() {
           })
         );
       };
+
       const handleDeleteCreateTeam = ({
         from,
         message,
         timestamp,
-
         _id,
         type,
       }: MessageNotificationPayload) => {
@@ -133,13 +127,14 @@ export default function SocketListener() {
           })
         );
       };
+
       socket.on("privateMessage", handlePrivateMessage);
       socket.on("notification", handleNotification);
-
       socket.on("teamRequest", handleTeamRequest);
       socket.on("JoinTeamRequest", handleJoinTeamRequest);
       socket.on("updateCreateTeam", handleUpdateCreateTeam);
       socket.on("deleteCreateTeam", handleDeleteCreateTeam);
+
       return () => {
         socket.off("privateMessage", handlePrivateMessage);
         socket.off("notification", handleNotification);
@@ -149,6 +144,7 @@ export default function SocketListener() {
         socket.off("deleteCreateTeam", handleDeleteCreateTeam);
       };
     }
+    return undefined; // Explicitly return undefined if socket is undefined
   }, [socket, dispatch]);
 
   return null;

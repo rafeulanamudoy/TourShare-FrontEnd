@@ -33,7 +33,7 @@ export default function JoinTeam() {
     const handleAsyncOp = async () => {
       const hash = window.location.hash;
 
-      const [path, queryString] = hash.split("?");
+      const [, queryString] = hash.split("?");
       if (queryString) {
         const params = new URLSearchParams(queryString);
         const joinId = params.get("joinId");

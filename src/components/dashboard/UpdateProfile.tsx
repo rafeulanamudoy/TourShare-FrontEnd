@@ -33,13 +33,12 @@ export default function UpdateProfile() {
   const loaderSize = UseDynamicLoading(buttonRef);
   const onSubmit = async (userValue: IUpdatedUser) => {
     const formData = new FormData();
-    //console.log(userValue, "check data");
+
     if (
       userData &&
       userValue.name.firstName.length > 0 &&
       !userValue.name.lastName
     ) {
-      //console.log(userValue?.name.lastName, "lastName check");
       formData.append("name[firstName]", userValue.name.firstName);
       formData.append("name[lastName]", userData.name.lastName);
     }
@@ -48,7 +47,6 @@ export default function UpdateProfile() {
       userValue.name.lastName.length > 0 &&
       !userValue.name.firstName
     ) {
-      // console.log(userValue?.name.firstName, "firstName check");
       formData.append("name[lastName]", userValue.name.lastName);
       formData.append("name[firstName]", userData.name.firstName);
     }
@@ -56,7 +54,6 @@ export default function UpdateProfile() {
       userValue.name.firstName.length > 0 &&
       userValue.name.lastName.length > 0
     ) {
-      //  console.log(userValue?.name.firstName, "firstName check");
       formData.append("name[firstName]", userValue.name.firstName);
       formData.append("name[lastName]", userValue.name.lastName);
     }
@@ -81,7 +78,6 @@ export default function UpdateProfile() {
           userData?.role
         );
         if (res?.success) {
-          //console.log(res);
           router.push("/dashboard/profile");
           showToast("success", res.message);
 

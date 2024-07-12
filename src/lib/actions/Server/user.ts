@@ -64,10 +64,9 @@ export async function getSingleUser() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      // Parse JSON response
+
       return data;
     } else {
-      ///  console.log("user access token not found");
     }
   } catch (error) {
     throw error;
@@ -82,7 +81,7 @@ export async function getSingleUserById(userId: string) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    // Parse JSON response
+
     return data;
   } catch (error) {
     throw error;
@@ -101,7 +100,7 @@ export async function updateSingleUser(
     });
     const result = await response.json();
     revalidateTag("updateUser");
-    //console.log(result);
+
     return result;
   } catch (error) {}
 }
@@ -115,7 +114,7 @@ export async function getAllUsers() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    // Parse JSON response
+
     return data;
   } catch (error) {
     throw error;
@@ -157,7 +156,7 @@ export async function resendVerifyEmail(data: { email: string }) {
     });
     const result = await response.json();
     revalidateTag("verifyEmail");
-    // console.log(result);
+
     return result;
   } catch (error) {}
 }

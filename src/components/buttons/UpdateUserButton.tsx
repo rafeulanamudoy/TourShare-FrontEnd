@@ -1,12 +1,8 @@
 "use client";
 
-import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
-import { useUserData } from "@/hooks/user/user";
-import { acceptJoinTeam, getSingleJoinTeam } from "@/lib/actions/Server/team";
 import { updateSingleUser } from "@/lib/actions/Server/user";
 import { useAppSelector } from "@/redux/hooks";
-import { useSocketContext } from "@/socket/context/SocketContext";
-import { IAccept } from "@/types/ICreateTeam";
+
 import { IUserSchema } from "@/types/IUser";
 import { override2 } from "@/utilities/css";
 import { showToast } from "@/utilities/ToastOptions";

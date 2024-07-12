@@ -1,12 +1,9 @@
 "use client";
 
 import React, { ChangeEvent } from "react";
-import { ENUM_JOIN_TEAM_STATUS } from "@/types/ICreateTeam";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  setToggleTeamRequest,
-  setToggoleRole,
-} from "@/redux/features/toggle/toggleSlice";
+
+import { useAppDispatch } from "@/redux/hooks";
+import { setToggoleRole } from "@/redux/features/toggle/toggleSlice";
 import { ENUM_USER_ROLE } from "@/types/IUser";
 
 interface RoleSelectProps {

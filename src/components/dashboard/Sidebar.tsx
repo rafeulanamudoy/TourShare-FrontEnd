@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
-import logo from "/public/images/logo.png";
+
+import React from "react";
 
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,7 +39,6 @@ export default function Sidebar() {
   const notifications = useAppSelector(
     (state) => state.notifications.notifications
   );
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const commonSidebarItems: SidebarItem[] = [
     { title: "Profile", url: "/dashboard/profile", icon: faUser },
@@ -100,7 +99,7 @@ export default function Sidebar() {
       <div className="md:border-b-2 h-36 flex items-center justify-center">
         <Image
           className=""
-          src={logo}
+          src={"/images/logo.png"}
           style={{
             width: `${toggle ? "70px" : "150px"}`,
             height: "auto",
@@ -110,7 +109,7 @@ export default function Sidebar() {
         />
       </div>
       <div className="mt-5 2xl:text-[25px] xl:text-[15px] lg:text-[12px] text-[8px] grid gap-y-5">
-        {allSidebarItems.map(({ title, url, icon, count }) => (
+        {allSidebarItems.map(({ title, url, icon }) => (
           <Link
             className={`${
               isActive(url) ? "bg-[#FF914F] " : ""

@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent } from "react";
 import { ENUM_JOIN_TEAM_STATUS } from "@/types/ICreateTeam";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { setToggleTeamRequest } from "@/redux/features/toggle/toggleSlice";
 
 interface StatusSelectProps {

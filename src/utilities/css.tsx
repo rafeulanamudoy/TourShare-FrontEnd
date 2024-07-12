@@ -1,4 +1,4 @@
-import { Dancing_Script, Rosario as Rosario } from "next/font/google";
+import { Dancing_Script } from "next/font/google";
 import { CSSProperties } from "react";
 
 export const override1: CSSProperties = {

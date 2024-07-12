@@ -3,7 +3,7 @@ import TeamDeleteButton from "@/components/buttons/TeamDeleteButton";
 import TeamUpdateButton from "@/components/buttons/TeamUpdateButton";
 import { getSingleTeamByEmail } from "@/lib/actions/Server/team";
 import { getSingleUser } from "@/lib/actions/Server/user";
-import { IJoinPerson, IJoinTeam } from "@/types/IJoinTeam";
+import { IJoinPerson } from "@/types/IJoinTeam";
 import { formattedDate } from "@/utilities/TimeFormat";
 import React from "react";
 

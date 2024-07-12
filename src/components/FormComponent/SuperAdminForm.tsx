@@ -18,7 +18,6 @@ import { override1 } from "@/utilities/css";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 
-import { useRouter } from "next/navigation";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 import { showToast } from "@/utilities/ToastOptions";
 
@@ -28,7 +27,6 @@ const rosario = Rosario({
 });
 
 export default function SupereAdminForm() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);

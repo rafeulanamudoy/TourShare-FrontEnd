@@ -5,7 +5,6 @@ import { IJoinTeam } from "@/types/IJoinTeam";
 import { revalidateTag } from "next/cache";
 
 export async function createTeam(data: ICreateTeam) {
-  //console.log(data, "create team data");
   try {
     const response = await fetch(`${process.env.URL}/team`, {
       method: "POST",
@@ -17,7 +16,6 @@ export async function createTeam(data: ICreateTeam) {
 
     return result;
   } catch (error) {
-    // console.log(error, "from team.ts");
     throw error;
   }
 }
@@ -29,14 +27,13 @@ export async function getTeams() {
     });
 
     const data = await response.json();
-    // console.log(data, "check data from server");
+
     return data;
   } catch (error) {
     throw error;
   }
 }
 export async function getSingleTeamByEmail(email: string) {
-  //console.log(email, "check email");
   try {
     const response = await fetch(`${process.env.URL}/team/email/${email}`, {
       cache: "no-store",
@@ -89,14 +86,11 @@ export async function updateSingleTeam(id: string, data: Partial<ICreateTeam>) {
     });
     const result = await response.json();
     revalidateTag("updateTeam");
-    //console.log(result);
+
     return result;
-  } catch (error) {
-    // console.log(error, "update user error from  user.ts server file");
-  }
+  } catch (error) {}
 }
 export async function createJoinTeam(data: IJoinTeam) {
-  //console.log(data, "create team data");
   try {
     const response = await fetch(`${process.env.URL}/joinTeam`, {
       method: "POST",
@@ -108,7 +102,6 @@ export async function createJoinTeam(data: IJoinTeam) {
 
     return result;
   } catch (error) {
-    // console.log(error, "from team.ts");
     throw error;
   }
 }
@@ -120,7 +113,7 @@ export async function getJoinTeams() {
     });
 
     const data = await response.json();
-    // console.log(data, "check data from server");
+
     return data;
   } catch (error) {
     throw error;
@@ -152,11 +145,9 @@ export async function updateSingleJoinTeam(
     });
     const result = await response.json();
     revalidateTag("updateJoinTeam");
-    //console.log(result);
+
     return result;
-  } catch (error) {
-    // console.log(error, "update user error from  user.ts server file");
-  }
+  } catch (error) {}
 }
 export async function deleteSingleJoinTeam(id: string) {
   try {
@@ -165,11 +156,9 @@ export async function deleteSingleJoinTeam(id: string) {
     });
     const result = await response.json();
     revalidateTag("deleteJoinTeam");
-    // console.log(result);
+
     return result;
-  } catch (error) {
-    // console.log(error, "update user error from  user.ts server file");
-  }
+  } catch (error) {}
 }
 export async function deleteSingleTeam(id: string) {
   try {
@@ -178,11 +167,9 @@ export async function deleteSingleTeam(id: string) {
     });
     const result = await response.json();
     revalidateTag("deleteTeam");
-    // console.log(result);
+
     return result;
-  } catch (error) {
-    // console.log(error, "update user error from  user.ts server file");
-  }
+  } catch (error) {}
 }
 export async function acceptJoinTeam(id: string, data: IAccept) {
   try {
@@ -193,9 +180,7 @@ export async function acceptJoinTeam(id: string, data: IAccept) {
     });
     const result = await response.json();
     revalidateTag("acceptTeam");
-    //  console.log(result);
+
     return result;
-  } catch (error) {
-    //  console.log(error, "update user error from  user.ts server file");
-  }
+  } catch (error) {}
 }

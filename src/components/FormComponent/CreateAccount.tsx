@@ -16,8 +16,6 @@ import { signUp } from "@/lib/actions/Server/user";
 import { SignUpSchema } from "@/lib/validation/yupValidation";
 import { override1 } from "@/utilities/css";
 
-import { useAppSelector } from "@/redux/hooks";
-
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 import { showToast } from "@/utilities/ToastOptions";
 
@@ -30,7 +28,7 @@ export default function CreateAccount() {
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
-  const { user } = useAppSelector((state) => state.auth);
+
   const [message, setMessage] = useState("");
 
   const {

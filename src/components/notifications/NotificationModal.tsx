@@ -18,7 +18,7 @@ interface NotificationModalProps {
 
 export const NotificationModal: React.FC<NotificationModalProps> = ({
   allNotifications,
-  unseenNotifications,
+
   onClose,
 }) => {
   const dispatch = useAppDispatch();

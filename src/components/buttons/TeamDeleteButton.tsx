@@ -2,12 +2,12 @@
 
 import { ENUM_NOTIFICATION_TYPE } from "@/enums/notification";
 import { deleteSingleTeam } from "@/lib/actions/Server/team";
-import { useAppSelector } from "@/redux/hooks";
+
 import { useSocketContext } from "@/socket/context/SocketContext";
 import { IJoinTeam } from "@/types/IJoinTeam";
 import { showToast } from "@/utilities/ToastOptions";
 
-import { faPenSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface TeamDeleteIdProps {
@@ -17,7 +17,6 @@ interface TeamDeleteIdProps {
 export default function TeamDeleteButton({ id }: TeamDeleteIdProps) {
   // console.log(location, "check location");
 
-  const { email } = useAppSelector((state) => state.auth.user);
   const { sendDeleteCreateTeamNotifiy } = useSocketContext();
 
   const handleDelete = async () => {

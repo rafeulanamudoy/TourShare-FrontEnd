@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ENUM_USER_ROLE, IUser } from "../../../types/IUser";
-import { stat } from "fs";
 
 const initialState: IUser = {
   user: {
@@ -25,8 +24,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, { payload }: PayloadAction<IUser>) => {
-      // console.log(payload, "i am from authSlice");
-
       state.user.email = payload.user.email;
       state.user.role = payload.user.role;
       state.user.profileImage = payload.user.profileImage;

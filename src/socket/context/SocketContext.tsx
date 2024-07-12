@@ -1,9 +1,7 @@
 "use client";
-import { createMessage } from "@/lib/actions/Server/messages";
-import { createUserNotification } from "@/lib/actions/Server/notifications";
-import { useAppSelector } from "@/redux/hooks";
-import { ENUM_JOIN_TEAM_STATUS, IJoinTeamStatus } from "@/types/ICreateTeam";
-import { INotificationStatus, INotificationType } from "@/types/INotification";
+
+import { IJoinTeamStatus } from "@/types/ICreateTeam";
+import { INotificationType } from "@/types/INotification";
 import React, {
   createContext,
   useContext,
@@ -58,7 +56,7 @@ interface SocketContextProps {
 
 interface SocketProviderProps {
   email: string;
-  children: ReactNode; // Add this line to type the children prop
+  children: ReactNode;
 }
 
 const SocketContext = createContext<SocketContextProps | undefined>(undefined);
@@ -78,7 +76,6 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
   const [isConnected, setIsConnected] = useState(false);
   const [transport, setTransport] = useState("N/A");
   const [socket, setSocket] = useState<Socket | null>(null);
-  const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
     const socketInstance: Socket = io(`${process.env.NEXT_PUBLIC_URL}`, {
@@ -97,20 +94,20 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
       setTransport(socketInstance.io.engine.transport.name);
     }
 
-    function onDisconnect(reason: string) {
+    function onDisconnect(_reason: string) {
       setIsConnected(false);
       setTransport("N/A");
     }
 
-    function onError(error: any) {}
+    function onError(_error: any) {}
 
     socketInstance.on("connect", onConnect);
     socketInstance.on("disconnect", onDisconnect);
     socketInstance.on("error", onError);
     socketInstance.on("connect_error", onError);
-    socketInstance.on("reconnect_attempt", (attempt) => {});
+    socketInstance.on("reconnect_attempt", (_attempt) => {});
     socketInstance.on("reconnect_failed", () => {});
-    socketInstance.on("reconnect_error", (error) => {});
+    socketInstance.on("reconnect_error", (_error) => {});
 
     return () => {
       socketInstance.off("connect", onConnect);

@@ -1,16 +1,16 @@
 "use client";
 
-import { useRemoveAccount, useUserData } from "@/hooks/user/user";
+import { useRemoveAccount } from "@/hooks/user/user";
 import { setToggle } from "@/redux/features/toggle/toggleSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { faBars, faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NotificationModal } from "../notifications/NotificationModal";
 import { INotification } from "@/types/INotification";
-import { ENUM_NOTIFICATION_STATUS } from "@/enums/notification";
+
 import useCombinedNotifications from "@/hooks/notifications/useCombinedNotification";
 
 type NavbarProps = {
@@ -18,12 +18,9 @@ type NavbarProps = {
   unseenNotifications: INotification[];
 };
 
-export default function Navbar({
-  allNotifications,
-  unseenNotifications,
-}: NavbarProps) {
+export default function Navbar({ allNotifications }: NavbarProps) {
   const handleLogOut = useRemoveAccount();
-  const { isLoading } = useUserData();
+
   const dispatch = useAppDispatch();
   const { profileImage } = useAppSelector((state) => state.auth.user);
   const instantNotifications = useAppSelector(

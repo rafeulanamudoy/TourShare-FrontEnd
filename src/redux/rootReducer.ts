@@ -5,8 +5,6 @@ import toggleSlice from "./features/toggle/toggleSlice";
 import messagesSlice from "./features/messages/messagesSlice";
 import notificationsSlice from "./features/notifications/notificationsSlice";
 
-// import slices
-
 const rootReducer = combineReducers({
   auth: authSlice,
   toggle: toggleSlice,

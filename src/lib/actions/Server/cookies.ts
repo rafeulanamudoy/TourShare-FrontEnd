@@ -44,7 +44,6 @@ export async function getCookie(name: string) {
   }
 }
 export async function setCookie(name: string, value: string) {
-  // console.log(name, value, "check to set cookie from cookie.ts file");
   cookies().set({
     name: name,
     value: value,

@@ -2,11 +2,10 @@
 
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
-import { roboto } from "../styles/fonts";
-import Header from "@/shared/Header";
+import React, { useRef, useState } from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
   getSingleUser,
   resendVerifyEmail,
@@ -17,7 +16,6 @@ import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";
 import { ClipLoader } from "react-spinners";
 import { override1 } from "@/utilities/css";
 import { showToast } from "@/utilities/ToastOptions";
-import { useAppSelector } from "@/redux/hooks";
 
 export default function VerifyEmail() {
   const searchParams = useSearchParams();
@@ -27,16 +25,12 @@ export default function VerifyEmail() {
   const [resendLoading, sendResendLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
-  const [email, setEmail] = useState("");
-
-  const search = searchParams.get("token");
 
   const handleVerifyEmail = async () => {
     try {
       setVerifyLoading(true);
       const res = await verifyEmail(token as string);
-      const user = await getSingleUser();
-      setEmail(user?.data?.email);
+
       if (res?.success) {
         showToast("success", res?.message);
         router.push("/signIn#signIn");

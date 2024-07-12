@@ -20,7 +20,6 @@ export async function getContacts() {
 }
 
 export async function createContact(data: IContactData) {
-  //console.log(data, "create team data");
   try {
     const response = await fetch(`${process.env.URL}/contact`, {
       method: "POST",
@@ -32,7 +31,6 @@ export async function createContact(data: IContactData) {
 
     return result;
   } catch (error) {
-    // console.log(error, "from team.ts");
     throw error;
   }
 }

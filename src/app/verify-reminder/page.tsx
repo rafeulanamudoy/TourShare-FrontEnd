@@ -1,6 +1,6 @@
 "use client";
-import { resendVerifyEmail, verifyEmail } from "@/lib/actions/Server/user";
-import { useAppSelector } from "@/redux/hooks";
+import { resendVerifyEmail } from "@/lib/actions/Server/user";
+
 import { override1 } from "@/utilities/css";
 import { showToast } from "@/utilities/ToastOptions";
 import { UseDynamicLoading } from "@/utilities/UseDynamicLoading";

@@ -6,7 +6,7 @@ import { addMessage } from "@/redux/features/messages/messagesSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useSocketContext } from "@/socket/context/SocketContext";
 import { formatTimestamp } from "@/utilities/TimeFormat";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 type IRecepient = {
   recepient: string;
