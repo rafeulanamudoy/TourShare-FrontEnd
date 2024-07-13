@@ -24,7 +24,7 @@ export default async function ShowTeam() {
       <div className=" ">
         <table className=" mx-auto  my-5 table-auto    border-collapse border border-slate-400 ">
           <thead
-            className="    2xl:text-xl  xl:text-base lg:text-xs  md:text-[10px]    sm:text-[8px] text-[4px]
+            className="    2xl:text-xl  xl:text-base lg:text-xs  md:text-[10px]    text-[7px] 
            "
           >
             <tr className=" ">
@@ -52,7 +52,7 @@ export default async function ShowTeam() {
 
               return (
                 <tr
-                  className=" border  2xl:text-lg xl:text-base lg:text-xs    md:text-[8px]  sm:text-[6px]    text-[3px] border-slate-600 text-center"
+                  className=" border  2xl:text-lg xl:text-base lg:text-xs    md:text-[8px]  text-[6px]     border-slate-600 text-center"
                   key={team._id}
                 >
                   <td className=" border border-slate-600 p-2">
