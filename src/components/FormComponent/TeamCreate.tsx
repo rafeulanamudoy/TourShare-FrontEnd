@@ -75,17 +75,17 @@ export default function TeamCreate() {
   return (
     <div
       id="createTeam"
-      className={` flex  flex-col  justify-center items-center  py-16   gap-y-16  h-auto  bg-[#FF914F]`}
+      className={`  py-5   flex  flex-col  justify-center items-center       bg-[#FF914F]`}
     >
       <span
-        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[30px] text-[20px] w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
+        className={` mb-5   uppercase 2xl:text-[70px] xl:text-[50px]  lg:text-[40px]  md:text-[30px] sm:text-[20px] text-[15px] w-[80%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[120px] xl:h-[110x] lg:h-[80px] md:h-[70px] sm:h-[60px] h-[40px]  mx-auto  grid justify-center items-center  `}
       >
         Create Team
       </span>
 
       <Form
-        className="  2xl:text-5xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-xs  text-[8px] capitalizecapitalize   text-white grid gap-y-16
-         items-center    md:w-[70%]   "
+        className="  2xl:text-4xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-xs  text-[8px] capitalize   text-white grid 2xl:gap-y-16 xl:gap-y-14 lg:gap-y-12 md:gap-y-10 sm:gap-y-6 gap-y-4
+         items-center    md:w-[75%]  w-[90%] "
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         register={register}
@@ -231,7 +231,7 @@ export default function TeamCreate() {
           </div>
         </div>{" "}
         <div className="    grid    grid-cols-12  justify-center items-center   ">
-          <label className=" col-span-2 grid gap-y-3" htmlFor="address">
+          <label className=" col-span-2 grid " htmlFor="address">
             Address
           </label>
           <div className="     col-span-10  ">
@@ -247,10 +247,7 @@ export default function TeamCreate() {
           </div>
         </div>
         <div className="  grid    grid-cols-12  justify-center items-center   ">
-          <label
-            className=" col-span-2 grid gap-y-3"
-            htmlFor="nationalIdNumber"
-          >
+          <label className=" col-span-2 grid " htmlFor="nationalIdNumber">
             <span>NationalId </span>
             <span>Number</span>
           </label>
@@ -270,13 +267,13 @@ export default function TeamCreate() {
           <div className="col-span-2"></div>
           <div className="col-span-10 ">
             <label
-              className="  block  mb-16 text-center   2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[30px] text-[20px]  uppercase   text-[#2E4262]    "
+              className="  block  2xl:mb-16 xl:mb-14 lg:mb-12 md:mb-10 sm:mb-6 mb-4 text-center    2xl:text-[70px] xl:text-[50px]  lg:text-[40px]  md:text-[30px] sm:text-[20px] text-[15px]   uppercase   text-[#2E4262]    "
               htmlFor="teamDetails"
             >
               Team Details
             </label>
 
-            <div className="   grid  grid-cols-2   gap-16 ">
+            <div className="   grid  grid-cols-2   2xl:gap-16 xl:gap-14 lg:gap-12 md:gap-10 sm:gap-6 gap-4">
               <div className="grid gap-y-5">
                 <label className="   " htmlFor="depurture">
                   Depurture
@@ -345,7 +342,7 @@ export default function TeamCreate() {
               </div>
             </div>
 
-            <div className="mt-16 gap-y-16 grid">
+            <div className=" 2xl:mt-16 xl:mt-14 lg:mt-12 md:mt-10 sm:mt-6 mt-4 2xl:gap-y-16 xl:gap-y-14 lg:gap-y-12 md:gap-y-10 sm:gap-y-6 gap-y-4 grid">
               <div className="grid  gap-y-5">
                 <label className="   " htmlFor="description">
                   Team Description

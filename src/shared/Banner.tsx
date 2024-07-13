@@ -4,9 +4,13 @@ export default function Banner() {
   return (
     <div
       style={{
-        position: "relative",
-        width: "100vw",
-        height: "90vh",
+        objectFit: "cover",
+        objectPosition: "bottom",
+
+        zIndex: -1,
+        width: "100%",
+
+        height: "100vh",
       }}
     >
       <Image
