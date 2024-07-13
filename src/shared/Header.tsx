@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import logo from "@/public/images/logo.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -66,8 +67,9 @@ export default function Header() {
             width={500}
             height={300}
             sizes="100vw"
-            src={"/images/logo.png"}
+            src={logo}
             alt="logo"
+            placeholder="blur"
           />
         </div>
         <div className="lg:hidden">

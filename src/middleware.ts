@@ -11,6 +11,7 @@ const protectedRoutes = [
   "/dashboard/createAdmin",
   "/createTeam",
   "/joinTeam",
+  "/contact",
 ];
 const publicRoutes = ["/signIn", "/signUp"];
 

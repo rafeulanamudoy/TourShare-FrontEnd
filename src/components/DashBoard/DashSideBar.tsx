@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-
+import logo from "@/public/images/logo.png";
 import React from "react";
 
 import Link from "next/link";
@@ -41,12 +41,6 @@ export default function DashSideBar() {
 
   const commonSidebarItems: SidebarItem[] = [
     { title: "Profile", url: "/dashboard/profile", icon: faUser },
-    {
-      title: "Message",
-      url: "/dashboard/messages",
-      icon: faMessage,
-      count: notifications.length,
-    },
   ];
 
   // Define role-specific sidebar items
@@ -56,6 +50,12 @@ export default function DashSideBar() {
     [ENUM_USER_ROLE.CUSTOMER]: [
       { title: "Your team", url: "/dashboard/team", icon: faPeopleGroup },
       { title: "Join Team", url: "/dashboard/joinTeam", icon: faPeopleArrows },
+      {
+        title: "Message",
+        url: "/dashboard/messages",
+        icon: faMessage,
+        count: notifications.length,
+      },
     ],
     [ENUM_USER_ROLE.SUPER_ADMIN]: [
       {
@@ -98,12 +98,11 @@ export default function DashSideBar() {
       <div className="md:border-b-2 h-36 flex items-center justify-center">
         <Image
           className=""
-          src={"/images/logo.png"}
+          src={logo}
           style={{
             width: `${toggle ? "70px" : "150px"}`,
             height: "auto",
           }}
-          placeholder="blur"
           alt="logo"
         />
       </div>
