@@ -1,5 +1,4 @@
 "use client";
-
 import React, { ReactNode, useEffect, useRef } from "react";
 
 interface NotificationModalProps {
@@ -38,12 +37,12 @@ export default function DashBoardModal({
 
   return (
     <div
-      className=" mt-5  fixed inset-0  flex items-center justify-center z-50"
+      className="fixed inset-0 flex items-center justify-center z-50"
       onClick={handleClickOutside}
     >
       <div
         ref={modalRef}
-        className="absolute      rounded-md  bg-[#2e4262] p-5  shadow-lg z-60"
+        className="absolute z-60 rounded-md bg-[#2e4262] p-5 shadow-lg "
       >
         {children}
       </div>

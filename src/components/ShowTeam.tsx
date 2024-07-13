@@ -10,12 +10,12 @@ export default async function ShowTeam() {
 
   return (
     <div className="uppercase">
-      <div className="grid  gap-y-5   ">
-        <h1 className=" text-[#0C264C] 2xl:text-8xl xl:text-6xl   lg:text-4xl sm:text-3xl text-2xl text-center">
+      <div className="grid  lg:gap-y-5   gap-y-2 ">
+        <h1 className=" text-[#0C264C] 2xl:text-8xl xl:text-6xl   lg:text-4xl sm:text-2xl text-xl text-center">
           Groups
         </h1>
         <p
-          className="  text-[#0C264C]  2xl:text-4xl xl:text-3xl lg:text-xl sm:text-lg  text-base text-center  underline   "
+          className="  text-[#0C264C]  2xl:text-4xl xl:text-3xl lg:text-xl sm:text-base  text-sm text-center  underline   "
           style={{ textUnderlineOffset: "0.4em", margin: "1rem" }}
         >
           Connect with your perfect match
@@ -24,7 +24,7 @@ export default async function ShowTeam() {
       <div className=" ">
         <table className=" mx-auto  my-5 table-auto    border-collapse border border-slate-400 ">
           <thead
-            className="    2xl:text-xl xl:text-lg lg:text-base  md:text-sm    sm:text-[8px] text-[4px]
+            className="    2xl:text-xl  xl:text-base lg:text-xs  md:text-[10px]    sm:text-[8px] text-[4px]
            "
           >
             <tr className=" ">

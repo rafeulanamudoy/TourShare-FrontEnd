@@ -30,6 +30,7 @@ export default function Header() {
   };
 
   const toggleModal = () => {
+    console.log("Profile image clicked");
     setModalOpen((prev) => !prev);
   };
 
@@ -39,7 +40,7 @@ export default function Header() {
 
   return (
     <div
-      className={`z-10 bg-white lg:absolute top-0 w-full lg:h-[25vh] grid lg:flex lg:justify-evenly items-center opacity-80 2xl:text-[25px] xl:text-[15px] lg:text-[12px] text-[8px] uppercase`}
+      className={`z-10 bg-white absolute top-0 w-full lg:h-[25vh] grid lg:flex lg:justify-evenly items-center opacity-80 2xl:text-[25px] xl:text-[15px] lg:text-[12px] text-[8px] uppercase`}
     >
       <nav
         className={`${
@@ -102,7 +103,6 @@ export default function Header() {
             </button>
 
             <div
-              // Assign reference
               className="relative w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 rounded-full overflow-hidden cursor-pointer"
               onClick={toggleModal}
               ref={profileImageRef}
@@ -166,7 +166,7 @@ export default function Header() {
           </h1>
           <Link
             href={"/dashboard/profile"}
-            className=" grid rounded-md  leading-8 w-full   text-white font-bold  text-center  bg-[#FF914F]   2xl:text-sm  xl:text-xs  lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px] capitalize"
+            className=" grid rounded-md  2xl:leading-8 xl:leading-6 lg:leading-5 md:leading-4  leading-3 w-full j justify-center items-center  text-white font-bold  text-center  bg-[#FF914F]   2xl:text-sm  xl:text-xs  lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px] capitalize"
           >
             {" "}
             view profile{" "}
