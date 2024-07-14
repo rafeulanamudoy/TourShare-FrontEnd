@@ -19,7 +19,7 @@ interface NotificationModalProps {
 
 export default function NotificationModal({
   allNotifications,
-
+  unseenNotifications,
   onClose,
 }: NotificationModalProps) {
   const dispatch = useAppDispatch();
@@ -57,26 +57,26 @@ export default function NotificationModal({
   };
 
   return (
-    <div className="fixed  inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-4 rounded-lg shadow-lg w-1/3 h-4/5 max-h-4/5 overflow-y-auto">
-        <div className="flex float-right">
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
+      <div className="bg-white p-4 rounded-lg shadow-lg w-full md:w-2/3 lg:w-1/2 xl:w-1/3 h-full md:h-4/5 max-h-4/5 overflow-y-auto">
+        <div className="flex justify-end">
           <button onClick={onClose} className="text-red-600 font-bold">
             X
           </button>
         </div>
-        <div className="flex justify-between mt-4 w-4/5 mx-auto">
+        <div className="flex justify-between mt-4 w-full mx-auto">
           <button
-            className={`flex-1 w-1/2 2xl:text-sm  xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px] font-semibold rounded-md leading-10 mx-1 ${
-              !showUnseen ? "bg-red-500" : "bg-gray-300"
-            }`}
+            className={`w-1/2 px-2 py-1 text-xs md:text-sm ${
+              !showUnseen ? "bg-red-500 text-white" : "bg-gray-300 text-black"
+            } rounded-md`}
             onClick={() => setShowUnseen(false)}
           >
             All Notifications
           </button>
           <button
-            className={`flex-1 w-1/2 2xl:text-sm  xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]   font-semibold rounded-md leading-10 mx-1 ${
-              showUnseen ? "bg-blue-500" : "bg-gray-300"
-            }`}
+            className={`w-1/2 px-2 py-1 text-xs md:text-sm ${
+              showUnseen ? "bg-blue-500 text-white" : "bg-gray-300 text-black"
+            } rounded-md`}
             onClick={() => setShowUnseen(true)}
           >
             Unseen Notifications

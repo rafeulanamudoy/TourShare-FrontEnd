@@ -7,14 +7,14 @@ import { useSocketContext } from "@/src/socket/context/SocketContext";
 import { formatTimestamp } from "@/src/utilities/TimeFormat";
 import React, { useEffect, useRef } from "react";
 
-type IRecepient = {
-  recepient: string;
+type IRecipient = {
+  recipient: string;
 };
 
 export default function ChattingComponent({
-  recepient,
+  recipient,
   children,
-}: React.PropsWithChildren<IRecepient>) {
+}: React.PropsWithChildren<IRecipient>) {
   const user = useAppSelector((state) => state.auth.user);
   const messages = useAppSelector((state) => state.messages.messages);
   const dispatch = useAppDispatch();
@@ -42,8 +42,8 @@ export default function ChattingComponent({
       const _id = Date.now().toString();
       const timestamp = new Date().toISOString();
       const type = ENUM_NOTIFICATION_TYPE.PRIVATEMESSAGE;
-      sendPrivateMessage(recepient, message, timestamp);
-      sendUserNotification(recepient, message, type, timestamp, _id);
+      sendPrivateMessage(recipient, message, timestamp);
+      sendUserNotification(recipient, message, type, timestamp, _id);
 
       dispatch(
         addMessage({
@@ -69,27 +69,29 @@ export default function ChattingComponent({
               message.sender === user.email
                 ? "self-end bg-blue-500 text-white"
                 : "self-start bg-gray-200 text-black"
-            } `}
+            }`}
           >
             <p className="mb-1">{message.message}</p>
-            <span className="block ">{message.sender}</span>
+            <span className="block">{message.sender}</span>
             <span className="block">{formatTimestamp(message.createdAt)}</span>
           </div>
         ))}
         <div ref={messagesEndRef} />{" "}
         {/* This empty div is used to scroll to bottom */}
       </div>
-      <div className="sticky bottom-0">
+      <div className="sticky bottom-0 bg-white w-full border-t border-gray-300 py-2 px-4 placeholder:text-xs lg:text-xl md:text-base text-xs">
         <form onSubmit={handleFormSubmit} className="flex items-center">
           <input
             type="text"
-            placeholder="Type your message..."
-            className="flex-1 border-2 border-gray-300 p-2 rounded-lg"
+            placeholder="Type..."
+            className="flex-1 border-2 border-gray-300 p-2 rounded-lg mr-2"
             ref={messageInputRef}
+            style={{ maxWidth: "calc(100% - 90px)" }} // Adjust input width to fit with button
           />
           <button
             type="submit"
-            className="ml-4 bg-blue-500 text-white p-2 rounded-lg"
+            className="bg-blue-500 text-white py-2 px-4 rounded-lg"
+            style={{ minWidth: "80px" }} // Fixed width for the send button
           >
             Send
           </button>
