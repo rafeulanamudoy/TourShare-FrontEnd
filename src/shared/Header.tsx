@@ -150,7 +150,7 @@ export default function Header() {
         onClose={toggleModal}
         targetRef={profileImageRef}
       >
-        <div className="grid  2xl:w-[180px] xl:w-[115px] lg:min-w-full    gap-3">
+        <div className="grid  2xl:w-[140px] xl:w-[115px] lg:min-w-full    gap-3">
           <div className="  mx-auto relative w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 rounded-full overflow-hidden cursor-pointer">
             <Image
               src={profileImage.url}
@@ -160,17 +160,17 @@ export default function Header() {
               height={100}
             />
           </div>
-          <h1 className="  2xl:text-lg     lg:text-sm  text-xs text-white font-bold text-center">
+          <h1 className="     lg:text-sm  text-xs text-white font-bold text-center">
             {name.firstName} {name.lastName}
           </h1>
           <Link
             href={"/dashboard/profile"}
-            className=" grid rounded-md  2xl:leading-8 xl:leading-6 lg:leading-5 md:leading-4  leading-3 w-full j justify-center items-center  text-white font-bold  text-center  bg-[#FF914F]     2xl:text-lg     lg:text-sm text-xs  capitalize"
+            className=" grid rounded-md  2xl:leading-8 xl:leading-6 lg:leading-5 md:leading-4  leading-3 w-full j justify-center items-center  text-white font-bold  text-center  bg-[#FF914F]    lg:text-sm text-xs  capitalize"
           >
             {" "}
             view profile{" "}
           </Link>{" "}
-          <nav className="  2xl:text-lg   lg:text-sm text-xs capitalize text-white  grid gap-y-3">
+          <nav className="    lg:text-sm text-xs capitalize text-white  grid gap-y-3">
             {role === ENUM_USER_ROLE.CUSTOMER && (
               <>
                 <Link href={"/dashboard/team"}>Your Team</Link>
