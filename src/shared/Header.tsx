@@ -150,7 +150,7 @@ export default function Header() {
         onClose={toggleModal}
         targetRef={profileImageRef}
       >
-        <div className="grid  2xl:w-[10px] xl:w-[115px] lg:min-w-full    gap-3">
+        <div className="grid  2xl:w-[140px] xl:w-[115px] lg:min-w-full    gap-3">
           <div className="  mx-auto relative w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 rounded-full overflow-hidden cursor-pointer">
             <Image
               src={profileImage.url}
