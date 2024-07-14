@@ -17,7 +17,7 @@ export default async function page({ params }: { params: { slug: string } }) {
       </h1>
       <div className=" overflow-y-auto "></div>
       <div className="overflow-y-auto ">
-        <ChattingComponent recepient={recepientUser}>
+        <ChattingComponent recipient={recepientUser}>
           <ChattingHistory messages={messages} />
         </ChattingComponent>
       </div>

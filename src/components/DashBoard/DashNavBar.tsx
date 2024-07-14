@@ -73,7 +73,6 @@ export default function DashNavBar({ allNotifications }: NavbarProps) {
       {isModalOpen && (
         <NotificationModal
           allNotifications={combinedAllNotifications}
-          unseenNotifications={combinedUnseenNotifications}
           onClose={() => setIsModalOpen(false)}
         />
       )}

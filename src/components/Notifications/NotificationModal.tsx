@@ -13,13 +13,13 @@ import UseCombinedNotifications from "./UseCombineNotifcations";
 
 interface NotificationModalProps {
   allNotifications: INotification[];
-  unseenNotifications: INotification[];
+
   onClose: () => void;
 }
 
 export default function NotificationModal({
   allNotifications,
-  unseenNotifications,
+
   onClose,
 }: NotificationModalProps) {
   const dispatch = useAppDispatch();
