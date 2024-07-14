@@ -39,7 +39,7 @@ export default function Header() {
 
   return (
     <div
-      className={`z-10 bg-white absolute top-0 w-full lg:h-[25vh] grid lg:flex lg:justify-evenly items-center opacity-80 2xl:text-[25px] xl:text-[20px] lg:text-[18px] md:text-[15px] text-[10px] uppercase`}
+      className={`z-10 bg-white absolute top-0 w-full lg:h-[25vh] grid lg:flex lg:justify-evenly items-center opacity-80 2xl:text-[25px] xl:text-[17px] lg:text-[15px] md:text-[12px] text-[10px] uppercase`}
     >
       <nav
         className={`${
