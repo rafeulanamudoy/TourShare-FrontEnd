@@ -53,11 +53,10 @@ export default function CustomerAccount() {
       const res = await signUp(formData, "customer");
 
       if (res?.success) {
-        setMessage(
-          "Please Check Your Gmail Message To Complete The Registration"
-        );
+        setMessage(res.message);
       } else {
         showToast("error", res?.message);
+        console.log(res);
       }
     } catch (error) {
       showToast("error", "An error occurred while creating the account");
