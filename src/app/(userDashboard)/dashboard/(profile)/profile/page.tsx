@@ -8,7 +8,7 @@ export default async function page() {
   } = await getSingleUser();
   return (
     <div className=" my-10  h-1/2   capitalize   bg-white   w-2/3 mx-auto py-5   ">
-      <div className="  w-[90%] mx-auto  flex justify-between items-center   2xl:text-5xl xl:text-4xl lg:text-2xl md:text-xl  sm:text-lg text-base  mb-5">
+      <div className="  w-[95%] mx-auto  flex justify-between items-center   2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl  sm:text-lg text-base  mb-5">
         <span>personal information</span>
         <UserToggoleButton location={"profile/update"} />
       </div>
@@ -28,7 +28,7 @@ export default async function page() {
           />
         </div>
       </div>
-      <div className=" relative grid w-[90%]  mx-auto  gap-y-10 2xl:text-3xl xl:text-2xl lg:text-base  md:text-xs sm:text-[10px] text-[8px] grid-cols-2  ">
+      <div className=" relative grid md:w-[90%] w-[95%] mx-auto  gap-y-10 2xl:text-2xl xl:text-xl lg:text-base  md:text-xs text-[9px] grid-cols-2  ">
         <div className=" grid gap-y-3 ">
           <span>full name</span>
           <span>

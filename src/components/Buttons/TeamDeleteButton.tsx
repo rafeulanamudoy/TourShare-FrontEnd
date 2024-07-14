@@ -13,8 +13,6 @@ interface TeamDeleteIdProps {
   // Define the type of the location prop
 }
 export default function TeamDeleteButton({ id }: TeamDeleteIdProps) {
-  // console.log(location, "check location");
-
   const { sendDeleteCreateTeamNotifiy } = useSocketContext();
 
   const handleDelete = async () => {
@@ -27,7 +25,6 @@ export default function TeamDeleteButton({ id }: TeamDeleteIdProps) {
       let joinPeopleEmail: any[] = [];
       const res = await deleteSingleTeam(id);
       if (res?.data?.joinPeople?.length > 0) {
-        // console.log(createTeam, "create team");
         res.data.joinPeople.map((people: { joinTeamId: IJoinTeam }) =>
           joinPeopleEmail.push(people?.joinTeamId?.email)
         );

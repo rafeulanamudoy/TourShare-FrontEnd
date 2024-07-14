@@ -27,15 +27,13 @@ export default function DashNavBar({ allNotifications }: NavbarProps) {
     (state) => state.notifications.notifications as INotification[]
   );
 
-  // console.log(instantNotifications, "check instant notification from navbar");
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { combinedAllNotifications, combinedUnseenNotifications } =
     UseCombinedNotifications(instantNotifications, allNotifications);
 
   return (
-    <div className="bg-white 2xl:text-[25px] xl:text-[15px] lg:text-[12px] text-[8px] px-5 flex items-center justify-between h-36 border-b-2">
+    <div className="bg-white 2xl:text-[25px] xl:text-[20px] lg:text-[18px] md:text-[15px] text-[10px] px-5 flex items-center justify-between h-36 border-b-2">
       <div>
         <button onClick={() => dispatch(setToggle())}>
           <FontAwesomeIcon icon={faBars} />

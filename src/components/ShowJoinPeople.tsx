@@ -13,7 +13,6 @@ interface JoinPeopleProps {
 }
 
 export default function ShowJoinPeople({ people, teamId }: JoinPeopleProps) {
-  //console.log(people, "from showjoinpeople");
   const payload: IAccept | null =
     people && people?._id
       ? {

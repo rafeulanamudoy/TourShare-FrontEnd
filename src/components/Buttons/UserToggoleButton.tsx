@@ -7,7 +7,6 @@ interface UserUpdateButtonProps {
   location: string; // Define the type of the location prop
 }
 export default function UserToggoleButton({ location }: UserUpdateButtonProps) {
-  // console.log(location, "check location");
   const { push } = useRouter();
   return (
     <button onClick={() => push(`${location}`)}>

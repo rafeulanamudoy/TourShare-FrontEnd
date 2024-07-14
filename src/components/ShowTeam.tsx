@@ -13,104 +13,68 @@ export default function ShowTeam() {
       try {
         const teams = await getTeams();
         setData(teams.data);
-      } catch (error) {
-        console.error("Error fetching teams:", error);
-      }
+      } catch (error) {}
     };
 
     fetchData();
   }, []);
 
   return (
-    <div className="uppercase">
-      <div className="grid lg:gap-y-5 gap-y-2">
-        <h1 className="text-[#0C264C] text-4xl lg:text-6xl text-center">
-          Groups
-        </h1>
+    <div className="p-4">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl lg:text-6xl ">Groups</h1>
         <p
-          className="text-[#0C264C] text-xl lg:text-3xl text-center underline"
+          className="text-xl lg:text-3xl  underline"
           style={{ textUnderlineOffset: "0.4em", margin: "1rem" }}
         >
           Connect with your perfect match
         </p>
       </div>
-      <div className="overflow-x-auto">
-        <table className="mx-auto my-5 table-auto border-collapse border border-slate-400">
-          <thead className="text-sm lg:text-base">
-            <tr>
-              <th className="border border-slate-600 p-2 min-w-[100px] lg:min-w-[150px]">
-                Group Name
-              </th>
-              <th className="border border-slate-600 p-2 min-w-[100px] lg:min-w-[150px]">
-                Destination
-              </th>
-              <th className="border border-slate-600 p-2 min-w-[80px] lg:min-w-[120px]">
-                Budget
-              </th>
-              <th className="border border-slate-600 p-2 min-w-[80px] lg:min-w-[120px]">
-                Current Members
-              </th>
-              <th className="border border-slate-600 p-2 min-w-[80px] lg:min-w-[120px]">
-                Needed Members
-              </th>
-              <th className="border border-slate-600 p-2 min-w-[100px] lg:min-w-[150px]">
-                Start Journey
-              </th>
-              <th className="border border-slate-600 p-2 min-w-[100px] lg:min-w-[150px]">
-                End Journey
-              </th>
-              <th className="border border-slate-600 p-2 min-w-[80px] lg:min-w-[120px]">
-                Status
-              </th>
-              <th className="border border-slate-600 p-2 min-w-[100px] lg:min-w-[150px]">
-                Team Details
-              </th>
-              <th className="border border-slate-600 p-2 min-w-[60px] lg:min-w-[90px]">
-                Join
-              </th>
-            </tr>
-          </thead>
-          <tbody className="text-xs lg:text-sm">
-            {data.map((team) => (
-              <tr
-                key={team._id}
-                className="border text-center border-slate-600"
-              >
-                <td className="border border-slate-600 p-2">{team.teamName}</td>
-                <td className="border border-slate-600 p-2">
-                  {team.destination}
-                </td>
-                <td className="border border-slate-600 p-2">{team.budget}</td>
-                <td className="border border-slate-600 p-2">
-                  {team.currentMembers}
-                </td>
-                <td className="border border-slate-600 p-2">
-                  {team.neededMembers}
-                </td>
-                <td className="border border-slate-600 p-2">
-                  {new Date(team.startDate).toLocaleDateString()}
-                </td>
-                <td className="border border-slate-600 p-2">
-                  {new Date(team.endDate).toLocaleDateString()}
-                </td>
-                <td className="border border-slate-600 p-2">
-                  {team.teamStatus}
-                </td>
-                <td className="border border-slate-600 p-2">
-                  <TeamDetailsButton teamId={team._id} />
-                </td>
-                {team.teamStatus && (
-                  <td className="border border-slate-600 p-2">
-                    <JoinTeamButton
-                      teamId={team._id}
-                      status={team.teamStatus}
-                    />
-                  </td>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {data.map((team) => (
+          <div
+            key={team._id}
+            className="border border-gray-300 p-4 rounded-lg  bg-[#2e4262] "
+          >
+            <div className="mb-4">
+              <h2 className=" capitalize xl:text-3xl text-2xl font-bold text-white">
+                {team.teamName}
+              </h2>
+            </div>
+            <div className="mb-4">
+              <p className="flex items-center text-white">
+                <span className="font-bold mr-2 ">Destination:</span>{" "}
+                {team.destination}
+              </p>
+              <p className="flex items-center text-white">
+                <span className="font-bold mr-2 ">Budget:</span> {team.budget}
+              </p>
+              <p className="flex items-center text-white">
+                <span className="font-bold mr-2 ">Current Members:</span>{" "}
+                {team.currentMembers}
+              </p>
+              <p className="flex items-center text-white">
+                <span className="font-bold mr-2 ">Needed Members:</span>{" "}
+                {team.neededMembers}
+              </p>
+              <p className="flex items-center text-white">
+                <span className="font-bold mr-2 e">Journey:</span>{" "}
+                {new Date(team.startDate).toLocaleDateString()} -{" "}
+                {new Date(team.endDate).toLocaleDateString()}
+              </p>
+              <p className="flex items-center text-white">
+                <span className="font-bold mr-2 ">Status:</span>{" "}
+                {team.teamStatus}
+              </p>
+            </div>
+            <div className="flex gap-x-5 w-full  ">
+              <TeamDetailsButton teamId={team._id} />
+              {team.teamStatus && (
+                <JoinTeamButton teamId={team._id} status={team.teamStatus} />
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -30,7 +30,6 @@ export default function Header() {
   };
 
   const toggleModal = () => {
-    console.log("Profile image clicked");
     setModalOpen((prev) => !prev);
   };
 
@@ -40,7 +39,7 @@ export default function Header() {
 
   return (
     <div
-      className={`z-10 bg-white absolute top-0 w-full lg:h-[25vh] grid lg:flex lg:justify-evenly items-center opacity-80 2xl:text-[25px] xl:text-[15px] lg:text-[12px] text-[8px] uppercase`}
+      className={`z-10 bg-white absolute top-0 w-full lg:h-[25vh] grid lg:flex lg:justify-evenly items-center opacity-80 2xl:text-[25px] xl:text-[20px] lg:text-[18px] md:text-[15px] text-[10px] uppercase`}
     >
       <nav
         className={`${
@@ -174,7 +173,7 @@ export default function Header() {
           <nav className="2xl:text-sm  xl:text-xs  lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px] capitalize text-white  grid gap-y-3">
             {role === ENUM_USER_ROLE.CUSTOMER && (
               <>
-                <Link href={"/dashboard/team"}>Create Team</Link>
+                <Link href={"/dashboard/team"}>Your Team</Link>
                 <hr className="leading-4 border-gray-500  " />
                 <Link href={"/dashboard/joinTeam"}>Join Team</Link>
               </>

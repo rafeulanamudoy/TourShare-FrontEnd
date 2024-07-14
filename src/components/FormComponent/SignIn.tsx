@@ -65,27 +65,25 @@ export default function SignIn() {
 
       reset();
     }
-
-    reset();
   };
   return (
     <div
       id="signIn"
-      className={` py-16   gap-y-16     h-auto flex  flex-col  items-center   bg-[#FFBD4A]`}
+      className={` lg:py-8  py-4  lg:gap-y-8  gap-y-4   h-auto flex  flex-col  items-center   bg-[#FFBD4A]`}
     >
       <span
-        className={`  uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px]  md:text-[40px] sm:text-[30px]  text-[20px]   ${rosario.className}   text-[#2E4262]`}
+        className={`  uppercase 2xl:text-[70px] xl:text-[50px]  lg:text-[40px]  md:text-[30px] sm:text-[20px] text-[15px]   ${rosario.className}   text-[#2E4262]`}
       >
         sign In
       </span>
       <Form
-        className="   py-32 2xl:text-5xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-base  text-[#2E4262]      flex flex-col justify-items-center  items-center
-        bg-white border-1 w-[50.5%]    "
+        className="  2xl:py-28  xl:py-24 lg:py-20  md:py-16  py-8 2xl:text-4xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-xs  text-[8px]  text-[#2E4262]      flex flex-col justify-items-center  items-center
+        bg-white border-1 lg:w-[50.5%] w-[80%]    "
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         register={register}
       >
-        <div className="w-[70%] flex flex-col items-center gap-y-10">
+        <div className="w-[70%] flex flex-col items-center   lg:gap-y-10 gap-y-8">
           <Input
             className="text-[#2E4262] p-5 bg-[#E1E1E1]       border-2 h-[3em] w-full border-[#707070]  "
             name="email"

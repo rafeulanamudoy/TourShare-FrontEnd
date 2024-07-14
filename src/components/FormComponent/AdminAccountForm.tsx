@@ -51,7 +51,7 @@ export default function AdminAccountForm() {
     try {
       setLoading(true);
       const res = await signUp(formData, ENUM_USER_ROLE.ADMIN);
-      //   console.log(res);
+
       if (res?.success) {
         showToast("success", res?.message);
         if (res.data) {

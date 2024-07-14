@@ -78,7 +78,7 @@ export default function TeamCreate() {
       className={`  py-5   flex  flex-col  justify-center items-center       bg-[#FF914F]`}
     >
       <span
-        className={` mb-5   uppercase 2xl:text-[70px] xl:text-[50px]  lg:text-[40px]  md:text-[30px] sm:text-[20px] text-[15px] w-[80%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[120px] xl:h-[110x] lg:h-[80px] md:h-[70px] sm:h-[60px] h-[40px]  mx-auto  grid justify-center items-center  `}
+        className={` mb-5   uppercase 2xl:text-[70px] xl:text-[50px]  lg:text-[40px]  md:text-[30px] sm:text-[20px] text-[15px] 2xl:h-[120px] xl:h-[110x] lg:h-[80px] md:h-[70px] sm:h-[60px] h-[40px] w-[80%]    text-[#2E4262] border-[#707070] border-2 bg-white   mx-auto  grid justify-center items-center  `}
       >
         Create Team
       </span>

@@ -16,8 +16,6 @@ export default function JoinTeamDeleteButton({
   id,
   teamEmail,
 }: TeamDeleteIdProps) {
-  // console.log(location, "check location");
-
   const { sendJoinTeamRequest } = useSocketContext();
   const { email } = useAppSelector((state) => state.auth.user);
 
@@ -33,7 +31,7 @@ export default function JoinTeamDeleteButton({
         showToast("success", res.message);
 
         const timestamp = new Date().toISOString();
-        //console.log(res, "check delete  response");
+
         sendJoinTeamRequest(
           teamEmail,
           `${email} cancel the request to join with your team`,

@@ -73,13 +73,13 @@ export default function CustomerAccount() {
       className={` flex  flex-col  justify-center items-center  py-16   gap-y-16  h-auto  bg-[#FF914F]`}
     >
       <span
-        className={` uppercase 2xl:text-[100px] xl:text-[70px]  lg:text-[50px] md:text-[40px] sm:text-[30px]  text-[20px] block   ${rosario.className} w-[75%]   text-[#2E4262] border-[#707070] border-2 bg-white 2xl:h-[160px] xl:h-[150x] lg:h-[135px] h-[120px]  mx-auto  grid justify-center items-center `}
+        className={` 2xl:text-[70px] xl:text-[50px]  lg:text-[40px]  md:text-[30px] sm:text-[20px] text-[15px] 2xl:h-[120px] xl:h-[110x] lg:h-[80px] md:h-[70px] sm:h-[60px] h-[40px] uppercase block   ${rosario.className} md:w-[75%] w-[95%]   text-[#2E4262] border-[#707070] border-2 bg-white   mx-auto  grid justify-center items-center `}
       >
         sign up
       </span>
       <Form
-        className="  2xl:text-5xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-lg text-[10px] capitalize   text-white grid gap-y-16
-         items-center    md:w-[70%]   "
+        className="  2xl:text-4xl xl:text-3xl  lg:text-2xl md:text-xl  sm:text-xs  text-[8px] capitalize   text-white grid 2xl:gap-y-16 xl:gap-y-14 lg:gap-y-12 md:gap-y-10 sm:gap-y-6 gap-y-4
+         items-center    md:w-[70%]  w-[90%]   "
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         register={register}
@@ -116,7 +116,7 @@ export default function CustomerAccount() {
           </label>
           <div className="     col-span-10  ">
             <Input
-              className="text-[#707070] w-full  h-[3em]  bg-white px-5  py-5   border-2   border-[#707070] "
+              className="text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]  "
               name="email"
               type="email"
               placeholder="abcd@gmail.com"
@@ -130,9 +130,9 @@ export default function CustomerAccount() {
           <label className=" col-span-2" htmlFor="email">
             Profile Image
           </label>
-          <div className="     col-span-10  ">
+          <div className="    text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]    col-span-10  ">
             <Input
-              className="text-[#707070] w-full  h-[3em]    bg-white  p-5   border-2    border-[#707070] "
+              className=" file-input    "
               name="profileImage"
               type="file"
               register={register}
@@ -149,7 +149,7 @@ export default function CustomerAccount() {
           <div className="   grid grid-cols-4   col-span-10  gap-x-5 ">
             <div className=" col-span-1">
               <Input
-                className="text-[#707070]  w-full   h-[3em]  bg-white p-5      border-2 border-[#707070] "
+                className="text-[#707070]  w-full    h-[3em]  bg-white p-5      border-2 border-[#707070] "
                 name="countryCode"
                 type="tel"
                 defaultValue={"+88"}
