@@ -56,7 +56,6 @@ export default function CustomerAccount() {
         setMessage(res.message);
       } else {
         showToast("error", res?.message);
-        console.log(res);
       }
     } catch (error) {
       showToast("error", "An error occurred while creating the account");
@@ -126,12 +125,12 @@ export default function CustomerAccount() {
           </div>
         </div>
         <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
-          <label className=" col-span-2" htmlFor="email">
+          <label className=" col-span-2" htmlFor="profileImage">
             Profile Image
           </label>
-          <div className="    text-[#707070]  w-full  h-[3em] bg-white  p-5    border-2 border-[#707070]    col-span-10  ">
+          <div className="     col-span-10  ">
             <Input
-              className=" file-input    "
+              className=" text-[#707070]  w-full    h-[3em]  bg-white p-5      border-2 border-[#707070]   "
               name="profileImage"
               type="file"
               register={register}

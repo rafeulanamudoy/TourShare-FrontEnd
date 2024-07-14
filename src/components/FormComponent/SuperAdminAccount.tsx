@@ -144,7 +144,7 @@ export default function SupereAdminAccount() {
           </div>
         </div>
         <div className=" w-full   grid    grid-cols-12  justify-center items-center   ">
-          <label className=" col-span-2" htmlFor="email">
+          <label className=" col-span-2" htmlFor="profileImage">
             Profile Image
           </label>
           <div className="     col-span-10  ">
