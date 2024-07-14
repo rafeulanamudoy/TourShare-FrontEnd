@@ -23,13 +23,13 @@ export default async function ChattingHistory({ messages }: IChats) {
               : "self-start bg-gray-200 text-black"
           }`}
         >
-          <p className="mb-1 2xl:text-xl xl:text-base lg:text-xs md:text-[10x] sm:text-[8px] text-[6px]">
+          <p className="mb-1 2xl:text-xl xl:text-lg lg:text-base text-sm">
             {message.message}
           </p>
-          <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+          <span className="block 2xl:text-lg xl:text-base lg:text-sm text-sm">
             {message.sender}
           </span>
-          <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+          <span className="block 2xl:text-lg xl:text-base lg:text-sm text-sm">
             {formatTimestamp(message.createdAt)}
           </span>
         </div>

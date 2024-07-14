@@ -71,9 +71,15 @@ export default function ChattingComponent({
                 : "self-start bg-gray-200 text-black"
             }`}
           >
-            <p className="mb-1">{message.message}</p>
-            <span className="block">{message.sender}</span>
-            <span className="block">{formatTimestamp(message.createdAt)}</span>
+            <p className="mb-1 2xl:text-xl xl:text-lg lg:text-base text-sm">
+              {message.message}
+            </p>
+            <span className="block 2xl:text-lg xl:text-base lg:text-sm text-sm">
+              {message.sender}
+            </span>
+            <span className="block 2xl:text-lg xl:text-base lg:text-sm text-sm">
+              {formatTimestamp(message.createdAt)}
+            </span>
           </div>
         ))}
         <div ref={messagesEndRef} />{" "}

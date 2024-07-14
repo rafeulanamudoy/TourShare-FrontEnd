@@ -27,7 +27,7 @@ export default async function ChattingLists() {
   }
 
   return (
-    <div className="w-1/3 md:border-r-2  border-black p-4  2xl:text-3xl xl:text-2xl lg:text-base  md:text-xs sm:text-[10px] text-[8px]      md:h-[calc(100vh-144px)]">
+    <div className="w-1/3 md:border-r-2  border-black p-4  2xl:text-3xl xl:text-2xl lg:text-lg text-base      md:h-[calc(100vh-144px)]">
       <ChattingList conversations={convirstationList} />
     </div>
   );

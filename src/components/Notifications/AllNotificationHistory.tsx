@@ -29,34 +29,34 @@ export default function AllNotificationHistory({
           }
         >
           {notification.type === ENUM_NOTIFICATION_TYPE.PRIVATEMESSAGE && (
-            <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+            <span className="block  2xl:text-xl xl:text-lg lg:text-base text-sm">
               {notification.sender} send you a message
             </span>
           )}
           {notification.type ===
             ENUM_NOTIFICATION_TYPE.JOINTEAMSTATUSUPDATE && (
-            <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+            <span className="block 2xl:text-xl xl:text-lg lg:text-base text-sm">
               {notification.message}
             </span>
           )}
           {notification.type ===
             ENUM_NOTIFICATION_TYPE.JOINTEAMREQUESTSTATUS && (
-            <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+            <span className="block  2xl:text-xl xl:text-lg lg:text-base text-sm">
               {notification.message}
             </span>
           )}
           {notification.type === ENUM_NOTIFICATION_TYPE.UPDATECREATETEAM && (
-            <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+            <span className="block  2xl:text-xl xl:text-lg lg:text-base text-sm">
               {notification.message}
             </span>
           )}
           {notification.type === ENUM_NOTIFICATION_TYPE.DELETECREATETEAM && (
-            <span className="block 2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px]">
+            <span className="block  2xl:text-xl xl:text-lg lg:text-base text-sm">
               {notification.message}
             </span>
           )}
 
-          <span className="2xl:text-base xl:text-xs lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px] text-blue-700">
+          <span className=" 2xl:text-xl xl:text-lg lg:text-base text-sm text-blue-700">
             {formatTimeDifference(notification.createdAt)}
           </span>
         </div>

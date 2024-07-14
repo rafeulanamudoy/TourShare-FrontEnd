@@ -29,7 +29,7 @@ export default function ChattingList({ conversations }: Iconversation) {
               )
             }
           >
-            <h3 className="2xl:text-xl xl:text-base lg:text-xs  md:text-[10x] sm:text-[8px] text-[6px] font-semibold">
+            <h3 className="2xl:text-xl xl:text-base lg:text-sm text-xs font-semibold">
               {conversation?.joinTeamId?.email}
             </h3>
             <p className="text-sm text-gray-500">

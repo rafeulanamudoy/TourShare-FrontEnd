@@ -64,9 +64,9 @@ export default function NotificationModal({
             X
           </button>
         </div>
-        <div className="flex justify-between mt-4 w-full mx-auto">
+        <div className="flex justify-between gap-x-3 mt-4 w-full mx-auto">
           <button
-            className={`w-1/2 px-2 py-1 text-xs md:text-sm ${
+            className={`w-1/2 px-2 py-1 2xl:text-xl xl:text-lg lg:text-base text-sm ${
               !showUnseen ? "bg-red-500 text-white" : "bg-gray-300 text-black"
             } rounded-md`}
             onClick={() => setShowUnseen(false)}
@@ -74,7 +74,7 @@ export default function NotificationModal({
             All Notifications
           </button>
           <button
-            className={`w-1/2 px-2 py-1 text-xs md:text-sm ${
+            className={`w-1/2 px-2 py-1  2xl:text-xl xl:text-lg lg:text-base text-sm ${
               showUnseen ? "bg-blue-500 text-white" : "bg-gray-300 text-black"
             } rounded-md`}
             onClick={() => setShowUnseen(true)}
