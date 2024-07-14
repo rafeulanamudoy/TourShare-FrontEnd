@@ -15,11 +15,11 @@ export default async function page() {
   return (
     <div className="uppercase my-10">
       <div className="grid md:gap-y-5 gap-2">
-        <h1 className="text-[#0C264C] 2xl:text-8xl xl:text-6xl lg:text-4xl sm:text-2xl text-xl text-center">
+        <h1 className="text-[#0C264C] 2xl:text-6xl xl:text-4xl lg:text-3xl sm:text-2xl text-xl text-center">
           Team Info
         </h1>
         <p
-          className="text-[#0C264C] 2xl:text-4xl xl:text-3xl lg:text-xl sm:text-base text-sm text-center underline"
+          className="text-[#0C264C] 2xl:text-3xl xl:text-2xl lg:text-xl sm:text-base text-sm text-center underline"
           style={{ textUnderlineOffset: "0.4em", margin: "1rem" }}
         >
           {team.data

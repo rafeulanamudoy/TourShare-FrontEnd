@@ -39,7 +39,7 @@ export default function Header() {
 
   return (
     <div
-      className={`z-10 bg-white absolute top-0 w-full lg:h-[25vh] grid lg:flex lg:justify-evenly items-center opacity-80 2xl:text-[20px]  xl:text-lg lg:text-base md:text-sm text-[10px] uppercase`}
+      className={`z-10 bg-white absolute top-0 w-full lg:h-[25vh] grid lg:flex lg:justify-evenly items-center opacity-80 2xl:text-[22px]  xl:text-lg lg:text-base md:text-sm text-[10px] uppercase`}
     >
       <nav
         className={`${
@@ -160,17 +160,17 @@ export default function Header() {
               height={100}
             />
           </div>
-          <h1 className=" 2xl:text-base xl:text-sm lg:text-xs md:text-[10px] sm:text-[8px] text-[6px] text-white font-bold text-center">
+          <h1 className="  xl:text-lg lg:text-sm   text-xs text-white font-bold text-center">
             {name.firstName} {name.lastName}
           </h1>
           <Link
             href={"/dashboard/profile"}
-            className=" grid rounded-md  2xl:leading-8 xl:leading-6 lg:leading-5 md:leading-4  leading-3 w-full j justify-center items-center  text-white font-bold  text-center  bg-[#FF914F]   2xl:text-sm  xl:text-xs  lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px] capitalize"
+            className=" grid rounded-md  2xl:leading-8 xl:leading-6 lg:leading-5 md:leading-4  leading-3 w-full j justify-center items-center  text-white font-bold  text-center  bg-[#FF914F]    xl:text-lg  lg:text-sm  text-xs  capitalize"
           >
             {" "}
             view profile{" "}
           </Link>{" "}
-          <nav className="2xl:text-sm  xl:text-xs  lg:text-[10px] md:text-[8px] sm:text-[6px] text-[4px] capitalize text-white  grid gap-y-3">
+          <nav className=" xl:text-lg  lg:text-sm  text-xs capitalize text-white  grid gap-y-3">
             {role === ENUM_USER_ROLE.CUSTOMER && (
               <>
                 <Link href={"/dashboard/team"}>Your Team</Link>
