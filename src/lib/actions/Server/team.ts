@@ -22,7 +22,6 @@ export async function createTeam(data: ICreateTeam) {
 export async function getTeams() {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_FULL_URL}/team`, {
-      cache: "no-store",
       next: { tags: ["teams", "updateTeam", "acceptTeam", "deleteTeam"] },
     });
 
