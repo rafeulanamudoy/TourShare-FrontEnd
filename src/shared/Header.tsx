@@ -17,7 +17,7 @@ import DashBoardModal from "../components/DashBoard/DashBoardModal";
 import { ENUM_USER_ROLE } from "../types/IUser";
 import SkeletonLoading from "../components/Loader/SkeletionLoading";
 
-export default function Header() {
+const Header = React.memo(() => {
   const { isLoading } = useUserData();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { email, profileImage, name, role } = useAppSelector(
@@ -199,4 +199,8 @@ export default function Header() {
       </DashBoardModal>
     </div>
   );
-}
+});
+
+Header.displayName = "Header";
+
+export default Header;

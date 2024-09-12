@@ -16,35 +16,26 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
+import SkeletonLoading from "../Loader/SkeletionLoading";
 
 export default function TeamJoin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const searchParams = useSearchParams();
+
   const [joinId, setJoinId] = useState<string | null>(null);
   const { sendJoinTeamRequest } = useSocketContext();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
 
+  const { email, phoneNumber } = useAppSelector((state) => state.auth.user);
+
   useEffect(() => {
-    const handleAsyncOp = async () => {
-      const hash = window.location.hash;
+    setJoinId(searchParams.get("joinId"));
 
-      const [, queryString] = hash.split("?");
-      if (queryString) {
-        const params = new URLSearchParams(queryString);
-        const joinId = params.get("joinId");
-
-        setJoinId(joinId);
-      } else {
-        setJoinId(searchParams.get("joinId"));
-      }
-    };
-    handleAsyncOp();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { email, phoneNumber } = useAppSelector((state) => state.auth.user);
   const {
     register,
     handleSubmit,
@@ -96,6 +87,10 @@ export default function TeamJoin() {
       reset();
     }
   };
+  if (!email && !phoneNumber) {
+    return <SkeletonLoading />;
+  }
+
   return (
     <div
       id="joinTeam"

@@ -10,12 +10,9 @@ export default async function page(searchParams: {
   const user = await getCookie("accessToken");
   let { destination, joinId } = searchParams.searchParams;
 
-  if (typeof destination === "string") {
-    destination = destination.replace(/^\/+/, "");
-  }
-
   if (user?.userEmail && destination && joinId) {
-    redirect(`${destination}#${destination}?joinId=${joinId}`);
+    redirect(`${destination}?joinId=${joinId}`);
+    // redirect(`${destination}#${destination}?joinId=${joinId}`);
   } else if (user?.userEmail && destination) {
     redirect(`${destination}#${destination}`);
   } else if (user?.userEmail && !destination) {
