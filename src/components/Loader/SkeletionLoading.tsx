@@ -5,6 +5,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 export default function SkeletonLoading() {
   return (
-    <Skeleton className=" z-10" baseColor="#C0C0C0" count={11} height={10} />
+    <Skeleton className=" z-10" baseColor="#C0C0C0" count={10} height={7} />
   );
 }
