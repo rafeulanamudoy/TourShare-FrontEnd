@@ -15,6 +15,7 @@ import { useRemoveAccount, useUserData } from "../hooks/user/user";
 import { useAppSelector } from "../redux/hooks";
 import DashBoardModal from "../components/DashBoard/DashBoardModal";
 import { ENUM_USER_ROLE } from "../types/IUser";
+import SkeletonLoading from "../components/Loader/SkeletionLoading";
 
 export default function Header() {
   const { isLoading } = useUserData();
@@ -34,7 +35,7 @@ export default function Header() {
   };
 
   if (isLoading) {
-    return null;
+    return <SkeletonLoading />;
   }
 
   return (
