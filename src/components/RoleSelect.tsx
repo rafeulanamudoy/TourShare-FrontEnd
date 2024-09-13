@@ -9,7 +9,7 @@ interface RoleSelectProps {
   value: string;
 }
 
-export default function RoleSelect({ value }: RoleSelectProps) {
+const RoleSelect = React.memo(({ value }: RoleSelectProps) => {
   const dispatch = useAppDispatch();
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -30,4 +30,7 @@ export default function RoleSelect({ value }: RoleSelectProps) {
       <option value={ENUM_USER_ROLE.SUPER_ADMIN}>SuperAdmin</option>
     </select>
   );
-}
+});
+RoleSelect.displayName = "RoleSelect";
+
+export default RoleSelect;

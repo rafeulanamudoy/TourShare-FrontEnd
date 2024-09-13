@@ -7,7 +7,7 @@ interface UserJoinTeamProps {
   teamId: string;
 }
 
-export default function TeamDetailsButton({ teamId }: UserJoinTeamProps) {
+const TeamDetailsButton = React.memo(({ teamId }: UserJoinTeamProps) => {
   const { push } = useRouter();
   return (
     <button
@@ -17,4 +17,7 @@ export default function TeamDetailsButton({ teamId }: UserJoinTeamProps) {
       Details
     </button>
   );
-}
+});
+TeamDetailsButton.displayName = "TeamDetailsButton";
+
+export default TeamDetailsButton;

@@ -4,7 +4,7 @@ import Banner from "@/src/shared/Banner";
 import Footer from "@/src/shared/Footer";
 
 export default function BaseLayout({
-  children, // will be a page or nested layout
+  children,
 }: {
   children: React.ReactNode;
 }) {

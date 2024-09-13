@@ -1,8 +1,7 @@
-import React from "react";
 import Image from "next/image";
 import home from "@/public/images/home.png";
 
-const Banner = React.memo(() => {
+export default function Banner() {
   return (
     <div
       style={{
@@ -24,8 +23,4 @@ const Banner = React.memo(() => {
       />
     </div>
   );
-});
-
-Banner.displayName = "Banner";
-
-export default Banner;
+}

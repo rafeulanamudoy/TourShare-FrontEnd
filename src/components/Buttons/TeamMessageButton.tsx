@@ -2,21 +2,23 @@
 
 import { useRouter } from "next/navigation";
 
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 interface UserMessageProps {
   children: ReactNode;
   email: string; // Define the type of the location prop
 }
 
-export default function TeamMessageButton({
-  children,
-  email,
-}: UserMessageProps) {
-  const { push } = useRouter();
-  return (
-    <button className="" onClick={() => push(`/dashboard/messages/${email}`)}>
-      {children}
-    </button>
-  );
-}
+const TeamMessageButton = React.memo(
+  ({ children, email }: UserMessageProps) => {
+    const { push } = useRouter();
+    return (
+      <button className="" onClick={() => push(`/dashboard/messages/${email}`)}>
+        {children}
+      </button>
+    );
+  }
+);
+TeamMessageButton.displayName = "TeamMessageButton";
+
+export default TeamMessageButton;

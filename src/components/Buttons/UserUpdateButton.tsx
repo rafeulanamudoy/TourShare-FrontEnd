@@ -6,7 +6,7 @@ import { IUserSchema } from "@/src/types/IUser";
 import { override2 } from "@/src/utilities/css";
 import { showToast } from "@/src/utilities/ToastOptions";
 import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { ClipLoader } from "react-spinners";
 
@@ -14,7 +14,7 @@ interface UserProps {
   payload: Partial<IUserSchema>; // Define the type of the location prop
 }
 
-export default function UserUpdateButton({ payload }: UserProps) {
+const UserUpdateButton = React.memo(({ payload }: UserProps) => {
   const role = useAppSelector((state) => state.toggle.roleValue);
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -62,4 +62,7 @@ export default function UserUpdateButton({ payload }: UserProps) {
       </button>
     </div>
   );
-}
+});
+UserUpdateButton.displayName = "UserUpdateButton";
+
+export default UserUpdateButton;

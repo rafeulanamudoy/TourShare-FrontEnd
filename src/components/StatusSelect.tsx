@@ -9,7 +9,7 @@ interface StatusSelectProps {
   value: string;
 }
 
-export default function StatusSelect({ value }: StatusSelectProps) {
+const StatusSelect = React.memo(({ value }: StatusSelectProps) => {
   const dispatch = useAppDispatch();
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -29,4 +29,8 @@ export default function StatusSelect({ value }: StatusSelectProps) {
       <option value={ENUM_JOIN_TEAM_STATUS.PENDING}>Pending</option>
     </select>
   );
-}
+});
+
+StatusSelect.displayName = "StatusSelect";
+
+export default StatusSelect;

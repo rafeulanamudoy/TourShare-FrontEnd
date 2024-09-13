@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const Footer = React.memo(() => {
+export default function Footer() {
   return (
     <div className="bg-[#18253a] text-gray-300 py-4 w-full">
       <div className="container mx-auto flex justify-between items-center">
@@ -38,8 +38,4 @@ const Footer = React.memo(() => {
       </div>
     </div>
   );
-});
-
-Footer.displayName = "Footer";
-
-export default Footer;
+}

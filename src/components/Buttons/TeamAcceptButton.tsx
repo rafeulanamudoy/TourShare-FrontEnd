@@ -6,12 +6,13 @@ import { useAppSelector } from "@/src/redux/hooks";
 import { useSocketContext } from "@/src/socket/context/SocketContext";
 import { IAccept } from "@/src/types/ICreateTeam";
 import { showToast } from "@/src/utilities/ToastOptions";
+import React from "react";
 
 interface UserJoinTeamProps {
-  payload: IAccept; // Define the type of the location prop
+  payload: IAccept;
 }
 
-export default function TeamAcceptButton({ payload }: UserJoinTeamProps) {
+const TeamAcceptButton = React.memo(({ payload }: UserJoinTeamProps) => {
   const state = useAppSelector((state) => state.toggle.requestValue);
   const { sendTeamRequest } = useSocketContext();
   const handleAccept = async () => {
@@ -53,4 +54,7 @@ export default function TeamAcceptButton({ payload }: UserJoinTeamProps) {
       </button>
     </div>
   );
-}
+});
+TeamAcceptButton.displayName = "TeamUpdateButton";
+
+export default TeamAcceptButton;

@@ -4,11 +4,12 @@ import { deleteSingleUser } from "@/src/lib/actions/Server/user";
 import { showToast } from "@/src/utilities/ToastOptions";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 
 interface TeamDeleteIdProps {
   id: string;
 }
-export default function DeleteUserButton({ id }: TeamDeleteIdProps) {
+const DeleteUserButton = React.memo(({ id }: TeamDeleteIdProps) => {
   const handleDelete = async () => {
     const confirmed = window.confirm("Are you sure you want to delete?");
     if (!confirmed) {
@@ -39,4 +40,7 @@ export default function DeleteUserButton({ id }: TeamDeleteIdProps) {
       ></FontAwesomeIcon>
     </button>
   );
-}
+});
+DeleteUserButton.displayName = "DeleteUserButton";
+
+export default DeleteUserButton;

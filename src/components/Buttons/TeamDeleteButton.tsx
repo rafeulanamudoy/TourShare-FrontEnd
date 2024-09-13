@@ -11,7 +11,6 @@ import React from "react";
 
 interface TeamDeleteIdProps {
   id: string;
-  // Define the type of the location prop
 }
 const TeamDeleteButton = React.memo(({ id }: TeamDeleteIdProps) => {
   const { sendDeleteCreateTeamNotifiy } = useSocketContext();
@@ -19,7 +18,7 @@ const TeamDeleteButton = React.memo(({ id }: TeamDeleteIdProps) => {
   const handleDelete = async () => {
     const confirmed = window.confirm("Are you sure you want to delete?");
     if (!confirmed) {
-      return; // Don't proceed if not confirmed
+      return;
     }
 
     try {
