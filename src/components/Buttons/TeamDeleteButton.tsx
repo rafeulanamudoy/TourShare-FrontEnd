@@ -7,12 +7,13 @@ import { IJoinTeam } from "@/src/types/IJoinTeam";
 import { showToast } from "@/src/utilities/ToastOptions";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 
 interface TeamDeleteIdProps {
   id: string;
   // Define the type of the location prop
 }
-export default function TeamDeleteButton({ id }: TeamDeleteIdProps) {
+const TeamDeleteButton = React.memo(({ id }: TeamDeleteIdProps) => {
   const { sendDeleteCreateTeamNotifiy } = useSocketContext();
 
   const handleDelete = async () => {
@@ -59,4 +60,7 @@ export default function TeamDeleteButton({ id }: TeamDeleteIdProps) {
       ></FontAwesomeIcon>
     </button>
   );
-}
+});
+TeamDeleteButton.displayName = "TeamDeleteButton";
+
+export default TeamDeleteButton;

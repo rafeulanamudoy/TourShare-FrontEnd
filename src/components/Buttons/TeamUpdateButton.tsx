@@ -2,8 +2,9 @@
 import { faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
+import React from "react";
 
-export default function TeamUpdateButton() {
+const TeamUpdateButton = React.memo(() => {
   const { push } = useRouter();
   return (
     <button onClick={() => push(`team/update`)}>
@@ -13,4 +14,7 @@ export default function TeamUpdateButton() {
       ></FontAwesomeIcon>
     </button>
   );
-}
+});
+TeamUpdateButton.displayName = "TeamUpdateButton";
+
+export default TeamUpdateButton;
