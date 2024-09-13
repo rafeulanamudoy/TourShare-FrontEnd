@@ -16,7 +16,7 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
-import SkeletonLoading from "../Loader/SkeletionLoading";
+import SkeletonLoading from "../Loader/SkeletonLoading";
 
 export default function TeamJoin() {
   const [loading, setLoading] = useState(false);
@@ -87,9 +87,9 @@ export default function TeamJoin() {
       reset();
     }
   };
-  if (!email && !phoneNumber) {
-    return <SkeletonLoading />;
-  }
+  // if (!email && !phoneNumber) {
+  //   return <SkeletonLoading height={10} />;
+  // }
 
   return (
     <div
@@ -114,16 +114,20 @@ export default function TeamJoin() {
             Email
           </label>
           <div className="     col-span-10  ">
-            <Input
-              className=" hover:cursor-not-allowed text-[#707070] w-full  h-[3em]  bg-white px-5  py-5   border-2   border-[#707070] "
-              name="email"
-              type="email"
-              placeholder="abcd@gmail.com"
-              defaultValue={email}
-              readOnly
-              register={register}
-              autoFocus
-            />
+            {email ? (
+              <Input
+                className=" hover:cursor-not-allowed text-[#707070] w-full  h-[3em]  bg-white px-5  py-5   border-2   border-[#707070] "
+                name="email"
+                type="email"
+                placeholder="abcd@gmail.com"
+                defaultValue={email}
+                readOnly
+                register={register}
+                autoFocus
+              />
+            ) : (
+              <SkeletonLoading count={1} height={100} />
+            )}
           </div>
         </div>
         <div className="    grid     grid-cols-12  justify-center items-center   ">
@@ -132,15 +136,19 @@ export default function TeamJoin() {
             <span>Number</span>
           </label>
           <div className="     col-span-10  ">
-            <Input
-              className="text-[#707070]  w-full   h-[3em]  bg-white p-5   hover:cursor-not-allowed    border-2 border-[#707070] "
-              name="phoneNumber"
-              type="tel"
-              defaultValue={phoneNumber}
-              register={register}
-              readOnly
-              autoFocus
-            />
+            {phoneNumber ? (
+              <Input
+                className="text-[#707070]  w-full   h-[3em]  bg-white p-5   hover:cursor-not-allowed    border-2 border-[#707070] "
+                name="phoneNumber"
+                type="tel"
+                defaultValue={phoneNumber}
+                register={register}
+                readOnly
+                autoFocus
+              />
+            ) : (
+              <SkeletonLoading count={1} height={100} />
+            )}
           </div>
         </div>
         <div className="    grid    grid-cols-12  justify-center items-center   ">

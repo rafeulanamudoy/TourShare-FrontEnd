@@ -1,8 +1,7 @@
 import SignIn from "@/src/components/FormComponent/SignIn";
-import SkeletonLoading from "@/src/components/Loader/SkeletionLoading";
+
 import { getCookie } from "@/src/lib/actions/Server/cookies";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
 
 export default async function page(searchParams: {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -21,9 +20,7 @@ export default async function page(searchParams: {
 
   return (
     <main>
-      <Suspense fallback={<SkeletonLoading />}>
-        <SignIn />
-      </Suspense>
+      <SignIn />
     </main>
   );
 }

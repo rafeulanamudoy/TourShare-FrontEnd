@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
@@ -15,17 +15,22 @@ import { useRemoveAccount, useUserData } from "../hooks/user/user";
 import { useAppSelector } from "../redux/hooks";
 import DashBoardModal from "../components/DashBoard/DashBoardModal";
 import { ENUM_USER_ROLE } from "../types/IUser";
-import SkeletonLoading from "../components/Loader/SkeletionLoading";
+
+import SkeletonLoading from "../components/Loader/SkeletonLoading";
+// Fixed typo in import
 
 const Header = React.memo(() => {
   const { isLoading } = useUserData();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+
   const { email, profileImage, name, role } = useAppSelector(
     (state) => state.auth.user
   );
   const handleLogOut = useRemoveAccount();
   const [isModalOpen, setModalOpen] = useState(false);
   const profileImageRef = useRef<HTMLDivElement>(null);
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -35,11 +40,12 @@ const Header = React.memo(() => {
   };
 
   if (isLoading) {
-    return <SkeletonLoading />;
+    return <SkeletonLoading count={1} height={200} />;
   }
 
   return (
     <div
+      ref={headerRef}
       className={`z-10 bg-white absolute top-0 w-full lg:h-[25vh] grid lg:flex lg:justify-evenly items-center opacity-80 2xl:text-[22px]  xl:text-lg lg:text-base md:text-sm text-[10px] uppercase`}
     >
       <nav
