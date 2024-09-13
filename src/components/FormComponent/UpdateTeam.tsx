@@ -97,7 +97,6 @@ export default function UpdateTeam({ team }: ITeamProps) {
           );
         router.push("/dashboard/team");
         showToast("success", res?.message);
-        showToast("error", res.message);
       } else {
         showToast("error", res.message);
       }
