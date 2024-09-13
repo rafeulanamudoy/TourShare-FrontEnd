@@ -87,9 +87,6 @@ export default function TeamJoin() {
       reset();
     }
   };
-  // if (!email && !phoneNumber) {
-  //   return <SkeletonLoading height={10} />;
-  // }
 
   return (
     <div
