@@ -431,7 +431,7 @@ export default function TeamCreate() {
                         className=" text-[#707070] w-full h-[3em] bg-white p-5 border-2 border-[#707070]"
                         name={`teamDetails.responsibilities.[${index}].responsibility`}
                         type="text"
-                        placeholder="Activity"
+                        placeholder="Responsibility"
                         error={errors.teamDetails?.responsibilities?.message}
                         register={register}
                         autoFocus
