@@ -11,22 +11,33 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { useRemoveAccount, useUserData } from "../hooks/user/user";
-import { useAppSelector } from "../redux/hooks";
+import { useRemoveAccount } from "../hooks/user/user";
+
 import DashBoardModal from "../components/DashBoard/DashBoardModal";
 import { ENUM_USER_ROLE } from "../types/IUser";
 
 import SkeletonLoading from "../components/Loader/SkeletonLoading";
+import { useGetSingleUserQuery } from "../redux/features/auth/authApi";
 // Fixed typo in import
+type User = {
+  userEmail: string;
+  role: string;
+  _id: string;
+} | null;
 
-const Header = React.memo(() => {
-  const { isLoading } = useUserData();
+interface HeaderProps {
+  user: User;
+}
+const Header = React.memo(({ user }: HeaderProps) => {
+  // const { isLoading } = useUserData();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  const { email, profileImage, name, role } = useAppSelector(
-    (state) => state.auth.user
-  );
+  const { data, isLoading } = useGetSingleUserQuery(user?._id);
+  // const { email, profileImage, name, role } = useAppSelector(
+  //   (state) => state.auth.user
+  // );
+
   const handleLogOut = useRemoveAccount();
   const [isModalOpen, setModalOpen] = useState(false);
   const profileImageRef = useRef<HTMLDivElement>(null);
@@ -99,7 +110,7 @@ const Header = React.memo(() => {
             contact
           </Link>
         </div>
-        {email ? (
+        {data?.data?.email ? (
           <div className="lg:flex gap-x-5 xl:gap-x-18 h-16 items-center gap-y-5 mb-5 lg:mb-0">
             <button
               onClick={handleLogOut}
@@ -114,7 +125,7 @@ const Header = React.memo(() => {
               ref={profileImageRef}
             >
               <Image
-                src={profileImage.url}
+                src={data?.data?.profileImage?.url}
                 alt="Picture of the author"
                 className="rounded-full"
                 width={100}
@@ -160,7 +171,7 @@ const Header = React.memo(() => {
         <div className="grid  2xl:w-[140px] xl:w-[115px] lg:min-w-full    gap-3">
           <div className="  mx-auto relative w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 rounded-full overflow-hidden cursor-pointer">
             <Image
-              src={profileImage.url}
+              src={data?.data?.profileImage?.url}
               alt="Picture of the author"
               className="rounded-full"
               width={100}
@@ -168,7 +179,7 @@ const Header = React.memo(() => {
             />
           </div>
           <h1 className="     lg:text-sm  text-xs text-white font-bold text-center">
-            {name.firstName} {name.lastName}
+            {data?.data?.name.firstName} {data?.data?.name.lastName}
           </h1>
           <Link
             href={"/dashboard/profile"}
@@ -178,20 +189,20 @@ const Header = React.memo(() => {
             view profile{" "}
           </Link>{" "}
           <nav className="    lg:text-sm text-xs capitalize text-white  grid gap-y-3">
-            {role === ENUM_USER_ROLE.CUSTOMER && (
+            {data?.data?.role === ENUM_USER_ROLE.CUSTOMER && (
               <>
                 <Link href={"/dashboard/team"}>Your Team</Link>
                 <hr className="leading-4 border-gray-500  " />
                 <Link href={"/dashboard/joinTeam"}>Join Team</Link>
               </>
             )}
-            {role === ENUM_USER_ROLE.ADMIN && (
+            {data?.data?.role === ENUM_USER_ROLE.ADMIN && (
               <>
                 <Link href={"/dashboard/manageTeam"}>Manage Team</Link>
                 <hr className="leading-4 border-gray-500  " />
               </>
             )}
-            {role === ENUM_USER_ROLE.SUPER_ADMIN && (
+            {data?.data?.role === ENUM_USER_ROLE.SUPER_ADMIN && (
               <>
                 <Link href={"/dashboard/manageUsers"}>Manage Users</Link>
                 <hr className="leading-4 border-gray-500  " />

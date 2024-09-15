@@ -1,7 +1,7 @@
 "use server";
 
 import { ENUM_USER_ROLE, ISignInData } from "@/src/types/IUser";
-import { getCookie, setCookie, verifyToken } from "./cookies";
+import { decodeUserCookie, setCookie, verifyToken } from "./cookies";
 import { Secret } from "jsonwebtoken";
 import { revalidateTag } from "next/cache";
 
@@ -58,7 +58,7 @@ export async function signIn(data: ISignInData) {
 }
 export async function getSingleUser() {
   try {
-    const user = await getCookie("accessToken");
+    const user = await decodeUserCookie("accessToken");
     if (user) {
       const { _id } = user;
       const response = await fetch(

@@ -12,17 +12,19 @@ import Link from "next/link";
 import { useState } from "react";
 import NotificationModal from "../Notifications/NotificationModal";
 import UseCombinedNotifications from "../Notifications/UseCombineNotifcations";
+import { IUserSchema } from "@/src/types/IUser";
 
 type NavbarProps = {
   allNotifications: INotification[];
-  unseenNotifications: INotification[];
+
+  user: IUserSchema;
 };
 
-export default function DashNavBar({ allNotifications }: NavbarProps) {
+export default function DashNavBar({ allNotifications, user }: NavbarProps) {
   const handleLogOut = useRemoveAccount();
 
   const dispatch = useAppDispatch();
-  const { profileImage } = useAppSelector((state) => state.auth.user);
+
   const instantNotifications = useAppSelector(
     (state) => state.notifications.notifications as INotification[]
   );
@@ -59,9 +61,9 @@ export default function DashNavBar({ allNotifications }: NavbarProps) {
           </button>
         </div>
         <div className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 rounded-full overflow-hidden">
-          {profileImage && (
+          {user.profileImage && (
             <Image
-              src={profileImage.url ? profileImage?.url : ""}
+              src={user?.profileImage?.url ? user?.profileImage?.url : ""}
               alt="Picture of the author"
               className="rounded-full"
               width={100}
