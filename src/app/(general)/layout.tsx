@@ -3,18 +3,18 @@ import { roboto } from "../styles/fonts";
 import Banner from "@/src/shared/Banner";
 import Footer from "@/src/shared/Footer";
 
-import { decodeUserCookie } from "@/src/lib/actions/Server/cookies";
+import { getSingleUser } from "@/src/lib/actions/Server/user";
 
 export default async function BaseLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await decodeUserCookie("accessToken");
+  const user = await getSingleUser();
 
   return (
     <section className={`${roboto.className}`}>
-      <Header user={user} />
+      <Header user={user?.data} />
 
       <Banner />
 

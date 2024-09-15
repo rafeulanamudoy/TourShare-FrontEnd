@@ -9,11 +9,11 @@ import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
-import { useAppDispatch } from "@/src/redux/hooks";
+
 import { SuperAdminSchema } from "@/src/lib/validation/yupValidation";
 import { ENUM_USER_ROLE, ISuperAdmin } from "@/src/types/IUser";
 import { signUp } from "@/src/lib/actions/Server/user";
-import { setUser } from "@/src/redux/features/auth/authSlice";
+
 import { showToast } from "@/src/utilities/ToastOptions";
 import Input from "@/src/hooks/reactHookForm/Input";
 import Form from "@/src/hooks/reactHookForm/Form";
@@ -29,7 +29,7 @@ export default function SupereAdminAccount() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
   const [message, setMessage] = useState("");
-  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -59,19 +59,6 @@ export default function SupereAdminAccount() {
           "Please Check Your Gmail Message To Complete The Registration"
         );
         if (res.data) {
-          dispatch(
-            setUser({
-              user: {
-                email: res?.data?.email,
-                role: res?.data?.role,
-                profileImage: res?.data?.profileImage,
-                name: res?.data?.name,
-                phoneNumber: res?.data?.phoneNumber,
-                _id: res?.data?._id,
-                emailVerified: res?.data?.emailVerified,
-              },
-            })
-          );
         }
       } else {
         showToast("error", res.message);

@@ -11,10 +11,6 @@ export default async function DashboardLayout({
 }) {
   const user = await getSingleUser();
   const { data: allNotifs } = await getAllUserNotification(user?.data?.email);
-  // const { data: unseenNotifs } = await getStatusNotification(
-  //   user?.data?.email,
-  //   ENUM_NOTIFICATION_STATUS.UNSEEN
-  // );
 
   return (
     <section className={`flex flex-row-reverse ${montserrat.className}`}>
@@ -24,7 +20,7 @@ export default async function DashboardLayout({
         <div className="h-auto">{children}</div>
       </div>
       <div className="h-screen">
-        <DashSideBar />
+        <DashSideBar role={user?.data?.role} />
       </div>
     </section>
   );

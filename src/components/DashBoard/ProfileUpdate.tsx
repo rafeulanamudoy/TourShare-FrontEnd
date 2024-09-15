@@ -2,11 +2,10 @@
 
 import Form from "@/src/hooks/reactHookForm/Form";
 import Input from "@/src/hooks/reactHookForm/Input";
-import { useUserData } from "@/src/hooks/user/user";
+
 import { updateSingleUser } from "@/src/lib/actions/Server/user";
-import { setUser } from "@/src/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/src/redux/hooks";
-import { IUpdatedUser } from "@/src/types/IUser";
+
+import { IUpdatedUser, IUserSchema } from "@/src/types/IUser";
 import { override2 } from "@/src/utilities/css";
 import { showToast } from "@/src/utilities/ToastOptions";
 import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
@@ -14,16 +13,18 @@ import { faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
 
-export default function ProfileUpdate() {
+interface HeaderProps {
+  userData: IUserSchema;
+}
+
+const ProfileUpdate = React.memo(({ userData }: HeaderProps) => {
   const [loading, setLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const { isLoading, userData } = useUserData();
 
   const { register, handleSubmit } = useForm();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -77,20 +78,6 @@ export default function ProfileUpdate() {
         if (res?.success) {
           router.push("/dashboard/profile");
           showToast("success", res.message);
-
-          dispatch(
-            setUser({
-              user: {
-                email: res.data.email,
-                role: res.data.role,
-                profileImage: res?.data?.profileImage,
-                name: res?.data?.name,
-                phoneNumber: res?.data?.phoneNumber,
-                _id: res?.data?._id,
-                emailVerified: res?.data?.emailVerified,
-              },
-            })
-          );
         } else {
           showToast("error", res.message);
         }
@@ -104,11 +91,21 @@ export default function ProfileUpdate() {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    setSelectedFiles(files);
+
+    if (files && files.length > 0) {
+      const selectedFile = files[0];
+      const fileSizeInMB = selectedFile.size / 1024 / 1024;
+
+      if (fileSizeInMB > 1) {
+        showToast("error", "File size too large. Maximum allowed size is 1MB.");
+        return;
+      }
+
+      // If the file size is valid, update state
+      setSelectedFiles(files);
+    }
   };
-  if (isLoading) {
-    return null;
-  }
+
   return (
     <Form
       className=" w-[90%] mx-auto grid "
@@ -246,4 +243,7 @@ export default function ProfileUpdate() {
       </div>
     </Form>
   );
-}
+});
+ProfileUpdate.displayName = "ProfileUpdate";
+
+export default ProfileUpdate;

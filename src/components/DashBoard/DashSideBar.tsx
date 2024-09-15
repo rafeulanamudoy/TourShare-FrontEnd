@@ -19,7 +19,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { usePathname } from "next/navigation";
 import { ENUM_USER_ROLE } from "@/src/types/IUser";
-import { useUserData } from "@/src/hooks/user/user";
+
 import { setToggle } from "@/src/redux/features/toggle/toggleSlice";
 
 interface SidebarItem {
@@ -28,13 +28,16 @@ interface SidebarItem {
   icon: IconDefinition;
   count?: number; // Optional count property
 }
+type SidebarProps = {
+  role: ENUM_USER_ROLE;
+};
 
-export default function DashSideBar() {
+export default function DashSideBar({ role }: SidebarProps) {
   const { toggle } = useAppSelector((state) => state.toggle);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
-  const { role } = useAppSelector((state) => state.auth.user);
+
   const notifications = useAppSelector(
     (state) => state.notifications.notifications
   );
@@ -74,12 +77,6 @@ export default function DashSideBar() {
     ...commonSidebarItems,
     ...(roleSpecificSidebarItems[role] || []),
   ];
-
-  const { isLoading } = useUserData();
-
-  if (isLoading) {
-    return null;
-  }
 
   return (
     <div

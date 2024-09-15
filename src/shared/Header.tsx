@@ -14,29 +14,14 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useRemoveAccount } from "../hooks/user/user";
 
 import DashBoardModal from "../components/DashBoard/DashBoardModal";
-import { ENUM_USER_ROLE } from "../types/IUser";
-
-import SkeletonLoading from "../components/Loader/SkeletonLoading";
-import { useGetSingleUserQuery } from "../redux/features/auth/authApi";
-// Fixed typo in import
-type User = {
-  userEmail: string;
-  role: string;
-  _id: string;
-} | null;
+import { ENUM_USER_ROLE, IUserSchema } from "../types/IUser";
 
 interface HeaderProps {
-  user: User;
+  user: IUserSchema;
 }
 const Header = React.memo(({ user }: HeaderProps) => {
-  // const { isLoading } = useUserData();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
-
-  const { data, isLoading } = useGetSingleUserQuery(user?._id);
-  // const { email, profileImage, name, role } = useAppSelector(
-  //   (state) => state.auth.user
-  // );
 
   const handleLogOut = useRemoveAccount();
   const [isModalOpen, setModalOpen] = useState(false);
@@ -49,10 +34,6 @@ const Header = React.memo(({ user }: HeaderProps) => {
   const toggleModal = () => {
     setModalOpen((prev) => !prev);
   };
-
-  if (isLoading) {
-    return <SkeletonLoading count={1} height={200} />;
-  }
 
   return (
     <div
@@ -110,7 +91,7 @@ const Header = React.memo(({ user }: HeaderProps) => {
             contact
           </Link>
         </div>
-        {data?.data?.email ? (
+        {user?.email ? (
           <div className="lg:flex gap-x-5 xl:gap-x-18 h-16 items-center gap-y-5 mb-5 lg:mb-0">
             <button
               onClick={handleLogOut}
@@ -125,7 +106,7 @@ const Header = React.memo(({ user }: HeaderProps) => {
               ref={profileImageRef}
             >
               <Image
-                src={data?.data?.profileImage?.url}
+                src={user?.profileImage?.url}
                 alt="Picture of the author"
                 className="rounded-full"
                 width={100}
@@ -171,7 +152,7 @@ const Header = React.memo(({ user }: HeaderProps) => {
         <div className="grid  2xl:w-[140px] xl:w-[115px] lg:min-w-full    gap-3">
           <div className="  mx-auto relative w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 rounded-full overflow-hidden cursor-pointer">
             <Image
-              src={data?.data?.profileImage?.url}
+              src={user?.profileImage?.url}
               alt="Picture of the author"
               className="rounded-full"
               width={100}
@@ -179,7 +160,7 @@ const Header = React.memo(({ user }: HeaderProps) => {
             />
           </div>
           <h1 className="     lg:text-sm  text-xs text-white font-bold text-center">
-            {data?.data?.name.firstName} {data?.data?.name.lastName}
+            {user?.name.firstName} {user?.name.lastName}
           </h1>
           <Link
             href={"/dashboard/profile"}
@@ -189,20 +170,20 @@ const Header = React.memo(({ user }: HeaderProps) => {
             view profile{" "}
           </Link>{" "}
           <nav className="    lg:text-sm text-xs capitalize text-white  grid gap-y-3">
-            {data?.data?.role === ENUM_USER_ROLE.CUSTOMER && (
+            {user?.role === ENUM_USER_ROLE.CUSTOMER && (
               <>
                 <Link href={"/dashboard/team"}>Your Team</Link>
                 <hr className="leading-4 border-gray-500  " />
                 <Link href={"/dashboard/joinTeam"}>Join Team</Link>
               </>
             )}
-            {data?.data?.role === ENUM_USER_ROLE.ADMIN && (
+            {user?.role === ENUM_USER_ROLE.ADMIN && (
               <>
                 <Link href={"/dashboard/manageTeam"}>Manage Team</Link>
                 <hr className="leading-4 border-gray-500  " />
               </>
             )}
-            {data?.data?.role === ENUM_USER_ROLE.SUPER_ADMIN && (
+            {user?.role === ENUM_USER_ROLE.SUPER_ADMIN && (
               <>
                 <Link href={"/dashboard/manageUsers"}>Manage Users</Link>
                 <hr className="leading-4 border-gray-500  " />

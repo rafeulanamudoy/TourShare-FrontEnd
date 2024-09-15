@@ -6,14 +6,14 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { Rosario as Rosario } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
-import { useAppDispatch } from "@/src/redux/hooks";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SignUpSchema } from "@/src/lib/validation/yupValidation";
 import { ENUM_USER_ROLE, ISuperAdmin } from "@/src/types/IUser";
 import { signUp } from "@/src/lib/actions/Server/user";
 import { showToast } from "@/src/utilities/ToastOptions";
-import { setUser } from "@/src/redux/features/auth/authSlice";
+
 import Form from "@/src/hooks/reactHookForm/Form";
 import Input from "@/src/hooks/reactHookForm/Input";
 import { override1 } from "@/src/utilities/css";
@@ -29,7 +29,6 @@ export default function AdminAccountForm() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
 
-  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -55,19 +54,6 @@ export default function AdminAccountForm() {
       if (res?.success) {
         showToast("success", res?.message);
         if (res.data) {
-          dispatch(
-            setUser({
-              user: {
-                email: res?.data?.email,
-                role: res?.data?.role,
-                profileImage: res?.data?.profileImage,
-                name: res?.data?.name,
-                phoneNumber: res?.data?.phoneNumber,
-                _id: res?.data?._id,
-                emailVerified: res?.data?.emailVerified,
-              },
-            })
-          );
           router.push("/");
         }
       } else {

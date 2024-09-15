@@ -14,6 +14,8 @@ import Form from "@/src/hooks/reactHookForm/Form";
 import Input from "@/src/hooks/reactHookForm/Input";
 import { ClipLoader } from "react-spinners";
 import { override1 } from "@/src/utilities/css";
+import { useAppDispatch } from "@/src/redux/hooks";
+import { setUser } from "@/src/redux/features/auth/authSlice";
 
 const rosario = Rosario({
   subsets: ["latin"],
@@ -24,6 +26,7 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -39,6 +42,19 @@ export default function SignIn() {
       const res = await signIn(userData);
 
       if (res?.success) {
+        dispatch(
+          setUser({
+            user: {
+              email: res?.data?.email,
+              role: res?.data?.role,
+              profileImage: res?.data?.profileImage,
+              name: res?.data?.name,
+              phoneNumber: res?.data?.phoneNumber,
+              _id: res?.data?._id,
+              emailVerified: res?.data?.emailVerified,
+            },
+          })
+        );
         showToast("success", "User Logged In Succesfully");
       } else {
         showToast("error", res.message);
