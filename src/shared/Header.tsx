@@ -13,9 +13,12 @@ import {
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useRemoveAccount } from "../hooks/user/user";
 
-import DashBoardModal from "../components/DashBoard/DashBoardModal";
+// import DashBoardModal from "../components/DashBoard/DashBoardModal";
 import { ENUM_USER_ROLE, IUserSchema } from "../types/IUser";
-
+import dynamic from "next/dynamic";
+const LazyDashModal = dynamic(
+  () => import("../components/DashBoard/DashBoardModal")
+);
 interface HeaderProps {
   user: IUserSchema;
 }
@@ -144,7 +147,7 @@ const Header = React.memo(({ user }: HeaderProps) => {
         )}
       </nav>
 
-      <DashBoardModal
+      <LazyDashModal
         isOpen={isModalOpen}
         onClose={toggleModal}
         targetRef={profileImageRef}
@@ -194,7 +197,7 @@ const Header = React.memo(({ user }: HeaderProps) => {
             )}
           </nav>
         </div>
-      </DashBoardModal>
+      </LazyDashModal>
     </div>
   );
 });
