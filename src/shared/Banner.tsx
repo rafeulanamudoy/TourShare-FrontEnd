@@ -5,19 +5,20 @@ export default function Banner() {
   return (
     <div
       style={{
-        objectFit: "cover",
-        objectPosition: "bottom",
-        zIndex: -1,
+        position: "relative",
         width: "100%",
         height: "100vh",
+        zIndex: -1,
       }}
     >
       <Image
         src={home}
         alt="home"
-        layout="fill"
-        objectFit="cover"
-        objectPosition="bottom"
+        fill
+        style={{
+          objectFit: "cover",
+          objectPosition: "bottom",
+        }}
         placeholder="blur"
         quality={75}
       />
