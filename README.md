@@ -47,7 +47,7 @@ TourShare employs three distinct user roles with different levels of access and 
 2. **Super Admin**:
 
    - The Super Admin has access to manage users and only super admin can create admin accounts.
-   - To create an Super Admin account visit : [Super Admin](https://tour-share-front-end.vercel.app/dashboard/createAdmin).and also when create account must have provide the Secret Key.and the secret key is **super-secret-key**
+   - To create an Super Admin account visit : [Super Admin](https://tour-share-front-end.vercel.app/superAdmin).and also when create account must have provide the Secret Key.and the secret key is **super-secret-key**
 
 3. **Admin**:
 
