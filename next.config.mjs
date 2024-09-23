@@ -5,6 +5,7 @@ import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  productionBrowserSourceMaps: false,
   images: {
     remotePatterns: [
       {
