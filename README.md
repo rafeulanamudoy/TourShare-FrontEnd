@@ -34,6 +34,7 @@ TourShare employs three distinct user roles with different levels of access and 
      - **Profile Section**: Customers can update their profile information.
      - **Your Team Section**: If the customer creates a team, they can:
        - View details of people who have sent join requests.
+       - accept pending or cancel the request of join member
        - Update or delete their team as needed.
      - **Join Team Section**: If the customer has joined a team, they can:
        - Cancel their join request.
