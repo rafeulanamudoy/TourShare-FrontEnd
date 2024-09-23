@@ -6,8 +6,7 @@ import Pagination from "./Pagination";
 import { ICreateTeam } from "../types/ICreateTeam";
 
 export default async function ShowTeam({ page }: { page: number }) {
-  // Get the page number from searchParams
-  const { data, meta } = await getTeams(page); // Fetch teams based on current page
+  const { data, meta } = await getTeams(page);
 
   return (
     <div className="p-4">

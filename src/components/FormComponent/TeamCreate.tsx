@@ -5,7 +5,7 @@ import React, { useRef, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 import { useFieldArray, useForm } from "react-hook-form";
-import { useAppSelector } from "@/src/redux/hooks";
+
 import { UseDynamicLoading } from "@/src/utilities/UseDynamicLoading";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CreateTeamSchema } from "@/src/lib/validation/yupValidation";
@@ -16,11 +16,15 @@ import Input from "@/src/hooks/reactHookForm/Input";
 import Form from "@/src/hooks/reactHookForm/Form";
 import { override1 } from "@/src/utilities/css";
 
-export default function TeamCreate() {
+interface TeamCreateProps {
+  email: string;
+  phoneNumber: string;
+}
+
+export default function TeamCreate({ email, phoneNumber }: TeamCreateProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { email, phoneNumber } = useAppSelector((state) => state.auth.user);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
   const {
