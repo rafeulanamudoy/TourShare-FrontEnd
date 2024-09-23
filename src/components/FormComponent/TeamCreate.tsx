@@ -141,8 +141,7 @@ export default function TeamCreate() {
         </div>
         <div className="    grid     grid-cols-12  justify-center items-center   ">
           <label className=" col-span-2 grid gap-y-3" htmlFor="phoneNumber">
-            <span>Phone </span>
-            <span>Number</span>
+            <span>Phone Number </span>
           </label>
           <div className="     col-span-10  ">
             <Input

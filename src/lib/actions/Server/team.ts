@@ -19,14 +19,14 @@ export async function createTeam(data: ICreateTeam) {
     throw error;
   }
 }
-export async function getTeams() {
+
+export async function getTeams(page = 2, limit = 6) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_FULL_URL}/team`, {
-      next: { tags: ["teams", "updateTeam", "acceptTeam", "deleteTeam"] },
-    });
-
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_FULL_URL}/team?page=${page}&limit=${limit}`,
+      { next: { tags: ["teams", "updateTeam", "acceptTeam", "deleteTeam"] } }
+    );
     const data = await response.json();
-
     return data;
   } catch (error) {
     throw error;
