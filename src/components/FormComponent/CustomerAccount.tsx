@@ -24,6 +24,7 @@ const rosario = Rosario({
 });
 
 export default function CustomerAccount() {
+  const MAX_RETRIES = 3;
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loaderSize = UseDynamicLoading(buttonRef);
@@ -47,21 +48,28 @@ export default function CustomerAccount() {
     formData.append("password", userData.password);
     formData.append("phoneNumber", phoneNumber);
     formData.append("role", ENUM_USER_ROLE.CUSTOMER);
+    let attempt = 0;
+    while (attempt < MAX_RETRIES) {
+      try {
+        setLoading(true);
+        const res = await signUp(formData, "customer");
 
-    try {
-      setLoading(true);
-      const res = await signUp(formData, "customer");
-
-      if (res?.success) {
-        setMessage(res.message);
-      } else {
-        showToast("error", res?.message);
+        if (res?.success) {
+          setMessage(res.message);
+          break;
+        } else {
+          showToast("error", res?.message);
+          break;
+        }
+      } catch (error) {
+        if (attempt < MAX_RETRIES - 1) {
+        } else {
+          showToast("error", "An error occurred while creating the account");
+        }
+      } finally {
+        setLoading(false);
+        attempt++;
       }
-    } catch (error) {
-      showToast("error", "An error occurred while creating the account");
-    } finally {
-      setLoading(false);
-
       reset();
     }
   };
